@@ -1,0 +1,293 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Beci - Centro de Ayuda</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@900&amp;family=Poppins:wght@400;600&amp;family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "secondary": "#062573",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["DM Sans", "sans-serif"],
+                        "body": ["Poppins", "sans-serif"],
+                        "sans": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        :root {
+            --bg-grad-1: #FDEAC4;
+            --bg-grad-2: #FDF3E6;
+            --bg-grad-3: #F4DBF0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-card {
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes float-async-1 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes float-async-2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes float-async-3 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .card-1 { animation: float-async-1 4s ease-in-out infinite; }
+        .card-2 { animation: float-async-2 5s ease-in-out infinite; }
+        .card-3 { animation: float-async-3 4.5s ease-in-out infinite; }
+
+        .mascot-wave {
+            transform-origin: bottom center;
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .screen.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-nav { display: none !important; }
+            .desktop-header { display: flex !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-900">
+<!-- Desktop Header (Hidden on Mobile) -->
+<header class="desktop-header hidden fixed top-0 left-0 w-full h-16 bg-[#F5F5F5] z-50 px-8 items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<img class="h-8 w-auto" data-alt="A clean, minimalist logotype for a modern community platform named Beci, featuring playful rounded letters and a soft color palette of orange and blue." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGz49rKzFwIXKEEI1iTY9rP4YCGDMpy42T12IQqr7Y7hV0TDs-muIVSRpSCUhL27xu-OZQpZgiXHphWF08DlZK9AgzpsA5pTWai3NGWkJuk995QeC3EPZzVK61WFk2udRq4ttdd_khWcaIJjtOarx9VCNFY1lQdtHO5r8kfzWnYw6KF19gkzW8WtAWTYh_9Cm2fnuay3HXYUV2fPQyOnPzGNyju7ub7iGZ1_frNlXNhVTM1sPm3bpRWQ">
+<nav class="flex gap-6 font-medium text-gray-600">
+<a class="hover:text-primary transition-colors" href="#">Inicio</a>
+<a class="hover:text-primary transition-colors" href="#">Favoritos</a>
+<a class="hover:text-primary transition-colors" href="#">Beci</a>
+<a class="text-primary" href="#">Ayuda</a>
+<a class="hover:text-primary transition-colors" href="#">Vecino</a>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-500">search</span>
+<div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white"></div>
+</div>
+</header>
+<main class="w-full max-w-4xl mx-auto px-4 pt-8 pb-32 md:pt-24 md:pb-12">
+<!-- Screen 1: ¿Te ayudamos? -->
+<section class="screen active flex-col items-center" id="screen-main">
+<div class="w-full flex justify-between items-center mb-6">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/50 shadow-sm">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<img class="h-16 w-auto md:h-20" data-alt="The Beci logo presented as a colorful 3D rendered ensemble of character-like letters, featuring a bright blue B with eyes and a tiny house door, a purple E with a cute hat, a pink C, and a green I." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpMUzqAx1lcxr7jCBdzogZZKWJ-PbpmZeWVJjW3D1ENzt5ZEGuOLRCXjiprWt_GK_bbrUaTTkGUxKzGko03AjulmpaKpVYJqfZG5MQcuFeGOpMEEpIUfzvJCZfKCyOnnV6wtKYO-AX_QSXEy1v3oYKMl3xzz-OylPW0ZrgyVfvcvjDvRu1NKDYlQLnfEwgpGGBi1PxfoO8jhaVGzVApecvqrZJDxwjUijltstW9DV3FQ6Mu_Kl-4nS_A">
+<div class="w-12"></div> <!-- Spacer -->
+</div>
+<div class="md:grid md:grid-cols-2 md:gap-12 md:items-center w-full">
+<div class="text-center md:text-left">
+<h1 class="font-display text-4xl md:text-5xl text-gray-900 mb-4">¿Te ayudamos?</h1>
+<p class="font-body text-gray-600 mb-8 max-w-md mx-auto md:mx-0">
+                        Cuentanos en que te podemos ayudar. Aquí estamos para resolver dudas, hablar con nosotros y conectar nuevas instituciones con la comunidad Beci.
+                    </p>
+<!-- Cards -->
+<div class="space-y-4 mb-8">
+<button class="card-1 floating-card w-full flex items-center p-4 bg-white rounded-2xl shadow-lg border border-white/50 text-left hover:scale-[1.02] active:scale-95 transition-all" onclick="navigateTo('screen-form')">
+<div class="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center mr-4">
+<img class="w-8 h-8" data-alt="A 3D stylized icon of speech bubbles in shades of purple and pink, glowing with a soft internal light, representing digital communication and support." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkqLZdDsDezPIcTIuAZqIkrVIMl7Y8PsBLj_dsMW6HkgH-EiUYpwsOr6Q5pBKxBFdLaYjZIMcIxRJgQZo9zz3Vw7UGUnCoGV6EAsztuKihVhzgNQdRxUVoLE0sOsxlWhXPwwFjt2nOqk1DQ_CiCtSFau2l6ZLbKB0AsaDBUBYIita6KycqSoAjcO79M214RNDXWr232H1ufNWQCkDjb4tF3n9ORiuk7g6b_EAjyyhOnSLajXiLDn6u6g">
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-lg text-gray-800">Tengo una duda</h3>
+<p class="text-sm text-gray-500">Escribenos y te ayudaremos</p>
+</div>
+<span class="material-symbols-outlined text-gray-300">chevron_right</span>
+</button>
+<div class="card-2 floating-card w-full flex items-center p-4 bg-white rounded-2xl shadow-lg border border-white/50 text-left">
+<div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mr-4">
+<img class="w-8 h-8" data-alt="A cute 3D miniature of a traditional school building with a small clock and a yellow flag on top, designed in a friendly cartoon style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq1pJBM1qsp0ic3aGtJzEuYxgu-00Ktm3VQQ0I6b46gzou0pqhuuR6qaMKcEqaWhOou12wnKqs3voCB--qxUPmBMipGqfwtVZe84hZVI5FfYMR_chHHHLeaqxz7RdKAlZKyiqRgwkMfAQQXcotPcMaS_ufhus-W9jRxxRATCBlxd91hdu0JNEXEzJesAyJwCII52Rt2ysguZEexEextMZZVID49YtTsIUiTBSNcTLFtSFYe86RvIDpRw">
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-lg text-gray-800">Quiero sumar mi institución</h3>
+<p class="text-sm text-gray-500">Haz parte de Beci</p>
+</div>
+<span class="material-symbols-outlined text-gray-300">chevron_right</span>
+</div>
+<div class="card-3 floating-card w-full flex items-center p-4 bg-white rounded-2xl shadow-lg border border-white/50 text-left">
+<div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mr-4">
+<img class="w-8 h-8" data-alt="A collection of 3D social media icons including a heart, a bell, and a mail symbol, floating together in a playful, vibrant arrangement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMNLgIErY_tm4eJ4KHc6os3fVgejZxqtHaY2gevuq3o23LT30VPT2WX7sIzWPRXZp4ge6Zm3_4--QrTXF-JUhJ6h59sTBqBrgh1UsI65z-jNWC3uXwizI9PkPrE3GIqtGlRtnMazex4NxL5F_gCqQ98MbrDAdDUpvVxd8CaCm6jOscH4NhP5LPlcrQGp8rlroHa0HVwc-mqtYuyn03HgZLRtrT_uxhK7FaA-FOePI__kUHwgM7eJHmNw">
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-lg text-gray-800">Redes y Contacto</h3>
+<p class="text-sm text-gray-500">Siguenos y Escribenos</p>
+</div>
+<span class="material-symbols-outlined text-gray-300">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="hidden md:flex justify-center mascot-wave">
+<img class="w-full max-w-sm" data-alt="A friendly 3D blue cloud mascot character with a vibrant purple and pink swirl of hair, waving happily with a friendly smile, set against a soft bokeh background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaVaetoEuIMRUigznNvaSqSCbtJLD76SeVz9bJ6w5lQaGDXJhMOP5zTfo0vFLMYSO4a8ZVZ7UmdicHOWHR9a_SOwEAQM3vp8rLKF-fy71IJ2agSHKdwlZKBi2OEZ2_qNFyPSthhZgsvPO6PStV7zPd2GdhUE2dLsJDrt044p_M5l5xxjB3rxAdn0Lp0eoJEeCsRM5-vcJdYCeTCy6HPS4LaFGAzcBD-D1pkUZudgOF48pUPvHP1vNR5w">
+</div>
+<!-- Mobile Mascot -->
+<div class="md:hidden flex justify-center mascot-wave mt-8">
+<img class="w-64" data-alt="A friendly 3D blue cloud mascot character with a vibrant purple and pink swirl of hair, waving happily with a friendly smile, set against a soft bokeh background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOsZ2NrFM_uVCXqS0LdDcD5jy8cASwl5IX746ucyrxhsxGbX3f4-eI-Dw8ZKSOEYXN2muOoUqd6VwVyGMepoQnZkYTS5TNcCLgi9x2DIkqs42oewj9cpU8AGnQ8cVLFEbCth_EzhLu3Z3sdoK8VvoiyHTfYpgHpukV8PYOk_tZX51N2nPhThcl6dm7mXkHlHHIm57E3O_2b-Rjhw8HTPcMxxdBR3A2UXEmjH4DQ8cTV9sXQIBHE5VNoQmcH6ZtofAmH279rXnV7GV2Pfg">
+</div>
+</div>
+</section>
+<!-- Screen 2: Tengo una duda -->
+<section class="screen flex-col items-center" id="screen-form">
+<div class="w-full flex justify-between items-center mb-6">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/50 shadow-sm" onclick="navigateTo('screen-main')">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<img class="h-16 w-auto" data-alt="The Beci logo presented as a colorful 3D rendered ensemble of character-like letters, featuring a bright blue B with eyes and a tiny house door, a purple E with a cute hat, a pink C, and a green I." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlF1wdqkRWR5jMphK8K7g6aAVTdJPZ_aDeMiAi6L0QF8RMivyrDHbXm4WJnXNZCrY8-MPvvC3-jirLwuteiQ3BRsjauD3CHLYR_5ZatvJCxidHRodChYKsTksoz4425jOh4BOVpIIKRrEjW3V6O8eRfBD599qHBamoLJUNHX2YNc-UzE7ER0wD8OIpEu8vYcukuIk6DinPHb5ekWZIwJ6Yr2waVRcvqa3jAKcsrYf3Rne53Oq5YXLRfg">
+<div class="w-12"></div>
+</div>
+<div class="w-full md:grid md:grid-cols-2 md:gap-12 md:items-start">
+<div class="relative">
+<div class="flex items-center gap-3 mb-4">
+<img class="w-10 h-10" data-alt="Two 3D purple chat bubble icons overlapping each other with soft shadows, indicating an active conversation or messaging interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjO20YAnC4T-uU6yfQzQRcJAXA4Sf_CSeZ7lbkojDq8PJYoxH3BjVi2hlxdhwFMT-DVdJlkm_uzYWDYXZKuL36chMpzWqTaVfAyAdzwUt_TdCb8wyEPdv0VngcFwquah0p5veTgZ4RI67WmErbToSoH5b7UdInxhD0_qVd-A9Jrvd3_6HZ22RwMYO7dTqmEGduzBb3dZgJHstoEZ680JuT8UqGLhUWrmcAqvDfbnCYqBlI63eDSwkH9Q">
+<h1 class="font-display text-3xl text-gray-900">Tengo una duda</h1>
+</div>
+<p class="font-body text-gray-600 mb-8">Cuentanos tu pregunta y te reponderemos pronto</p>
+<form class="space-y-6 bg-white/20 p-6 rounded-3xl backdrop-blur-sm shadow-inner">
+<div class="space-y-2">
+<label class="block font-semibold text-gray-700 ml-2">Nombre Completo</label>
+<input class="w-full h-14 px-6 rounded-2xl bg-white border-none shadow-md focus:ring-2 focus:ring-secondary/20 placeholder:text-gray-300" placeholder="Escribe tu nombre" type="text">
+</div>
+<div class="space-y-2">
+<label class="block font-semibold text-gray-700 ml-2">Correo electrónico o numero de cel</label>
+<input class="w-full h-14 px-6 rounded-2xl bg-white border-none shadow-md focus:ring-2 focus:ring-secondary/20 placeholder:text-gray-300" placeholder="ejemplo@gmail.com o +57 312..." type="text">
+</div>
+<div class="space-y-2">
+<label class="block font-semibold text-gray-700 ml-2">¿Sobre que tienes duda?</label>
+<textarea class="w-full p-6 rounded-2xl bg-white border-none shadow-md focus:ring-2 focus:ring-secondary/20 placeholder:text-gray-300 resize-none" placeholder="Cuéntanos aquí..." rows="4"></textarea>
+</div>
+<button class="w-full h-14 bg-secondary text-white font-bold rounded-full shadow-lg shadow-secondary/30 hover:bg-secondary/90 active:scale-95 transition-all" type="button">
+                            Enviar
+                        </button>
+</form>
+</div>
+<div class="mt-12 md:mt-0 flex flex-col items-center justify-center">
+<div class="relative mascot-thinking">
+<img class="w-full max-w-md" data-alt="A 3D character of a thoughtful blue cloud mascot with a questioning expression, finger on chin, with a translucent blue question mark floating above its head." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX2OCk0C5cmOIUFCPgZb1jcGgzBd1nBRVCcPZhVyYUNLxadu4KdtzPTnQ3int9ShVPlzJxEEjL5Axhs4HKxXXjbbkjfKVWA645fCZy-YtmhMgsBUeyV8g_RHjMt5esPVXQSMW-LylNeNLCvQjBPqY403pNOoAQDMBJI6usoZpgjARjcxTY6TwYrgFZvAegOGkG5X7ZjpVF3Zl0kdC1lE3lg-vNhYfOIepSj0XtoDQm-gJ05fsYwLOp7A">
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<nav class="mobile-nav fixed bottom-0 left-0 w-full glass-nav z-50">
+<div class="flex justify-between items-end px-4 pb-4 pt-3">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">home</span>
+<span class="text-[10px] font-medium text-gray-400 group-hover:text-primary">Inicio</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">favorite</span>
+<span class="text-[10px] font-medium text-gray-400 group-hover:text-primary">Favoritos</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="bg-primary/10 text-primary p-2 rounded-xl mb-1">
+<span class="font-display text-xs font-black">Beci</span>
+</div>
+<span class="text-[10px] font-medium text-gray-400 group-hover:text-primary">Beci</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">help</span>
+<span class="text-[10px] font-medium text-primary">Ayuda</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">person</span>
+<span class="text-[10px] font-medium text-gray-400 group-hover:text-primary">Vecino</span>
+</a>
+</div>
+<div class="h-4 bg-transparent"></div> <!-- Home Indicator safe area -->
+</nav>
+<script>
+        function navigateTo(screenId) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            setTimeout(() => {
+                const target = document.getElementById(screenId);
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 50);
+        }
+
+        // Form Submission Logic Placeholder
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias! Hemos recibido tu duda.');
+        });
+
+        // Initialize micro-interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Beci Help Center Initialized');
+        });
+    </script>
+
+
+</body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cuéntanos - Beci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=DM+Sans:wght@400;500;700;900&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "tertiary": "#340900",
+                        "on-primary": "#ffffff",
+                        "institutional-green-dark": "#336926",
+                        "on-tertiary-fixed-variant": "#7b2f15",
+                        "secondary-container": "#fe6b00",
+                        "institutional-orange": "#FF6C01",
+                        "primary-fixed": "#dce1ff",
+                        "surface-container": "#efedf4",
+                        "secondary-fixed": "#ffdbcc",
+                        "primary-container": "#062573",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f4f3fa",
+                        "on-tertiary-fixed": "#3a0b00",
+                        "on-primary-fixed-variant": "#2a418e",
+                        "tertiary-fixed": "#ffdbd0",
+                        "inverse-on-surface": "#f1f0f7",
+                        "surface-variant": "#e3e1e9",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#b6c4ff",
+                        "inverse-surface": "#2f3036",
+                        "surface-container-high": "#e9e7ee",
+                        "on-surface-variant": "#444651",
+                        "on-primary-container": "#7b90e2",
+                        "primary": "#001249",
+                        "on-surface": "#1a1b20",
+                        "on-primary-fixed": "#001550",
+                        "tertiary-fixed-dim": "#ffb59e",
+                        "background-nebulous-start": "#FDAC4",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#581500",
+                        "surface": "#faf8ff",
+                        "background-nebulous-end": "#F4DBF0",
+                        "on-tertiary-container": "#dc7959",
+                        "on-secondary-fixed": "#351000",
+                        "on-secondary-container": "#572000",
+                        "secondary-fixed-dim": "#ffb693",
+                        "outline": "#757682",
+                        "background": "#faf8ff",
+                        "surface-bright": "#faf8ff",
+                        "institutional-green-light": "#4DB21A",
+                        "outline-variant": "#c5c5d3",
+                        "background-nebulous-mid": "#FDF3E6",
+                        "on-background": "#1a1b20",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "secondary": "#a04100",
+                        "surface-tint": "#445aa7",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dbd9e0",
+                        "surface-container-highest": "#e3e1e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "1rem",
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "2rem",
+                        "margin-desktop": "2.5rem",
+                        "gutter": "1rem",
+                        "margin-mobile": "1rem"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-lg-mobile": ["DM Sans"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["DM Sans"],
+                        "display-lg": ["DM Sans"],
+                        "headline-md": ["DM Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "title-lg": ["Be Vietnam Pro"],
+                        "poppins": ["Poppins", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "900" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "900" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "900" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        :root {
+            --bg1: #FFFAC4;
+            --bg2: #FDF3E6;
+            --bg3: #F4DBF0;
+        }
+
+        .bg-nebulous {
+            background: radial-gradient(circle at 0% 0%, var(--bg2) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, var(--bg3) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, var(--bg1) 0%, transparent 50%);
+            background-color: #faf8ff;
+            background-size: 200% 200%;
+            animation: nebulousFlow 20s ease-in-out infinite;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        @keyframes nebulousFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-animation-delayed {
+            animation: float 6s ease-in-out 1s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .glass-input-shadow {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-nebulous min-h-screen text-on-surface antialiased relative flex flex-col">
+<div class="noise-overlay"></div>
+<!-- Top Navigation (Desktop) -->
+<header class="hidden md:flex items-center justify-between w-full max-w-7xl mx-auto top-0 pt-8 px-8 bg-transparent absolute z-50">
+<div class="flex items-center gap-4">
+<button class="text-primary-container hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-[28px] font-bold" style="font-variation-settings: 'FILL' 1;">arrow_back_ios_new</span>
+</button>
+</div>
+<nav class="flex gap-6">
+<a class="text-on-surface-variant hover:opacity-80 transition-opacity font-body-md" href="#">Inicio</a>
+<a class="text-on-surface-variant hover:opacity-80 transition-opacity font-body-md" href="#">Explorar</a>
+</nav>
+</header>
+<!-- Mobile Header Elements -->
+<div class="md:hidden absolute top-8 left-8 z-50">
+<button class="text-[#062573] hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[28px] font-bold" style="font-variation-settings: 'FILL' 1;">arrow_back_ios_new</span>
+</button>
+</div>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-[520px] mx-auto px-8 flex-1 flex flex-col justify-center relative z-20 py-12">
+<!-- Logo -->
+<div class="w-full flex justify-center mb-10">
+<img alt="Beci Logo" class="w-[160px] object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT4A7LDxjw5Ske0fdtMoC64jpCzz83-2bp2a3gw2Hg-WA136vj5VBYlQC60BwHMLhj9-KPpMi9QMtbPeW-Pp1GJL5iYn7Fin4iqxSmoTzlLJXzKSxlnZVCyNeC1ToO4GoKNXqxonPpv9ViePQa7Dorw6nPTwocFLJxZJNksTaeBtIpzfJCNlmCDDiJebH_8YHIdv4ToFHLY8jt8sP4tdYLRK76RQtjuyxWSCNHYdKz4EljpmeGnzcJj_AGFG3bUa9npQ"/>
+</div>
+<!-- Titles -->
+<div class="text-center mb-[24px] w-full">
+<h1 class="font-headline-lg text-[34px] font-black text-on-surface mb-[12px] leading-tight">Cuéntanos</h1>
+<p class="font-poppins text-[18px] font-medium text-on-surface max-w-[280px] mx-auto leading-snug">Queremos saber más sobre este lugar</p>
+</div>
+<!-- Form Area -->
+<form class="w-full flex flex-col" onsubmit="event.preventDefault();">
+<!-- Question 1 -->
+<div class="flex flex-col mb-[16px]">
+<label class="font-headline-md font-black text-[24px] text-on-surface mb-[12px] leading-tight" for="feedback">¿Qué te gustaría saber sobre este lugar?</label>
+<p class="font-poppins text-[16px] font-normal text-on-surface mb-[16px] leading-normal">Cuéntanos qué información te interesaría conocer y lo tendremos en cuenta.</p>
+<div class="relative w-full float-animation">
+<textarea class="w-full h-[140px] rounded-[24px] bg-white border-none p-5 font-poppins text-[16px] text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent resize-none glass-input-shadow transition-all placeholder:text-outline/70" id="feedback" maxlength="300" oninput="updateCounter(this)" placeholder="Escribe aquí..." rows="5"></textarea>
+<div class="absolute bottom-4 right-5 font-poppins text-[14px] text-outline/70" id="charCounter">0/300</div>
+</div>
+</div>
+<!-- Question 2 -->
+<div class="flex flex-col mb-[24px]">
+<label class="font-headline-md font-black text-[20px] text-on-surface mb-[12px]" for="contact">¿Cómo podemos contáctarte?</label>
+<div class="w-full float-animation-delayed">
+<input class="w-full h-[56px] rounded-full bg-white border-none px-6 font-poppins text-[16px] text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent glass-input-shadow transition-all placeholder:text-outline/70" id="contact" placeholder="Correo electrónico o teléfono (opcional)" type="text"/>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="flex justify-center">
+<button class="w-[230px] h-[54px] rounded-full bg-primary-container text-white font-poppins text-[18px] font-semibold hover:bg-primary-container/90 active:scale-95 transition-all shadow-lg shadow-primary-container/20" type="submit">
+                    Enviar
+                </button>
+</div>
+</form>
+</main>
+<script>
+        function updateCounter(textarea) {
+            const currentLength = textarea.value.length;
+            const counterElement = document.getElementById('charCounter');
+            counterElement.textContent = `${currentLength}/300`;
+            
+            if (currentLength >= 300) {
+                counterElement.classList.add('text-error');
+                counterElement.classList.remove('text-outline/70');
+            } else {
+                counterElement.classList.remove('text-error');
+                counterElement.classList.add('text-outline/70');
+            }
+        }
+    </script>
+</body></html>
