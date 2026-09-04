@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="h-full" lang="es" style=""><head>
+<!DOCTYPE html><html class="h-full" lang="es" style="height:100%;overflow:hidden;"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 <title>Beci - Ubícate</title>
@@ -21,6 +21,10 @@
       }
     }
   </script>
+<!-- Phosphor Icons for UI elements -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css">
 <!-- Custom Styles for Glassmorphism & Layout -->
 <style data-purpose="background-gradient">
     .beci-screen-bg {
@@ -37,96 +41,123 @@
       background-size: 16px 16px;
     }
   </style>
-<style data-purpose="glassmorphism-menu">
-    .glass-menu {
-      background: rgba(248, 243, 247, 0.78);
-      backdrop-filter: blur(28px) saturate(160%);
-      -webkit-backdrop-filter: blur(28px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      box-shadow: 0 16px 40px -10px rgba(92, 60, 114, 0.16),
-                  0 0 0 1px rgba(255, 255, 255, 0.4);
-      border-radius: 40px;
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+    body {
+      font-family: 'Montserrat', sans-serif;
     }
-    
-    .menu-item-separator {
-      border-bottom: 1px solid rgba(175, 160, 185, 0.28);
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
     }
   </style>
-<style data-purpose="animations">
-    .menu-transition {
-      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+<style data-purpose="custom-utilities">
+    /* Bottom nav glass effect */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
     }
-    .menu-closed {
+
+    /* Desktop header: hidden on mobile, fixed on lg+ */
+    .desktop-header {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .desktop-header {
+        display: flex;
+      }
+      body {
+        padding-top: 80px;
+      }
+    }
+
+    /* Hide scrollbar for horizontal scrolling lists */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Category Button Shine Effect */
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-shine::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+      transition: all 0.3s ease;
+    }
+    .btn-shine:hover::after {
+      left: 100%;
+      transition: all 0.6s ease;
+    }
+
+    /* Mobile dropdown navigation panel */
+    .nav-panel {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .nav-panel-closed {
       opacity: 0;
-      transform: scale(0.92) translate(16px, -16px);
+      transform: translateY(-8px) scale(0.96);
       pointer-events: none;
     }
-    .menu-open {
+    .nav-panel-open {
       opacity: 1;
-      transform: scale(1) translate(0, 0);
+      transform: translateY(0) scale(1);
       pointer-events: auto;
     }
   </style>
 </head>
-<body class="min-h-screen w-full bg-background text-beciNavy antialiased select-none flex flex-col items-center justify-start overflow-x-hidden">
-<!-- Mobile & Desktop Responsive Container -->
-<div class="w-full min-h-screen beci-screen-bg relative flex flex-col shadow-none md:shadow-2xl overflow-hidden" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBns_HbhsEiANccOvcMJxrKjXkOTJ9hzOReWNdy54wT1MbBHIQxd1P5llObhhk0J3Is0LBf59--t3UD3ORrX9gd5VWzT_jypJC4sRUy_KDPNI5oKTzHrN1iGmu8fLZsp7TaMppbbIwzeiRHqOtHWNxfnDXBK4dYDNJsCplTcO76IaYA6Xl4plZewjDynuYrphN46eSZ_VMgdVTvoeDoPIigySa23B8Z6N90p6UW_7Ho501Rv9jHsko1rxEeSOGrQViS2Wk&quot;); background-size: cover; background-position: center center; background-repeat: no-repeat;">
-<!-- BEGIN: Responsive Navigation Header -->
-<header class="w-full pt-4 md:pt-6 px-4 md:px-10 lg:px-16 relative z-30 transition-all duration-300" data-purpose="screen-header">
-<!-- Header Container -->
-<div class="max-w-7xl mx-auto flex items-center justify-between">
-<!-- Logo: Beci Mascot -->
-<a aria-label="Beci Home" class="inline-block transition-transform hover:scale-105 active:scale-95 z-20" href="#home">
-<img alt="Beci" class="w-28 sm:w-36 md:w-40 lg:w-44 h-auto object-contain drop-shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaFnXHjOV6alak9wpcCpjqAyA8-mCcpkSUeJs8Xq_MDAPvfnuwDYv_o7wEvkHLGSDqX4KlUivmdpxO0QgMKiaHRTThI1KODQPEakEzPPclbnPxRML8jqAfwCBOhYFQ0RGOrrsVL1s9qGZSE93Hh9Ou6iLKK1mEfutryvK-NCmiTGoRgA1HNeBvsyTTp3i5dKoDuOGH86HR25Ypca2v1efqQ-2Xu9WY9Cw4MI00TYfwGeOkxOGdOsIgG1q-_nrcOUWrwck" style="transform: scale(1.1128); transform-origin: left center;">
-</a>
-<!-- Desktop Navigation Links (hidden on mobile, flex on desktop) -->
-<nav aria-label="Navegación principal desktop" class="hidden lg:flex items-center gap-2 xl:gap-4 bg-white/70 backdrop-blur-xl px-5 py-2.5 rounded-full border border-white/80 shadow-[0_4px_20px_rgba(92,60,114,0.08)]">
-<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#inicio">
-        Inicio
-      </a>
-<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#favoritos">
-        Tus Favoritos
-      </a>
-<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#sobre-beci">
-        Sobre Beci
-      </a>
-<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#ayuda">
-        ¿Te ayudamos?
-      </a>
-<a class="desktop-nav-link px-5 py-2 text-[15px] font-bold text-white bg-primary hover:bg-primary-container shadow-sm rounded-full transition-all duration-200" href="#vecino">
-        Vecino
-      </a>
+<body class="h-screen w-full bg-background text-beciNavy antialiased select-none flex flex-col items-center justify-start overflow-hidden">
+<!-- BEGIN: Desktop Header -->
+<header class="desktop-header fixed top-0 left-0 w-full h-[80px] bg-white shadow-sm z-[100] items-center justify-between px-8">
+<div class="h-12 w-28 bg-contain bg-no-repeat bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDL5WwB6Hand9Wacq0bu_dZtUHvAD4HIb5Fvqe9xvCUqmPvYPqPTEq0tirfqDDzIiO9hrS_RiNVbOmwjOCmUg27crRPYlrHrwwKujzHJJs9mEm7qTfxSgpV3p0fYkR3zm1_n4_VeODyUSLJztsbQhHpi2vplL_fLxO3jh03yByA8SDVJ95Me7CQrd6iSI6YNZRmnhzBGPG7Fs8iWVO_XMNah5PrYUDBBxgJouEGGu9HXKsaYqPLYc1VPg');"></div>
+<nav class="flex items-center gap-8">
+<a class="font-poppins text-[16px] font-semibold text-[#062573] relative after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[3px] after:bg-[#062573] after:rounded-full" href="#">Inicio</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#062573] transition-colors" href="#">Tus Favoritos</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#062573] transition-colors" href="#">Sobre Beci</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#062573] transition-colors" href="TeayudamosBeci.html" target="_self">¿Te ayudamos?</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#062573] transition-colors" href="#">Vecino</a>
 </nav>
-<!-- Mobile / Tablet Hamburger Button (hidden on desktop) -->
-<button aria-label="Abrir menú" class="lg:hidden p-2.5 rounded-xl text-beciNavy hover:bg-white/40 active:scale-90 transition-all focus:outline-none" id="openMenuBtn" type="button">
-<img alt="Menú" class="w-8 sm:w-9 h-auto object-contain pointer-events-none drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuKNsumNzmVLEKwG-7rxVMm8Tfa5KxJDBF15W_ZtfSevrIMqZRO6quwyhegG2WgdEneJl4jNxllVrWAk4LVpZ3vX9zPPd-QcnceWMbTPF16o9GnWvwpTFMpZNVqAqjc3Q6_L44Ya00jx7aBJDeSXFs-3uVxBDRZAl_b2wm8Lku0XzCJ8qgBLoS0GhE46FYrc3mFYVwC_OAYpyiT08lXzM0HkV6Bz_QHV0yEq9l4gQS-E58yPkIumXzEmNHzaix9l00qIQ">
-</button>
-</div>
-<!-- Mobile / Tablet Secondary Row (Back Chevron + Title) -->
-<div class="lg:hidden flex items-center justify-between mt-3 px-1">
-<!-- Back Navigation Button -->
-<button aria-label="Volver atrás" class="w-10 h-10 -ml-2 flex items-center justify-center rounded-full text-beciNavy hover:bg-white/40 active:scale-90 transition-transform" id="backBtn" style="color: rgb(6, 37, 115);" type="button">
-<svg class="w-6 h-6 stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</header>
+<!-- END: Desktop Header -->
+<!-- BEGIN: Mobile Hamburger Menu -->
+<img alt="Beci" class="lg:hidden fixed top-4 left-4 z-[110] w-20 sm:w-24 h-auto object-contain drop-shadow-md" src="img/BECI.png">
+<button aria-label="Abrir menú" class="lg:hidden fixed top-4 right-4 z-[110] p-2.5 rounded-xl text-beciNavy hover:bg-white/40 active:scale-90 transition-all" id="hamburgerBtn" type="button">
+<svg class="w-7 h-7 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
 </button>
-<!-- Centered Mobile Title -->
-<h1 class="text-[26px] sm:text-[28px] font-bold tracking-tight text-beciNavy">
-      Ubícate
-    </h1>
-<!-- Spacer -->
-<div aria-hidden="true" class="w-8"></div>
+<div aria-label="Menú de navegación" class="lg:hidden fixed top-16 right-4 z-[110] w-[75%] sm:w-[55%] max-w-sm nav-panel nav-panel-closed glass-nav" id="navPanel" role="menu" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px) saturate(180%); -webkit-backdrop-filter: blur(12px) saturate(180%); border: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px; border-radius: 24px;">
+<nav class="flex flex-col p-2">
+<a class="nav-panel-link px-4 py-3 text-[16px] font-semibold text-beciNavy hover:text-purple-700 hover:bg-white/70 rounded-2xl transition-colors" href="#">Inicio</a>
+<a class="nav-panel-link px-4 py-3 text-[16px] font-semibold text-beciNavy hover:text-purple-700 hover:bg-white/70 rounded-2xl transition-colors" href="#">Tus Favoritos</a>
+<a class="nav-panel-link px-4 py-3 text-[16px] font-semibold text-beciNavy hover:text-purple-700 hover:bg-white/70 rounded-2xl transition-colors" href="#">Sobre Beci</a>
+<a class="nav-panel-link px-4 py-3 text-[16px] font-semibold text-beciNavy hover:text-purple-700 hover:bg-white/70 rounded-2xl transition-colors" href="TeayudamosBeci.html">¿Te ayudamos?</a>
+<a class="nav-panel-link px-4 py-3 text-[16px] font-semibold text-beciNavy hover:text-purple-700 hover:bg-white/70 rounded-2xl transition-colors" href="#">Vecino</a>
+</nav>
 </div>
-</header>
-<!-- END: Responsive Navigation Header -->
+<!-- END: Mobile Hamburger Menu -->
+<!-- Mobile & Desktop Responsive Container -->
+<div class="w-full h-full beci-screen-bg relative flex flex-col shadow-none md:shadow-2xl overflow-hidden" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBns_HbhsEiANccOvcMJxrKjXkOTJ9hzOReWNdy54wT1MbBHIQxd1P5llObhhk0J3Is0LBf59--t3UD3ORrX9gd5VWzT_jypJC4sRUy_KDPNI5oKTzHrN1iGmu8fLZsp7TaMppbbIwzeiRHqOtHWNxfnDXBK4dYDNJsCplTcO76IaYA6Xl4plZewjDynuYrphN46eSZ_VMgdVTvoeDoPIigySa23B8Z6N90p6UW_7Ho501Rv9jHsko1rxEeSOGrQViS2Wk&quot;); background-size: cover; background-position: center center; background-repeat: no-repeat;">
 <!-- BEGIN: Search Bar & Content Area -->
-<main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-10 lg:px-16 flex flex-col items-center relative z-10" data-purpose="interactive-map-area">
+<main class="flex-1 min-h-0 w-full max-w-7xl mx-auto px-4 md:px-10 lg:px-16 flex flex-col items-center relative z-10" data-purpose="interactive-map-area">
 <!-- Desktop Main Section Title and Subtitle -->
-<div class="hidden lg:flex flex-col items-center text-center mt-6 mb-2">
-<h1 class="text-4xl xl:text-5xl font-extrabold tracking-tight text-beciNavy">
+<div class="flex flex-col items-center text-center mt-6 mb-2">
+<h1 class="text-3xl sm:text-4xl xl:text-5xl font-extrabold tracking-tight text-beciNavy">
       Ubícate
     </h1>
-<p class="text-neutral-600 mt-2 text-base max-w-lg">
+<p class="hidden lg:block text-neutral-600 mt-2 text-base max-w-lg">
       Encuentra espacios, sedes aliadas y servicios comunitarios cerca de ti
     </p>
 </div>
@@ -141,15 +172,168 @@
 <input class="w-full py-3.5 sm:py-4 pr-5 pl-12 sm:pl-14 bg-white/95 text-neutral-800 placeholder-neutral-400 text-[14.5px] sm:text-[15.5px] rounded-full border border-white/80 focus:outline-none focus:ring-2 focus:ring-purple-300 transition-all" id="searchInput" placeholder="Buscar espacios, sedes o instituciones..." type="text">
 </div>
 </div>
-<!-- Subtle ambient decorative map canvas background -->
-<div class="flex-1 w-full relative min-h-[300px] md:min-h-[420px] flex items-center justify-center opacity-30 pointer-events-none mt-4">
-<svg class="w-full h-full max-w-2xl" fill="none" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-<path d="M-20 120 C80 90, 160 170, 240 130 C320 90, 360 190, 420 160" stroke="#bba0c9" stroke-dasharray="6 6" stroke-width="1.5"></path>
-<path d="M40 220 C140 180, 220 270, 320 210 C370 180, 410 240, 440 230" stroke="#bba0c9" stroke-dasharray="4 4" stroke-width="1.5"></path>
-<circle cx="140" cy="150" fill="#23c16b" r="4"></circle>
-<circle cx="280" cy="220" fill="#f59e0b" r="4"></circle>
-</svg>
+<!-- BEGIN: Filter Pills -->
+<div class="relative group w-full max-w-xl lg:max-w-none mt-5 mb-2 px-1 overflow-hidden">
+<div class="flex items-center gap-2">
+<div class="flex-1 relative overflow-hidden">
+<div class="flex overflow-x-auto hide-scrollbar gap-3 pb-2 flex-nowrap scroll-smooth min-h-[48px] pr-2" id="category-scroll-container" style="mask-image: linear-gradient(to right, black 95%, transparent 100%); transition: mask-image 0.3s ease;">
+<button class="category-btn btn-shine rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300 bg-[#062573] text-white active">
+        Todos
+      </button>
+<button class="category-btn btn-shine rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300 bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573]">
+        Educativos
+      </button>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">
+        Deportivos
+      </button>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">
+        Cultura
+      </button>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">
+        Salud
+      </button>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Institucionales</button>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Recreativos</button>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Tecnología</button>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Arte</button>
 </div>
+<script>
+      (function() {
+        const container = document.getElementById('category-scroll-container');
+        if (!container) return;
+
+        const updateMask = () => {
+          if (window.matchMedia('(min-width: 1024px)').matches) {
+            container.style.maskImage = 'none';
+            container.style.webkitMaskImage = 'none';
+            return;
+          }
+          const scrollLeft = container.scrollLeft;
+          const maxScroll = container.scrollWidth - container.clientWidth;
+          const isAtStart = scrollLeft <= 5;
+          const isAtEnd = scrollLeft >= maxScroll - 5;
+
+          let mask = '';
+          if (isAtStart && isAtEnd) {
+            mask = 'none';
+          } else if (isAtStart) {
+            mask = 'linear-gradient(to right, black 95%, transparent 100%)';
+          } else if (isAtEnd) {
+            mask = 'linear-gradient(to left, black 95%, transparent 100%)';
+          } else {
+            mask = 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)';
+          }
+          container.style.maskImage = mask;
+          container.style.webkitMaskImage = mask;
+        };
+
+        container.addEventListener('scroll', updateMask);
+        window.addEventListener('resize', updateMask);
+        setTimeout(updateMask, 100);
+      })();
+    </script>
+</div>
+<div class="flex items-center justify-center h-10 shrink-0 lg:hidden w-6 ml-2 transition-opacity duration-300" id="scroll-indicator-area">
+<i class="ph ph-caret-right text-gray-500 text-xl animate-bounce-right" id="scroll-arrow"></i>
+</div>
+</div>
+<style class="">
+  @keyframes bounce-horizontal-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+  @keyframes bounce-horizontal-left {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-6px); }
+  }
+  .animate-bounce-right {
+    animation: bounce-horizontal-right 1.5s infinite ease-in-out;
+  }
+  .animate-bounce-left {
+    animation: bounce-horizontal-left 1.5s infinite ease-in-out;
+  }
+</style>
+<script class="">
+  (function() {
+    const container = document.getElementById('category-scroll-container');
+    const arrow = document.getElementById('scroll-arrow');
+
+    if (!container || !arrow) return;
+
+    const updateIndicator = () => {
+      const scrollLeft = container.scrollLeft;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+
+      if (scrollLeft >= maxScroll - 5) {
+        arrow.className = 'ph ph-caret-left text-gray-500 text-xl animate-bounce-left';
+      } else {
+        arrow.className = 'ph ph-caret-right text-gray-500 text-xl animate-bounce-right';
+      }
+    };
+
+    container.addEventListener('scroll', updateIndicator);
+    window.addEventListener('load', updateIndicator);
+  })();
+</script>
+<script data-purpose="drag-scroll">
+  (function() {
+    const container = document.getElementById('category-scroll-container');
+    if (!container) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasDragged = false;
+
+    container.addEventListener('mousedown', (e) => {
+      isDown = true;
+      hasDragged = false;
+      container.classList.add('cursor-grabbing');
+      container.classList.remove('cursor-grab');
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDown = false;
+      container.classList.remove('cursor-grabbing');
+      container.classList.add('cursor-grab');
+    });
+
+    container.addEventListener('mouseup', () => {
+      isDown = false;
+      container.classList.remove('cursor-grabbing');
+      container.classList.add('cursor-grab');
+      setTimeout(() => { hasDragged = false; }, 50);
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 4) hasDragged = true;
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    container.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    container.classList.add('cursor-grab');
+    container.style.cursor = 'grab';
+  })();
+</script>
+</div>
+<!-- END: Filter Pills -->
+<!-- BEGIN: Interactive Map Area (temporary Google Maps embed) -->
+<div class="flex-1 min-h-0 w-full relative overflow-hidden mt-4" data-purpose="map-embed">
+<iframe allowfullscreen class="absolute inset-0 w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Medell%C3%ADn,%20Antioquia&t=&z=13&ie=UTF8&iwloc=&output=embed" title="Mapa de espacios y sedes aliadas"></iframe>
+</div>
+<!-- END: Interactive Map Area -->
 </main>
 <!-- END: Search Bar & Content Area -->
 <!-- BEGIN: Floating Bottom Legend Card -->
@@ -179,48 +363,51 @@
 </div>
 </footer>
 <!-- END: Floating Bottom Legend Card -->
-<!-- BEGIN: Glassmorphism Floating Menu (Mobile / Tablet only) -->
-<div class="lg:hidden glass-menu menu-transition absolute top-5 right-5 w-[75%] sm:w-[50%] max-w-sm z-50 pt-3 pb-7 px-4 flex flex-col menu-closed" data-purpose="glassmorphic-dropdown-menu" id="glassMenuPanel" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.4) 100%); backdrop-filter: blur(32px) saturate(200%); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(100, 80, 130, 0.16) 0px 20px 45px, rgba(255, 255, 255, 0.85) 0px 1.5px 2px inset; border-radius: 36px;">
-<!-- Top Close Button Bar -->
-<div class="flex justify-end pr-1 pt-1 pb-2">
-<button aria-label="Cerrar menú" class="p-1.5 rounded-full text-beciNavy hover:bg-black/5 active:scale-90 transition-transform" id="closeMenuBtn" type="button">
-<svg class="w-5 h-5 stroke-[2.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-</button>
 </div>
-<!-- Mobile Nav Items List -->
-<nav aria-label="Navegación principal móvil" class="flex flex-col text-center">
-<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#inicio">
-      Inicio
-    </a>
-<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#favoritos">
-      Tus Favoritos
-    </a>
-<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#sobre-beci">
-      Sobre Beci
-    </a>
-<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#ayuda">
-      ¿Te ayudamos?
-    </a>
-<a class="menu-item-link pt-3 pb-1 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors" href="#vecino">
-      Vecino
-    </a>
+<!-- BEGIN: BottomNavigation -->
+<nav class="fixed bottom-0 left-0 w-full glass-nav rounded-t-[32px] px-2 py-3 z-50 shadow-[0_-10px_40px_rgb(0,0,0,0.05)] hidden" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px) saturate(180%); border-top: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;">
+<ul class="flex justify-around items-center"><!-- Home (Active) -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-[#8A56AC]" href="#">
+<i class="ph ph-house text-2xl mb-1 font-bold"></i>
+<span class="text-[10px] font-medium">Inicio</span>
+</a>
+</li>
+<!-- Favorites -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="#">
+<i class="ph-fill ph-heart text-2xl mb-1 text-[#2C4196]"></i>
+<span class="text-[10px] font-medium whitespace-nowrap">Tus Favoritos</span>
+</a>
+</li>
+<!-- Beci Center Info -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-[#8A56AC] hover:text-[#8A56AC] transition-colors" href="#">
+<span class="text-[18px] font-extrabold mb-0 leading-tight">Beci</span>
+<span class="text-[10px] font-medium text-gray-600 mt-1" style="transform: translateY(5px);">Sobre Beci</span>
+</a>
+</li>
+<!-- Chat/Help -->
+<li class="flex flex-col items-center justify-center w-[72px]">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="#">
+<i class="ph ph-chat-circle-dots text-2xl mb-1 text-[#8A56AC]"></i>
+<span class="text-[10px] font-medium whitespace-nowrap">¿Te ayudamos?</span>
+</a>
+</li>
+<!-- Profile/Neighbor -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="#">
+<i class="ph ph-user text-2xl mb-1 text-[#8A56AC]"></i>
+<span class="text-[10px] font-medium">Vecino</span>
+</a>
+</li></ul>
 </nav>
-</div>
-<!-- END: Glassmorphism Floating Menu -->
-<!-- Toast Notification for Interactions -->
-<div class="fixed top-20 left-1/2 -translate-x-1/2 bg-beciNavy/90 text-white px-5 py-2.5 rounded-full text-xs font-medium tracking-wide shadow-lg pointer-events-none transition-all duration-300 z-50 opacity-0" id="toastNotification">Navegando a: Tus Favoritos</div>
-</div>
+<!-- END: BottomNavigation -->
 <!-- JavaScript Interactions -->
-<script data-purpose="menu-controller">
+<script data-purpose="page-interactions">
   document.addEventListener('DOMContentLoaded', () => {
-    const menuPanel = document.getElementById('glassMenuPanel');
-    const closeBtn = document.getElementById('closeMenuBtn');
-    const openBtn = document.getElementById('openMenuBtn');
-    const menuLinks = document.querySelectorAll('.menu-item-link, .desktop-nav-link');
-    const toast = document.getElementById('toastNotification');
     const infoBtn = document.getElementById('infoBtn');
+    const toast = document.getElementById('toastNotification');
 
     function showToast(message) {
       if (!toast) return;
@@ -233,52 +420,37 @@
       }, 1800);
     }
 
-    function closeMenu() {
-      if (!menuPanel) return;
-      menuPanel.classList.remove('menu-open');
-      menuPanel.classList.add('menu-closed');
-    }
-
-    function openMenu() {
-      if (!menuPanel) return;
-      menuPanel.classList.remove('menu-closed');
-      menuPanel.classList.add('menu-open');
-    }
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeMenu();
-      });
-    }
-
-    if (openBtn) {
-      openBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openMenu();
-      });
-    }
-
-    menuLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetName = link.textContent.trim();
-        showToast(`Navegando a: ${targetName}`);
-        closeMenu();
-      });
-    });
-
     if (infoBtn) {
       infoBtn.addEventListener('click', () => {
         showToast('Estados: Verde (Trabaja con Beci) | Ámbar (Pendiente)');
       });
     }
 
-    document.addEventListener('click', (e) => {
-      if (menuPanel && openBtn && !menuPanel.contains(e.target) && !openBtn.contains(e.target) && menuPanel.classList.contains('menu-open')) {
-        closeMenu();
-      }
-    });
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navPanel = document.getElementById('navPanel');
+
+    if (hamburgerBtn && navPanel) {
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = navPanel.classList.contains('nav-panel-open');
+        navPanel.classList.toggle('nav-panel-open', !isOpen);
+        navPanel.classList.toggle('nav-panel-closed', isOpen);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!navPanel.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+          navPanel.classList.add('nav-panel-closed');
+          navPanel.classList.remove('nav-panel-open');
+        }
+      });
+
+      navPanel.querySelectorAll('.nav-panel-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          navPanel.classList.add('nav-panel-closed');
+          navPanel.classList.remove('nav-panel-open');
+        });
+      });
+    }
   });
 </script>
 
