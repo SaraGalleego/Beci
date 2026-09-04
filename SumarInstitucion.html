@@ -1,0 +1,573 @@
+<!DOCTYPE html><html lang="es" ><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Beci - Registro de Institución</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@900&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        /* CSS Reset & Variables */
+        :root {
+            --color-primary: #062573;
+            --color-bg-start: #FDAC4;
+            --color-bg-mid: #FDF3E6;
+            --color-bg-end: #F4DBF0;
+            --color-text: #1a1b20;
+            --color-text-muted: #444651;
+            
+            --font-heading: 'DM Sans', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            min-height: 120vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #FFDAC4, #FDF3E6, #F4DBF0, #FFDAC4);
+            background-size: 400% 400%;
+            animation: moveNebula 15s ease infinite;
+            padding-bottom: 80px; /* Space for mobile nav */
+        }
+
+        @keyframes moveNebula {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Material Symbols */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        /* Header (Mobile First) */
+        header {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 10;
+        }
+
+        .logo {
+            height: 64px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 16px;
+        }
+
+        .back-btn {
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            margin-left: -8px;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .back-btn .material-symbols-outlined {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .back-btn-desktop {
+            display: none;
+        }
+
+        /* Desktop Header Nav (Hidden on mobile) */
+        .desktop-nav {
+            display: none;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* Title Section */
+        .title-section {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            justify-content: center;
+        }
+
+        .institution-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: none;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 32px;
+            color: var(--color-text);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 16px;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .animated-line {
+            width: 96px;
+            height: 4px;
+            background-color: var(--color-primary);
+            border-radius: 4px;
+            transform-origin: center;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Form Section */
+        form {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 16px;
+            color: var(--color-text);
+            text-align: left;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 16px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--color-text);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"] {
+            border-radius: 50px;
+        }
+
+        textarea {
+            border-radius: 20px;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            background: #ffffff;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(6, 37, 115, 0.1);
+            outline: none;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #757682;
+        }
+
+        /* Submit Button */
+        .submit-btn-container {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        button[type="submit"] {
+            background-color: var(--color-primary);
+            color: #ffffff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 16px 48px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        button[type="submit"]::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.5s ease;
+        }
+
+        button[type="submit"]:hover::after {
+            animation: lightSweep 0.8s ease-in-out forwards;
+        }
+
+        @keyframes lightSweep {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        /* Bottom Navigation (Mobile) */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 50;
+            padding: 0 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #6b596a;
+            padding: 8px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(6, 37, 115, 0.1);
+        }
+
+        .nav-item.active {
+            background-color: var(--color-primary);
+            color: #ffffff;
+            padding: 4px 16px;
+        }
+
+        .nav-item .material-symbols-outlined {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Focus styles */
+        *:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Desktop Restructuring (min-width: 768px) */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+                padding-top: 80px; /* Space for fixed desktop header */
+            }
+
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 80px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 64px;
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+                box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+                z-index: 100;
+            }
+
+            .logo {
+                height: 48px;
+                margin-bottom: 0;
+                margin-right: 24px;
+            }
+
+            .header-left {
+                display: flex;
+                align-items: center;
+            }
+
+            .back-btn-header {
+                display: none;
+            }
+            
+            .back-btn-desktop {
+                display: flex;
+                color: var(--color-primary);
+                align-items: center;
+                justify-content: center;
+                padding: 8px;
+                transition: opacity 0.3s ease;
+            }
+            
+            .back-btn-desktop:hover {
+                opacity: 0.8;
+            }
+            
+            .back-btn-desktop .material-symbols-outlined {
+                font-size: 32px;
+                font-weight: bold;
+            }
+
+            /* Hide mobile nav */
+            .mobile-nav {
+                display: none;
+            }
+
+            /* Show desktop nav */
+            .desktop-nav {
+                display: flex;
+                gap: 32px;
+            }
+
+            .desktop-nav .nav-item {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .desktop-nav .nav-item:hover {
+                background-color: transparent;
+                opacity: 0.8;
+            }
+
+            .desktop-nav .nav-item.active {
+                background-color: transparent;
+                color: var(--color-primary);
+                padding: 0;
+            }
+
+            main {
+                padding: 40px 64px;
+                padding-bottom: 120px;
+            }
+
+            .institution-icon {
+                display: block; /* Show on desktop */
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            .animated-line {
+                transform-origin: center;
+            }
+
+            button[type="submit"] {
+                width: auto;
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+<div class="header-left">
+<img alt="Beci Logo" class="logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGf0PFAM4nPnLiNcnp5CKDem7qx1SCPQWBLuemw2BIrztMxzn-o9IFlwPvmEbr9rLrXOKZkP4WjnakiWWlcBUQXpqBHKJOl2DbrZ258RLKpvVQqqeZmCQGn4yToysFXHo3-s4pLUN_MAxcBpl5p8GP4j3Z2Pep3qI5ENAKXOGymd9bL4VpRGKZ03bfUlegWouL3WnoT_F3Xcw4DUilfL4D3YRUSPrHBg7NjEzm377iz-GKAnvPbnI6ZHJ6J_8DwUjghg" style="max-width: 135px; height: auto; display: block; margin-bottom: 12px; margin-top: 24px; object-fit: contain;"><a aria-label="Volver" class="back-btn back-btn-header" href="#" style="margin-left: -12px; padding-left: 0px; margin-top: 8px;">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</a>
+</div>
+<!-- Desktop Nav -->
+<nav class="desktop-nav">
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="">Inicio</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="">Tus Favoritos</span>
+</a>
+<a class="nav-item active" href="#">
+<span class="material-symbols-outlined fill">info</span>
+<span class="">Sobre Beci</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">help_center</span>
+<span class="">¿Te ayudamos?</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="">Vecino</span>
+</a>
+</nav>
+</header>
+<!-- Main Content -->
+<main>
+<!-- Title Section -->
+<section class="title-section" style="align-items: center; text-align: center; padding: 0px 20px; margin-bottom: 32px;">
+<div class="title-row" style="display: flex; align-items: center; justify-content: center; width: 100%; gap: 12px; margin-bottom: 16px;">
+<a aria-label="Volver" class="back-btn-desktop" href="#">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</a>
+<img alt="Institution Icon" class="institution-icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_pzoXr2fmM71woyy-WGV0Z5yMT9P4He4ELnxYlzWKwR8ARR7uUdWWXycRz8g5SdiC0LBR50jdi6n9VRGHTdx73N9B_dAqGwxU8EIIUayrO0Go-ymJo4an_93u7RiQ3c8Wf8YFh4OZqqwfMgA84493HfwoSacF3qFTlUZCcHKDsJ1nRxve3G39hfWAc0qIMGEnzZ0EG293khKihVyJHKxTKqedVW6nrLspdVDBsFiDnAg_l4CMLWGZM2Pd7uyPmlukTw" style="width: 36px; height: 36px; object-fit: contain; display: block; flex-shrink: 0;">
+<h1 class="" style="font-size: 20px; white-space: nowrap; text-align: center; margin: 0px;">Quiero sumar mi institución</h1>
+</div>
+<h2 class="text-left md:text-center" style="width: 100%; max-width: none; margin-bottom: 24px;">Cuentanos sobre tu espacio y nos pondremos en contacto<br class="md:hidden"> contigo.</h2>
+<div class="animated-line" id="decorativeLine" style="transform: scaleX(1); transform-origin: center center; margin: 0px auto;"></div>
+</section>
+<!-- Form Section -->
+<form action="#" id="institutionForm" method="POST">
+<div class="form-group">
+<label class="" for="institutionName">Nombre de la institución</label>
+<input id="institutionName" name="institutionName" placeholder="Ej. Casa de la cultura" required="" style="background: rgb(255, 255, 255); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 15px, rgba(0, 0, 0, 0.02) 0px 1px 3px, rgba(255, 255, 255, 0.5) 0px 0px 0px 1px inset; transition: 0.3s;" type="text">
+</div>
+<div class="form-group">
+<label class="" for="writerName">Nombre de quien escribe</label>
+<input id="writerName" name="writerName" placeholder="Escribe tu nombre" required="" style="background: rgb(255, 255, 255); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 15px, rgba(0, 0, 0, 0.02) 0px 1px 3px, rgba(255, 255, 255, 0.5) 0px 0px 0px 1px inset; transition: 0.3s;" type="text">
+</div>
+<div class="form-group">
+<label class="" for="contactInfo">Correo Electrónico o numero de cel</label>
+<input id="contactInfo" name="contactInfo" placeholder="ejemplo@gmail.com o +57 312..." required="" style="background: rgb(255, 255, 255); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 15px, rgba(0, 0, 0, 0.02) 0px 1px 3px, rgba(255, 255, 255, 0.5) 0px 0px 0px 1px inset; transition: 0.3s;" type="text">
+</div>
+<div class="form-group">
+<label class="" for="city">Ciudad o Municipio</label>
+<input id="city" name="city" placeholder="Escribe tu ciudad" required="" style="background: rgb(255, 255, 255); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 15px, rgba(0, 0, 0, 0.02) 0px 1px 3px, rgba(255, 255, 255, 0.5) 0px 0px 0px 1px inset; transition: 0.3s;" type="text">
+</div>
+<div class="form-group">
+<label class="" for="description">Cuentanos sobre tu institución</label>
+<textarea id="description" name="description" placeholder="Describe brevemente las actividades, experiencias o servicios que ofrecen" required="" rows="4" style="background: rgb(255, 255, 255); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 15px, rgba(0, 0, 0, 0.02) 0px 1px 3px, rgba(255, 255, 255, 0.5) 0px 0px 0px 1px inset; transition: 0.3s;"></textarea>
+</div>
+<div class="submit-btn-container">
+<button class="" style="width: fit-content; max-width: 200px; border-radius: 9999px; padding: 12px 40px;" type="submit">Enviar</button>
+</div>
+</form>
+</main>
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-nav">
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="">Inicio</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="">Tus Favoritos</span>
+</a>
+<a class="nav-item active" href="#">
+<span class="material-symbols-outlined fill">info</span>
+<span class="">Sobre Beci</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">help_center</span>
+<span class="">¿Te ayudamos?</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="">Vecino</span>
+</a>
+</nav>
+<!-- Scripts -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const decLine = document.getElementById('decorativeLine');
+            
+            window.addEventListener('scroll', () => {
+                const scrollPos = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+                
+                let maxScroll = docHeight - windowHeight;
+                if(maxScroll <= 0) maxScroll = 1;
+                let scrollPercent = scrollPos / maxScroll;
+                
+                // Increase scale to make effect more noticeable based on scroll
+                let newScale = 1 + (scrollPercent * 1.5);
+                newScale = Math.min(newScale, 2.5);
+                
+                requestAnimationFrame(() => {
+                    decLine.style.transform = `scaleX(${newScale})`;
+                });
+            });
+        });
+    </script>
+
+
+</body></html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Beci Support - Tengo una duda</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700;9..40,900&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      /* Shared Colors */
+      --color-primary: #062573;
+      --color-surface: rgba(255, 255, 255, 0.7);
+      --color-background: transparent; /* Removed light blue fallback */
+      --color-text-main: #1a1b20;
+      --color-text-muted: #444651;
+      --color-institutional-green-light: #4DB21A;
+      --color-institutional-green-dark: #336926;
+      --color-white: #ffffff;
+      
+      /* Typography */
+      --font-headline: 'DM Sans', sans-serif;
+      --font-body: 'Poppins', sans-serif;
+      
+      /* Shapes */
+      --radius-pill: 9999px;
+      --radius-card: 16px;
+      
+      /* Spacing */
+      --spacing-base: 8px;
+      --spacing-container-mobile: 16px;
+      --spacing-container-desktop: 40px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text-main);
+      background-color: var(--color-background);
+      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvaiv0izz77TYuudUp-3_P3P5iA6l6i9FL-kdpXG9qkCRWF0guzslpzRqHhE3YM7CTrmhCuyQnleSGB-EmY5rg0ghB2LU_KMBoQhEe5yAjQ4QqdkqXcFUvkLwNBqGsCC3q9n5DDhvuNNxYHQx0Li0jYpEDtdMrqNV3t6j4VH13fvX2mgiAmULsXJnFni8hgemUpuxzD3sYyKphZh8X216u6eqcGUKCYLBy8cZ1j4nMcPLi9Fj9-j0oF-dfGcKH1YCtuw');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Shader Background Container */
+    .bg-shader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Layout Wrapper */
+    .layout-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      padding-bottom: 200px; /* Space for bottom nav on mobile + extra for scrolling */
+    }
+
+    /* Top Navigation (Desktop) */
+    .top-nav {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px var(--spacing-container-desktop);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .top-nav-logo {
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .top-nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .top-nav-link {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.2s ease;
+    }
+
+    .top-nav-link:hover {
+      color: var(--color-primary);
+    }
+
+    .top-nav-link.active {
+      color: var(--color-primary);
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: 4px;
+    }
+
+    /* Header Area (Mobile) */
+    .header-mobile {
+      display: flex;
+      flex-direction: column;
+      padding: 24px var(--spacing-container-mobile) 0;
+    }
+
+    .logo-mobile {
+      height: 48px;
+      object-fit: contain;
+      align-self: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--color-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      margin-left: -8px;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+    
+    .back-btn:hover {
+        background-color: rgba(6, 37, 115, 0.1);
+    }
+
+    .back-btn .material-symbols-outlined {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 24px var(--spacing-container-mobile);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Title Section */
+    .title-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-title {
+      font-family: var(--font-headline);
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--color-primary);
+      line-height: 1.2;
+    }
+
+    .title-icon {
+      font-size: 36px;
+      color: var(--color-primary);
+      /* Fallback if no image provided for specific icon, using material icon */
+    }
+
+    .page-subtitle {
+      font-size: 16px;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .animated-line-container {
+        width: 100%;
+        height: 4px;
+        margin-top: 16px;
+        background-color: rgba(6, 37, 115, 0.1);
+        border-radius: var(--radius-pill);
+        overflow: hidden;
+        display: flex;
+        justify-content: center; /* Center the line */
+    }
+
+    .animated-line {
+        height: 100%;
+        width: 0%;
+        background-color: var(--color-primary);
+        border-radius: var(--radius-pill);
+        transition: width 0.1s ease-out;
+    }
+
+    /* Form Section */
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      z-index: 10; /* Above mascot */
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--color-primary);
+      margin-left: 16px;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 16px 24px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--color-text-main);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    .form-input:focus, .form-textarea:focus {
+        border-color: var(--color-primary);
+        box-shadow: 0 4px 16px rgba(6, 37, 115, 0.15);
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .form-input {
+      border-radius: var(--radius-pill);
+    }
+
+    .form-textarea {
+      border-radius: var(--radius-card);
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: #9ca3af;
+    }
+
+    /* Submit Button with Shimmer */
+    .submit-btn {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 18px;
+      padding: 16px 32px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+      box-shadow: 0 8px 24px rgba(6, 37, 115, 0.25);
+      align-self: center; /* Center horizontally */
+      width: 100%;
+      max-width: 300px;
+      margin-top: 16px;
+    }
+
+    .submit-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(6, 37, 115, 0.35);
+    }
+
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: skewX(-25deg);
+      animation: shimmer 3s infinite linear;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      20% { left: 200%; }
+      100% { left: 200%; }
+    }
+
+    /* Mascot Animation */
+    .mascot-container {
+      position: fixed;
+      right: -100px; /* Start off-screen */
+      bottom: 20%;
+      width: 200px;
+      height: 200px;
+      z-index: 5; /* Below form */
+      pointer-events: none;
+      opacity: 0;
+      animation: mascotEntrance 1s ease-out forwards 0.5s, peekABoo 10s ease-in-out infinite 2s;
+    }
+
+    .mascot-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* Extracting just a portion if it's a sprite sheet, else it just shows */
+      object-position: right center;
+    }
+
+    @keyframes mascotEntrance {
+      from { right: -200px; opacity: 0; }
+      to { right: -50px; opacity: 0.8; }
+    }
+
+    @keyframes peekABoo {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-30px); }
+      70% { transform: translateX(10px); }
+      80% { transform: translateX(-10px); }
+    }
+
+    /* Bottom Navigation (Mobile) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(77, 178, 26, 0.7); /* institutional-green-light with opacity */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 16px;
+      z-index: 50;
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      border-radius: 12px;
+      min-width: 64px;
+    }
+
+    .bottom-nav-item:active {
+      transform: scale(0.95);
+    }
+
+    .bottom-nav-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .bottom-nav-item.active {
+      background-color: var(--color-institutional-green-dark);
+      color: var(--color-white);
+    }
+
+    .bottom-nav-icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .bottom-nav-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+
+    /* Media Queries */
+    @media (min-width: 768px) {
+      .header-mobile {
+        display: none;
+      }
+
+      .top-nav {
+        display: flex;
+      }
+
+      .bottom-nav {
+        display: none;
+      }
+      
+      .layout-wrapper {
+          padding-bottom: 200px;
+      }
+
+      .main-content {
+        padding: 40px var(--spacing-container-desktop) 100px; /* Added extra bottom padding */
+        max-width: 800px; /* Constrain form width on desktop */
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .page-title {
+        font-size: 48px;
+      }
+
+      .page-subtitle {
+        font-size: 18px;
+      }
+      
+      .mascot-container {
+          width: 300px;
+          height: 300px;
+          right: 0;
+      }
+      
+      @keyframes mascotEntrance {
+        from { right: -300px; opacity: 0; }
+        to { right: -80px; opacity: 0.9; }
+      }
+    }
+
+  </style>
+</head>
+<body>
+<!-- Shader Background -->
+<div class="bg-shader">
+</div>
+<!-- Mascot (Absolute/Fixed positioning) -->
+<div class="mascot-container">
+<img class="mascot-image" data-alt="A 3D rendered mascot character in blue and white, friendly expression, high quality glossy material, studio lighting, floating on a light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJnSP9u0_WnXbYLIR24BPaQI6A4BrZ4Z4JfANGsLsuZQLv7Egdi_Rs5jGnearPEY9mFZMB5it9mvnh-s6OV809Xi6ZwUVlHqTcAE-jn0ykBk5IXCZLWJDcy29sUZCQCfAfMVqPAYFnBe20HE8XITkGB2JPxQ4Zqt22FJM97xZFZLxX0d5ifB8KzWMOM2sR8mZkJyzqpc4PbJyeUZoAgSSIi9z7tjW8M2b9QXZQN0J275H7hwdtNPBGGENMc079lA3Y7Q"/>
+</div>
+<!-- Top Navigation (Hidden on Mobile) -->
+<nav class="top-nav">
+<!-- Using the image as logo for desktop as well -->
+<img alt="Beci Logo" class="top-nav-logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx6Bw7ul9RmY4FWmKnDjv9lByr5S2RCwQKsLO-3VofrdbWBbWk73AoloaZjNM0cPjxFU5TclW66Fmn8uvbDr0284yTZZ7uQmYEaQhdMZEW7rj9uY8Du-AjSCjgOkuh4APsr1yhs5iWZyntP3M88WQsh2IB6RYthsZ9YWneNQ1B31gyUdybeQS5oUv5-41HnIzdsSHirMTPK608msqZ3I_OqAv4h7bmwyEYbJTlk1Wj-bw_nX3OQnHVvfneXgXhbagJgA" style="height: 48px; width: auto; object-fit: contain;"/>
+<div class="top-nav-links">
+<a class="top-nav-link" href="#">Inicio</a>
+<a class="top-nav-link active" href="#">Dudas</a>
+<a class="top-nav-link" href="#">Chat</a>
+<a class="top-nav-link" href="#">Perfil</a>
+</div>
+</nav>
+<div class="layout-wrapper"><header class="header-mobile"><img alt="Beci Logo" class="logo-mobile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3vasteJ815IJXq6niyyXY52mMxxk_QtwwzJaXUR-5o09CcMs49wYyT-f8GHUEHZH5xiMO_hKgq3e3rBZdxKxTNCi95G-nLyIIrKpcyRsCsCe9o7jJ8ISZQ4pXl2XQqz9qq1AsCbdt4eoyZavv2u1bY1YJz77bc6SQdx0SLyXRCyokDLNSZ6Q3Y79Az0e9KeP0TnGMkO82uAQ3gLT15BCzkkinJAb4Tt5qkksVY2XcK58ZnX9qtMDHMktm4o8aGeFLbg" style="height: 48px; width: auto; object-fit: contain; margin-bottom: 16px; display: block;"/><button aria-label="Go back" class="back-btn" style="align-self: flex-start;"><span class="material-symbols-outlined">arrow_back_ios_new</span></button></header>
+<!-- Mobile Header -->
+<!-- Main Content -->
+<main class="main-content px-8">
+<section class="title-section md:items-center"><div class="header-text-section" style="display: flex; flex-direction: column;"><div class="title-wrapper" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 12px;"><img alt="Chat bubbles icon" class="title-icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvCOIEV5i5Uh5aq5bIVgI_4HGx3duxTrjloilhTHpITcUU_8oSIqBh16MN-GM6cnXx5QXx2DpHa_T2clM8LYVTFfnecI5tQsiL3QDdljLLjtgmdt1TowL_zHM7m3aFl11392siTQ46UEBe5SwGZXtvjNsTyoDC4KKSsNDOGCRvVxm0hVtEAiTp53fLQF3-RS6XdDw6Vwi-Uj_dof8e4_LyUGAgaANf_Ai4fBeD4ZDXlG0jGdEf-YrEAvnadYlAC-Csdw" style="width: 36px; height: 36px; object-fit: contain;"/><h1 class="page-title" style="color: rgb(0, 0, 0);">Tengo una duda</h1></div><p class="page-subtitle" style="text-align: left; max-width: 280px; margin: 8px auto 0px;">Cuéntanos tu pregunta y te responderemos pronto</p><div class="animated-line-container" style="margin: 12px auto 24px; width: 120px; background-color: transparent; height: 6px; border-radius: 9999px; overflow: hidden; display: flex; justify-content: center;"><div class="animated-line" id="scrollLine" style="width: 0%; height: 100%; background-color: rgb(6, 37, 115); border-radius: 9999px; transition: width 0.1s ease-out;"></div></div></div></section>
+<section class="form-container px-4">
+<div class="form-group">
+<label class="form-label" for="nombre">Nombre Completo</label>
+<input class="form-input" id="nombre" placeholder="Ej. Juan Pérez" style="padding-top: 10px; padding-bottom: 10px;" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label" for="contacto">Correo electrónico o numero de cel</label>
+<input class="form-input" id="contacto" placeholder="tucorreo@ejemplo.com o 555-1234" style="padding-top: 10px; padding-bottom: 10px;" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label" for="duda">¿Sobre que tienes duda?</label>
+<textarea class="form-textarea" id="duda" placeholder="Escribe aquí los detalles de tu pregunta..."></textarea>
+</div>
+<button class="submit-btn" style="width: auto; max-width: 400px; display: inline-block; align-self: center; padding-left: 64px; padding-right: 64px; position: relative; overflow: hidden;" type="button">Enviar<span class="shimmer-overlay" style="position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%); transform: skewX(-25deg); pointer-events: none;"></span><style>.submit-btn::after { display: none !important; } .submit-btn:hover .shimmer-overlay { animation: shimmer 3s infinite linear; }</style></button>
+</section>
+</main>
+</div>
+<!-- Bottom Navigation (Hidden on Desktop) -->
+<nav class="bottom-nav" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.3);"><a class="bottom-nav-item" href="#">
+<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(6, 37, 115);">home</span>
+<span class="bottom-nav-label">Inicio</span>
+</a>
+<a class="bottom-nav-item" href="#">
+<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(6, 37, 115);">favorite</span>
+<span class="bottom-nav-label">Tus Favoritos</span>
+</a>
+<a class="bottom-nav-item" href="#">
+<span class="bottom-nav-icon" style='color: rgb(168, 85, 247); font-family: "DM Sans", sans-serif; font-weight: 900; font-size: 20px; margin-bottom: 4px;'>Beci</span>
+<span class="bottom-nav-label">Sobre Beci</span>
+</a>
+<a class="bottom-nav-item active" href="#" style="background-color: rgba(6, 37, 115, 0.1); color: rgb(6, 37, 115);">
+<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(168, 85, 247);">chat_bubble</span>
+<span class="bottom-nav-label">¿Te ayudamos?</span>
+</a>
+<a class="bottom-nav-item" href="#">
+<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(168, 85, 247);">person</span>
+<span class="bottom-nav-label">Vecino</span>
+</a></nav>
+<script>
+    // Scroll Animation for the line
+    document.addEventListener('DOMContentLoaded', () => {
+        const line = document.getElementById('scrollLine');
+        
+        // Simple scroll listener to expand line based on page scroll
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            
+            // Ensure docHeight is greater than 0 to avoid division by zero
+            if (docHeight > 0) {
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                // Line grows from center (using justify-center on parent) up to 100% width
+                const lineWidth = Math.max(15, Math.min(scrollPercent, 100)); // Start at 15% width at least
+                line.style.width = `${lineWidth}%`;
+            }
+        });
+        
+        // Initial setup for line width
+        setTimeout(() => {
+            line.style.width = '15%'; // Base width on load
+            
+            // Trigger a fake scroll event to initialize properly based on initial scroll pos
+            window.dispatchEvent(new Event('scroll'));
+        }, 100);
+    });
+  </script>
+</body></html>

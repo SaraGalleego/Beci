@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Complejo Sena Norte Detail Screen</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700;9..40,900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            display: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            primary: '#062573',
+            'primary-dark': '#001249',
+            'pale-lavender': '#F9FFFA',
+            'warm-white': '#fefdfb',
+            'pastel-pink': '#fd98c4',
+            'pastel-green': '#eaf7ed',
+            'text-dark': '#1a1a1a',
+            'text-light': '#666666'
+          },
+          borderRadius: {
+            'huge': '80px',
+            'pill': '9999px',
+          },
+          boxShadow: {
+            'soft': '0 8px 24px rgba(0,0,0,0.08)',
+            'glass': '0 4px 16px rgba(0, 0, 0, 0.05)',
+          },
+          keyframes: {
+            bounceIn: {
+              '0%': { transform: 'scale(0.8)' },
+              '50%': { transform: 'scale(1.2)' },
+              '100%': { transform: 'scale(1)' },
+            }
+          },
+          animation: {
+            'bounce-in': 'bounceIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom CSS -->
+<style data-purpose="glassmorphism-and-utils">
+    .glassmorphic {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .content-panel-bg {
+      background: linear-gradient(180deg, rgb(247, 240, 251) 0%, rgb(247, 240, 251) 75%, rgb(242, 226, 255) 100%);
+    }
+
+    @media (min-width: 1024px) {
+      .content-panel-bg {
+        background: linear-gradient(135deg, rgb(248, 243, 252) 0%, rgb(245, 237, 250) 60%, rgb(240, 228, 252) 100%);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center font-sans antialiased selection:bg-pink-200 md:p-8 lg:p-10">
+<!-- Responsive Container: Mobile modal view centered on small screens, full-bleed on tablet & desktop -->
+<main class="w-full max-w-[400px] h-[100dvh] md:h-screen md:min-h-screen overflow-hidden relative flex flex-col lg:flex-row md:rounded-[36px] md:shadow-2xl md:max-w-2xl lg:max-w-5xl xl:max-w-6xl lg:min-h-0 lg:h-[82vh] lg:max-h-[820px] lg:rounded-[40px] lg:shadow-2xl lg:my-auto lg:mx-auto md:overflow-hidden lg:translate-y-[10%]">
+<!-- BEGIN: Hero Image Section (Stacked on mobile/tablet, Left column on desktop) -->
+<section class="relative w-full lg:h-full lg:w-1/2 flex-shrink-0 overflow-hidden h-[45%]"><img alt="Museo de Antioquia Medellín" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiZJXPQUKPjWqBV5eQR6UEcrmiit_sSQ2uyd2F8_wnJoizpeFKaTNlPZDM3unpoq-CXR0fWSscgrWrSik-fyPlY-P88FIq4TrJa0ReIMpnt_LNUYn8HeVfh2gPx90G6Lxql0bYpjhH1Ki1oq5avTCcWg-zB-of4i_0PbRgyIgTYREqOngNTdSuuMUo8GR0up2-Mad0FbKLedt0hXZKQVgjP_N6rIfjHZA8CNqfCZXXq_ywy-tZoqXdyQ"><div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/30 lg:bg-gradient-to-r lg:from-black/20 lg:via-transparent lg:to-transparent pointer-events-none"></div><div class="absolute top-0 w-full p-6 md:p-8 lg:p-10 flex justify-between items-center z-20"><button aria-label="Go back" class="glassmorphic w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white hover:bg-white/50 active:scale-95 transition-all shadow-md" onclick="history.back()"><svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 19.5L8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="flex gap-3 md:gap-4"><button aria-label="Add to favorites" aria-pressed="false" class="glassmorphic w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white hover:bg-white/50 active:scale-95 transition-all relative shadow-md" id="favoriteBtn"><svg class="w-5 h-5 md:w-6 md:h-6 absolute transition-opacity duration-200" fill="none" id="heartIconOutline" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" stroke-linecap="round" stroke-linejoin="round"></path></svg><svg class="w-5 h-5 md:w-6 md:h-6 absolute text-primary opacity-0 transition-opacity duration-200" fill="currentColor" id="heartIconFilled" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path></svg></button><button aria-label="Share this place" class="glassmorphic w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white hover:bg-white/50 active:scale-95 transition-all shadow-md" id="shareBtn"><svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></div></section>
+<!-- END: Hero Image Section -->
+<!-- BEGIN: Content Panel -->
+<section class="content-panel-bg flex-1 w-full lg:mt-0 relative z-10 flex flex-col justify-between pt-8 pb-6 px-6 md:px-10 md:pt-10 md:pb-10 lg:p-16 xl:p-20 lg:w-1/2 h-full overflow-y-auto hide-scrollbar rounded-t-[48px] md:rounded-t-[52px] -mt-12" style="border: none; outline: none; box-shadow: none;"><div class="flex flex-col lg:max-w-lg lg:mx-auto w-full"><div class="inline-flex items-center gap-2 bg-white px-4 py-1.5 md:py-2 md:px-5 rounded-pill shadow-sm w-max mb-5 md:mb-6 border border-gray-100"><span class="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-[#F59E0B] animate-pulse" style="background-color: #F59E0B;"></span><span class="text-sm md:text-base font-medium text-text-dark">Aún no trabaja con Beci</span></div><h1 class="font-display font-black text-4xl md:text-5xl lg:text-5xl xl:text-6xl leading-[1.15] text-text-dark mb-3 md:mb-4 tracking-tight">Museo de Antioquia</h1><div class="flex items-center gap-2 text-text-dark mb-5 md:mb-6"><svg class="w-5 h-5 md:w-6 md:h-6 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="text-[15px] md:text-lg font-medium text-gray-700">Medellín</span></div><p class="text-text-dark text-base md:text-lg lg:text-xl leading-relaxed text-gray-800 mb-6 lg:mb-10 max-w-xl">Este espacio aún no hace parte de Beci, pero nos encantaría conocerlo.</p></div><div class="w-full lg:max-w-lg lg:mx-auto mt-auto pt-2"><div class="rounded-3xl p-5 md:p-6 shadow-sm border border-amber-100/60 flex flex-col gap-3.5 md:gap-4" style="background-color: #FEFDF5;"><h3 class="font-display font-bold text-lg md:text-xl text-text-dark leading-snug">¿Te gustaría saber más sobre este lugar?</h3><p class="text-sm md:text-[15px] text-gray-600 leading-relaxed">Cuéntanos qué te gustaría saber o qué información te interesaría conocer de este lugar</p><button class="w-full bg-[#062573] hover:bg-[#041a54] text-white font-semibold py-3.5 md:py-4 px-6 rounded-pill shadow-soft text-base md:text-[17px] active:scale-[0.98] hover:shadow-md transition-all text-center mt-1">Cuéntanos aquí</button></div></div></section>
+<!-- END: Content Panel -->
+<!-- Toast Notification for Share (Hidden by default) -->
+<div class="fixed md:absolute bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 bg-gray-900/95 backdrop-blur text-white px-6 py-3 md:px-8 md:py-3.5 rounded-pill shadow-2xl opacity-0 pointer-events-none transition-opacity duration-300 z-50 text-sm md:text-base whitespace-nowrap" id="toast">
+    Enlace copiado al portapapeles
+  </div>
+</main>
+<!-- END: Responsive Container -->
+<!-- Interactivity Scripts -->
+<script data-purpose="interaction-logic">
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // Favorite Button Logic
+      const favBtn = document.getElementById('favoriteBtn');
+      const outlineIcon = document.getElementById('heartIconOutline');
+      const filledIcon = document.getElementById('heartIconFilled');
+
+      favBtn.addEventListener('click', () => {
+        const isPressed = favBtn.getAttribute('aria-pressed') === 'true';
+        
+        if (!isPressed) {
+          // Add favorite
+          favBtn.setAttribute('aria-pressed', 'true');
+          outlineIcon.classList.add('opacity-0');
+          filledIcon.classList.remove('opacity-0');
+          filledIcon.classList.add('animate-bounce-in');
+          setTimeout(() => filledIcon.classList.remove('animate-bounce-in'), 300);
+        } else {
+          // Remove favorite
+          favBtn.setAttribute('aria-pressed', 'false');
+          outlineIcon.classList.remove('opacity-0');
+          filledIcon.classList.add('opacity-0');
+        }
+      });
+
+      // Share Button Logic
+      const shareBtn = document.getElementById('shareBtn');
+      const toast = document.getElementById('toast');
+      
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: 'Complejo Sena Norte',
+          text: 'Un espacio para aprender, crear y crecer',
+          url: window.location.href
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else {
+            // Fallback: Copy to clipboard
+            await navigator.clipboard.writeText(window.location.href);
+            showToast();
+          }
+        } catch (err) {
+          // Fallback if rejected or unavailable
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            showToast();
+          } catch (clipErr) {
+            console.log('Error sharing/copying:', clipErr);
+          }
+        }
+      });
+
+      function showToast() {
+        toast.classList.remove('opacity-0');
+        setTimeout(() => {
+          toast.classList.add('opacity-0');
+        }, 2500);
+      }
+    });
+  </script>
+</body></html>

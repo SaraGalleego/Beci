@@ -1,0 +1,286 @@
+<!DOCTYPE html><html class="h-full" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Beci - Ubícate</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            beciNavy: '#111b33',
+            beciGreen: '#23c16b',
+            beciOrange: '#f59e0b',
+            beciMuted: '#8b8e99',
+          },
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Glassmorphism & Layout -->
+<style data-purpose="background-gradient">
+    .beci-screen-bg {
+      background: linear-gradient(145deg, #fceddb 0%, #fdf6ec 25%, #faf2f8 60%, #f4e8f8 100%);
+      position: relative;
+    }
+    .beci-screen-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.35;
+      pointer-events: none;
+      background-image: radial-gradient(#d6c2db 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+  </style>
+<style data-purpose="glassmorphism-menu">
+    .glass-menu {
+      background: rgba(248, 243, 247, 0.78);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 16px 40px -10px rgba(92, 60, 114, 0.16),
+                  0 0 0 1px rgba(255, 255, 255, 0.4);
+      border-radius: 40px;
+    }
+    
+    .menu-item-separator {
+      border-bottom: 1px solid rgba(175, 160, 185, 0.28);
+    }
+  </style>
+<style data-purpose="animations">
+    .menu-transition {
+      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .menu-closed {
+      opacity: 0;
+      transform: scale(0.92) translate(16px, -16px);
+      pointer-events: none;
+    }
+    .menu-open {
+      opacity: 1;
+      transform: scale(1) translate(0, 0);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="min-h-screen w-full bg-background text-beciNavy antialiased select-none flex flex-col items-center justify-start overflow-x-hidden">
+<!-- Mobile & Desktop Responsive Container -->
+<div class="w-full min-h-screen beci-screen-bg relative flex flex-col shadow-none md:shadow-2xl overflow-hidden" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBns_HbhsEiANccOvcMJxrKjXkOTJ9hzOReWNdy54wT1MbBHIQxd1P5llObhhk0J3Is0LBf59--t3UD3ORrX9gd5VWzT_jypJC4sRUy_KDPNI5oKTzHrN1iGmu8fLZsp7TaMppbbIwzeiRHqOtHWNxfnDXBK4dYDNJsCplTcO76IaYA6Xl4plZewjDynuYrphN46eSZ_VMgdVTvoeDoPIigySa23B8Z6N90p6UW_7Ho501Rv9jHsko1rxEeSOGrQViS2Wk&quot;); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+<!-- BEGIN: Responsive Navigation Header -->
+<header class="w-full pt-4 md:pt-6 px-4 md:px-10 lg:px-16 relative z-30 transition-all duration-300" data-purpose="screen-header">
+<!-- Header Container -->
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<!-- Logo: Beci Mascot -->
+<a aria-label="Beci Home" class="inline-block transition-transform hover:scale-105 active:scale-95 z-20" href="#home">
+<img alt="Beci" class="w-28 sm:w-36 md:w-40 lg:w-44 h-auto object-contain drop-shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaFnXHjOV6alak9wpcCpjqAyA8-mCcpkSUeJs8Xq_MDAPvfnuwDYv_o7wEvkHLGSDqX4KlUivmdpxO0QgMKiaHRTThI1KODQPEakEzPPclbnPxRML8jqAfwCBOhYFQ0RGOrrsVL1s9qGZSE93Hh9Ou6iLKK1mEfutryvK-NCmiTGoRgA1HNeBvsyTTp3i5dKoDuOGH86HR25Ypca2v1efqQ-2Xu9WY9Cw4MI00TYfwGeOkxOGdOsIgG1q-_nrcOUWrwck" style="transform: scale(1.1128); transform-origin: left center;">
+</a>
+<!-- Desktop Navigation Links (hidden on mobile, flex on desktop) -->
+<nav aria-label="Navegación principal desktop" class="hidden lg:flex items-center gap-2 xl:gap-4 bg-white/70 backdrop-blur-xl px-5 py-2.5 rounded-full border border-white/80 shadow-[0_4px_20px_rgba(92,60,114,0.08)]">
+<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#inicio">
+        Inicio
+      </a>
+<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#favoritos">
+        Tus Favoritos
+      </a>
+<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#sobre-beci">
+        Sobre Beci
+      </a>
+<a class="desktop-nav-link px-4 py-2 text-[15px] font-semibold text-beciNavy/90 hover:text-beciNavy hover:bg-white/80 rounded-full transition-all duration-200" href="#ayuda">
+        ¿Te ayudamos?
+      </a>
+<a class="desktop-nav-link px-5 py-2 text-[15px] font-bold text-white bg-primary hover:bg-primary-container shadow-sm rounded-full transition-all duration-200" href="#vecino">
+        Vecino
+      </a>
+</nav>
+<!-- Mobile / Tablet Hamburger Button (hidden on desktop) -->
+<button aria-label="Abrir menú" class="lg:hidden p-2.5 rounded-xl text-beciNavy hover:bg-white/40 active:scale-90 transition-all focus:outline-none" id="openMenuBtn" type="button">
+<img alt="Menú" class="w-8 sm:w-9 h-auto object-contain pointer-events-none drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuKNsumNzmVLEKwG-7rxVMm8Tfa5KxJDBF15W_ZtfSevrIMqZRO6quwyhegG2WgdEneJl4jNxllVrWAk4LVpZ3vX9zPPd-QcnceWMbTPF16o9GnWvwpTFMpZNVqAqjc3Q6_L44Ya00jx7aBJDeSXFs-3uVxBDRZAl_b2wm8Lku0XzCJ8qgBLoS0GhE46FYrc3mFYVwC_OAYpyiT08lXzM0HkV6Bz_QHV0yEq9l4gQS-E58yPkIumXzEmNHzaix9l00qIQ">
+</button>
+</div>
+<!-- Mobile / Tablet Secondary Row (Back Chevron + Title) -->
+<div class="lg:hidden flex items-center justify-between mt-3 px-1">
+<!-- Back Navigation Button -->
+<button aria-label="Volver atrás" class="w-10 h-10 -ml-2 flex items-center justify-center rounded-full text-beciNavy hover:bg-white/40 active:scale-90 transition-transform" id="backBtn" style="color: rgb(6, 37, 115);" type="button">
+<svg class="w-6 h-6 stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Centered Mobile Title -->
+<h1 class="text-[26px] sm:text-[28px] font-bold tracking-tight text-beciNavy">
+      Ubícate
+    </h1>
+<!-- Spacer -->
+<div aria-hidden="true" class="w-8"></div>
+</div>
+</header>
+<!-- END: Responsive Navigation Header -->
+<!-- BEGIN: Search Bar & Content Area -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-10 lg:px-16 flex flex-col items-center relative z-10" data-purpose="interactive-map-area">
+<!-- Desktop Main Section Title and Subtitle -->
+<div class="hidden lg:flex flex-col items-center text-center mt-6 mb-2">
+<h1 class="text-4xl xl:text-5xl font-extrabold tracking-tight text-beciNavy">
+      Ubícate
+    </h1>
+<p class="text-neutral-600 mt-2 text-base max-w-lg">
+      Encuentra espacios, sedes aliadas y servicios comunitarios cerca de ti
+    </p>
+</div>
+<!-- Search Bar: Responsive container -->
+<div class="w-full max-w-xl lg:max-w-2xl mt-4 md:mt-6 px-1">
+<div class="relative flex items-center w-full shadow-[0_6px_25px_rgba(0,0,0,0.06)] rounded-full transition-shadow hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]">
+<!-- Magnifying Glass Icon -->
+<div class="absolute left-4 sm:left-5 pointer-events-none flex items-center justify-center">
+<img alt="Buscar" class="w-6 h-6 object-contain pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB_mgvSVodiSOQS2OPIqTFCEU6qMKgvbpHuH3XQte7NvSLiLqIk_64CHgnRFu8tKuQYGy66Iw5ino3FTaZTvGBtHNBXcbvxC07BxYmGVtbPqWnVsgsOWUppqqebWRMKF1IVx6jVNjXTe_Ao7PMs4g6yVG02jAEzZXEAWvF2SLStkL5YqYrtKu2ukfeuxZZxPFs4drS6KYasZainoJfQQmrEHKys2Xsxdf5HkM7a4jVDDtrnMU4lRkENjJVrZbebeFw3qk" style="transform: scale(1.03); transform-origin: center center;">
+</div>
+<!-- Input Field -->
+<input class="w-full py-3.5 sm:py-4 pr-5 pl-12 sm:pl-14 bg-white/95 text-neutral-800 placeholder-neutral-400 text-[14.5px] sm:text-[15.5px] rounded-full border border-white/80 focus:outline-none focus:ring-2 focus:ring-purple-300 transition-all" id="searchInput" placeholder="Buscar espacios, sedes o instituciones..." type="text">
+</div>
+</div>
+<!-- Subtle ambient decorative map canvas background -->
+<div class="flex-1 w-full relative min-h-[300px] md:min-h-[420px] flex items-center justify-center opacity-30 pointer-events-none mt-4">
+<svg class="w-full h-full max-w-2xl" fill="none" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+<path d="M-20 120 C80 90, 160 170, 240 130 C320 90, 360 190, 420 160" stroke="#bba0c9" stroke-dasharray="6 6" stroke-width="1.5"></path>
+<path d="M40 220 C140 180, 220 270, 320 210 C370 180, 410 240, 440 230" stroke="#bba0c9" stroke-dasharray="4 4" stroke-width="1.5"></path>
+<circle cx="140" cy="150" fill="#23c16b" r="4"></circle>
+<circle cx="280" cy="220" fill="#f59e0b" r="4"></circle>
+</svg>
+</div>
+</main>
+<!-- END: Search Bar & Content Area -->
+<!-- BEGIN: Floating Bottom Legend Card -->
+<footer class="w-full p-4 sm:p-5 md:pb-8 relative z-20 flex justify-center" data-purpose="status-legend">
+<div class="glass-legend bg-white/95 backdrop-blur-md rounded-2xl px-3.5 sm:px-5 py-3 sm:py-3.5 shadow-[0_6px_25px_rgba(0,0,0,0.06)] border border-white flex items-center justify-between gap-2 sm:gap-8 text-[12px] sm:text-[14px] font-medium text-beciNavy w-full max-w-xl md:max-w-2xl overflow-hidden">
+<!-- Status Items -->
+<div class="flex items-center gap-3 sm:gap-6 flex-nowrap">
+<!-- Active Partner -->
+<div class="flex items-center space-x-1.5 sm:space-x-2 flex-shrink-0">
+<span class="w-2.5 h-2.5 rounded-full bg-beciGreen inline-block shadow-[0_0_6px_rgba(35,193,107,0.5)] flex-shrink-0"></span>
+<span class="tracking-tight text-neutral-800 text-xs sm:text-[14px] whitespace-nowrap">Trabaja con Beci</span>
+</div>
+<!-- Pending Partner -->
+<div class="flex items-center space-x-1.5 sm:space-x-2 flex-shrink-0">
+<span class="w-2.5 h-2.5 rounded-full bg-beciOrange inline-block shadow-[0_0_6px_rgba(245,158,11,0.5)] flex-shrink-0"></span>
+<span class="tracking-tight text-neutral-800 text-xs sm:text-[14px] whitespace-nowrap">Aún no trabaja con Beci</span>
+</div>
+</div>
+<!-- Information Button -->
+<button aria-label="Más información" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-full text-beciNavy hover:bg-neutral-100 active:scale-95 transition-all" id="infoBtn" type="button">
+<svg class="w-5 h-5 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<line x1="12" x2="12" y1="16" y2="12"></line>
+<line stroke-width="2.5" x1="12" x2="12.01" y1="8" y2="8"></line>
+</svg>
+</button>
+</div>
+</footer>
+<!-- END: Floating Bottom Legend Card -->
+<!-- BEGIN: Glassmorphism Floating Menu (Mobile / Tablet only) -->
+<div class="lg:hidden glass-menu menu-transition absolute top-5 right-5 w-[75%] sm:w-[50%] max-w-sm z-50 pt-3 pb-7 px-4 flex flex-col menu-closed" data-purpose="glassmorphic-dropdown-menu" id="glassMenuPanel" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.4) 100%); backdrop-filter: blur(32px) saturate(200%); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(100, 80, 130, 0.16) 0px 20px 45px, rgba(255, 255, 255, 0.85) 0px 1.5px 2px inset; border-radius: 36px;">
+<!-- Top Close Button Bar -->
+<div class="flex justify-end pr-1 pt-1 pb-2">
+<button aria-label="Cerrar menú" class="p-1.5 rounded-full text-beciNavy hover:bg-black/5 active:scale-90 transition-transform" id="closeMenuBtn" type="button">
+<svg class="w-5 h-5 stroke-[2.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Mobile Nav Items List -->
+<nav aria-label="Navegación principal móvil" class="flex flex-col text-center">
+<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#inicio">
+      Inicio
+    </a>
+<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#favoritos">
+      Tus Favoritos
+    </a>
+<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#sobre-beci">
+      Sobre Beci
+    </a>
+<a class="menu-item-link py-3 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors menu-item-separator" href="#ayuda">
+      ¿Te ayudamos?
+    </a>
+<a class="menu-item-link pt-3 pb-1 text-[16.5px] font-semibold text-beciNavy hover:text-purple-700 transition-colors" href="#vecino">
+      Vecino
+    </a>
+</nav>
+</div>
+<!-- END: Glassmorphism Floating Menu -->
+<!-- Toast Notification for Interactions -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 bg-beciNavy/90 text-white px-5 py-2.5 rounded-full text-xs font-medium tracking-wide shadow-lg pointer-events-none transition-all duration-300 z-50 opacity-0" id="toastNotification">Navegando a: Tus Favoritos</div>
+</div>
+<!-- JavaScript Interactions -->
+<script data-purpose="menu-controller">
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuPanel = document.getElementById('glassMenuPanel');
+    const closeBtn = document.getElementById('closeMenuBtn');
+    const openBtn = document.getElementById('openMenuBtn');
+    const menuLinks = document.querySelectorAll('.menu-item-link, .desktop-nav-link');
+    const toast = document.getElementById('toastNotification');
+    const infoBtn = document.getElementById('infoBtn');
+
+    function showToast(message) {
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100', '-translate-y-1');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', '-translate-y-1');
+        toast.classList.add('opacity-0');
+      }, 1800);
+    }
+
+    function closeMenu() {
+      if (!menuPanel) return;
+      menuPanel.classList.remove('menu-open');
+      menuPanel.classList.add('menu-closed');
+    }
+
+    function openMenu() {
+      if (!menuPanel) return;
+      menuPanel.classList.remove('menu-closed');
+      menuPanel.classList.add('menu-open');
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeMenu();
+      });
+    }
+
+    if (openBtn) {
+      openBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openMenu();
+      });
+    }
+
+    menuLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetName = link.textContent.trim();
+        showToast(`Navegando a: ${targetName}`);
+        closeMenu();
+      });
+    });
+
+    if (infoBtn) {
+      infoBtn.addEventListener('click', () => {
+        showToast('Estados: Verde (Trabaja con Beci) | Ámbar (Pendiente)');
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      if (menuPanel && openBtn && !menuPanel.contains(e.target) && !openBtn.contains(e.target) && menuPanel.classList.contains('menu-open')) {
+        closeMenu();
+      }
+    });
+  });
+</script>
+
+
+</body></html>
