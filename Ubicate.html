@@ -979,6 +979,77 @@
   var SENA_FALLBACK_KEY = 'complejo-norte';
   var SENA_SEDES_DATA = (typeof window.SENA_SEDES !== 'undefined') ? window.SENA_SEDES : {};
 
+  /* Catálogo de lugares principales e icónicos de Medellín y Valle de Aburrá */
+  var LUGARES_PRINCIPALES_BECI = [
+    // --- EDUCATIVOS (SENA y Universidades) ---
+    { id: 'sena-complejo-norte', name: 'Complejo Norte SENA', sector: 'Pedregal, Medellín', latitude: 6.3022365, longitude: -75.5682972, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=complejo-norte' },
+    { id: 'sena-ctma', name: 'CTMA SENA', sector: 'Complejo Norte, Medellín', latitude: 6.3002955, longitude: -75.5682575, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=ctma' },
+    { id: 'sena-servicios', name: 'Centro de Servicios SENA', sector: 'La Alpujarra, Medellín', latitude: 6.2554544, longitude: -75.5751145, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=servicios-gestion-empresarial' },
+    { id: 'sena-comercio', name: 'Centro de Comercio SENA', sector: 'Centro, Medellín', latitude: 6.2548554, longitude: -75.5749547, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=centro-comercio' },
+    { id: 'sena-moda', name: 'Centro de Moda SENA', sector: 'Itagüí', latitude: 6.1804305, longitude: -75.606357, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=moda' },
+    { id: 'sena-actividad-fisica', name: 'Centro Actividad Física SENA', sector: 'Complejo Norte', latitude: 6.3031, longitude: -75.5692, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=actividad-fisica' },
+    { id: 'sena-complejo-sur', name: 'Complejo Sur SENA', sector: 'Itagüí', latitude: 6.1808044, longitude: -75.6037657, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=complejo-sur' },
+    { id: 'udea', name: 'Universidad de Antioquia (UdeA)', sector: 'Ciudad Universitaria', latitude: 6.2678, longitude: -75.5686, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Universidad%20de%20Antioquia' },
+    { id: 'unal', name: 'Universidad Nacional de Colombia', sector: 'Sede Medellín', latitude: 6.2612, longitude: -75.5783, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Universidad%20Nacional' },
+    { id: 'eafit', name: 'Universidad EAFIT', sector: 'El Poblado', latitude: 6.2007, longitude: -75.5784, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Universidad%20EAFIT' },
+    { id: 'itm-robledo', name: 'ITM - Campus Robledo', sector: 'Robledo', latitude: 6.2758, longitude: -75.5912, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=ITM%20Robledo' },
+    { id: 'bpp', name: 'Biblioteca Pública Piloto', sector: 'Carlos E. Restrepo', latitude: 6.2595, longitude: -75.5862, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Biblioteca%20Publica%20Piloto' },
+
+    // --- DEPORTIVOS ---
+    { id: 'atanasio', name: 'Unidad Deportiva Atanasio Girardot', sector: 'Estadio', latitude: 6.2569, longitude: -75.5905, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Unidad%20Deportiva%20Atanasio%20Girardot' },
+    { id: 'ud-belen', name: 'Unidad Deportiva de Belén', sector: 'Belén', latitude: 6.2289, longitude: -75.5954, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Unidad%20Deportiva%20Belen' },
+    { id: 'juan-pablo-ii-dep', name: 'Parque Juan Pablo II (Acuático)', sector: 'Guayabal', latitude: 6.2167, longitude: -75.5919, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Juan%20Pablo%20II' },
+    { id: 'patinodromo', name: 'Patinódromo María Luisa Calle', sector: 'Guayabal', latitude: 6.2178, longitude: -75.5878, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Patinodromo%20Maria%20Luisa%20Calle' },
+    { id: 'polideportivo-envigado', name: 'Polideportivo Sur de Envigado', sector: 'Envigado', latitude: 6.1624, longitude: -75.5898, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Polideportivo%20Sur%20Envigado' },
+
+    // --- CULTURA ---
+    { id: 'museo-antioquia', name: 'Museo de Antioquia (Plaza Botero)', sector: 'Centro Medellín', latitude: 6.2529, longitude: -75.5689, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20de%20Antioquia' },
+    { id: 'parque-explora', name: 'Parque Explora', sector: 'Zona Norte', latitude: 6.2709, longitude: -75.5658, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Explora' },
+    { id: 'jardin-botanico', name: 'Jardín Botánico de Medellín', sector: 'Zona Norte', latitude: 6.2705, longitude: -75.5623, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Jardin%20Botanico' },
+    { id: 'planetario', name: 'Planetario de Medellín', sector: 'Zona Norte', latitude: 6.2702, longitude: -75.5668, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Planetario%20de%20Medellin' },
+    { id: 'casa-memoria', name: 'Museo Casa de la Memoria', sector: 'Parque Bicentenario', latitude: 6.2444, longitude: -75.5562, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20Casa%20de%20la%20Memoria' },
+    { id: 'teatro-metropolitano', name: 'Teatro Metropolitano', sector: 'Alpujarra', latitude: 6.2427, longitude: -75.5786, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Teatro%20Metropolitano' },
+
+    // --- SALUD ---
+    { id: 'san-vicente', name: 'Hospital San Vicente Fundación', sector: 'Prado Centro', latitude: 6.2625, longitude: -75.5658, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Hospital%20San%20Vicente%20Fundacion' },
+    { id: 'pablo-tobon', name: 'Hospital Pablo Tobón Uribe', sector: 'Robledo', latitude: 6.2778, longitude: -75.5847, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Hospital%20Pablo%20Tobon%20Uribe' },
+    { id: 'americas', name: 'Clínica Las Américas', sector: 'La Mota', latitude: 6.2235, longitude: -75.5968, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Clinica%20Las%20Americas' },
+    { id: 'general-medellin', name: 'Hospital General de Medellín', sector: 'Perpetuo Socorro', latitude: 6.2348, longitude: -75.5742, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Hospital%20General%20de%20Medellin' },
+    { id: 'cardio-vid', name: 'Clínica Cardio VID', sector: 'Robledo', latitude: 6.2795, longitude: -75.5815, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Clinica%20Cardio%20VID' },
+
+    // --- INSTITUCIONALES ---
+    { id: 'alpujarra', name: 'Centro Administrativo La Alpujarra', sector: 'Alpujarra', latitude: 6.2447, longitude: -75.5738, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Centro%20Administrativo%20La%20Alpujarra' },
+    { id: 'plaza-mayor', name: 'Plaza Mayor Medellín', sector: 'Alpujarra', latitude: 6.2415, longitude: -75.5768, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Plaza%20Mayor%20Medellin' },
+    { id: 'edificio-epm', name: 'Edificio Inteligente EPM', sector: 'Alpujarra', latitude: 6.2428, longitude: -75.5785, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Edificio%20EPM' },
+    { id: 'concejo-medellin', name: 'Concejo de Medellín', sector: 'Alpujarra', latitude: 6.2452, longitude: -75.5746, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Concejo%20de%20Medellin' },
+    { id: 'terminal-norte', name: 'Terminal de Transporte Norte', sector: 'Caribe', latitude: 6.2775, longitude: -75.5702, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Terminal%20del%20Norte' },
+    { id: 'terminal-sur', name: 'Terminal de Transporte Sur', sector: 'Guayabal', latitude: 6.2128, longitude: -75.5878, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Terminal%20del%20Sur' },
+
+    // --- RECREATIVOS ---
+    { id: 'pueblito-paisa', name: 'Cerro Nutibara y Pueblito Paisa', sector: 'Belén', latitude: 6.2365, longitude: -75.5812, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Pueblito%20Paisa' },
+    { id: 'parque-arvi', name: 'Parque Arví', sector: 'Santa Elena', latitude: 6.2825, longitude: -75.5015, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Arvi' },
+    { id: 'parque-deseos', name: 'Parque de los Deseos', sector: 'Zona Norte', latitude: 6.2698, longitude: -75.5661, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20de%20los%20Deseos' },
+    { id: 'parque-norte', name: 'Parque Norte', sector: 'Zona Norte', latitude: 6.2745, longitude: -75.5645, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Norte' },
+    { id: 'ciudad-rio', name: 'Parque Lineal Ciudad del Río', sector: 'El Poblado', latitude: 6.2235, longitude: -75.5742, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Ciudad%20del%20Rio' },
+    { id: 'parque-lleras', name: 'Parque Lleras', sector: 'El Poblado', latitude: 6.2088, longitude: -75.5678, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Lleras' },
+
+    // --- TECNOLOGÍA ---
+    { id: 'ruta-n', name: 'Complejo Ruta N (Innovación)', sector: 'Zona Norte', latitude: 6.2655, longitude: -75.5672, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Ruta%20N' },
+    { id: 'explora-tech', name: 'Parque Explora MakerSpace', sector: 'Zona Norte', latitude: 6.2709, longitude: -75.5658, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Explora%20Tech' },
+    { id: 'mova', name: 'Centro de Innovación MOVA', sector: 'Zona Norte', latitude: 6.2682, longitude: -75.5638, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Centro%20MOVA' },
+    { id: 'vivero-software', name: 'Vivero del Software', sector: 'Belén', latitude: 6.2305, longitude: -75.5902, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Vivero%20del%20Software' },
+    { id: 'sena-ctma-tech', name: 'CTMA SENA - Automatización 4.0', sector: 'Complejo Norte', latitude: 6.3002955, longitude: -75.5682575, category: 'tecnologia', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=ctma' },
+
+    // --- ARTE ---
+    { id: 'mamm', name: 'MAMM - Arte Moderno', sector: 'Ciudad del Río', latitude: 6.2232, longitude: -75.5748, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20de%20Arte%20Moderno%20MAMM' },
+    { id: 'museo-ant-arte', name: 'Museo de Antioquia (Galerías)', sector: 'Centro', latitude: 6.2529, longitude: -75.5689, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20de%20Antioquia' },
+    { id: 'teatro-tobon', name: 'Teatro Pablo Tobón Uribe', sector: 'La Candelaria', latitude: 6.2482, longitude: -75.5585, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Teatro%20Pablo%20Tobon%20Uribe' },
+    { id: 'palacio-cultura', name: 'Palacio de la Cultura Uribe Uribe', sector: 'Plaza Botero', latitude: 6.2519, longitude: -75.5679, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Palacio%20de%20la%20Cultura' },
+    { id: 'moravia-cultural', name: 'Centro Cultural Moravia', sector: 'Moravia', latitude: 6.2748, longitude: -75.5608, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Centro%20Cultural%20Moravia' }
+  ];
+
+  var ALL_PLACES_POOL = LUGARES_PRINCIPALES_BECI.slice();
+
   var map;
   var userPosition = null;
   var currentPlaces = [];
@@ -1053,13 +1124,13 @@
 
   var CATEGORY_RULES = [
     { key: 'educativos', matchTag: function (tags) { return AMENITY_IN(tags, ['school', 'university', 'college', 'library', 'training']); }, re: /escuela|colegio|instituto|universidad|sena|campus|biblioteca|academia|liceo|institucion educativa/ },
-    { key: 'deportivos', matchTag: function (tags) { return LEISURE_IN(tags, ['sports_centre', 'stadium', 'fitness_centre', 'pitch', 'playground']) || !!tags['sport']; }, re: /deportivo|estadio|gimnasio|cancha|coliseo|club deportivo|polideportivo/ },
-    { key: 'tecnologia', matchTag: function () { return false; }, re: /tecnol|ciencia|innovacion|investigaci|parque tecn|ctei/ },
-    { key: 'arte', matchTag: function (tags) { return TOURISM_IN(tags, ['gallery']) || AMENITY_IN(tags, ['arts_centre']); }, re: /arte|galeria|museo|teatro/ },
-    { key: 'cultura', matchTag: function (tags) { return TOURISM_IN(tags, ['museum', 'attraction']) || AMENITY_IN(tags, ['library', 'community_centre', 'arts_centre']); }, re: /museo|galer|teatro|biblioteca|cultural|centro/ },
-    { key: 'recreativos', matchTag: function (tags) { return LEISURE_IN(tags, ['park', 'garden']) || TOURISM_IN(tags, ['theme_park', 'zoo']); }, re: /parque|recrea|zona verde|jardin|plaza|unidad deportiva/ },
-    { key: 'institucionales', matchTag: function (tags) { return tags['office'] === 'government' || AMENITY_IN(tags, ['public_building']); }, re: /alcaldia|institucion|entidad|secretaria|departamento|sede/ },
-    { key: 'salud', matchTag: function () { return false; }, re: /salud publica|hospital universitario/ }
+    { key: 'deportivos', matchTag: function (tags) { return LEISURE_IN(tags, ['sports_centre', 'stadium', 'fitness_centre', 'pitch', 'playground']) || !!tags['sport']; }, re: /deportivo|estadio|gimnasio|cancha|coliseo|club deportivo|polideportivo|patinodromo/ },
+    { key: 'tecnologia', matchTag: function () { return false; }, re: /tecnol|ciencia|innovacion|innovación|investigaci|parque tecn|ctei|ruta n|software|mova/ },
+    { key: 'arte', matchTag: function (tags) { return TOURISM_IN(tags, ['gallery']) || AMENITY_IN(tags, ['arts_centre']); }, re: /arte|galeria|galería|museo|teatro|exposicion/ },
+    { key: 'cultura', matchTag: function (tags) { return TOURISM_IN(tags, ['museum', 'attraction']) || AMENITY_IN(tags, ['library', 'community_centre', 'arts_centre']); }, re: /museo|galer|teatro|biblioteca|cultural|centro|planetario|botanico/ },
+    { key: 'recreativos', matchTag: function (tags) { return LEISURE_IN(tags, ['park', 'garden']) || TOURISM_IN(tags, ['theme_park', 'zoo']); }, re: /parque|recrea|zona verde|jardin|jardín|plaza|unidad deportiva|pueblito/ },
+    { key: 'institucionales', matchTag: function (tags) { return tags['office'] === 'government' || AMENITY_IN(tags, ['public_building', 'townhall']); }, re: /alcaldia|alcaldía|gobernacion|gobernación|institucion|institución|entidad|secretaria|departamento|sede|alpujarra|concejo|terminal/ },
+    { key: 'salud', matchTag: function (tags) { return AMENITY_IN(tags, ['hospital', 'clinic', 'doctors']); }, re: /hospital|clinica|clínica|salud|centro de salud|cardio/ }
   ];
 
   function AMENITY_IN(tags, list) {
@@ -1087,9 +1158,9 @@
 
   var BLACKLIST_NAME = [
     'restaurante', 'restaurant', 'cafe', 'bar', 'hotel', 'banco', 'bank',
-    'supermercado', 'supermarket', 'tienda', 'clinica', 'clínica', 'hospital',
+    'supermercado', 'supermarket', 'tienda',
     'iglesia', 'church', 'gasolinera', 'farmacia', 'drogueria', 'droguería',
-    'centro comercial', 'discoteca', 'estacion de servicio', 'terminal',
+    'centro comercial', 'discoteca', 'estacion de servicio',
     'parqueadero', 'parking'
   ];
 
@@ -1147,18 +1218,18 @@
     arte: '🎨',
     recreativos: '🌳',
     institucionales: '🏛️',
-    salud: '💚',
+    salud: '🏥',
     otros: '📍'
   };
 
   var CATEGORY_LABELS = {
-    educativos: 'Escuela / Universidad',
+    educativos: 'Educativo',
     deportivos: 'Deportivo',
     tecnologia: 'Tecnología',
     arte: 'Arte y Cultura',
     cultura: 'Cultura',
-    recreativos: 'Parque / Recreación',
-    institucionales: 'Institución',
+    recreativos: 'Recreativo',
+    institucionales: 'Institucional',
     salud: 'Salud',
     otros: 'Lugar cercano'
   };
@@ -1192,6 +1263,10 @@
 
     setupControls();
     setupSearch();
+
+    // Cargar inmediatamente los lugares principales más importantes al ingresar
+    loadPlacesForCategory('Todos', MEDELLIN);
+
     requestUserLocation();
 
     map.on('click', function () {
@@ -1240,25 +1315,25 @@
     var now = Date.now();
     if (userPosition) {
       var moved = haversineMeters(userPosition, coords);
-      if (moved < 300 && (now - lastLocationUpdate) < 20000) return;
+      if (moved < 200 && (now - lastLocationUpdate) < 20000) return;
     }
     userPosition = coords;
     lastLocationUpdate = now;
     showUserLocation(coords);
-    map.flyTo(coords, 14, { duration: 1.2 });
+
+    // Actualizar lugares más cercanos a la ubicación real del usuario
+    loadPlacesForCategory(activeCategory, coords);
     findNearbyPlaces(coords);
   }
 
   function handleLocationError() {
-    showStatus('No pudimos acceder a tu ubicación. Mostramos lugares cerca de Medellín.', 6000);
-    if (userPosition) {
-      showUserLocation(userPosition);
-      findNearbyPlaces(userPosition);
-      return;
+    showStatus('Ubicación predeterminada en Medellín. Mostrando lugares principales.', 4000);
+    if (!userPosition) {
+      userPosition = { lat: MEDELLIN.lat, lng: MEDELLIN.lng };
     }
-    userPosition = { lat: MEDELLIN.lat, lng: MEDELLIN.lng };
-    map.flyTo([MEDELLIN.lat, MEDELLIN.lng], 12, { duration: 1 });
-    findNearbyPlaces(MEDELLIN);
+    if (!currentPlaces || currentPlaces.length === 0) {
+      loadPlacesForCategory(activeCategory, MEDELLIN);
+    }
   }
 
   /* Marcador rosa de "Estás aquí" + etiqueta */
@@ -1328,8 +1403,11 @@
 
   function aggregateNearbyPlaces(elements, origin) {
     var seen = {};
-    var candidates = [];
+    ALL_PLACES_POOL.forEach(function (p) {
+      seen[normalizeText(p.name)] = true;
+    });
 
+    var added = false;
     elements.forEach(function (el_) {
       if (el_.tags && typeof el_.tags !== 'object') return;
       var tags = el_.tags || {};
@@ -1337,45 +1415,37 @@
       if (!name) return;
       if (!isRelevantPlace(name, tags)) return;
 
+      var norm = normalizeText(name);
+      if (seen[norm]) return;
+      seen[norm] = true;
+
       var lat, lng;
       if (el_.type === 'node') { lat = el_.lat; lng = el_.lon; }
       else if (el_.center || typeof el_.center === 'object') { lat = el_.center.lat; lng = el_.center.lon; }
       else if (el_.lat) { lat = el_.lat; lng = el_.lon; }
       if (!lat || !lng) return;
 
-      var id = el_.type + '-' + el_.id;
-      if (seen[id]) return;
-      seen[id] = true;
-
       var meters = haversineMeters(origin, { lat: lat, lng: lng });
-      candidates.push({
-        id: id,
+      var isSena = identifySenaPlace(name);
+      ALL_PLACES_POOL.push({
+        id: 'osm-' + el_.type + '-' + el_.id,
         name: name,
+        sector: 'Cercano a ti',
         latitude: lat,
         longitude: lng,
         tags: tags,
         straightDistance: meters,
-        isSena: identifySenaPlace(name),
+        isSena: isSena,
         category: getPlaceCategory(name, tags),
-        detailUrl: resolveDetailUrl(name, identifySenaPlace(name)),
+        detailUrl: resolveDetailUrl(name, isSena),
         walkingDistance: null
       });
+      added = true;
     });
 
-    candidates.sort(function (a, b) { return a.straightDistance - b.straightDistance; });
-    currentPlaces = candidates.slice(0, MAX_PLACES);
-
-    if (currentPlaces.length === 0) {
-      showStatus('No encontramos lugares relevantes cerca de tu ubicación.', 5000);
-      return;
+    if (added) {
+      loadPlacesForCategory(activeCategory, origin);
     }
-
-    currentPlaces.forEach(function (p) {
-      renderPlaceMarker(p);
-      calculateWalkingDistance(p);
-    });
-
-    applyCategoryFilter(activeCategory);
   }
 
   /* -------------------- Búsqueda por nombre (mínimo 5 km) -------------------- */
@@ -1939,36 +2009,73 @@
     pinCard = null;
   }
 
+  /* ============================================================
+     CARGA Y FILTRADO DE LUGARES POR CATEGORÍA
+     Ordenados por proximidad al usuario
+     ============================================================ */
+  function loadPlacesForCategory(category, targetCenter) {
+    targetCenter = targetCenter || userPosition || MEDELLIN;
+    var norm = normalizeText(category);
+    var isAll = category === 'Todos' || norm === 'todos' || !category;
+    activeCategory = isAll ? 'Todos' : norm;
+
+    // Calcular distancia en línea recta de todos los lugares en el pool al usuario
+    ALL_PLACES_POOL.forEach(function (p) {
+      p.straightDistance = haversineMeters(targetCenter, { lat: p.latitude, lng: p.longitude });
+    });
+
+    // Filtrar y ordenar por distancia (más cercanos primero)
+    var pool = [];
+    if (activeCategory === 'Todos') {
+      // Para "Todos": ordenar por proximidad al usuario y tomar los 6 principales
+      pool = ALL_PLACES_POOL.slice().sort(function (a, b) {
+        return a.straightDistance - b.straightDistance;
+      }).slice(0, 6);
+    } else {
+      pool = ALL_PLACES_POOL.filter(function (p) {
+        var cat = p.category || getPlaceCategory(p.name, p.tags);
+        return cat === activeCategory;
+      }).sort(function (a, b) {
+        return a.straightDistance - b.straightDistance;
+      }).slice(0, 6);
+    }
+
+    clearPlaces();
+    currentPlaces = pool;
+
+    if (!currentPlaces.length) {
+      showStatus('No encontramos lugares de ' + (category || 'esta categoría') + ' registrados.', 3500);
+      return;
+    }
+
+    currentPlaces.forEach(function (p) {
+      renderPlaceMarker(p);
+      calculateWalkingDistance(p);
+    });
+
+    // Renderizar inmediatamente las cards flotantes con sus triangulitos
+    renderFloatingResultCards(currentPlaces);
+
+    // Ajustar mapa
+    if (currentPlaces.length === 1) {
+      map.flyTo([currentPlaces[0].latitude, currentPlaces[0].longitude], 14, { duration: 0.9 });
+    } else {
+      var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
+      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
+    }
+
+    var label = category || 'Todos';
+    if (label === 'Todos') {
+      showStatus('Lugares principales más cercanos a ti.', 2200);
+    } else {
+      showStatus('Lugares de ' + label + ' más cercanos a ti.', 2500);
+    }
+  }
+
   /* -------------------- Filtro por categoría -------------------- */
 
   function applyCategoryFilter(category) {
-    var isAll = category === 'Todos';
-    activeCategory = isAll ? 'Todos' : (normalizeText(category) || category.toLowerCase());
-    currentPlaces.forEach(function (p) {
-      var visible = activeCategory === 'Todos' || p.category === activeCategory;
-      if (p.marker) {
-        if (visible && !map.hasLayer(p.marker)) p.marker.addTo(map);
-        if (!visible && map.hasLayer(p.marker)) map.removeLayer(p.marker);
-      }
-    });
-  }
-
-  /* Re-centra el mapa sobre los pines visibles del filtro activo */
-  function fitMapToVisiblePlaces() {
-    if (!map) return;
-    if (activeCategory === 'Todos') {
-      var base = userPosition || MEDELLIN;
-      map.flyTo([base.lat, base.lng], userPosition ? 14 : 12, { duration: 0.9 });
-      return;
-    }
-    var visible = currentPlaces.filter(function (p) { return p.category === activeCategory; });
-    if (!visible.length) return;
-    if (visible.length === 1) {
-      map.flyTo([visible[0].latitude, visible[0].longitude], 14, { duration: 0.9 });
-    } else {
-      var bounds = L.latLngBounds(visible.map(function (p) { return [p.latitude, p.longitude]; }));
-      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
-    }
+    loadPlacesForCategory(category, userPosition || MEDELLIN);
   }
 
   function setupCategoryPills() {
@@ -1986,21 +2093,9 @@
         pill.style.background = '#062573';
         pill.style.color = '#fff';
         closePinCard();
-        applyCategoryFilter(pill.textContent.trim());
-        fitMapToVisiblePlaces();
-        var label = pill.textContent.trim();
-        if (label === 'Todos') {
-          showStatus('Mostrando todos los lugares cercanos.', 2200);
-        } else {
-          var visible = currentPlaces.filter(function (p) { return p.category === activeCategory; });
-          if (visible.length) {
-            selectPlace(visible[0]);
-            showPinCard(visible[0]);
-            showStatus(visible.length + ' lugar(es) de ' + label + ' cerca de ti.', 2600);
-          } else {
-            showStatus('No hay lugares de ' + label + ' cerca de ti.', 3500);
-          }
-        }
+
+        var catName = pill.textContent.trim();
+        loadPlacesForCategory(catName, userPosition || MEDELLIN);
       });
     });
   }
