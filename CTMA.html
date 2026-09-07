@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BECI - CTMA Sede Pedregal &amp; Logros</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: DM Sans & Poppins -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F9FFFA;
+      color: #1F2937;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    h1, h2, h3, .font-heading {
+      font-family: 'DM Sans', sans-serif;
+    }
+    /* Glassmorphism token from DESIGN.md */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+    }
+    /* Hero address badge glassmorphism */
+    .glass-address-badge {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+    /* Light sweep animation for Chismear button */
+    .btn-chismear {
+      position: relative;
+      overflow: hidden;
+      background-color: #336926;
+      transition: all 0.3s ease;
+    }
+    .btn-chismear::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: rotate(25deg);
+      transition: none;
+    }
+    .btn-chismear:hover::after {
+      left: 140%;
+      transition: all 0.75s ease-in-out;
+    }
+    /* Custom scroll wheel 3D container */
+    .wheel-container {
+      perspective: 1600px;
+      user-select: none;
+      touch-action: none;
+    }
+    .folder-item {
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease, filter 0.3s ease;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+    .folder-item img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.14));
+    }
+    /* Dashed curved trail */
+    .trail-path {
+      stroke-dasharray: 8, 8;
+      animation: dash 35s linear infinite;
+    }
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -1000;
+      }
+    }
+
+    /* Card styling */
+    .kairu-card-inner {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+    .card-body img {
+      transition: transform 0.5s ease;
+    }
+  </style>
+</head>
+<body class="bg-[#F9FFFA] min-h-screen text-gray-800 antialiased flex flex-col items-center">
+<!-- ==================== 1. DESKTOP HEADER (lg: 1024px+) ==================== -->
+<header class="hidden lg:flex w-full bg-white border-b border-green-50 shadow-sm sticky top-0 z-50 px-6 py-4 items-center justify-between">
+<div class="max-w-7xl w-full mx-auto flex items-center justify-between">
+<a class="flex items-center transition hover:scale-105 active:scale-95" href="#">
+<img alt="Beci Logo" class="h-10 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvm1nS_iI8sAXnYP-ACprr9tFpJ37zVhJCzi3TKkRZ4GK32cu1O9naXi74A1kFd6MAQD1lIom9xJtkQJSq50ItepRhpj75BcXF-VfskNvy5Hmmc3-W20BFrXuVML3DHq1O4SgfBHJoFH7aXvSJbnntoXTJFMrzXQMnnWrE2spkdOSVyzm-d1wk-MPTBtpY5CGUK4IRrb8AE5HdJRU0hpbcUuoW8x8PFPHooleAYXzIM7I6EPHbMfTtynBB6DKUItV5xw"/>
+</a>
+<nav class="flex items-center gap-8 text-[15px] font-medium text-gray-700">
+<a class="hover:text-[#4DB21A] transition" href="#">Inicio</a>
+<a class="hover:text-[#4DB21A] transition" href="#">Charlemos</a>
+<div class="relative py-1">
+<a class="text-gray-900 font-semibold transition" href="#">Explorar Sedes</a>
+<span class="absolute -bottom-1.5 left-0 right-0 h-[3px] bg-[#4DB21A] rounded-full"></span>
+</div>
+<a class="hover:text-[#4DB21A] transition" href="#">Estar al Tanto</a>
+<a class="hover:text-[#4DB21A] transition" href="#">Explorar Programas</a>
+</nav>
+</div>
+</header>
+<!-- ==================== MAIN RESPONSIVE CONTAINER ==================== -->
+<div class="w-full max-w-md md:max-w-3xl bg-[#F9FFFA] min-h-screen relative pb-28 md:pb-32 lg:pb-24 border-green-100 lg:max-w-none">
+<!-- ==================== MOBILE & TABLET HEADER (Hidden on lg+) ==================== -->
+<header class="lg:hidden w-full px-5 pt-4 pb-2.5 flex items-center justify-between z-40 sticky top-0 bg-[#F9FFFA]/95 backdrop-blur-md border-b border-green-50">
+<!-- Beci Logo -->
+<a class="block transition hover:scale-105 active:scale-95" href="#">
+<img alt="Beci" class="h-10 md:h-12 object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPUJH9yVMygpwOSnfKphEHfDADxfZsNkUi1WEbvlHjiZhoJBFcL8ikH4nREbX1X7eALt6T9OR1M4iI54IYg81HEJUj3rbvEbdoa1pnXMlH0uyRgE11xrXBqtfam1KEib6tA-CDKNkx6F82Tnn8kVyh57GeX-_4ED0Uai3J-uhpHhMuSR6VSApQKRi1qWgVQOnQ-kUFPLtns_0_SX3YIrddIu93oUQmlBaoVGam12c_eoYyNi1SXEwybtglYUqvWj_bdw"/>
+</a>
+<!-- Title CTMA with navigation arrows -->
+<div class="flex items-center gap-3 md:gap-5">
+<button aria-label="Anterior" class="text-green-700 hover:text-green-900 transition text-lg md:text-xl font-bold">
+          &lt;
+        </button>
+<div class="relative pb-0.5">
+<span class="font-heading font-black text-2xl md:text-3xl tracking-wider text-[#1F2937]">CTMA</span>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-green-600 rounded-full"></div>
+</div>
+<button aria-label="Siguiente" class="text-gray-300 hover:text-green-900 transition text-lg md:text-xl font-bold">
+          &gt;
+        </button>
+</div>
+<!-- Hamburger Menu Icon (Group 90) -->
+<button aria-label="Menú" class="p-1 hover:opacity-80 transition focus:outline-none flex items-center justify-center" id="menu-btn">
+<img alt="Menú" class="w-8 md:w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtMZQeMBHWcY1L_iVHDOqivEyPs738Fs2Xccfm3Mm2Ot0ao1MzxvWymJlflYiO1dd58PovrcSksrzJantFUI0Mm-05847U80DTRYiAuROoTMIvbX7hmIz_rpM0--hJZGcTj_SbCWG9f7AwOcICvj3RmYBYiwHtCBodTryPn2Y-jw9oaq6yRMsvMuDEZ2hCdNIryOst4b7bkYgG_P_3iG0vNeNNWAD0JeRS1OuHtEjy0wcRu8c3fMFnsXAkVWyxg1XnCQ"/>
+</button>
+</header>
+<!-- FLOATING GLASS HAMBURGER MENU DROPDOWN (Mobile & Tablet) -->
+<div class="hidden fixed inset-0 z-50 bg-black/25 backdrop-blur-[2px] flex items-start justify-center pt-20 px-4" id="menu-backdrop">
+<div class="w-full max-w-xs md:max-w-sm glass-card rounded-3xl p-6 relative transition-all transform scale-95 opacity-0 duration-300 shadow-2xl border border-white/70" id="dropdown-menu">
+<!-- Close button "X" in green -->
+<div class="flex justify-between items-center mb-5">
+<span class="text-xs font-bold text-[#336926] uppercase tracking-wider">Menú Navegación</span>
+<button aria-label="Cerrar menú" class="w-8 h-8 rounded-full bg-green-50 text-[#336926] hover:bg-green-100 hover:text-[#4DB21A] font-extrabold flex items-center justify-center text-base transition shadow-sm" id="close-menu-btn">✕</button>
+</div>
+<!-- Centered options with intermediate divider lines -->
+<div class="flex flex-col text-center font-semibold text-gray-800 text-[15px]">
+<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="#">Ayuda / Inicio</a>
+<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
+<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="#">Eventos</a>
+<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
+<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="#">Chismear</a>
+<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
+<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="#">Estar al Tanto</a>
+<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
+<a class="py-2.5 text-[#336926] font-bold transition hover:scale-105" href="#">Explorar Sedes</a>
+<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
+<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="#">Explorar Programas</a>
+</div>
+</div>
+</div>
+<!-- ==================== MAIN SCROLLABLE CONTENT ==================== -->
+<main class="relative z-10">
+<!-- SECTION 1: HERO - CTMA SEDE PEDREGAL -->
+<section class="px-4 md:px-8 lg:px-10 pt-3 md:pt-6 pb-4 md:pb-6 relative" id="hero-section">
+<!-- Campus Banner Card -->
+<div class="relative w-full h-[360px] md:h-[420px] lg:h-[460px] rounded-[32px] md:rounded-[40px] overflow-hidden shadow-lg border border-white/80 group mx-auto max-w-6xl">
+<!-- Background photo of SENA CTMA Pedregal -->
+<img alt="SENA CTMA Sede Pedregal" class="w-full h-full object-cover brightness-95 contrast-105 scale-100 group-hover:scale-105 transition duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFCsXzGzrYnV9n_kTYKjd7G48mBHWv9VT5xLNYE1dh75id-DLKD1xmVBp41mXZFoSsNNrjPoxkx547QtiMQUDVOEJdz7Fsz8Klr3b6O-AcZ2Sb7lfb--Ab9VM1X4uNESPDyEUyE0M707VpIJ4FpFeVpF0zkGbAzRQFn14OqCfcLOL3TujNIJ8NJkQRaIWXvUsVZJVvkiqGunlNOXteF0m7lrF7g6v7RifDBMUsWsKY9dQCi4oB0nIz"/>
+<!-- Gradient overlay for text contrast -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/45"></div>
+<!-- Hero Content (Top Left) -->
+<div class="absolute top-6 md:top-8 left-6 md:left-10 z-20 text-white max-w-sm md:max-w-md">
+<p class="text-sm md:text-base lg:text-[18px] font-medium opacity-90 leading-tight">¡Hola! Soy</p>
+<h1 class="font-heading text-3xl md:text-5xl lg:text-[53px] font-black tracking-wide drop-shadow-md">KAIRU</h1>
+<p class="text-base md:text-lg lg:text-[20px] font-semibold text-green-300 drop-shadow mt-0.5">Sede Pedregal</p>
+<!-- Location Badge with Strict Premium Glassmorphism -->
+<div class="mt-4 md:mt-6 flex items-center gap-3 glass-address-badge text-gray-900 px-3.5 md:px-4 py-2.5 rounded-2xl max-w-[240px] md:max-w-[270px]">
+<div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white/70 backdrop-blur-sm flex items-center justify-center shrink-0 text-green-700 shadow-sm border border-white/50">
+<svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="text-[11px] md:text-xs lg:text-[13.5px] leading-tight">
+<p class="font-bold text-gray-950">Diagonal 104 #69-120</p>
+<p class="text-gray-700 text-[10px] md:text-[11px] lg:text-[12px] font-medium">(Barrio El Pedregal)</p>
+</div>
+<div class="text-orange-500 ml-auto text-sm drop-shadow-sm">📍</div>
+</div>
+</div>
+<div class="absolute bottom-0 right-2 md:right-8 lg:right-14 z-20 pointer-events-none flex items-end justify-end"><img alt="Kairu Sede Pedregal" class="w-[150px] sm:w-[190px] md:w-[250px] lg:w-[490px] h-auto max-h-[220px] md:max-h-[300px] lg:max-h-none object-contain block drop-shadow-2xl translate-y-1 lg:translate-y-2 origin-bottom transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO-XyEY-ffRrA8wrW4PiAlW5KDB13i4WP2uAw6P9iuCJO8PCdKxZvq4TUK_5OCeG_2XRDxHPzhpr7c0rvm8PlLcFaFI59UPjPvvlTvGJLDnJxFBCn1FTD0hQhTPrjuT5HRy29S91aBPdHnF9WPol-cLnvR_wVz681ODpOQ5C31hK1S7XVyxPdUMPW8aLwqlyVX3pY8eMbghYDEx6zyms989abPpyCPLydg5U4VNawALLiKP4O269sOaGPJ0kRqRh3fpQ"/></div></div>
+</section>
+<!-- ==================== SECTION 2: 3D CYLINDER CARPETAS WHEEL ==================== -->
+<section class="px-4 md:px-8 lg:px-10 py-3 md:py-6 relative -mt-16 z-20" id="folders-section" style="margin-top: -6rem;">
+<div class="rounded-[36px] md:rounded-[44px] p-5 md:p-8 pt-4 shadow-md border border-green-50 relative overflow-hidden max-w-6xl mx-auto bg-white">
+<!-- Instructions header for interaction -->
+<div class="flex items-center justify-between px-2 md:px-4 mb-3">
+<span class="text-[11px] md:text-xs font-bold text-green-800 tracking-wider uppercase">Rueda de Secciones</span>
+<span class="text-[11px] md:text-xs text-gray-500 flex items-center gap-1.5 font-medium">
+<span class="">Desliza arriba / abajo</span>
+<svg class="w-3.5 h-3.5 text-green-600 animate-bounce" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 11l5 5 5-5M7 7l5 5 5-5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+</div>
+<!-- Wheel interactive container (Swipe & Mousewheel enabled) -->
+<div class="wheel-container relative w-full h-[280px] md:h-[340px] lg:h-[370px] flex items-center justify-center cursor-grab active:cursor-grabbing overflow-visible" id="folderWheel">
+<!-- Folder 0: Tour Virtual (Verde) -->
+<div class="folder-item absolute w-[92%] max-w-[360px] md:max-w-[480px] lg:max-w-[560px] cursor-pointer" data-index="0" data-label="Tour Virtual" style="transform: translate3d(0px, 64px, 5.51091e-15px) scale(0.98); z-index: 1800; opacity: 0.985;">
+<div class="relative group transition duration-300 transform hover:scale-[1.02]">
+<img alt="Tour Virtual" class="w-full h-auto drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATMOmLxtH4g6Ve39s4gO1IBf7ZVSUDhqQ0GkQXsXT3zHKNCS3twfQXh2MeJenzJuH36f5Uy7eqFgtFSBQtVLEVcmc7_0bG0ksMdEL8tLSltfgGEUu4gJ6-R1sVkriS_br_hBBPs_DT2xbfFrrZUNFwuflmb0gpvdhd1UiCG6S_ADNJC19nAVa7PJI-aiO5vYX5Rx7475YJv_QU2KHZfv2mSpStQUxGKHVD-r8eXiYWj5oEN-paMt_D3_xHM2UuqGQXxA"/>
+</div>
+</div>
+<!-- Folder 1: Eventos (Amarillo) -->
+<div class="folder-item absolute w-[92%] max-w-[360px] md:max-w-[480px] lg:max-w-[560px] cursor-pointer" data-index="1" data-label="Eventos" style="transform: translate3d(0px, 7.83774e-15px, -90px) scale(0.92); z-index: 0; opacity: 0.97;">
+<div class="relative group transition duration-300 transform hover:scale-[1.02]">
+<img alt="Eventos" class="w-full h-auto drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxG1xzc6KGFr-2rO4X6Jq7W2CS3-kUYFTXHc9Vrmml3tt_BaL81w4IzMQ0Hn0YwUmYkVJ_2YWXlHWBfQtg8PFAfTPvXZitT6Tw99RSp0maQvxtpDxLH7V61857UNTokFGp4JkBBRzXlcmydiukqoN4ugCzA7XLxJ28O5nIsTGwAxn-4CCINU4uv_LuWbQJOzKlSN-IDeoauT53Tc5McYkLE96ESr9HO9O1p2nGGJLXQg6l-wAcCo62vGUmv2flxKT_qA"/>
+</div>
+</div>
+<!-- Folder 2: Programas (Naranja) -->
+<div class="folder-item absolute w-[92%] max-w-[360px] md:max-w-[480px] lg:max-w-[560px] cursor-pointer" data-index="2" data-label="Programas" style="transform: translate3d(0px, -64px, -1.65327e-14px) scale(0.98); z-index: 1800; opacity: 0.985;">
+<div class="relative group transition duration-300 transform hover:scale-[1.02]">
+<img alt="Programas" class="w-full h-auto drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfNgWGZideURjbKuP73YBTOJKbbr7eOQPcfJ3q6jqjNSUpyjPqvf7kj51qTFTnRwU6IM3FHGZU0phAKV3jhuhiLqHYxmgYcr7_ZyJHqSzSSKQPNV36d-LTvpfLV7eFWN6v_9rcNQ9tRTSSZqPg9Nfljemkmp3NgrOfmL8h9FgmbM_2kuBJJBTUzvn-3EvQimAn6_SurICcrhsOSQLTTkSHWOtvIcTuDCX9UVLa2NW-LK9LbT_abEHD_M17Orep7eA-Gg"/>
+</div>
+</div>
+<!-- Folder 3: Estar al Tanto (Azul) -->
+<div class="folder-item absolute w-[92%] max-w-[360px] md:max-w-[480px] lg:max-w-[560px] cursor-pointer" data-index="3" data-label="Estar al Tanto" style="transform: translate3d(0px, 0px, 90px) scale(1.04); z-index: 3600; opacity: 1;">
+<div class="relative group transition duration-300 transform hover:scale-[1.02]">
+<img alt="Estar al Tanto" class="w-full h-auto drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkMxkB5-OYhWs_jehB1yEgg5z8PJha0TrnXVrGwnM-IoTl07595K5n43LnQ1-iYLmqSLkHFO4GBSWPWT2qQxMMtSdlJF8rZqIqbmUr0vm57vjavgj4JMh2_Wg9VMx-AjmG33r2Xdiij71trctmumjg0hPOEmzOXv1C78iA9QPiesCmN5GAZpU8XB7B4K-BiHYkOE9BUM97-y39qfQ7QocWXysYQXjTC8d10MknVjK9QxPoRboKlih2CAiQsaf1u9rkqw"/>
+</div>
+</div>
+</div>
+<!-- Indicator dots for current front folder -->
+<div class="flex justify-center items-center gap-2 mt-4" id="wheel-dots">
+<button aria-label="Sección 1" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" data-dot="0"></button>
+<button aria-label="Sección 2" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" data-dot="1"></button>
+<button aria-label="Sección 3" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" data-dot="2"></button>
+<button aria-label="Sección 4" class="w-5 h-2.5 rounded-full bg-green-600 transition-all duration-300" data-dot="3"></button>
+</div>
+</div>
+</section>
+<!-- ==================== SECTION 3: LOGROS - CTMA ==================== -->
+<section class="mt-4 md:mt-8 relative" id="logros-section">
+<!-- Header Ribbon -->
+<div class="w-full bg-[#3FB91A] py-3.5 md:py-4 px-6 shadow-sm flex items-center justify-center relative overflow-hidden">
+<div class="absolute top-1 left-0 right-0 h-[1px] border-b border-dashed border-white/40"></div>
+<h2 class="font-heading font-black text-2xl md:text-3xl text-white tracking-wide text-center drop-shadow-sm">
+            Logros – CTMA
+          </h2>
+<div class="absolute bottom-1 left-0 right-0 h-[1px] border-b border-dashed border-white/40"></div>
+</div>
+<!-- Mural / Album of Achievements with responsive connecting path -->
+<div class="relative px-4 md:px-10 lg:px-12 py-8 md:py-12 overflow-hidden max-w-6xl mx-auto" id="logros-cards-container">
+<!-- SVG Winding Trail and Decorators matching Image 1 -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" fill="none" preserveaspectratio="none" viewbox="0 0 600 1450">
+<!-- Sinuous curved dashed trail connecting cards -->
+<path class="trail-path" d="M 180 80 C 360 80, 360 260, 430 320 C 500 380, 480 520, 240 600 C 140 640, 160 760, 200 840 C 250 920, 460 920, 430 1060" fill="none" opacity="0.6" stroke="#4DB21A" stroke-dasharray="7 7" stroke-width="2.5"></path>
+<!-- Decorative Triangle (top right) -->
+<polygon fill="none" opacity="0.45" points="420,40 450,40 435,70" stroke="#4DB21A" stroke-width="1.5"></polygon>
+<!-- Decorative Dot Clusters -->
+<g fill="#4DB21A" opacity="0.35">
+<!-- Right cluster near Card 2 -->
+<circle cx="520" cy="180" r="3.5"></circle><circle cx="540" cy="180" r="3.5"></circle><circle cx="560" cy="180" r="3.5"></circle>
+<circle cx="520" cy="200" r="3.5"></circle><circle cx="540" cy="200" r="3.5"></circle><circle cx="560" cy="200" r="3.5"></circle>
+<circle cx="520" cy="220" r="3.5"></circle><circle cx="540" cy="220" r="3.5"></circle><circle cx="560" cy="220" r="3.5"></circle>
+<!-- Bottom cluster -->
+<circle cx="220" cy="1180" r="4"></circle><circle cx="245" cy="1180" r="4"></circle><circle cx="270" cy="1180" r="4"></circle>
+<circle cx="208" cy="1205" r="4"></circle><circle cx="233" cy="1205" r="4"></circle><circle cx="258" cy="1205" r="4"></circle>
+</g>
+<!-- Concentric soft rings left side -->
+<circle cx="-20" cy="820" fill="none" opacity="0.2" r="90" stroke="#4DB21A" stroke-width="1.5"></circle>
+<circle cx="-20" cy="820" fill="none" opacity="0.15" r="120" stroke="#4DB21A" stroke-width="1"></circle>
+</svg>
+<div class="relative z-10 w-full max-w-4xl mx-auto flex flex-col gap-y-12 sm:gap-y-16 md:gap-y-20">
+<!-- ROW 1: Card 1 (Left) -->
+<div class="relative flex justify-start w-full">
+<div class="group relative w-[68%] sm:w-[58%] md:w-[48%] lg:w-[48%] lg:max-w-[500px]" id="logro-feria">
+<!-- Card container tilted left (-6.5deg) -->
+<div class="kairu-card-inner relative z-10 hover:scale-[1.03] hover:-translate-y-1 transition-all duration-300" style="transform: rotate(-6.5deg);">
+<!-- Year pill overlapping top -->
+<div class="absolute -top-3.5 lg:-top-5 left-5 lg:left-7 z-20 bg-[#4DB21A] text-white text-xs md:text-sm lg:text-xl font-bold lg:font-black px-4 md:px-5 lg:px-7 py-0.5 md:py-1 lg:py-2 rounded-full lg:rounded-2xl shadow-md tracking-wide">
+          2025
+        </div>
+<div class="card-body bg-white rounded-[24px] md:rounded-[28px] lg:rounded-[36px] p-2.5 md:p-3.5 lg:p-6 border-2 border-[#4DB21A] shadow-lg relative">
+<div class="w-full h-28 sm:h-36 md:h-44 lg:h-64 rounded-[18px] lg:rounded-[24px] overflow-hidden mb-2.5 lg:mb-4 shadow-inner">
+<img alt="Primera Feria Tecnológica" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAajX7akD0c1HMfgbdSlz5f9m0b8iipkLrqQsEbi_IGN116gq-s6rTMfhYCNbO-ddytoOtKYuEX5umDyE0xclWHLCF5rVlEIFBu1g2Z_Yi0tXzB3oRsifYQxaoy8qI7O6Qj2YFsvRDSEgL6AUMdqnOVOd0ur8cMjPmxEO4GgnyxtgWDpvzenCSwbX85Q2LJfGBnt75Xei1mgZ16pL8CmhmdMhycibgb9Ilfq6OTRAkLBE7EUroWm720"/>
+</div>
+<h3 class="font-heading font-black text-gray-900 text-xs sm:text-sm md:text-base lg:text-2xl leading-tight">
+            Primera Feria Tecnológica
+          </h3>
+<p class="text-[10px] sm:text-[11px] md:text-xs lg:text-base text-gray-600 mt-1 lg:mt-2.5 leading-snug">
+            El CTMA impactó al exhibir más de 20 proyectos innovadores en IA, automatización y transición energética.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 2: Card 2 (Right) -->
+<div class="relative flex justify-end w-full">
+<div class="group relative w-[68%] sm:w-[58%] md:w-[48%] lg:w-[48%] lg:max-w-[500px]" id="logro-diseno">
+<!-- Card container tilted right (+6.5deg) -->
+<div class="kairu-card-inner relative z-10 hover:scale-[1.03] hover:-translate-y-1 transition-all duration-300" style="transform: rotate(6.5deg);">
+<!-- Year pill overlapping top -->
+<div class="absolute -top-3.5 lg:-top-5 left-5 lg:left-7 z-20 bg-[#4DB21A] text-white text-xs md:text-sm lg:text-xl font-bold lg:font-black px-4 md:px-5 lg:px-7 py-0.5 md:py-1 lg:py-2 rounded-full lg:rounded-2xl shadow-md tracking-wide">
+          2025
+        </div>
+<div class="card-body bg-white rounded-[24px] md:rounded-[28px] lg:rounded-[36px] p-2.5 md:p-3.5 lg:p-6 border-2 border-[#4DB21A] shadow-lg relative">
+<div class="w-full h-28 sm:h-36 md:h-44 lg:h-64 rounded-[18px] lg:rounded-[24px] overflow-hidden mb-2.5 lg:mb-4 shadow-inner">
+<img alt="Aprendices ganan concurso de diseño" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Rjy_EKAz4zYGcP35XyYHif0mlFkLqmntwUmi_ODBiTEKU7JHo41jSmZGgSpMhkq7QpRL5tZjSzp0SRqyVLeWhnHekX_oMRlvFqL_VqOOtlTh0ywWJTyK5_RFKuf3FFoTmoL22nKHCylCrXiQU4CC87MBhLi9lwpDkAyQEh-rX6WMtJSZ0bYY5U6toCgB_vMa68vmNcvXEbwxMO2qr3Byj-FKDRj2gEUA9t3rBLBIjpVUcDVuR0Tl"/>
+</div>
+<h3 class="font-heading font-black text-gray-900 text-xs sm:text-sm md:text-base lg:text-2xl leading-tight">
+            Aprendices ganan concurso de diseño
+          </h3>
+<p class="text-[10px] sm:text-[11px] md:text-xs lg:text-base text-gray-600 mt-1 lg:mt-2.5 leading-snug">
+            Aprendices demostraron su excelencia al vencer a universitarios de Medellín en un reto de diseño de marca.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 3: Card 3 (Left) -->
+<div class="relative flex justify-start w-full">
+<div class="group relative w-[68%] sm:w-[58%] md:w-[48%] lg:w-[48%] lg:max-w-[500px]" id="logro-innovatech">
+<!-- Card container tilted left (-6deg) -->
+<div class="kairu-card-inner relative z-10 hover:scale-[1.03] hover:-translate-y-1 transition-all duration-300" style="transform: rotate(-6deg);">
+<!-- Year pill overlapping top -->
+<div class="absolute -top-3.5 lg:-top-5 left-5 lg:left-7 z-20 bg-[#4DB21A] text-white text-xs md:text-sm lg:text-xl font-bold lg:font-black px-4 md:px-5 lg:px-7 py-0.5 md:py-1 lg:py-2 rounded-full lg:rounded-2xl shadow-md tracking-wide">
+          2025
+        </div>
+<div class="card-body bg-white rounded-[24px] md:rounded-[28px] lg:rounded-[36px] p-2.5 md:p-3.5 lg:p-6 border-2 border-[#4DB21A] shadow-lg relative">
+<div class="w-full h-28 sm:h-36 md:h-44 lg:h-64 rounded-[18px] lg:rounded-[24px] overflow-hidden mb-2.5 lg:mb-4 shadow-inner">
+<img alt="Participación destacada en INNOVATECH" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPU8Wb_VXZIenked4WxR7rRYgyRhgNtgUBzOr4Bb-0NEcPP-AZyDacePRBCpRZP7W1I5JdlwgNC6g9HC0GRzUM1RFFYC0vj4DDxaip_5zGjwVcTqzIafQGJwwVy1P-v6QGo6a6AZIuGwYpOY5rGyUpxOum6EvRhlrbjVPRvNstBIKZ5BpVzN_f-15NpZnLb3qTlqJIcHb81dPCi5kQjJj6-JSJL1oo2_bFZl4jdoEH8uoSOqRJ2Dow"/>
+</div>
+<h3 class="font-heading font-black text-gray-900 text-xs sm:text-sm md:text-base lg:text-2xl leading-tight">
+            Participación destacada en INNOVATECH
+          </h3>
+<p class="text-[10px] sm:text-[11px] md:text-xs lg:text-base text-gray-600 mt-1 lg:mt-2.5 leading-snug">
+            ¡Orgullo investigativo! El CTMA brilló al liderar la representación del SENA con proyectos de alto impacto.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 4: Card 4 (Right) with Static Decorative Kairu -->
+<div class="relative flex justify-end w-full mb-4">
+<!-- Static decorative Kairu beside card 4 as shown in screenshot -->
+<div class="absolute left-1/4 sm:left-1/3 bottom-12 z-0 w-[85px] sm:w-[115px] md:w-[135px] pointer-events-none select-none">
+<img alt="Kairu decorativo" class="w-full h-auto object-contain drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsHzhRPHbonWCrue4h2a2_b34bnqvbBKFJVoCw6ub_5fWjbeCsakHgnZl0jJQC4gAhw-QUVgMGhsC0XeEzvmLz-Dxc_801i8yWj4CsTfLcuH_O9z0a1FXaGoVj2LANuRpTUm-wdyzj_-Qs1ElmLMiumuLj9Xgrtn6_pFNmSYbrVBigakldcen_ihmMvgLJDARl_HvLynOxaS0wjfmf658rS5cZglAJ0APRoECZRYARZMyOhgKWreyOlcWq_MFatVoVyQ"/>
+</div>
+<div class="group relative w-[68%] sm:w-[58%] md:w-[48%] lg:w-[48%] lg:max-w-[500px]" id="logro-solares">
+<!-- Card container tilted right (+6.5deg) -->
+<div class="kairu-card-inner relative z-10 hover:scale-[1.03] hover:-translate-y-1 transition-all duration-300" style="transform: rotate(6.5deg);">
+<!-- Year pill overlapping top -->
+<div class="absolute -top-3.5 lg:-top-5 left-5 lg:left-7 z-20 bg-[#4DB21A] text-white text-xs md:text-sm lg:text-xl font-bold lg:font-black px-4 md:px-5 lg:px-7 py-0.5 md:py-1 lg:py-2 rounded-full lg:rounded-2xl shadow-md tracking-wide">
+          2020
+        </div>
+<div class="card-body bg-white rounded-[24px] md:rounded-[28px] lg:rounded-[36px] p-2.5 md:p-3.5 lg:p-6 border-2 border-[#4DB21A] shadow-lg relative">
+<div class="w-full h-28 sm:h-36 md:h-44 lg:h-64 rounded-[18px] lg:rounded-[24px] overflow-hidden mb-2.5 lg:mb-4 shadow-inner">
+<img alt="Instalación de paneles solares" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbyo-XsSm9pdUNDs6luRRxzKgtg2J93C4JG1klcJ_OLwAZA8AePUM7Gv2gxCIiS2k7a9YmcK_t64F1aCURdtsu-lIiJj6CaBDqM0WqGZLrN3-OBs1HtURl4cQAc_wAlffKA2oO_wIdCVz-oVCRpm-XTphwuqyWABLY85M8h3mDGnuNZAmM8AmGi8X3NKjq3TnanSwuglZxGAyOrCLWKys8A5NMm58SvViR-gVYyEDASlcqyhkUDq2Y"/>
+</div>
+<h3 class="font-heading font-black text-gray-900 text-xs sm:text-sm md:text-base lg:text-2xl leading-tight">
+            Instalación de 780 paneles solares
+          </h3>
+<p class="text-[10px] sm:text-[11px] md:text-xs lg:text-base text-gray-600 mt-1 lg:mt-2.5 leading-snug">
+            El CTMA se consolida como referente de sostenibilidad al implementar un sistema de 780 paneles solares que impulsa la transición energética regional.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+</main>
+<!-- ==================== FIXED INSTITUTIONAL BOTTOM BAR (Mobile & Tablet) ==================== -->
+<footer class="fixed bottom-0 left-0 w-full bg-[#4DB21A] py-2.5 md:py-3 px-6 md:px-12 flex items-center justify-between z-50 shadow-lg">
+<div class="flex items-center gap-2">
+<span class="text-white text-xs md:text-sm font-semibold tracking-wide">
+          Entérate de todo
+        </span>
+</div>
+<!-- Chismear Button (#336926 pill, with light sweep) -->
+<button class="btn-chismear text-white font-bold text-xs md:text-sm px-6 md:px-8 py-2 md:py-2.5 rounded-full shadow-md active:scale-95 hover:brightness-110 transition">
+        Chismear
+      </button>
+</footer>
+</div>
+<!-- ==================== INTERACTION SCRIPT: VERTICAL WHEEL & MENU ==================== -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* -------------------------------------------------------------
+         1. VERTICAL CYLINDRICAL WHEEL OF FOLDERS
+         ------------------------------------------------------------- */
+      const wheelContainer = document.getElementById('folderWheel');
+      const folders = Array.from(document.querySelectorAll('.folder-item'));
+      const dots = Array.from(document.querySelectorAll('#wheel-dots button'));
+      const numFolders = folders.length;
+
+      let currentAngle = 0;
+      let targetAngle = 0;
+      let isDragging = false;
+      let isMoving = false;
+      let startY = 0;
+      let lastDeltaY = 0;
+      let animFrameId = null;
+
+      const angleStep = 360 / numFolders;
+
+      function getWheelDimensions() {
+        if (window.innerWidth >= 1024) {
+          return { ySpread: 64, zDepth: 90 };
+        }
+        if (window.innerWidth >= 768) {
+          return { ySpread: 56, zDepth: 75 };
+        }
+        return { ySpread: 46, zDepth: 60 };
+      }
+
+      function renderWheel(angle, moving = false) {
+        const dims = getWheelDimensions();
+
+        folders.forEach((folder, idx) => {
+          const baseOffset = idx * angleStep;
+          let relAngle = (angle + baseOffset) % 360;
+          if (relAngle < 0) relAngle += 360;
+
+          const rad = (relAngle * Math.PI) / 180;
+          const y = Math.sin(rad) * dims.ySpread;
+          const z = Math.cos(rad) * dims.zDepth;
+
+          const depthNorm = (z + dims.zDepth) / (2 * dims.zDepth);
+          const uniformScale = 0.92 + (depthNorm * 0.12);
+          const zIndex = Math.round((z + dims.zDepth) * 20);
+
+          let opacity = 0.97 + (depthNorm * 0.03);
+          if (moving) {
+            opacity = 0.95 + (depthNorm * 0.05);
+          }
+
+          folder.style.transform = `translate3d(0, ${y}px, ${z}px) scale(${uniformScale})`;
+          folder.style.opacity = opacity.toFixed(3);
+          folder.style.zIndex = zIndex;
+        });
+
+        let normalizedAngle = (-angle) % 360;
+        if (normalizedAngle < 0) normalizedAngle += 360;
+        const frontIndex = Math.round(normalizedAngle / angleStep) % numFolders;
+
+        dots.forEach((dot, dIdx) => {
+          if (dIdx === frontIndex) {
+            dot.className = "w-5 h-2.5 rounded-full bg-green-600 transition-all duration-300";
+          } else {
+            dot.className = "w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300";
+          }
+        });
+      }
+
+      function snapToNearest() {
+        const snappedAngle = Math.round(targetAngle / angleStep) * angleStep;
+        animateTo(snappedAngle);
+      }
+
+      function animateTo(destAngle) {
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+        isMoving = true;
+        function step() {
+          const diff = destAngle - currentAngle;
+          if (Math.abs(diff) < 0.25) {
+            currentAngle = destAngle;
+            targetAngle = destAngle;
+            isMoving = false;
+            renderWheel(currentAngle, false);
+            return;
+          }
+          currentAngle += diff * 0.18;
+          renderWheel(currentAngle, true);
+          animFrameId = requestAnimationFrame(step);
+        }
+        step();
+      }
+
+      renderWheel(0, false);
+
+      function onPointerDown(e) {
+        isDragging = true;
+        isMoving = true;
+        startY = e.pageY || (e.touches && e.touches[0].pageY);
+        lastDeltaY = 0;
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+      }
+
+      function onPointerMove(e) {
+        if (!isDragging) return;
+        const currentY = e.pageY || (e.touches && e.touches[0].pageY);
+        const delta = currentY - startY;
+        startY = currentY;
+        lastDeltaY = delta;
+        
+        const sensitivity = 0.55;
+        targetAngle += delta * sensitivity;
+        currentAngle = targetAngle;
+        renderWheel(currentAngle, true);
+        e.preventDefault();
+      }
+
+      function onPointerUp() {
+        if (!isDragging) return;
+        isDragging = false;
+        targetAngle += lastDeltaY * 1.5;
+        snapToNearest();
+      }
+
+      wheelContainer.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+
+      wheelContainer.addEventListener('touchstart', onPointerDown, { passive: false });
+      window.addEventListener('touchmove', onPointerMove, { passive: false });
+      window.addEventListener('touchend', onPointerUp);
+
+      wheelContainer.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY;
+        const step = delta > 0 ? -angleStep : angleStep;
+        targetAngle = Math.round((currentAngle + step) / angleStep) * angleStep;
+        animateTo(targetAngle);
+      }, { passive: false });
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-dot'));
+          targetAngle = -idx * angleStep;
+          animateTo(targetAngle);
+        });
+      });
+
+      folders.forEach(folder => {
+        folder.addEventListener('click', () => {
+          const idx = parseInt(folder.getAttribute('data-index'));
+          targetAngle = -idx * angleStep;
+          animateTo(targetAngle);
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        renderWheel(currentAngle, isMoving || isDragging);
+      });
+
+      /* -------------------------------------------------------------
+         2. HAMBURGER MENU MODAL TOGGLE (Mobile & Tablet)
+         ------------------------------------------------------------- */
+      const menuBtn = document.getElementById('menu-btn');
+      const closeMenuBtn = document.getElementById('close-menu-btn');
+      const dropdownMenu = document.getElementById('dropdown-menu');
+      const menuBackdrop = document.getElementById('menu-backdrop');
+
+      function openMenu() {
+        menuBackdrop.classList.remove('hidden');
+        setTimeout(() => {
+          dropdownMenu.classList.remove('scale-95', 'opacity-0');
+          dropdownMenu.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+
+      function closeMenu() {
+        dropdownMenu.classList.remove('scale-100', 'opacity-100');
+        dropdownMenu.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          menuBackdrop.classList.add('hidden');
+        }, 250);
+      }
+
+      if (menuBtn) {
+        menuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openMenu();
+        });
+      }
+
+      if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closeMenu();
+        });
+      }
+
+      if (menuBackdrop) {
+        menuBackdrop.addEventListener('click', (e) => {
+          if (!dropdownMenu.contains(e.target)) {
+            closeMenu();
+          }
+        });
+      }
+
+    });
+  </script>
+</body></html>

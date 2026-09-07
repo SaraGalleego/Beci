@@ -1,0 +1,392 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Estar al Tanto - Registro Beci</title>
+<!-- Google Fonts: DM Sans & Poppins -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-green': '#4DB21A',
+            'brand-dark-green': '#336926',
+            'brand-light-bg': '#f5faf4',
+            'brand-input-bg': '#f8fbf7',
+            'brand-input-border': '#dce8dc',
+            'brand-orange': '#FF6C01',
+            'brand-title': '#0d1e3a'
+          },
+          fontFamily: {
+            dmsans: ['"DM Sans"', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: CSS Stylesheets -->
+<style data-purpose="base-layout">
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5faf4;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Fondo animado suave */
+    @keyframes floatBg {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-8px) scale(1.008);
+      }
+    }
+
+    .animated-bg-decor {
+      animation: floatBg 7s ease-in-out infinite;
+    }
+  </style>
+<style data-purpose="mascot-animation">
+    /* Animación Mascota Peek-a-boo */
+    @keyframes mascotPeek {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg) scale(1);
+      }
+      25% {
+        transform: translateY(-12px) rotate(2deg) scale(1.02);
+      }
+      60% {
+        transform: translateY(-4px) rotate(-1.5deg) scale(1);
+      }
+      80% {
+        transform: translateY(-8px) rotate(1deg) scale(1.01);
+      }
+    }
+
+    .mascot-peek-anim {
+      animation: mascotPeek 4.5s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+  </style>
+<style data-purpose="buttons-effects">
+    /* Efecto sweep destello en botón naranja */
+    .btn-sweep {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-sweep::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(25deg);
+      transition: all 0.75s ease;
+    }
+
+    .btn-sweep:hover::after {
+      left: 120%;
+    }
+
+    /* Glassmorphism Menú Hamburguesa */
+    .glass-menu {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
+    }
+  </style>
+<!-- END: CSS Stylesheets -->
+<style id="sweep-hover-fix">
+  .btn-sweep::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-20deg);
+    transition: none !important;
+    animation: none !important;
+    opacity: 0;
+  }
+  .btn-sweep:hover::after {
+    opacity: 1;
+    animation: lightSweep 0.75s ease-in-out forwards !important;
+  }
+  @keyframes lightSweep {
+    0% { left: -150%; }
+    100% { left: 150%; }
+  }
+</style></head>
+<body class="min-h-screen text-slate-800 flex flex-col relative antialiased selection:bg-brand-green selection:text-white">
+<!-- BEGIN: Institutional Background Decor -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" data-purpose="background-layer">
+<img alt="Fondo Institucional" class="w-full h-full object-cover opacity-60 animated-bg-decor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbK2VmU3fT41qAGa2tFNKSvBj7ySxacOtg4byRs0zLN-Dql5FZCi9v0upKykhlGGr0MupKB4z4cSNQWfhjf3u9RRAt7DopgOpYJM7NFVyreGzLclrZsyG7zyF6kElZG-sa8t_wcvdZYzfHUntpa4iCztHLkQ8wgbPEY2pftotJ4WMyipwjyTKoYL1UpDrVqmcFCv3UkcO3MpgUBotAnIldzVZ6MlJvxW9ONDM46pIruvDVKvX46Rcd9RPeanyIeKZ_HQ">
+</div>
+<!-- END: Institutional Background Decor -->
+<!-- BEGIN: Top Bar Navigation (Responsive Desktop Order) -->
+<footer class="w-full bg-[#4DB21A] text-white px-6 py-3 fixed bottom-0 left-0 right-0 z-40 shadow-md" data-purpose="institutional-bar">
+<div class="max-w-md lg:max-w-4xl mx-auto flex items-center justify-end gap-3">
+<span class="text-sm font-medium font-poppins tracking-wide">Enterate de todo</span>
+<button class="bg-[#336926] hover:bg-[#254f1c] text-white text-xs font-semibold px-5 py-2 rounded-full transition-transform duration-200 transform hover:scale-110 active:scale-95 shadow-sm" data-purpose="action-chismear" type="button">
+        Chismear
+      </button>
+</div>
+</footer>
+<!-- END: Top Bar Navigation (Responsive Desktop Order) -->
+<!-- BEGIN: Main Content Area -->
+<main class="relative z-10 flex-1 flex flex-col items-center justify-start pt-6 lg:pb-12 w-full">
+<div class="w-full flex flex-col flex-1">
+<!-- BEGIN: Header Navigation -->
+<header class="flex items-center justify-between w-full mb-4 px-6">
+<!-- Logo 3D Beci -->
+<div class="flex flex-col items-start">
+<a aria-label="Inicio Beci" class="block transition-transform hover:scale-105 active:scale-95" href="#">
+<img alt="Beci Logo Oficial" class="h-16 sm:h-20 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjiBpaqGt9T3OqXW83g3N0shIHHDzZV7Wdvu26RlvqC8-sEZja9YGG3_akzaGcQ4GnyZFr7GoA2W3kSz43xjbX-_N6EZgE12ysD59jt0IU5jPN_Z6n8hV40jgPjAfdSVJmB0UmcGymaJ-372VBt4M2SBkEu2y7ZIBTPCZOLMC8PMD9f5TKxZS7eE-wwlYfzdUuIA9WYZP_Tr9RpIsDuvDvskaJMKVmN2G9rYHiPQUTljnIhc3bhDCzfWFEaYN3r4tyb5Q">
+</a>
+<!-- Flecha interactiva Volver -->
+<button aria-label="Volver" class="mt-2 text-[#336926] hover:text-[#1c4b18] font-bold text-2xl px-1 py-0.5 rounded focus:outline-none transition-transform hover:-translate-x-1" type="button">
+            ❮
+          </button>
+</div>
+<!-- Botón Menú Hamburguesa -->
+<nav class="hidden md:flex items-center gap-5 lg:gap-7 font-poppins text-sm lg:text-base"><a href="#ayuda" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Ayuda</a><a href="#eventos" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Eventos</a><a href="#chismear" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Chismear</a><a href="#estar-al-tanto" class="text-[#336926] font-bold border-b-2 border-[#336926] pb-0.5 transition-colors duration-200">Estar al Tanto</a><a href="#sedes" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Explorar Sedes</a><a href="#programas" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Explorar Programas</a></nav><button aria-label="Abrir menú de navegación" class="w-12 h-12 flex flex-col justify-center items-center gap-1.5 rounded-2xl hover:bg-white/40 active:scale-95 transition-all focus:outline-none md:hidden" id="menuOpenBtn" type="button"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChsT57pP74jFCGrwR-6v2MXLvq9W24tH-lX7ygTtGGtdrUyWUrbgZwj-fLJBCt0ZI6-6Liqwy8Rc0kyfS03QkyVvkiPA4ecOqjvju4a_P6zHqRfzcQHAI92qQVw9gwDxRMWY6H2css_cik3CGUXuzc83qEZhcm3S_TmbeTWbf9HBkiKpVhYpvnju-S4xV_-hCxRA8_L2VHPCe27ijirylxwZ4GI7aPoKFGSXgAT-AV0hVKSh972dORBeStVHuVZsqmvWE" alt="Menú" class="w-10 sm:w-10 h-auto object-contain drop-shadow-sm pointer-events-none"></button>
+</header>
+<!-- END: Header Navigation -->
+<!-- BEGIN: Headline Titles -->
+<section class="text-center px-4 mb-8" data-purpose="registration-heading">
+<h1 class="font-dmsans font-extrabold text-[#0d1e3a] text-2xl sm:text-[26px] leading-tight mb-1">
+          ¡Registra tu correo!
+        </h1>
+<p class="font-dmsans font-medium text-slate-700 text-sm sm:text-base" style="font-size: 1.03em;">si quieres seguir<br class="">recibiendo info</p>
+</section>
+<!-- END: Headline Titles -->
+<!-- BEGIN: Form Container with Peek-a-boo Mascot -->
+<div class="relative w-full mt-6 flex-1 flex flex-col md:max-w-md md:mx-auto">
+<!-- Mascota Azul Beci Asomándose -->
+<div class="absolute -top-24 right-2 sm:right-4 w-32 sm:w-36 z-0 pointer-events-none mascot-peek-anim md:fixed md:top-auto md:w-72 lg:w-96 md:z-10 mascot-desktop-float bottom-0" style="--desktop-right: 0;">
+<img alt="Mascota Beci saludando" class="w-full h-auto object-contain filter drop-shadow-md pointer-events-none select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC39ZdSGHI959OuLy3ulGBUmyDFhym4oRVQ9A7LCILM8i3zxlUQmnu8bPBKbMfm-zwYtvtgwCzjLAIuAJiOtf3iUpsSvCLhaewuZnkANMBaQzU9icH7fRGtjPqsPcKb_QeTKexE59c5wnna3HkkBlhDOKzz1AcSR4nqinir_380-98Sq274ACegHs_04dx7qtv5P4rZxmAjwd3jpLe3AbbR8F_Qa1L9bIuKkq3wpaiJGsWxUNHmRPXp3pnPcFva5YyVcPU">
+</div>
+<!-- Tarjeta Principal del Formulario -->
+<section class="relative z-10 bg-white shadow-[0_-4px_24px_rgba(51,105,38,0.08)] border border-[#eaf3e9] px-6 sm:px-8 pt-8 flex flex-col gap-4 rounded-t-[40px] flex-1 pb-24 md:max-w-md md:mx-auto md:rounded-t-[40px]" data-purpose="form-card">
+<!-- Botón Continuar con Google -->
+<button class="w-full bg-white hover:bg-slate-50 active:scale-95 border border-slate-200 rounded-full py-3 px-5 flex items-center justify-center gap-3 shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] max-w-md mx-auto" data-purpose="google-oauth-button" type="button">
+<img alt="Icono oficial Google" class="w-5 h-5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1YTPXpEBqsdg1I-jCgxR7JNhLtPErCB7U7nwxe6T47KpVNJ4qx9qL1uQ1fQIluO53_Bl3cVHCdEOjSr84cw5tDzgJs5Gk23tDXexZvMIEjkcvqLhvlm1sMpCvH3Ke23crzse_-12Qalns7_bm5AVET49TBQhXzCcH5vw-sa4YZ7ynAV5nm9YFR9FUnGBQRK5WZKXkO0cFPN46lwv4Da7U202iAaboFzV-h5xqNrBtpw564owRqHZjKD51b6GwGPJYimo">
+<span class="text-slate-800 text-sm font-semibold tracking-normal font-poppins">Continuar con Google</span>
+</button>
+<!-- Formulario de Registro -->
+<form class="flex flex-col gap-3.5 mt-1 max-w-md mx-auto w-full" id="registerForm" onsubmit="event.preventDefault();">
+<!-- Fila: Nombre y Apellido -->
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="sr-only" for="firstName">Nombre</label>
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="firstName" name="firstName" placeholder="Nombre" required="" type="text">
+</div>
+<div>
+<label class="sr-only" for="lastName">Apellido</label>
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="lastName" name="lastName" placeholder="Apellido" required="" type="text">
+</div>
+</div>
+<!-- Campo Correo -->
+<div>
+<label class="sr-only" for="email">Correo electrónico</label>
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="email" name="email" placeholder="Correo" required="" type="email">
+</div>
+<!-- Campo Contraseña con Toggle Show/Hide -->
+<div class="relative flex items-center">
+<label class="sr-only" for="password">Contraseña</label>
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 pl-4 pr-11 py-2.5 outline-none transition-all" id="password" name="password" placeholder="Contraseña" required="" type="text">
+<!-- Botón Toggle Visibilidad -->
+<button aria-label="Mostrar u ocultar contraseña" class="absolute right-3.5 text-slate-400 hover:text-slate-700 p-1 focus:outline-none transition-colors" id="togglePasswordBtn" type="button">
+<!-- SVG Ojo Abierto -->
+<svg class="w-5 h-5 hidden" fill="none" id="eyeIconOpen" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<!-- SVG Ojo Cerrado (oculto al inicio) -->
+<svg class="w-5 h-5" fill="none" id="eyeIconClosed" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Casilla Términos y Condiciones -->
+<div class="flex items-center gap-2.5 mt-1 px-1">
+<input class="w-4 h-4 text-[#336926] border-slate-300 rounded focus:ring-[#4DB21A] focus:ring-offset-0 cursor-pointer" id="termsCheckbox" required="" type="checkbox">
+<label class="text-xs text-slate-700 font-poppins cursor-pointer select-none" for="termsCheckbox">
+                Acepto terminos y condiciones
+              </label>
+</div>
+<!-- Switch Interactivo Recibir Novedades -->
+<div class="flex items-center gap-3 px-1 mt-0.5">
+<button aria-checked="false" class="w-11 h-6 rounded-full p-0.5 transition-colors duration-300 ease-in-out relative focus:outline-none bg-slate-200" id="newsletterSwitch" role="switch" type="button">
+<div class="w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out" id="switchKnob"></div>
+</button>
+<span class="text-xs text-slate-700 font-poppins cursor-pointer select-none" id="switchLabel">
+                Quiero recibir novedades y eventos
+              </span>
+</div>
+<!-- Botón CTA Registrarme -->
+<div class="mt-4 flex justify-center">
+<button class="btn-sweep w-full max-w-[240px] bg-[#FF6C01] hover:bg-[#eb6400] active:scale-95 text-white font-dmsans font-bold text-sm tracking-wide py-3 px-8 rounded-full shadow-[0_6px_18px_rgba(255,108,1,0.35)] transition-all duration-200 transform hover:scale-105" data-purpose="submit-register-button" type="submit">
+                Registrarme
+              </button>
+</div>
+</form>
+</section>
+</div>
+<!-- END: Form Container -->
+</div>
+</main>
+<!-- END: Main Content Area -->
+<!-- BEGIN: Hamburger Menu Modal -->
+<div class="fixed inset-0 z-50 flex p-4 bg-slate-900/30 backdrop-blur-sm transition-opacity duration-300 ease-out items-start justify-end pt-6 opacity-0 pointer-events-none" data-purpose="navigation-modal" id="menuModal">
+<!-- Modal Card (Clonando exactamente menu hamburguesa.png) -->
+<div class="glass-menu w-full max-w-[320px] p-6 relative flex flex-col items-center transform transition-transform duration-300 ease-out scale-90" id="menuCard">
+<!-- Botón Cerrar (X) Verde Institucional -->
+<button aria-label="Cerrar Menú" class="absolute top-5 left-5 text-[#336926] hover:text-[#1e4415] focus:outline-none transition-transform hover:scale-110 active:scale-90" id="menuCloseBtn" type="button">
+<svg class="w-6 h-6 stroke-current" fill="none" stroke-linecap="round" stroke-width="3.5" viewBox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+<!-- Lista de enlaces de navegación -->
+<nav class="w-full pt-6 pb-2 flex flex-col text-center font-poppins"><a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#ayuda">
+          Ayuda
+        </a>
+<div class="w-full h-px bg-slate-300/70"></div>
+<a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#eventos">
+          Eventos
+        </a>
+<div class="w-full h-px bg-slate-300/70"></div>
+<a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#chismear">
+          Chismear
+        </a>
+<div class="w-full h-px bg-slate-300/70"></div>
+<a class="py-2.5 text-[#336926] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-bold text-lg transition-colors duration-200" href="#estar-al-tanto">
+          Estar al Tanto
+        </a>
+<div class="w-full h-px bg-slate-300/70"></div>
+<a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#sedes">
+          Explorar Sedes
+        </a>
+<div class="w-full h-px bg-slate-300/70"></div>
+<a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#programas">
+          Explorar Programas
+        </a></nav>
+</div>
+</div>
+<!-- END: Hamburger Menu Modal -->
+<!-- BEGIN: Interactive Logic Scripts -->
+<script data-purpose="menu-toggle-logic">
+    // Control del modal de Menú Hamburguesa
+    const menuOpenBtn = document.getElementById('menuOpenBtn');
+    const menuCloseBtn = document.getElementById('menuCloseBtn');
+    const menuModal = document.getElementById('menuModal');
+    const menuCard = document.getElementById('menuCard');
+
+    function openModal() {
+      menuModal.classList.remove('opacity-0', 'pointer-events-none');
+      menuModal.classList.add('opacity-100', 'pointer-events-auto');
+      menuCard.classList.remove('scale-90');
+      menuCard.classList.add('scale-100');
+    }
+
+    function closeModal() {
+      menuModal.classList.add('opacity-0', 'pointer-events-none');
+      menuModal.classList.remove('opacity-100', 'pointer-events-auto');
+      menuCard.classList.add('scale-90');
+      menuCard.classList.remove('scale-100');
+    }
+
+    menuOpenBtn.addEventListener('click', openModal);
+    menuCloseBtn.addEventListener('click', closeModal);
+
+    // Cerrar al hacer clic fuera de la tarjeta
+    menuModal.addEventListener('click', (e) => {
+      if (e.target === menuModal) {
+        closeModal();
+      }
+    });
+  </script>
+<script data-purpose="form-controls-logic">
+    // Control de visibilidad de contraseña
+    const passwordInput = document.getElementById('password');
+    const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+    const eyeIconOpen = document.getElementById('eyeIconOpen');
+    const eyeIconClosed = document.getElementById('eyeIconClosed');
+
+    togglePasswordBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.getAttribute('type') === 'password';
+      if (isPassword) {
+        passwordInput.setAttribute('type', 'text');
+        eyeIconOpen.classList.add('hidden');
+        eyeIconClosed.classList.remove('hidden');
+      } else {
+        passwordInput.setAttribute('type', 'password');
+        eyeIconOpen.classList.remove('hidden');
+        eyeIconClosed.classList.add('hidden');
+      }
+    });
+
+    // Control del switch de novedades
+    const newsletterSwitch = document.getElementById('newsletterSwitch');
+    const switchKnob = document.getElementById('switchKnob');
+    const switchLabel = document.getElementById('switchLabel');
+    let isSubscribed = false;
+
+    function toggleNewsletter() {
+      isSubscribed = !isSubscribed;
+      newsletterSwitch.setAttribute('aria-checked', isSubscribed.toString());
+
+      if (isSubscribed) {
+        newsletterSwitch.classList.remove('bg-slate-200');
+        newsletterSwitch.classList.add('bg-[#4DB21A]');
+        switchKnob.classList.add('translate-x-5');
+      } else {
+        newsletterSwitch.classList.add('bg-slate-200');
+        newsletterSwitch.classList.remove('bg-[#4DB21A]');
+        switchKnob.classList.remove('translate-x-5');
+      }
+    }
+
+    newsletterSwitch.addEventListener('click', toggleNewsletter);
+    switchLabel.addEventListener('click', toggleNewsletter);
+  </script>
+<!-- END: Interactive Logic Scripts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,1446 @@
+<!DOCTYPE html><html lang="es" style=""><head></head><body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden bg-[#F9FFFA]"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Beci - Charlemos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;800;900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F9FFFA;
+      color: #1a2e16;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    .font-title {
+      font-family: 'DM Sans', sans-serif;
+    }
+    .beci-card-shadow {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .state-transition {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(77, 178, 26, 0.35);
+      border-radius: 4px;
+    }
+    @keyframes fadeInSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-bubble {
+      animation: fadeInSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Screen Views - Full independent screens */
+    .screen-view {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #F9FFFA;
+      z-index: 40;
+    }
+
+    /* Transfer Banner Animation */
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .pulse-soft {
+      animation: pulseSoft 2s infinite ease-in-out;
+    }
+
+    /* Input Shake Animation */
+    @keyframes inputShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .animate-shake {
+      animation: inputShake 0.4s ease-in-out;
+    }
+
+    /* Smooth touch scrolling for quick suggestions */
+    .touch-scroll-x {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(77, 178, 26, 0.25) transparent;
+    }
+    .touch-scroll-x::-webkit-scrollbar {
+      height: 4px;
+    }
+    .touch-scroll-x::-webkit-scrollbar-thumb {
+      background: rgba(77, 178, 26, 0.25);
+      border-radius: 4px;
+    }
+
+    /* Glassmorphism menu modal styling */
+    .glass-menu-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+    }
+  </style>
+<style class="">textarea, input { caret-color: transparent; } textarea:focus, input:focus { caret-color: #336926; }</style>
+<!-- ======================================================== -->
+<!-- VISTA 1: PANTALLA INICIAL (HOME / LOBBY)                  -->
+<!-- ======================================================== -->
+<div class="screen-view overflow-y-auto" id="screen-home" style="position: relative; height: auto; min-height: 100vh; z-index: 10; display: flex;">
+<!-- TOP HEADER -->
+<header class="w-full border-none md:border-none lg:border-b lg:border-emerald-100/60 lg:bg-[#FFFFFF] transition-colors z-20 bg-transparent lg:bg-white lg:shadow-md shrink-0">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+<a class="flex items-center gap-1 cursor-pointer select-none group" href="#"><img alt="BECI" class="h-[52px] md:h-[62px] lg:h-12 w-auto object-contain transition-transform group-hover:scale-105 relative top-[3%] lg:top-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhLv8mu71mViEz1jgUpwT_7OzXUQYykxLafd4nqAKswE5_3dbWSGb9teWJ2h6R7xJLUwtncmBLt1bKkhKYsjt7FJujx2fEq67aW6_XCcfkZjWTtskcZM1vxrnTkZdvNBOVjnNr_oUyi40fy25j7FQjfrIaMfyuvyyXYyU06lnfEPCdRqoeK3JQ3hfv0g82_5CrFBylFDpNlZdAZi-d8K9swAsMtEpVfrz3Rk2CT5elr_4fZlu4N-64PzysH74K03X9_g" style="transform: scale(1.08); transform-origin: left center;"></a>
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 ml-auto mr-0">
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Ayuda</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Eventos</a>
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="#"><span class="font-bold text-sm lg:text-base text-stone-800">Charlemos</span><span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span></a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Estar al Tanto</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Explorar Sedes</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Explorar programas</a>
+</nav>
+<div class="flex items-center gap-3 lg:hidden">
+<button aria-label="Menú" class="p-2 rounded-2xl bg-transparent hover:bg-black/5 text-[#336926] transition active:scale-95 border-none cursor-pointer" onclick="openMobileNavMenu()" type="button"><img alt="Menú" class="w-7 h-5 md:w-8 md:h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSo7NPtEvcPb86mvyKmZNR2nf1i_JDTAnSCGXp7GLXv5_1JxWRtCwp76e7HLB_00jay969HjOGCVGW1E74_bp_a2hjDhVjd-LFlbziB8q_aN2YNSKKQqGwhzqHBfwouSXUUh9t7bEXwOGzn7P_TbEBsTXbB7zGTALbkSVchysJsueZV7IlRqpQXeBvzxxOxsZpY-qJBbU0t9Lzamwq0PYryHCXUfiVm4lHgGmxpKOZWgRmkWASbiQDnrHjno2V8mZSg"></button>
+</div>
+</div>
+</header>
+<!-- MAIN LOBBY VIEW -->
+<main class="state-transition flex-1 flex flex-col w-full max-w-md md:max-w-4xl lg:max-w-5xl mx-auto pb-28 md:pb-36 px-4 sm:px-6 pt-2 md:pt-6 relative" id="main-view">
+<!-- Subheader with Back Button & Title -->
+<div class="flex items-center justify-between relative my-2 md:mb-5">
+<button aria-label="Volver" class="p-1.5 md:p-2 text-[#336926] font-bold hover:bg-black/5 rounded-full transition active:scale-90" onclick="resetAndReturnToHome()" type="button">
+<svg class="w-6 h-6 md:w-7 md:h-7 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+</button>
+<div class="flex-1 flex flex-col items-center justify-center pr-7 md:pr-10">
+<h1 class="font-title font-black text-2xl md:text-3xl lg:text-4xl text-stone-800 tracking-tight text-center">Charlemos</h1>
+</div>
+</div>
+<!-- Friendly Character Area -->
+<div class="flex flex-col items-center my-1 md:my-3 relative select-none">
+<div class="absolute -left-2 md:left-24 lg:left-48 top-4 md:top-2 w-5 h-5 md:w-7 md:h-7 rounded-full border-2 border-stone-300 opacity-60"></div>
+<div class="absolute right-4 md:right-28 lg:right-52 top-2 md:top-0 w-0 h-0 border-l-[8px] md:border-l-[12px] border-l-transparent border-r-[8px] md:border-r-[12px] border-r-transparent border-b-[14px] md:border-b-[20px] border-b-[#4DB21A]/30 transform rotate-12"></div>
+<div class="absolute right-1 md:right-20 lg:right-40 bottom-4 w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#4DB21A]/20"></div>
+<div class="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
+<div class="absolute inset-1 md:-inset-2 bg-gradient-to-tr from-sky-200 via-pink-200 to-indigo-200 rounded-full blur-xl md:blur-2xl opacity-60 animate-pulse"></div>
+<svg class="w-32 h-32 md:w-36 md:h-36 relative drop-shadow-md transition-transform hover:scale-105 duration-300" fill="none" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient gradientUnits="userSpaceOnUse" id="cloudGrad" x1="20" x2="140" y1="20" y2="140">
+<stop offset="0%" stop-color="#C5E2FF"></stop>
+<stop offset="45%" stop-color="#70B5FF"></stop>
+<stop offset="80%" stop-color="#B2A0F8"></stop>
+<stop offset="100%" stop-color="#EAA6DF"></stop>
+</linearGradient>
+<linearGradient gradientUnits="userSpaceOnUse" id="hairGrad" x1="40" x2="100" y1="30" y2="70">
+<stop offset="0%" stop-color="#F9BBE5"></stop>
+<stop offset="100%" stop-color="#93C5FD"></stop>
+</linearGradient>
+</defs>
+<circle cx="50" cy="95" fill="url(#cloudGrad)" r="32"></circle>
+<circle cx="110" cy="95" fill="url(#cloudGrad)" r="32"></circle>
+<circle cx="80" cy="70" fill="url(#cloudGrad)" r="42"></circle>
+<circle cx="80" cy="110" fill="url(#cloudGrad)" r="34"></circle>
+<path d="M58 56C58 44 76 42 88 50C100 58 108 50 106 42C92 32 66 36 58 56Z" fill="url(#hairGrad)"></path>
+<path d="M62 76C65 72 73 72 76 76" stroke="#1E293B" stroke-linecap="round" stroke-width="3.5"></path>
+<path d="M92 76C95 72 103 72 106 76" stroke="#1E293B" stroke-linecap="round" stroke-width="3.5"></path>
+<path d="M72 86C72 96 96 96 96 86Z" fill="#991B1B"></path>
+<path d="M76 91C80 88 88 88 92 91C90 95 78 95 76 91Z" fill="#F472B6"></path>
+<g class="origin-bottom-left" style="transform-origin: 35px 95px; animation: wave 2.5s infinite ease-in-out;">
+<path d="M36 96C32 90 32 75 36 70C39 65 44 68 44 75C45 68 49 68 50 74C52 69 57 71 56 77C58 74 62 76 60 83C58 92 48 102 36 96Z" fill="#88C0FF"></path>
+</g>
+<style>
+            @keyframes wave {
+              0%, 100% { transform: rotate(0deg); }
+              50% { transform: rotate(-16deg); }
+            }
+          </style>
+</svg>
+</div>
+<p class="text-stone-500 font-medium text-base md:text-lg mt-0.5 tracking-tight">
+        ¡Aquí estoy para ayudarte!
+      </p>
+</div>
+<!-- Conversation Card (Green Container) -->
+<div class="w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto bg-[#56B828] rounded-[24px] md:rounded-[28px] p-4 md:p-6 text-white beci-card-shadow mt-2 md:mt-4 relative overflow-hidden" id="main-chat-card" style="display: block; pointer-events: auto;">
+<!-- Initial Mode Selector -->
+<div class="flex items-center justify-center mb-3 md:mb-4">
+<div class="bg-[#3C8A18] p-1 rounded-full flex items-center shadow-inner max-w-[240px] w-full" id="custom-toggle-container">
+<button class="flex-1 py-1.5 px-3 text-xs md:text-sm font-semibold rounded-full bg-[#205809] text-white shadow-sm transition text-center cursor-pointer" id="tab-asistente" onclick="selectInitialMode('asistente')" type="button">
+            asistente
+          </button>
+<button class="flex-1 py-1.5 px-3 text-xs md:text-sm font-medium rounded-full text-white/90 hover:text-white transition text-center cursor-pointer" id="tab-persona" onclick="selectInitialMode('persona')" type="button">
+            persona
+          </button>
+</div>
+</div>
+<!-- Message Input pill inside green card -->
+<div class="bg-white rounded-[24px] md:rounded-full p-1.5 md:p-2 pl-4 md:pl-6 flex items-center shadow-md focus-within:ring-2 focus-within:ring-white/40 border border-transparent outline-none transition-all" id="initial-input-wrapper">
+<textarea class="w-full bg-transparent text-stone-700 placeholder-stone-400 text-sm md:text-base border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 shadow-none p-0 pr-2 font-normal resize-none overflow-y-auto leading-relaxed" id="initial-input" oninput="autoResizeTextarea(this)" onkeydown="handleInitialKeydown(event)" placeholder="Resolvemos tus dudas" rows="1" style="max-height: 120px; min-height: 24px; pointer-events: auto; height: 24px; display: block; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; border-image: none !important; outline: none !important; box-shadow: none !important;"></textarea>
+<button aria-label="Enviar mensaje" class="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#409618] hover:bg-[#347c13] active:scale-95 text-white flex items-center justify-center transition shrink-0 shadow-sm self-end mb-0.5 md:mb-0 cursor-pointer" id="initial-send-btn" onclick="handleSendInitial()" style="pointer-events: auto; display: flex;" type="button">
+<img alt="Enviar" class="w-5 h-5 md:w-6 md:h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjSt1zlVv7hvuBdXIA1ZJe_ob8-mtBfFPgObcB807py9SS2Nf8si_quLwUju_dufN7Fd6B2NREUdI2g16Ow69XT4ixOHw2YdBVJlOtvKIGvg4vHHXa0HS_RRxZNBPFz17FFvBytAx8S7gEZJJWbv7kjcAl-qlAluN_E_fFQP6S2mSm-FuialSy4fFWpbm-Gvu2oMH_9AhLVOEe_UN93xMSKFgihI3QWUf8dtvwTIc8Qd3OcS5QKr-yla78MEV8YtYRgw">
+</button>
+</div>
+</div>
+<!-- FAQ Section -->
+<section class="mt-6 md:mt-10 w-full max-w-md md:max-w-3xl lg:max-w-4xl mx-auto md:!mt-10" id="faq-section">
+<div class="flex flex-col items-center mb-4 md:mb-6">
+<h2 class="font-title font-black text-xl md:text-2xl lg:text-3xl text-stone-800 tracking-tight text-center">
+          Preguntas frecuentes
+        </h2>
+<div class="w-32 md:w-40 h-1 md:h-1.5 bg-[#F9BC57] rounded-full mt-1.5"></div>
+</div>
+<!-- FAQ Grid -->
+<div class="grid grid-cols-2 gap-3 md:gap-6 mt-4 md:mt-6 px-1 md:gap-4">
+<button class="state-transition bg-[#FBFDFB] hover:bg-white text-left px-5 py-4 md:px-7 md:py-5 rounded-[24px] md:rounded-[28px] border border-emerald-100/70 beci-card-shadow flex items-center justify-between group transition duration-300 active:scale-[0.97] shadow-sm transform hover:scale-[1.02] md:py-4 cursor-pointer" onclick="openFaqChat(0)" style="transform: rotate(-2.2deg); box-shadow: rgba(50, 110, 40, 0.08) 0px 10px 25px -5px, rgba(0, 0, 0, 0.03) 0px 4px 10px;" type="button">
+<span class="text-xs md:text-sm lg:text-[15px] font-semibold text-stone-800 leading-snug md:leading-relaxed line-clamp-3 pr-2">
+            ¿Cuánto cuesta estudiar en el SENA y cuáles son los requisitos?
+          </span>
+<div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-emerald-50/90 group-hover:bg-emerald-100 flex items-center justify-center shrink-0 ml-1 transition">
+<svg class="w-4 h-4 md:w-5 md:h-5 text-[#336926] transform group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</div>
+</button>
+<button class="state-transition bg-[#FBFDFB] hover:bg-white text-left px-5 py-4 md:px-7 md:py-5 rounded-[24px] md:rounded-[28px] border border-emerald-100/70 beci-card-shadow flex items-center justify-between group transition duration-300 active:scale-[0.97] shadow-sm transform hover:scale-[1.02] md:py-4 cursor-pointer" onclick="openFaqChat(1)" style="transform: rotate(-1.5deg); box-shadow: rgba(50, 110, 40, 0.08) 0px 10px 25px -5px, rgba(0, 0, 0, 0.03) 0px 4px 10px;" type="button">
+<span class="text-xs md:text-sm lg:text-[15px] font-semibold text-stone-800 leading-snug md:leading-relaxed line-clamp-3 pr-2">
+            ¿Qué programas o cursos ofrecen? y ¿Cómo inscribirme?
+          </span>
+<div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-emerald-50/90 group-hover:bg-emerald-100 flex items-center justify-center shrink-0 ml-1 transition">
+<svg class="w-4 h-4 md:w-5 md:h-5 text-[#336926] transform group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</div>
+</button>
+<button class="state-transition bg-[#FBFDFB] hover:bg-white text-left px-5 py-4 md:px-7 md:py-5 rounded-[24px] md:rounded-[28px] border border-emerald-100/70 beci-card-shadow flex items-center justify-between group transition duration-300 active:scale-[0.97] shadow-sm transform hover:scale-[1.02] md:py-4 cursor-pointer" onclick="openFaqChat(2)" style="transform: rotate(-2deg); box-shadow: rgba(50, 110, 40, 0.08) 0px 10px 25px -5px, rgba(0, 0, 0, 0.03) 0px 4px 10px;" type="button">
+<span class="text-xs md:text-sm lg:text-[15px] font-semibold text-stone-800 leading-snug md:leading-relaxed line-clamp-3 pr-2">
+            ¿Cómo me inscribo a los cursos?
+          </span>
+<div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-emerald-50/90 group-hover:bg-emerald-100 flex items-center justify-center shrink-0 ml-1 transition">
+<svg class="w-4 h-4 md:w-5 md:h-5 text-[#336926] transform group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</div>
+</button>
+<button class="state-transition bg-[#FBFDFB] hover:bg-white text-left px-5 py-4 md:px-7 md:py-5 rounded-[24px] md:rounded-[28px] border border-emerald-100/70 beci-card-shadow flex items-center justify-between group transition duration-300 active:scale-[0.97] shadow-sm transform hover:scale-[1.02] md:py-4 cursor-pointer" onclick="openFaqChat(3)" style="transform: rotate(-2.4deg); box-shadow: rgba(50, 110, 40, 0.08) 0px 10px 25px -5px, rgba(0, 0, 0, 0.03) 0px 4px 10px;" type="button">
+<span class="text-xs md:text-sm lg:text-[15px] font-semibold text-stone-800 leading-snug md:leading-relaxed line-clamp-3 pr-2">
+            ¿Cada cuánto tiempo tienen nuevas convocatorias?
+          </span>
+<div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-emerald-50/90 group-hover:bg-emerald-100 flex items-center justify-center shrink-0 ml-1 transition">
+<svg class="w-4 h-4 md:w-5 md:h-5 text-[#336926] transform group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</div>
+</button>
+</div>
+</section>
+</main>
+<!-- FIXED BOTTOM BAR -->
+<nav class="state-transition fixed bottom-0 left-0 right-0 z-30 bg-[#4DB21A] text-white py-2.5 px-5 md:py-4 md:px-10 lg:py-5 lg:px-16 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.06)] mx-auto" id="bottom-bar">
+<span class="text-xs md:text-base lg:text-lg font-medium tracking-wide text-white/95">
+      Enterate de todo
+    </span>
+<button class="relative overflow-hidden group bg-[#336926] hover:bg-[#28531e] active:scale-95 text-white text-xs md:text-base lg:text-lg font-bold px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-3.5 rounded-full shadow-sm transition-all duration-300 hover:shadow-[0_0_20px_#4db21a,0_0_35px_rgba(255,255,255,0.7)] hover:brightness-125 cursor-pointer" onclick="openSofiaPortal()" type="button">
+<span class="relative z-10">Chismear</span>
+<span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"></span>
+</button>
+</nav>
+</div>
+<!-- ======================================================== -->
+<!-- MODAL MENÚ HAMBURGUESA MÓVIL / TABLET (FRAME 28)         -->
+<!-- ======================================================== -->
+<div class="fixed inset-0 z-50 bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" id="mobile-nav-overlay" onclick="handleOverlayClick(event)">
+<div class="glass-menu-card relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" id="mobile-nav-modal" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: rgba(31, 38, 135, 0.08) 0px 8px 32px 0px, rgba(0, 0, 0, 0.05) 0px 4px 16px;">
+<!-- Botón Cerrar 'X' verde cómodo y accesible -->
+<button aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer" onclick="closeMobileNavMenu()" type="button">
+<svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+<!-- Opciones de Navegación con tipografía amplia, cómoda y espaciado generoso -->
+<div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4">
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
+        Ayuda
+      </a>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
+        Eventos
+      </a>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu(); openSofiaPortal();">
+        Chismear
+      </a>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
+        Estar al Tanto
+      </a>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
+        Explorar Sedes
+      </a>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
+        Explorar Programas
+      </a>
+</div>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- VISTA 2: PANTALLA COMPLETA CHAT IA (#chat-ia-view)       -->
+<!-- ======================================================== -->
+<div class="screen-view" id="chat-ia-view" style="display: none;">
+<!-- Top Navigation Header -->
+<header class="w-full bg-white border-b border-emerald-100/80 px-4 md:px-8 py-3 shrink-0 shadow-sm z-10">
+<div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
+<!-- Back Arrow to Home with complete chat reset -->
+<button aria-label="Volver al inicio" class="p-2 -ml-2 text-[#336926] hover:bg-emerald-50 rounded-full transition active:scale-90 flex items-center justify-center cursor-pointer" onclick="resetAndReturnToHome()" type="button">
+<svg class="w-6 h-6 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+</button>
+<!-- Persistent Toggle Switch: Hablar con IA vs Hablar con humano -->
+<div class="bg-emerald-50 border border-emerald-200/80 p-0.5 md:p-1 rounded-full flex items-center shadow-inner">
+<button class="py-1.5 px-3 md:px-4 text-xs md:text-sm font-bold rounded-full bg-[#336926] text-white shadow-sm transition-all duration-200 whitespace-nowrap cursor-pointer" type="button">
+          Hablar con IA
+        </button>
+<button class="py-1.5 px-3 md:px-4 text-xs md:text-sm font-medium rounded-full text-stone-600 hover:text-[#336926] transition-all duration-200 whitespace-nowrap cursor-pointer" onclick="handleManualSwitchToHuman()" type="button">
+          Hablar con humano
+        </button>
+</div>
+<div class="w-6 hidden md:block"></div>
+</div>
+</header>
+<!-- Chat IA Subheader: Identity & Status -->
+<div class="w-full bg-white/70 border-b border-emerald-100/60 px-4 md:px-8 py-2.5 shrink-0 backdrop-blur-xs">
+<div class="max-w-3xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-400 via-indigo-300 to-pink-300 flex items-center justify-center shadow-inner overflow-hidden">
+<svg class="w-5 h-5 text-indigo-800" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6.4-4.6-6.4 4.6 2.4-7.2-6-4.8h7.6z"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-title font-bold text-stone-800 text-sm md:text-base leading-tight">Beci Asistente IA</h3>
+<span class="text-[11px] md:text-xs text-[#4DB21A] font-semibold flex items-center gap-1.5 mt-0.5">
+<span class="w-2 h-2 rounded-full bg-[#4DB21A] inline-block animate-pulse"></span> Respuestas instantáneas
+          </span>
+</div>
+</div>
+<span class="text-[11px] font-medium text-stone-500 bg-stone-100 px-2.5 py-1 rounded-full">Modo IA</span>
+</div>
+</div>
+<!-- Messages container for Chat IA -->
+<div class="flex-1 overflow-y-auto px-4 md:px-6 py-6 space-y-3.5 w-full max-w-3xl mx-auto" id="messages-ia-container"></div>
+<!-- Quick Suggestion Pills (100% Opcionales y secundarias con scroll táctil suave y chips w-auto) -->
+<div class="w-full max-w-3xl mx-auto px-4 pb-2 flex items-center gap-2 overflow-x-auto touch-scroll-x flex-nowrap shrink-0">
+<button class="whitespace-nowrap flex-shrink-0 w-auto text-xs bg-emerald-50 hover:bg-emerald-100 text-[#336926] font-medium py-1.5 px-3 rounded-full border border-emerald-200/80 transition active:scale-95 shadow-2xs cursor-pointer" onclick="handlePillClickIA(this.textContent)" type="button">¿Dónde estudiar fotos?</button>
+<button class="whitespace-nowrap flex-shrink-0 w-auto text-xs bg-emerald-50 hover:bg-emerald-100 text-[#336926] font-medium py-1.5 px-3 rounded-full border border-emerald-200/80 transition active:scale-95 shadow-2xs cursor-pointer" onclick="handlePillClickIA(this.textContent)" type="button">¿Cuánto cuesta estudiar?</button>
+<button class="whitespace-nowrap flex-shrink-0 w-auto text-xs bg-emerald-50 hover:bg-emerald-100 text-[#336926] font-medium py-1.5 px-3 rounded-full border border-emerald-200/80 transition active:scale-95 shadow-2xs cursor-pointer" onclick="handlePillClickIA(this.textContent)" type="button">¿Qué programas ofrecen?</button>
+<button class="whitespace-nowrap flex-shrink-0 w-auto text-xs bg-emerald-100 hover:bg-emerald-200 text-[#205809] font-semibold py-1.5 px-3 rounded-full border border-emerald-300 transition active:scale-95 shadow-2xs cursor-pointer" onclick="handlePillClickIA('Pásame con un asesor')" type="button">Pásame con un asesor</button>
+</div>
+<!-- Bottom Input for IA: NUNCA SE BLOQUEA, SIEMPRE HABILITADO Y DISPONIBLE -->
+<div class="w-full bg-white/95 backdrop-blur-md border-t border-emerald-100/80 p-3 md:p-4 shrink-0">
+<form class="max-w-3xl mx-auto flex items-center gap-2 bg-[#F9FFFA] border border-emerald-200 rounded-[26px] px-4 md:px-5 py-1.5 md:py-2 shadow-sm focus-within:border-[#4DB21A] focus-within:ring-2 focus-within:ring-[#4DB21A]/20 transition" onsubmit="event.preventDefault(); handleSendIA();">
+<textarea autocomplete="off" class="flex-1 bg-transparent border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 shadow-none p-0 text-sm md:text-base text-stone-800 placeholder-stone-400 font-normal resize-none overflow-y-auto leading-relaxed" id="input-chat-ia" oninput="autoResizeTextarea(this)" onkeydown="handleIAKeydown(event)" placeholder="Escribe tu mensaje para Beci..." rows="1" style="max-height: 120px; min-height: 24px; pointer-events: auto; height: 24px; caret-color: transparent; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; border-image: none !important; outline: none !important; box-shadow: none !important;"></textarea>
+<button aria-label="Enviar mensaje a IA" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#4DB21A] hover:bg-[#3ea012] active:scale-95 text-white flex items-center justify-center transition shrink-0 shadow-sm self-end mb-0.5 cursor-pointer" id="btn-send-ia" onclick="handleSendIA()" type="button">
+<img alt="Enviar" class="w-4 h-4 md:w-5 md:h-5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmvAHiRpVNDgmxEcxbruC8LFc3KQ8sbE-aCR1EBKq_N3sbIcHfjUi_yEwj2YmuU-eq2SRXms1q29RCjyow8-5_jK_luwES2tkn_-jaayNhy5quZRxiR_RQmFqe8rrtm0j0rIthpRtXCTFjtZmtbA3lEonqV27RwFkaqkQyirz4hK1TyoxY0ji5bXQC6dZrRX2WFUYZZnXp3R-qH3z2yejo35oZsizErjl1bRZSJDOXsWranVvNrvm1lxqliixCHvyzWw">
+</button>
+</form>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- VISTA 3: PANTALLA COMPLETA CHAT ASESOR HUMANO            -->
+<!-- ======================================================== -->
+<div class="screen-view" id="chat-humano-view" style="display: none;">
+<!-- Top Navigation Header -->
+<header class="w-full bg-white border-b border-emerald-100/80 px-4 md:px-8 py-3 shrink-0 shadow-sm z-10">
+<div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
+<!-- Back Arrow to Home with complete chat reset -->
+<button aria-label="Volver al inicio" class="p-2 -ml-2 text-[#336926] hover:bg-emerald-50 rounded-full transition active:scale-90 flex items-center justify-center cursor-pointer" onclick="resetAndReturnToHome()" type="button">
+<svg class="w-6 h-6 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+</button>
+<!-- Persistent Toggle Switch: Hablar con IA vs Hablar con humano -->
+<div class="bg-emerald-50 border border-emerald-200/80 p-0.5 md:p-1 rounded-full flex items-center shadow-inner">
+<button class="py-1.5 px-3 md:px-4 text-xs md:text-sm font-medium rounded-full text-stone-600 hover:text-[#336926] transition-all duration-200 whitespace-nowrap cursor-pointer" onclick="handleManualSwitchToIA()" type="button">
+          Hablar con IA
+        </button>
+<button class="py-1.5 px-3 md:px-4 text-xs md:text-sm font-bold rounded-full bg-[#336926] text-white shadow-sm transition-all duration-200 whitespace-nowrap cursor-pointer" type="button">
+          Hablar con humano
+        </button>
+</div>
+<div class="w-6 hidden md:block"></div>
+</div>
+</header>
+<!-- Live human advisor institutional banner -->
+<div class="w-full bg-gradient-to-r from-emerald-700 via-[#336926] to-[#205809] text-white text-xs md:text-sm py-2 px-4 shadow-sm shrink-0">
+<div class="max-w-3xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-emerald-200 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+<span class=""><strong>Atención al Ciudadano SENA Medellín:</strong> Estás conectado con un asesor en vivo.</span>
+</div>
+<span class="hidden sm:inline-block bg-white/20 text-[11px] px-2.5 py-0.5 rounded-full font-semibold">Regional Antioquia</span>
+</div>
+</div>
+<!-- Subheader: Human Advisor identity -->
+<div class="w-full bg-white/80 border-b border-emerald-100/70 px-4 md:px-8 py-2.5 shrink-0 backdrop-blur-xs">
+<div class="max-w-3xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-md overflow-hidden ring-2 ring-emerald-300">
+<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+</div>
+<div>
+<h3 class="font-title font-bold text-stone-800 text-sm md:text-base leading-tight">Asesor humano</h3>
+<span class="text-[11px] md:text-xs text-emerald-600 font-semibold flex items-center gap-1.5 mt-0.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Asesor disponible
+          </span>
+</div>
+</div>
+<span class="text-[11px] font-medium text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-full">Atención humana</span>
+</div>
+</div>
+<!-- Messages container for Chat Humano -->
+<div class="flex-1 overflow-y-auto px-4 md:px-6 py-6 space-y-3.5 w-full max-w-3xl mx-auto" id="messages-humano-container"></div>
+<!-- Quick prompts for Human Advisor (100% Opcionales con scroll táctil suave y chips w-auto) -->
+<div class="w-full max-w-3xl mx-auto px-4 pb-2 flex items-center gap-2 overflow-x-auto touch-scroll-x flex-nowrap shrink-0">
+<button class="whitespace-nowrap flex-shrink-0 w-auto text-xs bg-emerald-50 hover:bg-emerald-100 text-[#336926] font-medium py-1.5 px-3 rounded-full border border-emerald-200/80 transition active:scale-95 shadow-2xs cursor-pointer" onclick="handlePillClickHumano(this.textContent)" type="button">Requisitos de inscripción</button>
+<button class="whitespace-nowrap flex-shrink-0 w-auto text-xs bg-emerald-50 hover:bg-emerald-100 text-[#336926] font-medium py-1.5 px-3 rounded-full border border-emerald-200/80 transition active:scale-95 shadow-2xs cursor-pointer" onclick="handlePillClickHumano(this.textContent)" type="button">Sedes en Medellín</button>
+<button class="whitespace-nowrap flex-shrink-0 w-auto text-xs bg-emerald-50 hover:bg-emerald-100 text-[#336926] font-medium py-1.5 px-3 rounded-full border border-emerald-200/80 transition active:scale-95 shadow-2xs cursor-pointer" onclick="handlePillClickHumano(this.textContent)" type="button">Horarios disponibles</button>
+</div>
+<!-- Bottom Input for Humano: NUNCA SE BLOQUEA, SIEMPRE HABILITADO Y DISPONIBLE -->
+<div class="w-full bg-white/95 backdrop-blur-md border-t border-emerald-100/80 p-3 md:p-4 shrink-0">
+<form class="max-w-3xl mx-auto flex items-center gap-2 bg-[#F9FFFA] border border-emerald-200 rounded-[26px] px-4 md:px-5 py-1.5 md:py-2 shadow-sm focus-within:border-[#4DB21A] focus-within:ring-2 focus-within:ring-[#4DB21A]/20 transition" onsubmit="event.preventDefault(); handleSendHumano();">
+<textarea autocomplete="off" class="flex-1 bg-transparent border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 shadow-none p-0 text-sm md:text-base text-stone-800 placeholder-stone-400 font-normal resize-none overflow-y-auto leading-relaxed" id="input-chat-humano" oninput="autoResizeTextarea(this)" onkeydown="handleHumanoKeydown(event)" placeholder="Escribe tu mensaje para el asesor..." rows="1" style="max-height: 120px; min-height: 24px; pointer-events: auto; height: 24px; caret-color: transparent; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; border-image: none !important; outline: none !important; box-shadow: none !important;"></textarea>
+<button aria-label="Enviar mensaje al asesor" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#336926] hover:bg-[#205809] active:scale-95 text-white flex items-center justify-center transition shrink-0 shadow-sm self-end mb-0.5 cursor-pointer" id="btn-send-humano" onclick="handleSendHumano()" type="button">
+<img alt="Enviar" class="w-4 h-4 md:w-5 md:h-5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvCQgAroO8aWVshfI_g_agjLfIMDeIPTgZcewK3Z8Y3imWjak4o6BgsqSYbU8vA8LdpW-pGqtU2Yb00yL11SY-bn9MBpLiioiULsw9qNu5JpgUqZU5kGmEjQlabDkV1YXrp2zMKtR4gHRs2Essduru8TcWah8VdVxnbuIi7uZpFrDa1kRDiOP4-wXMbn3niQ7L8uRfliKZ6qPEvJ23D4eA3pcG5p-A6lFe0tHFkgMRq4PSyKmghLIA41NxPPwg3-kIyQ">
+</button>
+</form>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- CAPA DE TRANSICIÓN ANIMADA ENTRE PANTALLAS (OVERLAY)     -->
+<!-- ======================================================== -->
+<div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="transfer-overlay">
+<div class="bg-white/95 border border-emerald-200/90 rounded-3xl p-6 sm:p-8 max-w-sm w-full mx-4 shadow-2xl flex flex-col items-center text-center transform scale-95 transition-transform duration-300" id="transfer-modal-box">
+<div class="relative w-16 h-16 mb-4 flex items-center justify-center">
+<div class="absolute inset-0 rounded-full bg-emerald-400/25 animate-ping"></div>
+<div class="w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-500 to-[#336926] text-white flex items-center justify-center shadow-lg relative z-10">
+<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+</div>
+</div>
+<h4 class="font-title font-bold text-stone-800 text-lg" id="transfer-title-text">Conectándote con un asesor humano...</h4>
+<p class="text-stone-500 text-xs mt-1 leading-relaxed" id="transfer-subtitle-text">Atención al ciudadano SENA Regional Antioquia</p>
+<div class="mt-4 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#4DB21A] animate-bounce"></span>
+<span class="w-2 h-2 rounded-full bg-[#4DB21A] animate-bounce [animation-delay:0.15s]"></span>
+<span class="w-2 h-2 rounded-full bg-[#4DB21A] animate-bounce [animation-delay:0.3s]"></span>
+</div>
+</div>
+</div>
+<script>
+  // State Management & Conversational Memory
+  let currentScreen = 'home';            // 'home', 'ia', 'humano'
+  let initialSelectedMode = 'asistente'; // Mode selected on home card
+  let pendingIATimeout = null;
+  let pendingHumanoTimeout = null;
+  let isTransitioning = false;
+
+  // Rich Context Memory for Multi-Turn Dialogues
+  const conversationContext = {
+    ia: {
+      lastTopic: null,          // 'programas', 'inscripciones', 'sedes', 'requisitos', 'costos', 'horarios'
+      lastSite: null,           // 'pedregal', 'san_juan', 'palace', 'pomar', 'calasanz', 'itagui', 'cisneros'
+      lastProgram: null,        // 'software', 'fotografia', 'confeccion', 'salud', 'cocina', 'animacion', 'gestion'
+      historyCount: 0
+    },
+    humano: {
+      lastTopic: null,
+      lastSite: null,
+      lastProgram: null,
+      historyCount: 0
+    }
+  };
+
+  // External Portal Helper
+  function openSofiaPortal() {
+    window.open('https://oferta.senasofiaplus.edu.co', '_blank');
+  }
+
+  // Mobile / Tablet Navigation Menu Open/Close
+  function openMobileNavMenu() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.remove('hidden');
+    // Force reflow for smooth CSS transitions
+    void overlay.offsetWidth;
+    overlay.classList.remove('opacity-0');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileNavMenu() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.add('opacity-0');
+    modal.classList.remove('scale-100');
+    modal.classList.add('scale-95');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target.id === 'mobile-nav-overlay') {
+      closeMobileNavMenu();
+    }
+  }
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileNavMenu();
+    }
+  });
+
+  // Sofia Plus Inscriptions CTA Button generator
+  function getSofiaInscriptionsCtaHtml() {
+    return `<div class="mt-2.5 pt-2 border-t border-gray-100"><a href="https://oferta.senasofiaplus.edu.co" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FF6C01] hover:bg-[#e05e00] text-white text-xs font-semibold rounded-full shadow-sm transition-all transform hover:scale-105"><span>Te invito a chismear un rato</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a></div>`;
+  }
+
+  // Helper to check if a message relates to inscriptions / registration / convocatorias
+  function isInscriptionRelated(rawText) {
+    if (!rawText) return false;
+    const q = normalizeQuery(rawText);
+    return /(inscri|convocatoria|convocatorias|registrar|registro|inscribirme|inscribir|postular|postularme|matricular|matricula|abren|fechas|cuando puedo|quiero estudiar|como me inscribo)/.test(q);
+  }
+
+  // Auto-resize textarea
+  function autoResizeTextarea(textarea) {
+    if (!textarea) return;
+    textarea.style.height = 'auto';
+    const newHeight = Math.max(24, Math.min(textarea.scrollHeight, 120));
+    textarea.style.height = newHeight + 'px';
+  }
+
+  // Ensure textarea remains enabled, unfrozen, editable and focused
+  function ensureInputEnabled(target) {
+    const id = target === 'ia' ? 'input-chat-ia' : (target === 'humano' ? 'input-chat-humano' : 'initial-input');
+    const btnId = target === 'ia' ? 'btn-send-ia' : (target === 'humano' ? 'btn-send-humano' : 'initial-send-btn');
+    
+    const input = document.getElementById(id);
+    if (input) {
+      input.disabled = false;
+      input.removeAttribute('disabled');
+      input.readOnly = false;
+      input.removeAttribute('readonly');
+      input.style.pointerEvents = 'auto';
+      input.style.display = 'block';
+      setTimeout(() => {
+        try {
+          input.focus();
+        } catch (e) {}
+      }, 50);
+    }
+
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      btn.disabled = false;
+      btn.removeAttribute('disabled');
+      btn.style.pointerEvents = 'auto';
+      btn.style.display = 'flex';
+    }
+
+    const card = document.getElementById('main-chat-card');
+    if (card) {
+      card.style.display = 'block';
+      card.style.pointerEvents = 'auto';
+    }
+  }
+
+  // Feedback visual para indicar que el usuario debe escribir antes de enviar
+  function shakeEmptyInput() {
+    const inputWrapper = document.getElementById('initial-input-wrapper');
+    const input = document.getElementById('initial-input');
+
+    if (inputWrapper) {
+      inputWrapper.classList.remove('animate-shake');
+      inputWrapper.classList.add('ring-2', 'ring-amber-300');
+      void inputWrapper.offsetWidth;
+      inputWrapper.classList.add('animate-shake');
+
+      setTimeout(() => {
+        inputWrapper.classList.remove('animate-shake');
+        inputWrapper.classList.remove('ring-2', 'ring-amber-300');
+      }, 600);
+    }
+
+    if (input) {
+      input.focus();
+    }
+  }
+
+  // ========================================================
+  // RESET & SESSION MANAGEMENT ENGINE
+  // ========================================================
+  function clearChatContainers() {
+    const iaContainer = document.getElementById('messages-ia-container');
+    if (iaContainer) iaContainer.innerHTML = '';
+
+    const humanoContainer = document.getElementById('messages-humano-container');
+    if (humanoContainer) humanoContainer.innerHTML = '';
+
+    const inputIa = document.getElementById('input-chat-ia');
+    if (inputIa) {
+      inputIa.value = '';
+      inputIa.disabled = false;
+      inputIa.removeAttribute('disabled');
+      inputIa.readOnly = false;
+      inputIa.removeAttribute('readonly');
+      inputIa.style.pointerEvents = 'auto';
+      inputIa.style.display = 'block';
+      autoResizeTextarea(inputIa);
+    }
+
+    const inputHumano = document.getElementById('input-chat-humano');
+    if (inputHumano) {
+      inputHumano.value = '';
+      inputHumano.disabled = false;
+      inputHumano.removeAttribute('disabled');
+      inputHumano.readOnly = false;
+      inputHumano.removeAttribute('readonly');
+      inputHumano.style.pointerEvents = 'auto';
+      inputHumano.style.display = 'block';
+      autoResizeTextarea(inputHumano);
+    }
+
+    if (pendingIATimeout) {
+      clearTimeout(pendingIATimeout);
+      pendingIATimeout = null;
+    }
+    if (pendingHumanoTimeout) {
+      clearTimeout(pendingHumanoTimeout);
+      pendingHumanoTimeout = null;
+    }
+
+    // Reset contextual memories
+    conversationContext.ia = { lastTopic: null, lastSite: null, lastProgram: null, historyCount: 0 };
+    conversationContext.humano = { lastTopic: null, lastSite: null, lastProgram: null, historyCount: 0 };
+
+    const overlay = document.getElementById('transfer-overlay');
+    const modalBox = document.getElementById('transfer-modal-box');
+    if (overlay && modalBox) {
+      overlay.classList.add('opacity-0');
+      overlay.classList.add('hidden');
+      modalBox.classList.remove('scale-100');
+      modalBox.classList.add('scale-95');
+    }
+
+    isTransitioning = false;
+  }
+
+  function resetAndReturnToHome() {
+    clearChatContainers();
+
+    const initialInput = document.getElementById('initial-input');
+    const initialBtn = document.getElementById('initial-send-btn');
+    const initialCard = document.getElementById('main-chat-card');
+
+    if (initialCard) {
+      initialCard.style.display = 'block';
+      initialCard.style.pointerEvents = 'auto';
+    }
+
+    if (initialInput) {
+      initialInput.value = '';
+      initialInput.disabled = false;
+      initialInput.removeAttribute('disabled');
+      initialInput.readOnly = false;
+      initialInput.removeAttribute('readonly');
+      initialInput.style.pointerEvents = 'auto';
+      initialInput.style.display = 'block';
+      autoResizeTextarea(initialInput);
+      setTimeout(() => {
+        try {
+          initialInput.focus();
+        } catch (e) {}
+      }, 60);
+    }
+
+    if (initialBtn) {
+      initialBtn.disabled = false;
+      initialBtn.removeAttribute('disabled');
+      initialBtn.style.pointerEvents = 'auto';
+      initialBtn.style.display = 'flex';
+    }
+
+    navigateToScreen('home');
+  }
+
+  // FAQ Data
+  const faqData = [
+    {
+      q: "¿Cuánto cuesta estudiar en el SENA y cuáles son los requisitos?",
+      a: `Todos los programas de formación en el SENA son 100% gratuitos, sin ningún costo de matrícula ni cobro por intermediarios. Para ingresar necesitas tu documento de identidad vigente, tener mínimo 14 o 16 años según el nivel del curso, haber aprobado 9° grado para técnicos o grado 11 para tecnologías, y contar con registro en Sofia Plus.${getSofiaInscriptionsCtaHtml()}`
+    },
+    {
+      q: "¿Qué programas o cursos ofrecen? y ¿Cómo inscribirme?",
+      a: `En Medellín el SENA cuenta con programas técnicos, tecnologías y cursos cortos en áreas como Desarrollo de Software, Animación Digital, Confección y Moda, Gestión Empresarial, Salud y Cocina. La inscripción se realiza directamente por el portal oficial Sofia Plus durante los periodos de convocatoria.${getSofiaInscriptionsCtaHtml()}`
+    },
+    {
+      q: "¿Cómo me inscribo a los cursos?",
+      a: `Para inscribirte ingresas a senasofiaplus.edu.co, seleccionas el programa de tu preferencia que tenga convocatorias abiertas, haces clic en Inscribirse y completas el formulario con tu documento de identidad. No requieres intermediarios ni realizar ningún pago.${getSofiaInscriptionsCtaHtml()}`
+    },
+    {
+      q: "¿Cada cuánto tiempo tienen nuevas convocatorias?",
+      a: `El SENA habilita 4 convocatorias presenciales regulares al año: en marzo, mayo, agosto y noviembre. Además, la oferta de cursos virtuales y complementarios cortos tiene inscripciones continuas todo el año a través de Sofia Plus.${getSofiaInscriptionsCtaHtml()}`
+    }
+  ];
+
+  // Landing screen mode selection
+  function selectInitialMode(mode) {
+    initialSelectedMode = mode;
+    const btnAsistente = document.getElementById('tab-asistente');
+    const btnPersona = document.getElementById('tab-persona');
+    if (mode === 'asistente') {
+      btnAsistente.className = 'flex-1 py-1.5 px-3 text-xs md:text-sm font-semibold rounded-full bg-[#205809] text-white shadow-sm transition text-center cursor-pointer';
+      btnPersona.className = 'flex-1 py-1.5 px-3 text-xs md:text-sm font-medium rounded-full text-white/90 hover:text-white transition text-center cursor-pointer';
+    } else {
+      btnPersona.className = 'flex-1 py-1.5 px-3 text-xs md:text-sm font-semibold rounded-full bg-[#205809] text-white shadow-sm transition text-center cursor-pointer';
+      btnAsistente.className = 'flex-1 py-1.5 px-3 text-xs md:text-sm font-medium rounded-full text-white/90 hover:text-white transition text-center cursor-pointer';
+    }
+  }
+
+  // ========================================================
+  // SCREEN TRANSITION ENGINE
+  // ========================================================
+  function navigateToScreen(targetScreen) {
+    const screens = {
+      home: document.getElementById('screen-home'),
+      ia: document.getElementById('chat-ia-view'),
+      humano: document.getElementById('chat-humano-view')
+    };
+
+    currentScreen = targetScreen;
+
+    if (targetScreen === 'home') {
+      screens.home.style.setProperty('display', 'flex', 'important');
+      screens.ia.style.setProperty('display', 'none', 'important');
+      screens.humano.style.setProperty('display', 'none', 'important');
+      ensureInputEnabled('home');
+    } else if (targetScreen === 'ia') {
+      screens.home.style.setProperty('display', 'none', 'important');
+      screens.ia.style.setProperty('display', 'flex', 'important');
+      screens.humano.style.setProperty('display', 'none', 'important');
+      ensureInputEnabled('ia');
+    } else if (targetScreen === 'humano') {
+      screens.home.style.setProperty('display', 'none', 'important');
+      screens.ia.style.setProperty('display', 'none', 'important');
+      screens.humano.style.setProperty('display', 'flex', 'important');
+      ensureInputEnabled('humano');
+    }
+  }
+
+  // ========================================================
+  // TOP BAR INTERACTION HANDLERS
+  // ========================================================
+  function handleManualSwitchToHuman() {
+    navigateToScreen('humano');
+    const container = document.getElementById('messages-humano-container');
+    if (container && container.children.length === 0) {
+      addMessageBubble('bot', "Hola, un gusto saludarte. Soy asesor de Atención al Ciudadano del SENA en Medellín. ¿En qué programa, sede o trámite te puedo colaborar hoy?", 'humano');
+    }
+    ensureInputEnabled('humano');
+  }
+
+  function handleManualSwitchToIA() {
+    navigateToScreen('ia');
+    const container = document.getElementById('messages-ia-container');
+    if (container && container.children.length === 0) {
+      addMessageBubble('bot', "Hola, soy Beci tu asistente virtual. Cuéntame qué carrera, sede en Medellín o duda sobre el SENA deseas resolver.", 'ia');
+    }
+    ensureInputEnabled('ia');
+  }
+
+  // ========================================================
+  // HOME / FAQ ENTRY HANDLERS
+  // ========================================================
+  function handleInitialKeydown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendInitial();
+    }
+  }
+
+  function handleSendInitial() {
+    const input = document.getElementById('initial-input');
+    const text = input ? input.value.trim() : '';
+
+    if (!text) {
+      shakeEmptyInput();
+      return;
+    }
+
+    clearChatContainers();
+
+    if (input) {
+      input.value = '';
+      autoResizeTextarea(input);
+    }
+
+    if (initialSelectedMode === 'persona') {
+      navigateToScreen('humano');
+      addMessageBubble('user', text, 'humano');
+      ensureInputEnabled('humano');
+      showTypingIndicator('humano');
+
+      setTimeout(() => {
+        removeTypingIndicator('humano');
+        const reply = generateHumanResponse(text, true);
+        addMessageBubble('bot', reply, 'humano');
+        ensureInputEnabled('humano');
+      }, 1200); // 1.2s grandmother typing state for persona
+
+    } else {
+      navigateToScreen('ia');
+      addMessageBubble('user', text, 'ia');
+      ensureInputEnabled('ia');
+
+      if (isAdvisorTransferRequest(text)) {
+        triggerHumanAdvisorTransfer();
+        return;
+      }
+
+      showTypingIndicator('ia');
+      setTimeout(() => {
+        removeTypingIndicator('ia');
+        const reply = generateIAResponse(text);
+        addMessageBubble('bot', reply, 'ia');
+        ensureInputEnabled('ia');
+      }, 500);
+    }
+  }
+
+  function openFaqChat(index) {
+    const faq = faqData[index];
+    if (!faq) return;
+
+    clearChatContainers();
+
+    navigateToScreen('ia');
+    addMessageBubble('user', faq.q, 'ia');
+    ensureInputEnabled('ia');
+    showTypingIndicator('ia');
+
+    setTimeout(() => {
+      removeTypingIndicator('ia');
+      addMessageBubble('bot', faq.a, 'ia');
+      ensureInputEnabled('ia');
+    }, 500);
+  }
+
+  // ========================================================
+  // TRANSFER LOGIC (IA -> ASESOR HUMANO)
+  // ========================================================
+  function isAdvisorTransferRequest(rawText) {
+    if (!rawText) return false;
+    const text = normalizeQuery(rawText);
+
+    if (/^(asesor|persona|humano|agente|alguien|ayuda humana|atencion humana)$/.test(text)) {
+      return true;
+    }
+
+    const triggers = [
+      "pasame con un asesor",
+      "pasame con el asesor",
+      "pasame a un asesor",
+      "pasame al asesor",
+      "pasame con un humano",
+      "pasame a un humano",
+      "pasame con una persona",
+      "pasame a una persona",
+      "pasame con alguien",
+      "pasame a alguien",
+      "pasame con un agente",
+      "pasame con gente",
+      "pasanos con un asesor",
+      "pasanos con una persona",
+      "quiero hablar con un asesor",
+      "quiero hablar con el asesor",
+      "quiero hablar con una persona",
+      "quiero hablar con un humano",
+      "quiero hablar con alguien",
+      "quiero hablar con una persona real",
+      "quiero hablar con un ser humano",
+      "quiero un asesor",
+      "quiero una persona",
+      "quiero un humano",
+      "quiero que me atienda alguien",
+      "quiero que me atienda un asesor",
+      "quiero que me atienda una persona",
+      "necesito un asesor",
+      "necesito una persona",
+      "necesito un humano",
+      "necesito hablar con alguien",
+      "necesito hablar con un asesor",
+      "necesito hablar con una persona",
+      "necesito hablar con una persona real",
+      "necesito atencion humana",
+      "un asesor por favor",
+      "un humano por favor",
+      "una persona por favor",
+      "hablar con alguien",
+      "hablar con un asesor",
+      "hablar con una persona",
+      "hablar con un humano",
+      "comunicame con un asesor",
+      "comunicame con una persona",
+      "comunicame con un agente",
+      "comunicar con un asesor",
+      "comunicar con una persona",
+      "conectar con asesor",
+      "conectar con un asesor",
+      "conectar con persona",
+      "asesor humano",
+      "persona real",
+      "alguien real",
+      "agente humano",
+      "atencion personalizada",
+      "me pasas con un asesor",
+      "me pasas con una persona",
+      "me pasas a un asesor",
+      "puedes pasarme con un asesor",
+      "puedes comunicarme con un asesor",
+      "puedes pasarme con una persona"
+    ];
+
+    return triggers.some(t => text.includes(t));
+  }
+
+  function triggerHumanAdvisorTransfer() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    addMessageBubble('bot', "Entendido, te comunico de inmediato con un asesor humano.", 'ia');
+
+    const overlay = document.getElementById('transfer-overlay');
+    const modalBox = document.getElementById('transfer-modal-box');
+    const chatIaView = document.getElementById('chat-ia-view');
+
+    setTimeout(() => {
+      if (chatIaView) {
+        chatIaView.style.setProperty('display', 'none', 'important');
+      }
+
+      if (overlay && modalBox) {
+        overlay.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          overlay.classList.remove('opacity-0');
+          modalBox.classList.remove('scale-95');
+          modalBox.classList.add('scale-100');
+        });
+      }
+    }, 800);
+
+    setTimeout(() => {
+      if (overlay && modalBox) {
+        overlay.classList.add('opacity-0');
+        modalBox.classList.remove('scale-100');
+        modalBox.classList.add('scale-95');
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+        }, 300);
+      }
+
+      navigateToScreen('humano');
+      addMessageBubble('bot', "Hola, ya estás en línea con el asesor humano de Medellín. Cuéntame con detalle qué información o programa necesitas.", 'humano');
+
+      isTransitioning = false;
+      ensureInputEnabled('humano');
+    }, 2500);
+  }
+
+  // ========================================================
+  // CHAT IA INPUT & MESSAGING ENGINE
+  // ========================================================
+  function handleIAKeydown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendIA();
+    }
+  }
+
+  function handleSendIA() {
+    if (isTransitioning) return;
+    const input = document.getElementById('input-chat-ia');
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    autoResizeTextarea(input);
+    ensureInputEnabled('ia');
+    addMessageBubble('user', text, 'ia');
+
+    if (isAdvisorTransferRequest(text)) {
+      triggerHumanAdvisorTransfer();
+      return;
+    }
+
+    showTypingIndicator('ia');
+    if (pendingIATimeout) clearTimeout(pendingIATimeout);
+    pendingIATimeout = setTimeout(() => {
+      removeTypingIndicator('ia');
+      const reply = generateIAResponse(text);
+      addMessageBubble('bot', reply, 'ia');
+      ensureInputEnabled('ia');
+    }, 550);
+  }
+
+  function handlePillClickIA(pillText) {
+    if (isTransitioning) return;
+    const input = document.getElementById('input-chat-ia');
+    if (input) {
+      input.value = pillText;
+      handleSendIA();
+    }
+  }
+
+  // ========================================================
+  // CHAT ASESOR HUMANO INPUT & MESSAGING ENGINE
+  // ========================================================
+  function handleHumanoKeydown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendHumano();
+    }
+  }
+
+  function handleSendHumano() {
+    if (isTransitioning) return;
+    const input = document.getElementById('input-chat-humano');
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    autoResizeTextarea(input);
+    ensureInputEnabled('humano');
+    addMessageBubble('user', text, 'humano');
+
+    showTypingIndicator('humano');
+    if (pendingHumanoTimeout) clearTimeout(pendingHumanoTimeout);
+    
+    // Display typing state featuring the grandmother character for 1.2 to 1.4 seconds
+    pendingHumanoTimeout = setTimeout(() => {
+      removeTypingIndicator('humano');
+      const reply = generateHumanResponse(text, false);
+      addMessageBubble('bot', reply, 'humano');
+      ensureInputEnabled('humano');
+    }, 1300);
+  }
+
+  function handlePillClickHumano(pillText) {
+    if (isTransitioning) return;
+    const input = document.getElementById('input-chat-humano');
+    if (input) {
+      input.value = pillText;
+      handleSendHumano();
+    }
+  }
+
+  // ========================================================
+  // DOM RENDERING: BUBBLES & GRANDMOTHER TYPING INDICATOR
+  // ========================================================
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+
+  // SVG representation of the friendly grandmother / Beci character for avatar & typing states
+  function getGrandmotherAvatarSvg(sizeClass = "w-7 h-7") {
+    return `<div class="${sizeClass} rounded-full bg-gradient-to-tr from-sky-200 via-pink-200 to-indigo-200 flex items-center justify-center shrink-0 overflow-hidden shadow-sm border border-emerald-100">
+      <svg class="w-full h-full p-0.5" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gmGrad" x1="20" y1="20" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#C5E2FF"/>
+            <stop offset="45%" stop-color="#70B5FF"/>
+            <stop offset="80%" stop-color="#B2A0F8"/>
+            <stop offset="100%" stop-color="#EAA6DF"/>
+          </linearGradient>
+          <linearGradient id="gmHair" x1="40" y1="30" x2="100" y2="70" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F9BBE5"/>
+            <stop offset="100%" stop-color="#93C5FD"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="95" r="28" fill="url(#gmGrad)"/>
+        <circle cx="110" cy="95" r="28" fill="url(#gmGrad)"/>
+        <circle cx="80" cy="70" r="38" fill="url(#gmGrad)"/>
+        <circle cx="80" cy="108" r="30" fill="url(#gmGrad)"/>
+        <path d="M58 56C58 44 76 42 88 50C100 58 108 50 106 42C92 32 66 36 58 56Z" fill="url(#gmHair)"/>
+        <path d="M64 76C67 73 73 73 76 76" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+        <path d="M92 76C95 73 101 73 104 76" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+        <path d="M73 88C73 96 95 96 95 88Z" fill="#991B1B"/>
+        <path d="M77 92C80 89 88 89 91 92C89 95 79 95 77 92Z" fill="#F472B6"/>
+      </svg>
+    </div>`;
+  }
+
+  function addMessageBubble(sender, textOrHtml, targetChat) {
+    const container = targetChat === 'ia'
+      ? document.getElementById('messages-ia-container')
+      : document.getElementById('messages-humano-container');
+    if (!container) return;
+
+    const bubbleWrap = document.createElement('div');
+
+    if (sender === 'user') {
+      bubbleWrap.className = 'flex items-end justify-end ml-auto max-w-[78%] md:max-w-[70%] animate-bubble';
+      const userBg = targetChat === 'ia' ? 'bg-[#4DB21A]' : 'bg-[#336926]';
+      bubbleWrap.innerHTML = `
+        <div class="w-fit inline-block ${userBg} text-white text-sm px-3.5 py-2 md:px-4 md:py-2.5 rounded-2xl rounded-tr-xs shadow-sm leading-snug break-words">
+          ${escapeHtml(textOrHtml)}
+        </div>
+      `;
+    } else {
+      bubbleWrap.className = 'flex items-start gap-2 max-w-[85%] md:max-w-[78%] animate-bubble';
+      const isIA = targetChat === 'ia';
+      const avatarHtml = isIA
+        ? `<div class="w-7 h-7 rounded-full bg-sky-200 text-sky-700 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3.5 h-3.5 text-sky-800" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6.4-4.6-6.4 4.6 2.4-7.2-6-4.8h7.6z"/></svg>
+           </div>`
+        : getGrandmotherAvatarSvg("w-7 h-7");
+
+      const name = isIA ? 'Beci Asistente' : 'Asesor humano';
+
+      bubbleWrap.innerHTML = `
+        ${avatarHtml}
+        <div class="w-fit inline-block bg-white text-stone-800 text-sm px-3.5 py-2.5 md:px-4 md:py-3 rounded-2xl rounded-tl-xs border border-emerald-50 beci-card-shadow leading-relaxed break-words">
+          <div class="text-[10px] font-bold text-stone-400 mb-1 flex items-center gap-1.5">
+            <span>${name}</span>
+            <span class="w-1.5 h-1.5 rounded-full ${isIA ? 'bg-[#4DB21A]' : 'bg-emerald-500'}"></span>
+          </div>
+          <div class="text-stone-800 text-sm leading-relaxed">${textOrHtml}</div>
+        </div>
+      `;
+    }
+
+    container.appendChild(bubbleWrap);
+    container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+  }
+
+  function showTypingIndicator(targetChat) {
+    removeTypingIndicator(targetChat);
+    const container = targetChat === 'ia'
+      ? document.getElementById('messages-ia-container')
+      : document.getElementById('messages-humano-container');
+    if (!container) return;
+
+    const typingEl = document.createElement('div');
+    typingEl.id = `typing-indicator-${targetChat}`;
+    typingEl.className = 'flex items-center gap-2 max-w-[75%] animate-bubble';
+
+    const isIA = targetChat === 'ia';
+    const avatarHtml = isIA
+      ? `<div class="w-7 h-7 rounded-full bg-sky-200 text-sky-700 flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-sky-800" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6.4-4.6-6.4 4.6 2.4-7.2-6-4.8h7.6z"/></svg>
+         </div>`
+      : getGrandmotherAvatarSvg("w-8 h-8"); // Featuring the grandmother character avatar
+
+    const typingText = isIA ? 'Beci está respondiendo...' : 'El asesor está escribiendo...';
+
+    typingEl.innerHTML = `
+      ${avatarHtml}
+      <div class="w-fit inline-block bg-white px-3.5 py-2 rounded-2xl rounded-tl-xs border border-emerald-50 beci-card-shadow flex items-center gap-2">
+        <div class="flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DB21A] animate-bounce"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DB21A] animate-bounce [animation-delay:0.18s]"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DB21A] animate-bounce [animation-delay:0.36s]"></span>
+        </div>
+        <span class="text-xs text-stone-400 font-medium ml-1">${typingText}</span>
+      </div>
+    `;
+    container.appendChild(typingEl);
+    container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+  }
+
+  function removeTypingIndicator(targetChat) {
+    const indicator = document.getElementById(`typing-indicator-${targetChat}`);
+    if (indicator) indicator.remove();
+  }
+
+  function normalizeQuery(str) {
+    if (!str) return "";
+    return str.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()¿?¡!"']/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  // ========================================================
+  // SMART & CONTEXTUAL CONVERSATION ENGINE (NATURAL & ZERO EMOJIS)
+  // ========================================================
+  function generateIAResponse(userQuery) {
+    const q = normalizeQuery(userQuery);
+    const ctx = conversationContext.ia;
+    ctx.historyCount++;
+
+    // 1. Follow-up detection: "¿Y en Pedregal?", "¿Y en San Juan?", etc.
+    const isPedregalFollowup = /^(y\s+)?(en|para|de)\s+pedregal/.test(q) || (q.includes('pedregal') && q.length < 30);
+    const isSanJuanFollowup = /^(y\s+)?(en|para|de)\s+(san juan|complejo central|centro)/.test(q) || (q.includes('san juan') && q.length < 30);
+    const isCalasanzFollowup = /^(y\s+)?(en|para|de)\s+calasanz/.test(q);
+    const isPomarFollowup = /^(y\s+)?(en|para|de)\s+(el pomar|pomar|manrique)/.test(q);
+
+    // Multi-turn context on Sede Pedregal
+    if (isPedregalFollowup) {
+      ctx.lastSite = 'pedregal';
+      return `En la sede Pedregal (Centro de Tecnología de la Manufactura Avanzada - CTMA, ubicado en la Calle 104 # 68A-120) se imparten programas de Confección, Diseño Textil, Calzado y Marroquinería, Mecánica Industrial, Mecatrónica y Análisis y Desarrollo de Software.`;
+    }
+
+    if (isSanJuanFollowup) {
+      ctx.lastSite = 'san_juan';
+      return `En el Complejo Central San Juan (Calle 44 # 45-67) se ofertan programas de Gestión Empresarial, Contabilidad y Finanzas, Mercadeo, Recursos Humanos y Asistencia Administrativa.`;
+    }
+
+    if (isCalasanzFollowup) {
+      ctx.lastSite = 'calasanz';
+      return `En la Sede Calasanz (Calle 50 # 80-25) destacan los programas de Tecnología en Análisis y Desarrollo de Software (ADSO), Redes de Datos y Gestión de Redes.`;
+    }
+
+    if (isPomarFollowup) {
+      ctx.lastSite = 'pomar';
+      return `En la sede El Pomar / Manrique se concentran cursos de Servicios Comunitarios, Belleza, Cuidado Personal y Cocina Básica.`;
+    }
+
+    // 2. Follow-up detection: "¿Y cuándo puedo inscribirme?", "¿Y cómo me inscribo?", "¿Y los requisitos?"
+    const isWhenInscribeFollowup = /^(y\s+)?(cuando|en que fecha|que dias|fechas)\s+(puedo\s+)?inscribirme/.test(q) ||
+                                  /^(y\s+)?(cuando\s+abren|cuando\s+son\s+las\s+convocatorias)/.test(q);
+
+    if (isWhenInscribeFollowup || (ctx.lastTopic === 'programas' && /(cuando|fechas|abren)/.test(q))) {
+      ctx.lastTopic = 'inscripciones';
+      return `Las convocatorias presenciales se abren cuatro veces al año: en marzo, mayo, agosto y noviembre. Los cursos virtuales tienen inscripciones permanentes.${getSofiaInscriptionsCtaHtml()}`;
+    }
+
+    // Follow-up: "¿Y cuáles son los requisitos?" or "¿Qué piden?"
+    if (/^(y\s+)?(cuales\s+son\s+los\s+requisitos|que\s+piden|que\s+necesito)/.test(q)) {
+      ctx.lastTopic = 'requisitos';
+      let subject = ctx.lastProgram ? `para ${ctx.lastProgram}` : "para ingresar";
+      return `Los requisitos ${subject} son: tener documento de identidad vigente, ser mayor de 14 años (o 16 según el programa técnico/tecnológico), haber aprobado grado 9° para carreras técnicas o grado 11 para tecnologías, y estar registrado en Sofia Plus.${getSofiaInscriptionsCtaHtml()}`;
+    }
+
+    // 3. Saludos cordiales sin emojis
+    if (/^(hola|buenas|buenos dias|buenas tardes|buenas noches|que tal|como estas|ola)/.test(q)) {
+      return "Hola, soy Beci tu asistente virtual del SENA Medellín. Cuéntame qué carrera, sede o duda deseas resolver hoy.";
+    }
+
+    // 4. Costos y Gratuidad
+    if (/(cuanto vale|cuanto cuesta|costo|precio|cobran|gratis|es gratis|matricula|pagar|pago)/.test(q)) {
+      ctx.lastTopic = 'costos';
+      return "Todos los programas del SENA son 100% gratuitos. En ninguna sede ni convocatoria se cobra dinero por inscripción, formulario ni matrícula. No utilices intermediarios.";
+    }
+
+    // 5. Sedes en Medellín
+    if (/(sedes|donde queda|donde estan|ubicacion|direcciones|centros)/.test(q)) {
+      ctx.lastTopic = 'sedes';
+      if (/(pedregal|ctma)/.test(q)) {
+        return "La sede Pedregal (CTMA) queda en la Calle 104 # 68A-120, noroccidente de Medellín. En ella se forman programas de Confección, Diseño Textil, Calzado, Mecánica y Software.";
+      }
+      if (/(san juan|centro|complejo central)/.test(q)) {
+        return "El Complejo Central San Juan se encuentra en la Calle 44 # 45-67 (Centro de Medellín), sede del Centro de Comercio y Servicios.";
+      }
+      if (/(pomar|manrique)/.test(q)) {
+        return "La sede El Pomar está ubicada en el barrio Manrique (Carrera 45 con Calle 84).";
+      }
+      if (/(calasanz)/.test(q)) {
+        return "La sede Calasanz está ubicada en la Calle 50 # 80-25, enfocada en Tecnologías de la Información y Software.";
+      }
+      return "En Medellín y el Valle de Aburrá contamos con las sedes principales: Complejo Central San Juan (Calle 44 # 45-67), Sede Pedregal CTMA (Calle 104 # 68A-120), Sede Calasanz (Calle 50 # 80-25), Sede Palacé (Centro), Sede El Pomar en Manrique e Itagüí (Confección y Moda). Si deseas una sede en particular, pregúntame por ella.";
+    }
+
+    // 6. Convocatorias / Inscripciones / Fechas
+    if (isInscriptionRelated(q)) {
+      ctx.lastTopic = 'inscripciones';
+      return `El SENA cuenta con 4 convocatorias presenciales oficiales cada año: en marzo, mayo, agosto y noviembre. La oferta virtual complementaria mantiene inscripciones abiertas todo el año. Para inscribirte de forma gratuita solo debes ingresar a la plataforma oficial Sofia Plus.${getSofiaInscriptionsCtaHtml()}`;
+    }
+
+    // 7. Software / ADSO / Sistemas
+    if (/(software|adso|programac|sistemas|programar|codigo|computadores)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Desarrollo de Software';
+      return "La Tecnología en Análisis y Desarrollo de Software (ADSO) se imparte en la sede Pedregal (CTMA), en la Sede Calasanz y en modalidad virtual. Tiene una duración de 27 meses (formación lectiva y práctica remunerada). Requisitos: ser bachiller, haber presentado la prueba Saber 11 y estar registrado en Sofia Plus.";
+    }
+
+    // 8. Fotografía / Medios Audiovisuales
+    if (/(foto|fotitos|fotografia|camara|camaras|audiovisual|video)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Fotografía y Medios Audiovisuales';
+      return "En Medellín se oferta el Técnico en Fotografía y Camarografía Digital (15 meses) y la Tecnología en Producción de Medios Audiovisuales y Animación Digital en las sedes CTMA (Pedregal) y Palacé.";
+    }
+
+    // 9. Confección, Moda y Diseño Textil
+    if (/(confeccion|moda|costura|ropa|textil|diseno de modas)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Confección y Moda';
+      return "Los programas de Confección, Patronaje y Moda se imparten principalmente en el Centro de Formación en Diseño, Confección y Moda en la sede Itagüí y en talleres especializados de la sede Pedregal.";
+    }
+
+    // 10. Salud y Enfermería
+    if (/(salud|enfermeria|auxiliar de enfermeria|farmacia|oral)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Salud';
+      return "Los programas de Salud, tales como Auxiliar en Enfermería, Servicios Farmacéuticos y Salud Oral, se forman en el Centro de Servicios de Salud ubicado en la sede Cisneros (Calle 51 # 57-70).";
+    }
+
+    // 11. Cocina y Gastronomía
+    if (/(cocina|gastronomia|alimentos|chef|panaderia|reposteria)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Cocina y Gastronomía';
+      return "El Técnico en Cocina, Panadería y Servicios de Restaurante se brinda en el Centro de Servicios y Gestión Empresarial en el Complejo Central San Juan y en sedes con talleres gastronómicos del SENA.";
+    }
+
+    // 12. Programas en general
+    if (/(programas|carreras|cursos|que ofrecen|que hay|oferta|que puedo estudiar)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      return `El SENA en Medellín cuenta con programas técnicos y tecnológicos en Desarrollo de Software, Gestión Empresarial, Animación Digital, Confección y Moda, Salud y Cocina. Todos son gratuitos y se postulan a través de Sofia Plus.${getSofiaInscriptionsCtaHtml()}`;
+    }
+
+    // 13. Requisitos en general
+    if (/(requisito|requisitos|que piden|que necesito|documentos|edad)/.test(q)) {
+      ctx.lastTopic = 'requisitos';
+      return "Los requisitos generales son: documento de identidad vigente, tener mínimo 14 o 16 años según el curso, haber aprobado 9° grado para carreras técnicas o grado 11 con examen Saber 11 para tecnologías, y registro activo en Sofia Plus.";
+    }
+
+    // 14. Agradecimientos
+    if (/(gracias|muchas gracias|mil gracias|agradezco)/.test(q)) {
+      return "Con todo el gusto. Si necesitas información de alguna sede específica en Medellín o detalles de otra carrera, con gusto te oriento.";
+    }
+
+    // Default fallback
+    return "En el SENA Medellín te podemos informar sobre programas en Desarrollo de Software, Moda, Salud, Cocina y Gestión Empresarial, así como sedes en San Juan, Pedregal o Calasanz. Dime cuál te interesa para darte detalles específicos.";
+  }
+
+  function generateHumanResponse(userQuery, isFirstMessage = false) {
+    const q = normalizeQuery(userQuery);
+    const ctx = conversationContext.humano;
+    ctx.historyCount++;
+
+    // Follow-up context handling
+    const isPedregalFollowup = /^(y\s+)?(en|para|de)\s+pedregal/.test(q) || (q.includes('pedregal') && q.length < 30);
+    const isSanJuanFollowup = /^(y\s+)?(en|para|de)\s+(san juan|complejo central|centro)/.test(q) || (q.includes('san juan') && q.length < 30);
+    const isCalasanzFollowup = /^(y\s+)?(en|para|de)\s+calasanz/.test(q);
+
+    if (isPedregalFollowup) {
+      ctx.lastSite = 'pedregal';
+      return `Con gusto te detallo: en la sede Pedregal (Calle 104 # 68A-120, CTMA) contamos con formación en Confección Industrial, Diseño Textil, Calzado, Mecatrónica y Desarrollo de Software. ¿Te gustaría saber horarios o requisitos de alguno de estos?`;
+    }
+
+    if (isSanJuanFollowup) {
+      ctx.lastSite = 'san_juan';
+      return `En el Complejo San Juan (Calle 44 # 45-67) concentramos las formaciones administrativas, financieras, contabilidad, mercadeo y servicios comerciales. ¿Cuál de esas áreas buscas?`;
+    }
+
+    if (isCalasanzFollowup) {
+      ctx.lastSite = 'calasanz';
+      return `En Calasanz (Calle 50 # 80-25) tenemos los ambientes de aprendizaje dedicados a programación de software, infraestructura de redes y tecnologías digitales.`;
+    }
+
+    // Contextual follow-up for inscriptions
+    if (/^(y\s+)?(cuando|en que fecha|que dias|fechas)\s+(puedo\s+)?inscribirme/.test(q) || (ctx.lastTopic === 'programas' && /(cuando|fechas|abren)/.test(q))) {
+      ctx.lastTopic = 'inscripciones';
+      return `Las convocatorias nacionales presenciales se habilitan cuatro veces al año, en los meses de marzo, mayo, agosto y noviembre. Te sugiero tener tu usuario activo en Sofia Plus para aplicar tan pronto inicien.${getSofiaInscriptionsCtaHtml()}`;
+    }
+
+    // First greeting or generic greetings
+    if (isFirstMessage || /^(hola|buen|buenas|que tal|como estas|ola|saludos)/.test(q)) {
+      return "Hola, un gusto saludarte. Soy asesor de Atención al Ciudadano del SENA en Medellín. Cuéntame con tranquilidad qué carrera, sede o información necesitas.";
+    }
+
+    // Costos y Gratuidad
+    if (/(cuanto vale|cuanto cuesta|costo|precio|cobran|gratis|es gratis|matricula|pagar|pago)/.test(q)) {
+      ctx.lastTopic = 'costos';
+      return "Te confirmo que en el SENA toda la formación es 100% gratuita. No se cobra matrícula, ni mensualidades, ni derechos de grado. Ningún funcionario o particular puede pedirte dinero por un cupo.";
+    }
+
+    // Inscripciones / Convocatorias
+    if (isInscriptionRelated(q)) {
+      ctx.lastTopic = 'inscripciones';
+      return `Las convocatorias regulares para formación presencial se programan en marzo, mayo, agosto y noviembre a través de la plataforma Sofia Plus. Si buscas formación virtual complementaria, hay cupos disponibles de forma constante.${getSofiaInscriptionsCtaHtml()}`;
+    }
+
+    // Software / ADSO
+    if (/(software|adso|programac|sistemas|programar)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'ADSO';
+      return "El programa de Análisis y Desarrollo de Software (ADSO) es una tecnología de 27 meses. En Medellín lo brindamos de manera presencial en Pedregal y en Calasanz, con etapa productiva remunerada en empresas aliadas. ¿En qué sector de la ciudad te encuentras ubicado?";
+    }
+
+    // Confección y Moda
+    if (/(confeccion|moda|costura|ropa|textil)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Confección y Moda';
+      return "En el sector textil y confección somos líderes con el Centro de Diseño, Confección y Moda en Itagüí y la sede de Pedregal en Medellín. Ofrecemos patronaje, corte, confección y diseño textil en diferentes jornadas.";
+    }
+
+    // Salud y Cocina
+    if (/(salud|enfermeria|farmacia)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Salud';
+      return "Para las carreras del área de la salud, como Auxiliar en Enfermería o Servicios Farmacéuticos, la formación se realiza en la sede Cisneros (Centro de Servicios de Salud). Requieren examen de admisión y esquema de vacunación completo.";
+    }
+
+    if (/(cocina|gastronomia|panaderia)/.test(q)) {
+      ctx.lastTopic = 'programas';
+      ctx.lastProgram = 'Cocina';
+      return "Contamos con técnicos en Cocina y Panadería con cocinas industriales certificadas en el Complejo San Juan. Son cursos muy solicitados con excelentes oportunidades de inserción laboral.";
+    }
+
+    // Sedes
+    if (/(sedes|donde queda|donde estan|ubicacion|pedregal|san juan|calasanz|manrique)/.test(q)) {
+      ctx.lastTopic = 'sedes';
+      return "En el área metropolitana de Medellín atendemos en el Complejo Central San Juan (Calle 44 # 45-67), la sede Pedregal CTMA (Calle 104 # 68A-120), Calasanz (Calle 50 # 80-25), Palacé en el centro, y la subsede El Pomar en Manrique. Si me indicas el barrio donde vives, te oriento sobre la sede más cercana.";
+    }
+
+    // Requisitos
+    if (/(requisito|requisitos|que piden|documentos|edad)/.test(q)) {
+      ctx.lastTopic = 'requisitos';
+      return "Los requisitos habituales son tener documento de identidad vigente, edad mínima requerida según el programa (14 años para operarios/técnicos y 16 para tecnologías), fotocopia del certificado de 9° grado para técnicos o diploma y pruebas Saber 11 para nivel tecnólogo.";
+    }
+
+    // Horarios
+    if (/(horario|horarios|jornada|manana|tarde|noche|madrugada)/.test(q)) {
+      ctx.lastTopic = 'horarios';
+      return "Disponemos de tres jornadas generales: diurna de 6:00 a.m. a 12:00 m., mixta o tarde de 12:00 m. a 6:00 p.m., y nocturna de 6:00 p.m. a 10:00 p.m. Al momento de inscribirte en Sofia Plus seleccionas el horario que mejor te convenga.";
+    }
+
+    // Despedidas y cortesía
+    if (/(gracias|muchas gracias|mil gracias|amable|chao|hasta luego|adios)/.test(q)) {
+      return "Ha sido un gusto orientarte. Recuerda que todos nuestros servicios son públicos y gratuitos. Que tengas un excelente día.";
+    }
+
+    return "Estoy atento para orientarte sobre inscripciones, sedes en Medellín o cualquiera de los programas técnicos y tecnológicos del SENA. ¿En qué otro aspecto te puedo ayudar?";
+  }
+
+  // Initialize textareas on DOM ready
+  document.addEventListener('DOMContentLoaded', () => {
+    ['initial-input', 'input-chat-ia', 'input-chat-humano'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) autoResizeTextarea(el);
+    });
+    ensureInputEnabled('home');
+  });
+</script>
+</body></html>

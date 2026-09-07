@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Bienvenida - Beci</title>
+<!-- Fonts: DM Sans and Poppins -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,800&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+    /* CSS Vanilla implementation replacing Tailwind */
+    :root {
+        --beci-blue: #062573;
+        --beci-purple: #A855F7;
+        --beci-text-purple: #A855F7;
+        --font-display: 'DM Sans', sans-serif;
+        --font-body: 'Poppins', sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html, body {
+        font-family: var(--font-body);
+        color: #000;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6wH234s27gx8X8rkJr8JCEZDhnGCor_aZVlbTQB2jVD5SY77X_Oz_kyGfK4Q5YA09GeEGBdSFT2t7M4WheXOJguZaVGBVDiVGPYTlxJaq7djZNidITXbjFGQ3nGffyht1_bZUPxNkOzdfhDLmNzGn_fUV7CMdsQf23Bm-MjX8dlMwHP654_6bWBBatkohkwUw--qGCrEfl2hZ3_mMlMIzwLXoM-rdvBSsELSaH69HrFGSHCQ0BMVmZvwCucTrsa8lYA');
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+    }
+
+    /* Layout */
+    .main-container {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+        padding: 4vh 2rem 3vh 2rem;
+    }
+
+    .content-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .left-col {
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+    }
+
+    header {
+        width: 100%;
+        margin-bottom: 2vh;
+        opacity: 0;
+    }
+
+    .logo {
+        width: 140px;
+        object-fit: contain;
+        transform: rotate(-5deg);
+        margin-left: 0;
+    }
+
+    /* Text Content */
+    .text-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5vh;
+        opacity: 0;
+        margin-top: 2vh;
+    }
+
+    .badge {
+        display: inline-block;
+        background-color: var(--beci-purple);
+        color: white;
+        padding: 0.2rem 0.8rem;
+        border-radius: 9999px;
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 0.875rem;
+        width: max-content;
+        margin-bottom: 0.5rem;
+    }
+
+    h1 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 2rem;
+        line-height: 1.1;
+        color: #000;
+    }
+
+    .text-purple { color: var(--beci-text-purple); }
+
+    p {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: #000;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        max-width: 280px;
+        line-height: 1.3;
+    }
+
+    /* Character */
+    .character-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex: 1;
+        opacity: 0;
+        pointer-events: none;
+        position: relative;
+        z-index: 1;
+        margin-bottom: -5vh; /* Drop below button level slightly if needed, or adjust to sit on button */
+    }
+
+    .character-img {
+        height: 55vh;
+        width: auto;
+        object-fit: contain;
+        transform-origin: bottom center;
+        filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+        margin-bottom: 0;
+    }
+
+    /* CTA Button */
+    .cta-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        opacity: 0;
+        z-index: 20;
+        position: relative;
+    }
+
+    .btn-primary {
+        background-color: var(--beci-blue);
+        color: white;
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 1.25rem;
+        letter-spacing: 0.025em;
+        padding: 1rem 3rem;
+        border: none;
+        border-radius: 9999px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 320px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-primary:hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .light-sweep {
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transform: skewX(-25deg);
+        transition: none;
+    }
+
+    .btn-primary:hover .light-sweep {
+        animation: sweep 0.7s ease-in-out;
+    }
+
+    /* Particles/Clouds - Simulated for animation request */
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+        z-index: 1;
+        pointer-events: none;
+    }
+    
+    .particle-triangle {
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 14px solid #F87171;
+        position: absolute;
+        z-index: 1;
+    }
+
+    /* Animations */
+    @keyframes sweep {
+        0% { left: -150%; }
+        100% { left: 150%; }
+    }
+
+    @keyframes slideLeftIn {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideUpIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInCharacter {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes characterLife {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        25% { transform: translateY(-5px) rotate(1deg); }
+        50% { transform: translateY(-8px) rotate(0deg); }
+        75% { transform: translateY(-5px) rotate(-1deg); }
+    }
+
+    @keyframes floatDeco {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* Animation Classes to be applied by JS */
+    .animate-slide-left {
+        animation: slideLeftIn 0.8s ease-out forwards;
+    }
+    
+    .animate-slide-up {
+        animation: slideUpIn 0.8s ease-out forwards;
+    }
+
+    .animate-character-in {
+        animation: slideInCharacter 1s ease-out forwards, characterLife 6s ease-in-out infinite 1s;
+    }
+
+    .anim-float { animation: floatDeco 6s infinite ease-in-out; }
+
+    /* Desktop Media Query */
+    @media (min-width: 1024px) {
+        .main-container {
+            padding: 8vh 4rem;
+        }
+
+        .content-area {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .left-col {
+            flex: 1;
+            max-width: 50%;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 250px;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            font-size: 1.25rem;
+            padding: 0.4rem 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+        }
+
+        p {
+            font-size: 1.5rem;
+            max-width: 500px;
+            margin-top: 1.5rem;
+        }
+
+        .character-container {
+            flex: 1;
+            justify-content: flex-end;
+            margin-bottom: -15vh;
+        }
+
+        .character-img {
+            height: 85vh;
+        }
+
+        .cta-container {
+            position: absolute;
+            bottom: 8vh;
+            left: 4rem;
+            width: auto;
+            justify-content: flex-start;
+        }
+
+        .btn-primary {
+            font-size: 1.5rem;
+            padding: 1.25rem 4rem;
+            max-width: 400px;
+        }
+    }
+
+</style>
+<style>@media (min-width: 1024px) { .character-img { height: 70vh !important; } }</style><style>@media (min-width: 768px) { body { background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkzXzfdC_8j2xR9ocki8R3qmxIS-SdbvhncH7ow838AmxeNtdWGThTieK6AxgeO2n2MaPmPDweH-axwcVer0VBhE7JACq6YZ7fma4noXWf62LZtTQUZLkoz7uAeUD70rikDvsFGaxq4uhIws0e2r5PovXztgQopqphinmcmPaqQw9VlytFzhh5TFTDK7KnHYyypx8LX9LOeys5maE9Rcta50n74YL-hhuEc1om-ozvyRGPu-KncShHLByOsa42IxYwMQ') !important; background-size: cover !important; background-position: center bottom !important; background-repeat: no-repeat !important; } }</style></head>
+<body style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCOKVGbytVtTkY-09XEaQkJ-boILrb6JD9ZRmcRzzeglhI8Bu9H2lCfC1awc7GYhvw-DSNVGDC8yvh7GXTsAvqqm5p6La5_l5-RIlGma554NFx8NQbWr4PQjF5ipDnt_aAUVHTGMFJfmK7I0Gr0f2oPGfslJMmgtQOK7R0SbuNTkgLq2Iy_9ru085fCS7afZ9JUYIiK6h7AQ0lZDj10iRKj2W7gy9-hwkF-611CIdEM-szd5UdZlPZtAoo-V21Y-lvcYA&quot;); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+<!-- Particles (Simulated from reference) -->
+<div class="particle anim-float" style="width: 10px; height: 10px; top: 15%; right: 15%; background-color: #F472B6; animation-delay: 0s;"></div>
+<div class="particle anim-float" style="width: 14px; height: 14px; top: 75%; left: 15%; background-color: #A78BFA; animation-delay: 2s;"></div>
+<div class="particle-triangle anim-float" style="top: 80%; left: 25%; transform: rotate(15deg); animation-delay: 1s;"></div>
+<div class="particle anim-float" style="width: 8px; height: 8px; bottom: 15%; left: 40%; background-color: #FCD34D; animation-delay: 1.5s;"></div>
+<!-- Main Layout -->
+<main class="main-container">
+<div class="content-area">
+<div class="left-col">
+<!-- Header -->
+<header class="animate-slide-left" id="header-anim">
+<img alt="Beci Logo" class="logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ4JtLqeHg_kMHqUHtmSfnYlWSt8ed5Z25Jw9g_Ybo56UJbo-j9j8jYlsZ8IfEdkMs1M7ncbjwAhBz0Wf3rh8D-x9FzxmFXyny4BlXABSL2XCLViY0knV_UhsG5tEPRdIGk6dB_3YtHWdJNZwZyRJQq2MkHArI1ImoM6RbanCw-pHUSkrTigrAhkVCGXipACMjZagCeO0zIBi4T4XYq1_pIx5pddRH8VttlsGFoGHoCKCQIWrpF9Gq8ewDXBRJC72FPA">
+</header>
+<!-- Text Content -->
+<section class="text-content animate-slide-left" id="text-anim"><h1 style="font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.1; color: #1a1b20; letter-spacing: -0.02em;" class="">¡Hola!<br>¡Bienvenido<br><span style="color: #336926;" class="">Veci!</span></h1><p style="font-family: 'Poppins', sans-serif; font-size: clamp(0.95rem, 1.6vw, 1.25rem); color: #1a1b20; font-weight: 500; margin-top: 1rem; max-width: 320px; line-height: 1.35;" class="">Exploremos juntos los Centros <strong style="color: #336926; font-weight: 700;">SENA</strong> de Antioquia y enterate de todo lo que hay.</p><svg fill="none" height="16" style="margin-top: 0.5rem; display: block;" viewBox="0 0 120 16" width="120"><path d="M2 8C20 14 40 2 60 8C80 14 100 2 118 8" stroke="#4DB21A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg></section>
+</div>
+<!-- Character -->
+<div class="character-container animate-character-in" id="char-anim">
+<img alt="Beci Character Waving" class="character-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkPpJhuUEgP4gIMyHn7jKqmUduc4m-UzgOPL39jl7pK-OaScth3_qQ5P9uRL4fp3uaaWNrfqGyfnoPkH_lN61HAWtL_higDNben14BZPd1yj6j0ycDQq1t1-0kkws3u_2srpJfOFOGFxWxJGgUS2ixakzwjTOZK14oGtTJahrax67Pue7QHmztxpXUn2Vgfccz8ytMl1JH9aH2YJR8JfnIt96uXbfYq58wl1Hsisy2s63r6TmaULsve9ZS3Qa-rWVsqg">
+</div>
+</div>
+<!-- CTA Button -->
+<div class="cta-container animate-slide-up" id="cta-anim" style="position: relative; bottom: auto; left: auto; width: 100%; justify-content: center; margin-top: -2vh;">
+<button class="btn-primary" style="max-width: 340px; width: 100%; padding: 1rem 3rem; font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 1.35rem; background: linear-gradient(135deg, #FF6C01 0%, #FF5000 100%); border-radius: 9999px; color: #ffffff; box-shadow: 0 8px 24px rgba(255, 108, 1, 0.4); border: none; cursor: pointer; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            Comenzar
+            <div class="light-sweep"></div>
+</button>
+</div>
+</main>
+<script>
+    // Pure JS Animations Initialization
+    document.addEventListener("DOMContentLoaded", () => {
+        
+        // Entry Animations
+        const header = document.getElementById('header-anim');
+        const textContent = document.getElementById('text-anim');
+        const ctaBtn = document.getElementById('cta-anim');
+        const character = document.getElementById('char-anim');
+
+        // Delay cascade for entry
+        if(header) setTimeout(() => header.classList.add('animate-slide-left'), 100);
+        if(textContent) setTimeout(() => textContent.classList.add('animate-slide-left'), 300);
+        if(ctaBtn) setTimeout(() => ctaBtn.classList.add('animate-slide-up'), 600);
+        if(character) setTimeout(() => character.classList.add('animate-character-in'), 800);
+
+    });
+</script>
+
+
+</body></html>

@@ -2,6 +2,11 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 <title>Beci - Ubícate</title>
+<!-- Leaflet (open-source map, no API key required) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- Datos de las sedes SENA (fuente única compartida con TrabajaconBeci.html) -->
+<script src="beci-data.js"></script>
 <!-- Tailwind CSS v3 -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
@@ -117,6 +122,434 @@
       pointer-events: auto;
     }
   </style>
+<style data-purpose="beci-map-component">
+    /* ==================================================
+       BECI Interactive Map Component (encapsulated)
+       All selectors are scoped under #beci-map-component
+       so they do not affect the rest of the website.
+    ================================================== */
+    #beci-map-component {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Montserrat', 'Poppins', system-ui, sans-serif;
+      color: #1e1e1e;
+      line-height: 1.4;
+    }
+    #beci-map {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #eee7dc;
+    }
+    #beci-map-component .leaflet-container {
+      width: 100%;
+      height: 100%;
+      background: #eee7dc;
+      font-family: 'Montserrat', 'Poppins', system-ui, sans-serif;
+    }
+
+    /* --- Search field --- */
+    #beci-map-component .beci-map-search {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: min(92%, 440px);
+    }
+    #beci-map-component .beci-map-search input {
+      width: 100%;
+      padding: 12px 44px 12px 18px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 6px 18px rgba(80, 60, 100, 0.14);
+      font-size: 14px;
+      color: #1e1e1e;
+      outline: none;
+      font-family: inherit;
+    }
+    #beci-map-component .beci-map-search input::placeholder {
+      color: #8b8e99;
+    }
+    #beci-map-component .beci-map-search-icon {
+      position: absolute;
+      right: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      color: #8A56AC;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+    #beci-map-component .beci-map-search-icon:hover {
+      color: #062573;
+      transform: translateY(-50%) scale(1.08);
+    }
+    #beci-map-component .beci-map-search-icon:active {
+      transform: translateY(-50%) scale(0.94);
+    }
+    #beci-map-component .beci-map-search-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* --- Floating controls --- */
+    #beci-map-component .beci-map-controls {
+      position: absolute;
+      right: 14px;
+      top: 72px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #beci-map-component .beci-map-controls button {
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      color: #111b33;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    #beci-map-component .beci-map-controls button:hover {
+      background: #fff;
+      transform: scale(1.06);
+    }
+    #beci-map-component .beci-map-controls button svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Mobile / Tablet adjustments */
+    @media (max-width: 1023px) {
+      #beci-map-component .beci-map-search {
+        top: 10px;
+      }
+      #beci-map-component .beci-map-controls {
+        top: 68px;
+        right: 10px;
+      }
+    }
+
+    /* --- Pin popup card (grows from the geographic pin) --- */
+    #beci-map-component .beci-pin-card {
+      position: absolute;
+      z-index: 950;
+      width: min(280px, calc(100vw - 56px));
+      box-sizing: border-box;
+      padding: 12px;
+      background: rgba(255, 251, 243, 0.98);
+      border-radius: 16px;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 16px 38px rgba(40, 30, 60, 0.3);
+      font-family: 'Montserrat', 'Poppins', system-ui, sans-serif;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-inner {
+      transform-origin: 50% 100%;
+      animation: beciPinCardIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    #beci-map-component .beci-pin-card.below .beci-pin-inner {
+      transform-origin: 50% 0%;
+    }
+    #beci-map-component .beci-pin-card::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: var(--pc-tail-x, 50%);
+      transform: translateX(-50%);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid rgba(255, 251, 243, 0.98);
+      filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.08));
+    }
+    #beci-map-component .beci-pin-card.below::after {
+      top: -8px;
+      bottom: auto;
+      border-top: none;
+      border-bottom: 8px solid rgba(255, 251, 243, 0.98);
+    }
+    #beci-map-component .beci-pin-card .beci-pin-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-photo {
+      width: 56px;
+      height: 56px;
+      border-radius: 13px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #ece6dd;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-info {
+      flex: 1;
+      min-width: 0;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #111b33;
+      margin: 0 0 3px;
+      line-height: 1.25;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-meta {
+      font-size: 11.5px;
+      color: #6b7280;
+      margin: 0;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-close {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.06);
+      color: #6b7280;
+      font-size: 15px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-close:hover {
+      background: rgba(0, 0, 0, 0.12);
+      color: #111b33;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 9px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    }
+    #beci-map-component .beci-pin-card .beci-pin-status .beci-pin-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-status.green .beci-pin-dot {
+      background: #23c16b;
+      box-shadow: 0 0 6px rgba(35, 193, 107, 0.55);
+    }
+    #beci-map-component .beci-pin-card .beci-pin-status.orange .beci-pin-dot {
+      background: #f59e0b;
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.55);
+    }
+    #beci-map-component .beci-pin-card .beci-pin-status-text {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #374151;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-status.green .beci-pin-status-text {
+      color: #17964f;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-status.orange .beci-pin-status-text {
+      color: #b45309;
+    }
+    #beci-map-component .beci-pin-card .beci-pin-hint {
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8A56AC;
+      text-align: right;
+    }
+    @keyframes beciPinCardIn {
+      0% { opacity: 0; transform: scale(0.25); }
+      60% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* --- Floating result cards (one above each search pin) --- */
+    #beci-map-component .beci-search-cards-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 945;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    #beci-map-component .beci-search-card {
+      position: absolute;
+      width: min(210px, 46vw);
+      box-sizing: border-box;
+      padding: 8px 10px;
+      background: rgba(255, 251, 243, 0.97);
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 24px rgba(40, 30, 60, 0.22);
+      font-family: 'Montserrat', 'Poppins', system-ui, sans-serif;
+      cursor: pointer;
+      pointer-events: auto;
+      transform: translate(-50%, -100%);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      animation: beciResultCardIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes beciResultCardIn {
+      0% { opacity: 0; transform: translate(-50%, -88%) scale(0.9); }
+      100% { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+    }
+    #beci-map-component .beci-search-card:hover {
+      box-shadow: 0 14px 30px rgba(40, 30, 60, 0.3);
+    }
+    #beci-map-component .beci-search-card .rc-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+    #beci-map-component .beci-search-card .rc-photo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #f3e9dd;
+    }
+    #beci-map-component .beci-search-card .rc-main {
+      flex: 1;
+      min-width: 0;
+    }
+    #beci-map-component .beci-search-card .rc-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #111b33;
+      line-height: 1.2;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    #beci-map-component .beci-search-card .rc-meta {
+      font-size: 10.5px;
+      color: #6b7280;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #beci-map-component .beci-search-card .rc-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.08);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    #beci-map-component .beci-search-card .rc-status .rc-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    #beci-map-component .beci-search-card .rc-status.green .rc-dot {
+      background: #23c16b;
+      box-shadow: 0 0 6px rgba(35, 193, 107, 0.55);
+    }
+    #beci-map-component .beci-search-card .rc-status.orange .rc-dot {
+      background: #f59e0b;
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.55);
+    }
+    #beci-map-component .beci-search-card .rc-status.green {
+      color: #17964f;
+    }
+    #beci-map-component .beci-search-card .rc-status.orange {
+      color: #b45309;
+    }
+
+    /* Location button active state */
+    #beci-map-component .beci-map-controls button.locating {
+      color: #062573;
+      animation: beciLocatePulse 1.1s ease-in-out infinite;
+    }
+    @keyframes beciLocatePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(6, 37, 115, 0.34); }
+      50% { box-shadow: 0 0 0 12px rgba(6, 37, 115, 0); }
+    }
+
+    /* --- Status toast --- */
+    #beci-map-component .beci-map-status {
+      position: absolute;
+      z-index: 1100;
+      top: 64px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: min(90%, 420px);
+      background: rgba(17, 27, 51, 0.92);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      transform: translate(-50%, -6px);
+      pointer-events: none;
+    }
+    #beci-map-component .beci-map-status.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* User living marker: pink circle with white ring */
+    #beci-map-component .beci-user-marker {
+      width: 26px;
+      height: 26px;
+      border: 4px solid #ffffff;
+      border-radius: 50%;
+      background: #F285C2;
+      box-shadow: 0 0 0 2px rgba(242, 133, 194, 0.4), 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    #beci-map-component .beci-user-label {
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.94);
+      color: #111b33;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      white-space: nowrap;
+    }
+    #beci-map-component .beci-user-label-anchor {
+      width: 0 !important;
+      height: 0 !important;
+    }
+    #beci-map-component .beci-user-label-anchor .beci-user-label {
+      bottom: auto;
+      top: 12px;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body class="h-screen w-full bg-background text-beciNavy antialiased select-none flex flex-col items-center justify-start overflow-hidden">
 <!-- BEGIN: Desktop Header -->
@@ -160,17 +593,6 @@
 <p class="hidden lg:block text-neutral-600 mt-2 text-base max-w-lg">
       Encuentra espacios, sedes aliadas y servicios comunitarios cerca de ti
     </p>
-</div>
-<!-- Search Bar: Responsive container -->
-<div class="w-full max-w-xl lg:max-w-2xl mt-4 md:mt-6 px-1">
-<div class="relative flex items-center w-full shadow-[0_6px_25px_rgba(0,0,0,0.06)] rounded-full transition-shadow hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]">
-<!-- Magnifying Glass Icon -->
-<div class="absolute left-4 sm:left-5 pointer-events-none flex items-center justify-center">
-<img alt="Buscar" class="w-6 h-6 object-contain pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB_mgvSVodiSOQS2OPIqTFCEU6qMKgvbpHuH3XQte7NvSLiLqIk_64CHgnRFu8tKuQYGy66Iw5ino3FTaZTvGBtHNBXcbvxC07BxYmGVtbPqWnVsgsOWUppqqebWRMKF1IVx6jVNjXTe_Ao7PMs4g6yVG02jAEzZXEAWvF2SLStkL5YqYrtKu2ukfeuxZZxPFs4drS6KYasZainoJfQQmrEHKys2Xsxdf5HkM7a4jVDDtrnMU4lRkENjJVrZbebeFw3qk" style="transform: scale(1.03); transform-origin: center center;">
-</div>
-<!-- Input Field -->
-<input class="w-full py-3.5 sm:py-4 pr-5 pl-12 sm:pl-14 bg-white/95 text-neutral-800 placeholder-neutral-400 text-[14.5px] sm:text-[15.5px] rounded-full border border-white/80 focus:outline-none focus:ring-2 focus:ring-purple-300 transition-all" id="searchInput" placeholder="Buscar espacios, sedes o instituciones..." type="text">
-</div>
 </div>
 <!-- BEGIN: Filter Pills -->
 <div class="relative group w-full max-w-xl lg:max-w-none mt-5 mb-2 px-1 overflow-hidden">
@@ -329,11 +751,27 @@
 </script>
 </div>
 <!-- END: Filter Pills -->
-<!-- BEGIN: Interactive Map Area (temporary Google Maps embed) -->
+<!-- BEGIN: Interactive Map Area -->
 <div class="flex-1 min-h-0 w-full relative overflow-hidden mt-4" data-purpose="map-embed">
-<iframe allowfullscreen class="absolute inset-0 w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Medell%C3%ADn,%20Antioquia&t=&z=13&ie=UTF8&iwloc=&output=embed" title="Mapa de espacios y sedes aliadas"></iframe>
+<!-- BEGIN: Beci Interactive Map Component (Leaflet + OpenStreetMap) -->
+<section id="beci-map-component">
+<div class="beci-map-search">
+<input id="beci-map-search-input" type="text" placeholder="¿Qué lugar quieres conocer?" autocomplete="off" aria-label="Buscar un lugar">
+<button type="button" class="beci-map-search-icon" aria-label="Buscar lugar">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+</button>
 </div>
-<!-- END: Interactive Map Area -->
+<div id="beci-map"></div>
+<div class="beci-map-controls">
+<button id="beci-location-btn" type="button" aria-label="Mi ubicación" title="Mi ubicación">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>
+</button>
+</div>
+<div id="beci-map-status" class="beci-map-status" role="status"></div>
+<div id="beci-search-cards-layer" class="beci-search-cards-layer"></div>
+</section>
+<!-- END: Beci Interactive Map Component -->
+</div>
 </main>
 <!-- END: Search Bar & Content Area -->
 <!-- BEGIN: Floating Bottom Legend Card -->
@@ -453,6 +891,1080 @@
     }
   });
 </script>
+<!-- BEGIN: Beci Interactive Map Component JS -->
+<script data-purpose="beci-map-component">
+(function () {
+  'use strict';
 
+  /* ============================================================
+     BECI Map Component — pila 100% gratuita (sin API key)
+     ------------------------------------------------------------
+     * Mapa base:        Leaflet + OpenStreetMap
+     * Lugares cercanos: Overpass API (OSM)
+     * Búsqueda ciudad:  Nominatim (OSM)
+     * Distancia a pie:  OSRM público (perfil foot)
+     * Ubicación:        Geolocalización del navegador
+     ============================================================ */
 
+  var MEDELLIN = { lat: 6.2442, lng: -75.5812 };
+  var NEARBY_RADIUS_METERS = 1500;
+  var SEARCH_RADIUS_METERS = 5000;
+  var MAX_PLACES = 15;
+  var MAX_DISTANCE_BATCH = 4;
+
+  /* Navegación de tarjetas:
+     - SENA  -> TrabajaconBeci.html  (plantilla dinámica; ?sede=<clave> o ?lugar=<nombre>)
+     - Otros -> NoTrabajaconBeci.html?lugar=<nombre>
+     Los datos de las sedes SENA vienen de beci-data.js (SENA_SEDES). */
+  var SENA_PAGE = 'TrabajaconBeci.html';
+  var REGULAR_PAGE = 'NoTrabajaconBeci.html';
+  var SENA_FALLBACK_KEY = 'complejo-norte';
+  var SENA_SEDES_DATA = (typeof window.SENA_SEDES !== 'undefined') ? window.SENA_SEDES : {};
+
+  var map;
+  var userPosition = null;
+  var currentPlaces = [];
+  var selectedPlace = null;
+  var activeCategory = 'Todos';
+  var statusTimer = null;
+  var watchId = null;
+  var lastLocationUpdate = 0;
+  var pinCard = null;
+  var resultCards = [];
+
+  var userDot, userDotInner, userLabelMarker;
+
+  var el = {
+    root: document.getElementById('beci-map-component'),
+    map: document.getElementById('beci-map'),
+    status: document.getElementById('beci-map-status'),
+    searchInput: document.getElementById('beci-map-search-input'),
+    searchIcon: document.querySelector('.beci-map-search-icon'),
+    locationBtn: document.getElementById('beci-location-btn'),
+    searchCardsLayer: document.getElementById('beci-search-cards-layer')
+  };
+
+  /* -------------------- Utilidades -------------------- */
+
+  function showStatus(message, duration) {
+    if (!el.status) return;
+    el.status.textContent = message;
+    el.status.classList.add('show');
+    if (statusTimer) clearTimeout(statusTimer);
+    statusTimer = setTimeout(function () {
+      el.status.classList.remove('show');
+    }, duration || 3500);
+  }
+
+  function haversineMeters(p1, p2) {
+    var R = 6371000;
+    var dLat = (p2.lat - p1.lat) * Math.PI / 180;
+    var dLng = (p2.lng - p1.lng) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(p1.lat * Math.PI / 180) * Math.cos(p2.lat * Math.PI / 180) *
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  function formatDistance(meters) {
+    if (!meters && meters !== 0) return '';
+    if (meters < 1000) {
+      return 'A ' + (Math.round(meters / 10) * 10) + ' m caminando';
+    }
+    return 'A ' + (meters / 1000).toFixed(1).replace('.', ',') + ' km caminando';
+  }
+
+  function includesToken(lowerText, tokens) {
+    return tokens.some(function (t) { return lowerText.indexOf(t) !== -1; });
+  }
+
+  /* SENA = VERDE. Cualquier otro lugar relevante = NARANJA. */
+  function identifySenaPlace(name) {
+    return name && name.toLowerCase().indexOf('sena') !== -1;
+  }
+
+  /* Estado mostrado en tarjetas y leyenda: SENA = VERDE, resto = NARANJA. */
+  function placeStatusInfo(place) {
+    return place.isSena
+      ? { text: 'Trabaja con Beci', colorClass: 'green' }
+      : { text: 'Aún no trabaja con Beci', colorClass: 'orange' };
+  }
+
+  /* -------------------- Categorías (píldoras de filtro) -------------------- */
+
+  var CATEGORY_RULES = [
+    { key: 'educativos', matchTag: function (tags) { return AMENITY_IN(tags, ['school', 'university', 'college', 'library', 'training']); }, re: /escuela|colegio|instituto|universidad|sena|campus|biblioteca|academia|liceo|institucion educativa/ },
+    { key: 'deportivos', matchTag: function (tags) { return LEISURE_IN(tags, ['sports_centre', 'stadium', 'fitness_centre', 'pitch', 'playground']) || !!tags['sport']; }, re: /deportivo|estadio|gimnasio|cancha|coliseo|club deportivo|polideportivo/ },
+    { key: 'tecnologia', matchTag: function () { return false; }, re: /tecnol|ciencia|innovacion|investigaci|parque tecn|ctei/ },
+    { key: 'arte', matchTag: function (tags) { return TOURISM_IN(tags, ['gallery']) || AMENITY_IN(tags, ['arts_centre']); }, re: /arte|galeria|museo|teatro/ },
+    { key: 'cultura', matchTag: function (tags) { return TOURISM_IN(tags, ['museum', 'attraction']) || AMENITY_IN(tags, ['library', 'community_centre', 'arts_centre']); }, re: /museo|galer|teatro|biblioteca|cultural|centro/ },
+    { key: 'recreativos', matchTag: function (tags) { return LEISURE_IN(tags, ['park', 'garden']) || TOURISM_IN(tags, ['theme_park', 'zoo']); }, re: /parque|recrea|zona verde|jardin|plaza|unidad deportiva/ },
+    { key: 'institucionales', matchTag: function (tags) { return tags['office'] === 'government' || AMENITY_IN(tags, ['public_building']); }, re: /alcaldia|institucion|entidad|secretaria|departamento|sede/ },
+    { key: 'salud', matchTag: function () { return false; }, re: /salud publica|hospital universitario/ }
+  ];
+
+  function AMENITY_IN(tags, list) {
+    return list.indexOf(tags['amenity'] || '') !== -1;
+  }
+  function TOURISM_IN(tags, list) {
+    return list.indexOf(tags['tourism'] || '') !== -1;
+  }
+  function LEISURE_IN(tags, list) {
+    return list.indexOf(tags['leisure'] || '') !== -1;
+  }
+
+  function getPlaceCategory(name, tags) {
+    if (identifySenaPlace(name)) return 'educativos';
+    tags = tags || {};
+    var lowerName = (name || '').toLowerCase();
+    for (var i = 0; i < CATEGORY_RULES.length; i++) {
+      var rule = CATEGORY_RULES[i];
+      if ((rule.matchTag && rule.matchTag(tags)) || rule.re.test(lowerName)) return rule.key;
+    }
+    return 'otros';
+  }
+
+  /* -------------------- Filtro de relevancia -------------------- */
+
+  var BLACKLIST_NAME = [
+    'restaurante', 'restaurant', 'cafe', 'bar', 'hotel', 'banco', 'bank',
+    'supermercado', 'supermarket', 'tienda', 'clinica', 'clínica', 'hospital',
+    'iglesia', 'church', 'gasolinera', 'farmacia', 'drogueria', 'droguería',
+    'centro comercial', 'discoteca', 'estacion de servicio', 'terminal',
+    'parqueadero', 'parking'
+  ];
+
+  function isRelevantPlace(name, tags) {
+    var lowerName = (name || '').toLowerCase();
+    if (includesToken(lowerName, BLACKLIST_NAME)) return false;
+    if (identifySenaPlace(lowerName)) return true;
+    for (var i = 0; i < CATEGORY_RULES.length; i++) {
+      var rule = CATEGORY_RULES[i];
+      if ((rule.matchTag && rule.matchTag(tags)) || rule.re.test(lowerName)) return true;
+    }
+    return false;
+  }
+
+  /* -------------------- URL de detalle -------------------- */
+
+  function normalizeText(str) {
+    return (str || '').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function matchSenaSede(name) {
+    var n = normalizeText(name);
+    if (!n) return null;
+    var keys = Object.keys(SENA_SEDES_DATA);
+    for (var k = 0; k < keys.length; k++) {
+      var sede = SENA_SEDES_DATA[keys[k]];
+      var tokens = (sede && sede.tokens) || [];
+      for (var t = 0; t < tokens.length; t++) {
+        var token = normalizeText(tokens[t]);
+        if (token && n.indexOf(token) !== -1) return keys[k];
+      }
+    }
+    return null;
+  }
+
+  /* Cada tarjeta navega SIEMPRE hacia su página de detalle. */
+  function resolveDetailUrl(name, isSena) {
+    if (isSena) {
+      var key = matchSenaSede(name);
+      if (key) return SENA_PAGE + '?sede=' + key;
+      return SENA_PAGE + '?lugar=' + encodeURIComponent(name);
+    }
+    return REGULAR_PAGE + '?lugar=' + encodeURIComponent(name);
+  }
+
+  /* -------------------- Placeholders de foto por categoría -------------------- */
+
+  var CATEGORY_EMOJI = {
+    educativos: '🎓',
+    deportivos: '⚽',
+    cultura: '🎭',
+    tecnologia: '💡',
+    arte: '🎨',
+    recreativos: '🌳',
+    institucionales: '🏛️',
+    salud: '💚',
+    otros: '📍'
+  };
+
+  var CATEGORY_LABELS = {
+    educativos: 'Escuela / Universidad',
+    deportivos: 'Deportivo',
+    tecnologia: 'Tecnología',
+    arte: 'Arte y Cultura',
+    cultura: 'Cultura',
+    recreativos: 'Parque / Recreación',
+    institucionales: 'Institución',
+    salud: 'Salud',
+    otros: 'Lugar cercano'
+  };
+
+  function getCategoryPhoto(category) {
+    var emoji = CATEGORY_EMOJI[category] || CATEGORY_EMOJI['otros'];
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150">' +
+      '<rect width="200" height="150" rx="16" fill="#f3e9dd"/>' +
+      '<text x="100" y="98" font-size="58" text-anchor="middle">' + emoji + '</text>' +
+      '</svg>';
+    return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+  }
+
+  /* -------------------- Inicialización del mapa -------------------- */
+
+  function initializeMap() {
+    if (!el.map) return;
+    if (typeof L === 'undefined') {
+      showStatus('No pudimos cargar el mapa. Revisa tu conexión.', 6000);
+      return;
+    }
+    map = L.map('beci-map', {
+      center: MEDELLIN,
+      zoom: 13,
+      zoomControl: true
+    });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    setupControls();
+    setupSearch();
+    requestUserLocation();
+
+    map.on('click', function () {
+      closePinCard();
+      clearFloatingResultCards();
+    });
+    map.on('move zoom', function () {
+      positionPinCard();
+      updateFloatingResultCards();
+    });
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (map) map.invalidateSize();
+      }, 250);
+    });
+
+    setTimeout(function () { if (map) map.invalidateSize(); }, 150);
+    setTimeout(function () { if (map) map.invalidateSize(); }, 500);
+  }
+
+  /* -------------------- Geolocalización -------------------- */
+
+  function requestUserLocation() {
+    if (!('geolocation' in navigator)) {
+      handleLocationError();
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      onLocationSuccess,
+      handleLocationError,
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+    );
+    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+    watchId = navigator.geolocation.watchPosition(
+      onLocationSuccess,
+      function () {},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+  }
+
+  function onLocationSuccess(position) {
+    var coords = { lat: position.coords.latitude, lng: position.coords.longitude };
+    var now = Date.now();
+    if (userPosition) {
+      var moved = haversineMeters(userPosition, coords);
+      if (moved < 300 && (now - lastLocationUpdate) < 20000) return;
+    }
+    userPosition = coords;
+    lastLocationUpdate = now;
+    showUserLocation(coords);
+    map.flyTo(coords, 15, { duration: 1.2 });
+    findNearbyPlaces(coords);
+  }
+
+  function handleLocationError() {
+    showStatus('No pudimos acceder a tu ubicación. Mostramos lugares cerca de Medellín.', 6000);
+    if (userPosition) {
+      showUserLocation(userPosition);
+      findNearbyPlaces(userPosition);
+      return;
+    }
+    userPosition = { lat: MEDELLIN.lat, lng: MEDELLIN.lng };
+    map.flyTo([MEDELLIN.lat, MEDELLIN.lng], 14, { duration: 1 });
+    findNearbyPlaces(MEDELLIN);
+  }
+
+  /* Marcador rosa de "Estás aquí" + etiqueta */
+  function showUserLocation(coords) {
+    if (!userDot) {
+      userDot = L.circleMarker([coords.lat, coords.lng], {
+        radius: 13,
+        color: '#ffffff',
+        weight: 4,
+        fillColor: '#F285C2',
+        fillOpacity: 1
+      }).addTo(map).setZIndexOffset(1000);
+      userDotInner = L.circleMarker([coords.lat, coords.lng], {
+        radius: 5,
+        color: '#F285C2',
+        weight: 0,
+        fillColor: '#ffffff',
+        fillOpacity: 1
+      }).addTo(map).setZIndexOffset(1000);
+      userLabelMarker = L.marker([coords.lat, coords.lng], {
+        icon: L.divIcon({
+          className: 'beci-user-label-anchor',
+          html: '<div class="beci-user-label">Estás aquí</div>',
+          iconSize: [0, 0]
+        }),
+        interactive: false,
+        keyboard: false
+      }).addTo(map).setZIndexOffset(1001);
+    } else {
+      userDot.setLatLng([coords.lat, coords.lng]);
+      userDotInner.setLatLng([coords.lat, coords.lng]);
+      userLabelMarker.setLatLng([coords.lat, coords.lng]);
+    }
+  }
+
+  /* -------------------- Buscar lugares cercanos (Overpass) -------------------- */
+
+  function findNearbyPlaces(coords) {
+    clearPlaces();
+    showStatus('Buscando lugares cercanos...');
+
+    var query =
+      '[out:json][timeout:25];(' +
+      'node["amenity"~"^(school|university|college|library|community_centre|arts_centre|training)$"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'way["amenity"~"^(school|university|college|library|community_centre|arts_centre|training)$"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'node["tourism"~"^(museum|attraction|gallery|theme_park|zoo)$"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'way["tourism"~"^(museum|attraction|gallery|theme_park|zoo)$"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'node["leisure"~"^(park|garden|sports_centre|stadium|fitness_centre|pitch|playground)$"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'way["leisure"~"^(park|garden|sports_centre|stadium|fitness_centre|pitch|playground)$"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'node["sport"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'way["sport"](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'node["name"~"sena",i](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      'way["name"~"sena",i](around:' + NEARBY_RADIUS_METERS + ',' + coords.lat + ',' + coords.lng + ');' +
+      ');out center;';
+
+    fetch('https://overpass-api.de/api/interpreter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'data=' + encodeURIComponent(query)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) { aggregateNearbyPlaces(data.elements || [], coords); })
+      .catch(function () {
+        showStatus('No pudimos consultar los lugares cercanos. Intenta de nuevo.', 6000);
+      });
+  }
+
+  function aggregateNearbyPlaces(elements, origin) {
+    var seen = {};
+    var candidates = [];
+
+    elements.forEach(function (el_) {
+      if (el_.tags && typeof el_.tags !== 'object') return;
+      var tags = el_.tags || {};
+      var name = tags.name || tags.operator || '';
+      if (!name) return;
+      if (!isRelevantPlace(name, tags)) return;
+
+      var lat, lng;
+      if (el_.type === 'node') { lat = el_.lat; lng = el_.lon; }
+      else if (el_.center || typeof el_.center === 'object') { lat = el_.center.lat; lng = el_.center.lon; }
+      else if (el_.lat) { lat = el_.lat; lng = el_.lon; }
+      if (!lat || !lng) return;
+
+      var id = el_.type + '-' + el_.id;
+      if (seen[id]) return;
+      seen[id] = true;
+
+      var meters = haversineMeters(origin, { lat: lat, lng: lng });
+      candidates.push({
+        id: id,
+        name: name,
+        latitude: lat,
+        longitude: lng,
+        tags: tags,
+        straightDistance: meters,
+        isSena: identifySenaPlace(name),
+        category: getPlaceCategory(name, tags),
+        detailUrl: resolveDetailUrl(name, identifySenaPlace(name)),
+        walkingDistance: null
+      });
+    });
+
+    candidates.sort(function (a, b) { return a.straightDistance - b.straightDistance; });
+    currentPlaces = candidates.slice(0, MAX_PLACES);
+
+    if (currentPlaces.length === 0) {
+      showStatus('No encontramos lugares relevantes cerca de tu ubicación.', 5000);
+      return;
+    }
+
+    currentPlaces.forEach(function (p) {
+      renderPlaceMarker(p);
+      calculateWalkingDistance(p);
+    });
+
+    applyCategoryFilter(activeCategory);
+  }
+
+  /* -------------------- Búsqueda por nombre (mínimo 5 km) -------------------- */
+
+  function escapeRegex(str) {
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function searchByNameViaOverpass(term) {
+    clearPlaces();
+    showStatus('Buscando "' + term + '" en un radio de ' + (SEARCH_RADIUS_METERS / 1000) + ' km...');
+    var center = userPosition || MEDELLIN;
+    var q = escapeRegex(normalizeText(term));
+    var query =
+      '[out:json][timeout:30];(' +
+      'node["name"~"' + q + '",i](around:' + SEARCH_RADIUS_METERS + ',' + center.lat + ',' + center.lng + ');' +
+      'way["name"~"' + q + '",i](around:' + SEARCH_RADIUS_METERS + ',' + center.lat + ',' + center.lng + ');' +
+      ');out center;';
+
+    return fetch('https://overpass-api.de/api/interpreter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'data=' + encodeURIComponent(query)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        aggregateNearbyPlaces(data.elements || [], center);
+        if (!currentPlaces.length) {
+          showStatus('No encontramos "' + term + '" en un radio de ' + (SEARCH_RADIUS_METERS / 1000) + ' km. Probamos en toda la ciudad...', 4500);
+          return false;
+        }
+        activeCategory = 'Todos';
+        resetSearchPills();
+        applyCategoryFilter('Todos');
+        var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
+        map.fitBounds(bounds, { padding: [40, 60], maxZoom: 16 });
+        selectPlace(currentPlaces[0]);
+        renderFloatingResultCards(currentPlaces);
+        showStatus(currentPlaces.length + ' lugares encontrados para "' + term + '".', 4500);
+        return true;
+      })
+      .catch(function () {
+        showStatus('No pudimos completar esa búsqueda. Probamos en toda la ciudad...', 4500);
+        return false;
+      });
+  }
+
+  /* -------------------- Todas las sedes SENA (beci-data.js) -------------------- */
+
+  function isSenaQuery(query) {
+    var q = normalizeText(query);
+    return !!q && q.indexOf('sena') !== -1;
+  }
+
+  function buildPlacesFromSenaData() {
+    var origin = userPosition || MEDELLIN;
+    var places = [];
+    Object.keys(SENA_SEDES_DATA).forEach(function (key) {
+      var d = SENA_SEDES_DATA[key];
+      if (!d || typeof d.lat === 'undefined') return;
+      places.push({
+        id: 'sede-' + key,
+        name: d.nombre,
+        latitude: d.lat,
+        longitude: d.lng,
+        tags: {},
+        straightDistance: haversineMeters(origin, { lat: d.lat, lng: d.lng }),
+        isSena: true,
+        category: getPlaceCategory(d.nombre, {}),
+        detailUrl: SENA_PAGE + '?sede=' + key,
+        walkingDistance: null
+      });
+    });
+    return places;
+  }
+
+  function searchSenaSedes() {
+    var places = buildPlacesFromSenaData();
+    clearPlaces();
+    currentPlaces = places;
+    if (!currentPlaces.length) {
+      showStatus('No tenemos coordenadas de las sedes del SENA todavía.', 5000);
+      return;
+    }
+    activeCategory = 'Todos';
+    resetSearchPills();
+    currentPlaces.forEach(function (p) {
+      renderPlaceMarker(p);
+      calculateWalkingDistance(p);
+    });
+    applyCategoryFilter('Todos');
+    var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
+    map.fitBounds(bounds, { padding: [50, 70], maxZoom: 15 });
+    selectPlace(currentPlaces[0]);
+    renderFloatingResultCards(currentPlaces);
+    showStatus(currentPlaces.length + ' sedes del SENA en Medellín y su área metropolitana.', 5000);
+  }
+
+  /* -------------------- Distancia caminando (OSRM) -------------------- */
+
+  function calculateWalkingDistance(place) {
+    distanceQueue.push(place);
+    pumpDistanceQueue();
+  }
+
+  var distanceQueue = [];
+  var distanceRunning = 0;
+
+  function pumpDistanceQueue() {
+    while (distanceQueue.length > 0 && distanceRunning < MAX_DISTANCE_BATCH) {
+      var place = distanceQueue.shift();
+      distanceRunning++;
+      walkingRouteForPlace(place, function () {
+        distanceRunning--;
+        pumpDistanceQueue();
+      });
+    }
+  }
+
+  function walkingRouteForPlace(place, done) {
+    if (!userPosition) { done(); return; }
+    var url = 'https://router.project-osrm.org/route/v1/foot/' +
+      place.longitude + ',' + place.latitude + ';' +
+      userPosition.lng + ',' + userPosition.lat + '?overview=false';
+    fetch(url)
+      .then(function (res) { return res.json(); })
+      .then(function (json) {
+        if (json.code === 'Ok' && json.routes && json.routes[0]) {
+          place.walkingDistance = Math.round(json.routes[0].distance);
+        } else {
+          place.walkingDistance = place.straightDistance;
+        }
+        updatePlaceCardDistance(place);
+        done();
+      })
+      .catch(function () {
+        place.walkingDistance = place.straightDistance;
+        updatePlaceCardDistance(place);
+        done();
+      });
+  }
+
+  /* -------------------- Marcadores -------------------- */
+
+  function placePinSvg(fill) {
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 40 46">' +
+      '<path d="M20 2 C12.5 2 7 8.2 7 15.6 C7 25 20 44 20 44 C20 44 33 25 33 15.6 C33 8.2 27.5 2 20 2 Z" fill="' + fill + '"/>' +
+      '<circle cx="20" cy="16" r="7" fill="#ffffff"/></svg>';
+    return L.divIcon({ html: svg, className: 'beci-place-icon', iconSize: [28, 32], iconAnchor: [14, 32] });
+  }
+
+  function renderPlaceMarker(place) {
+    var icon = placePinSvg('#8A56AC');
+    var marker = L.marker([place.latitude, place.longitude], { icon: icon, title: place.name, riseOnHover: true });
+    marker.place = place;
+    marker.on('click', function () {
+      selectPlace(place);
+      map.flyTo([place.latitude, place.longitude], Math.max(map.getZoom(), 16), { duration: 1 });
+      showPinCard(place);
+    });
+    marker._defaultIcon = icon;
+    marker.addTo(map);
+    place.marker = marker;
+  }
+
+  /* -------------------- Selección y distancia -------------------- */
+
+  function updatePlaceCardDistance(place) {
+    if (pinCard && pinCard.place === place) {
+      var pinDistance = pinCard.card.querySelector('.beci-pin-meta');
+      if (pinDistance) {
+        pinDistance.textContent = (CATEGORY_LABELS[place.category] || CATEGORY_LABELS['otros']) +
+          (place.walkingDistance !== null ? ' · ' + formatDistance(place.walkingDistance) : '');
+      }
+    }
+  }
+
+  function focusPlaceMarker(place) {
+    if (!place.marker) return;
+    resetAllPlaceMarkers();
+    selectedPlace = place;
+    place.marker.setIcon(placePinSvg('#062573'));
+    place.marker.setZIndexOffset(500);
+  }
+
+  function resetAllPlaceMarkers() {
+    currentPlaces.forEach(function (p) {
+      if (p.marker) {
+        p.marker.setIcon(p.marker._defaultIcon);
+        p.marker.setZIndexOffset(0);
+      }
+    });
+  }
+
+  function selectPlace(place) {
+    resetAllPlaceMarkers();
+    selectedPlace = place;
+    focusPlaceMarker(place);
+  }
+
+  function clearPlaces() {
+    closePinCard();
+    clearFloatingResultCards();
+    currentPlaces.forEach(function (p) {
+      if (p.marker) {
+        map.removeLayer(p.marker);
+        if (map.hasLayer(p.marker)) map.removeLayer(p.marker);
+      }
+    });
+    currentPlaces = [];
+    selectedPlace = null;
+  }
+
+  /* -------------------- Cards flotantes sobre los pines -------------------- */
+
+  function renderFloatingResultCards(places) {
+    clearFloatingResultCards();
+    if (!map || !el.searchCardsLayer) return;
+    (places || []).forEach(function (place) {
+      var info = placeStatusInfo(place);
+
+      var card = document.createElement('div');
+      card.className = 'beci-search-card';
+
+      var row = document.createElement('div');
+      row.className = 'rc-row';
+
+      var photo = document.createElement('img');
+      photo.className = 'rc-photo';
+      photo.alt = place.name;
+      photo.src = getCategoryPhoto(place.category);
+
+      var main = document.createElement('div');
+      main.className = 'rc-main';
+
+      var name = document.createElement('p');
+      name.className = 'rc-name';
+      name.textContent = place.name;
+
+      var meta = document.createElement('p');
+      meta.className = 'rc-meta';
+      meta.textContent = (CATEGORY_LABELS[place.category] || CATEGORY_LABELS['otros']) +
+        ' · ' + formatDistance(place.straightDistance);
+
+      main.appendChild(name);
+      main.appendChild(meta);
+      row.appendChild(photo);
+      row.appendChild(main);
+      card.appendChild(row);
+
+      var status = document.createElement('div');
+      status.className = 'rc-status ' + info.colorClass;
+      var dot = document.createElement('span');
+      dot.className = 'rc-dot';
+      var txt = document.createElement('span');
+      txt.textContent = info.text;
+      status.appendChild(dot);
+      status.appendChild(txt);
+      card.appendChild(status);
+
+      card.addEventListener('click', function () {
+        navigateToDetailPage(place);
+      });
+
+      el.searchCardsLayer.appendChild(card);
+      resultCards.push({ place: place, element: card });
+    });
+    updateFloatingResultCards();
+  }
+
+  function updateFloatingResultCards() {
+    if (!map || !el.searchCardsLayer) return;
+    resultCards.forEach(function (entry) {
+      var p = map.latLngToContainerPoint([entry.place.latitude, entry.place.longitude]);
+      entry.element.style.left = p.x + 'px';
+      entry.element.style.top = (p.y - 8) + 'px';
+    });
+  }
+
+  function clearFloatingResultCards() {
+    if (!el.searchCardsLayer) return;
+    resultCards.forEach(function (entry) {
+      if (entry.element && entry.element.parentNode) {
+        entry.element.parentNode.removeChild(entry.element);
+      }
+    });
+    resultCards = [];
+  }
+
+  /* -------------------- Tarjeta emergente del pin -------------------- */
+
+  function showPinCard(place) {
+    closePinCard();
+
+    var info = placeStatusInfo(place);
+
+    var card = document.createElement('div');
+    card.className = 'beci-pin-card';
+
+    var inner = document.createElement('div');
+    inner.className = 'beci-pin-inner';
+
+    var head = document.createElement('div');
+    head.className = 'beci-pin-head';
+
+    var photo = document.createElement('img');
+    photo.className = 'beci-pin-photo';
+    photo.alt = place.name;
+    photo.src = getCategoryPhoto(place.category);
+
+    var pinInfo = document.createElement('div');
+    pinInfo.className = 'beci-pin-info';
+
+    var pinName = document.createElement('p');
+    pinName.className = 'beci-pin-name';
+    pinName.textContent = place.name;
+
+    var pinMeta = document.createElement('p');
+    pinMeta.className = 'beci-pin-meta';
+    pinMeta.textContent = (CATEGORY_LABELS[place.category] || CATEGORY_LABELS['otros']) +
+      (place.walkingDistance !== null ? ' · ' + formatDistance(place.walkingDistance) : '');
+
+    pinInfo.appendChild(pinName);
+    pinInfo.appendChild(pinMeta);
+
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'beci-pin-close';
+    closeBtn.setAttribute('aria-label', 'Cerrar');
+    closeBtn.textContent = '\u00d7';
+    closeBtn.addEventListener('click', function (event) {
+      event.stopPropagation();
+      closePinCard();
+    });
+
+    head.appendChild(photo);
+    head.appendChild(pinInfo);
+    head.appendChild(closeBtn);
+
+    var statusRow = document.createElement('div');
+    statusRow.className = 'beci-pin-status ' + info.colorClass;
+    var statusDot = document.createElement('span');
+    statusDot.className = 'beci-pin-dot';
+    var statusText = document.createElement('span');
+    statusText.className = 'beci-pin-status-text';
+    statusText.textContent = info.text;
+    statusRow.appendChild(statusDot);
+    statusRow.appendChild(statusText);
+
+    var hint = document.createElement('p');
+    hint.className = 'beci-pin-hint';
+    hint.textContent = 'Ver información completa \u203a';
+
+    inner.appendChild(head);
+    inner.appendChild(statusRow);
+    inner.appendChild(hint);
+    card.appendChild(inner);
+
+    card.addEventListener('click', function () {
+      navigateToDetailPage(place);
+    });
+
+    el.root.appendChild(card);
+    pinCard = { card: card, place: place };
+    positionPinCard();
+  }
+
+  function positionPinCard() {
+    if (!pinCard || !map) return;
+    var card = pinCard.card;
+    var point = map.latLngToContainerPoint([pinCard.place.latitude, pinCard.place.longitude]);
+    var cardW = card.offsetWidth || 280;
+    var cardH = card.offsetHeight || 170;
+    var margin = 14;
+    var tailGap = 10;
+    var left = point.x - cardW / 2;
+    var top = point.y - cardH - tailGap;
+
+    var below = top < margin;
+    if (below) {
+      top = point.y + tailGap;
+      if (top + cardH > el.map.clientHeight - margin) top = el.map.clientHeight - cardH - margin;
+      card.classList.add('below');
+    } else {
+      card.classList.remove('below');
+    }
+
+    left = Math.max(margin, Math.min(left, el.map.clientWidth - cardW - margin));
+    top = Math.max(margin, top);
+
+    card.style.left = left + 'px';
+    card.style.top = top + 'px';
+    card.style.setProperty('--pc-tail-x', (point.x - left) + 'px');
+  }
+
+  function closePinCard() {
+    if (!pinCard) return;
+    if (pinCard.card && pinCard.card.parentNode) {
+      pinCard.card.parentNode.removeChild(pinCard.card);
+    }
+    pinCard = null;
+  }
+
+  /* -------------------- Filtro por categoría -------------------- */
+
+  function applyCategoryFilter(category) {
+    var isAll = category === 'Todos';
+    activeCategory = isAll ? 'Todos' : (normalizeText(category) || category.toLowerCase());
+    currentPlaces.forEach(function (p) {
+      var visible = activeCategory === 'Todos' || p.category === activeCategory;
+      if (p.marker) {
+        if (visible && !map.hasLayer(p.marker)) p.marker.addTo(map);
+        if (!visible && map.hasLayer(p.marker)) map.removeLayer(p.marker);
+      }
+    });
+  }
+
+  /* Re-centra el mapa sobre los pines visibles del filtro activo */
+  function fitMapToVisiblePlaces() {
+    if (!map) return;
+    if (activeCategory === 'Todos') {
+      var base = userPosition || MEDELLIN;
+      map.flyTo([base.lat, base.lng], userPosition ? 15 : 14, { duration: 0.9 });
+      return;
+    }
+    var visible = currentPlaces.filter(function (p) { return p.category === activeCategory; });
+    if (!visible.length) return;
+    if (visible.length === 1) {
+      map.flyTo([visible[0].latitude, visible[0].longitude], 16, { duration: 0.9 });
+    } else {
+      var bounds = L.latLngBounds(visible.map(function (p) { return [p.latitude, p.longitude]; }));
+      map.fitBounds(bounds, { padding: [40, 60] });
+    }
+  }
+
+  function setupCategoryPills() {
+    var pills = document.querySelectorAll('.category-btn');
+    if (!pills.length) return;
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        pills.forEach(function (p) {
+          p.classList.remove('active');
+          p.classList.add('bg-white/90', 'text-gray-800', 'border', 'border-gray-100');
+          p.style.background = '';
+          p.style.color = '';
+        });
+        pill.classList.add('active');
+        pill.style.background = '#062573';
+        pill.style.color = '#fff';
+        closePinCard();
+        applyCategoryFilter(pill.textContent.trim());
+        fitMapToVisiblePlaces();
+        var label = pill.textContent.trim();
+        if (label === 'Todos') {
+          showStatus('Mostrando todos los lugares cercanos.', 2200);
+        } else {
+          var visible = currentPlaces.filter(function (p) { return p.category === activeCategory; });
+          if (visible.length) {
+            selectPlace(visible[0]);
+            showPinCard(visible[0]);
+            showStatus(visible.length + ' lugar(es) de ' + label + ' cerca de ti.', 2600);
+          } else {
+            showStatus('No hay lugares de ' + label + ' cerca de ti.', 3500);
+          }
+        }
+      });
+    });
+  }
+
+  /* -------------------- Búsqueda de un lugar en Medellín (Nominatim) -------------------- */
+
+  function performSearch() {
+    if (!el.searchInput) return;
+    var query = el.searchInput.value.trim();
+    if (!query) return;
+    textSearchPlace(query);
+  }
+
+  function setupSearch() {
+    if (!el.searchInput) return;
+    el.searchInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        performSearch();
+      }
+    });
+    if (el.searchIcon) {
+      el.searchIcon.addEventListener('click', function () {
+        performSearch();
+      });
+    }
+  }
+
+  function searchLocalMatches(query) {
+    var q = normalizeText(query);
+    if (!q) return false;
+    var matches = currentPlaces.filter(function (p) {
+      return normalizeText(p.name).indexOf(q) !== -1;
+    });
+    if (!matches.length) return false;
+
+    activeCategory = 'Todos';
+    resetSearchPills();
+    applyCategoryFilter('Todos');
+
+    if (matches.length === 1) {
+      focusMapOnPlace(matches[0]);
+      selectPlace(matches[0]);
+      showPinCard(matches[0]);
+      showStatus('Encontrado en tu zona: ' + matches[0].name, 3500);
+    } else {
+      var bounds = L.latLngBounds(matches.map(function (m) { return [m.latitude, m.longitude]; }));
+      map.fitBounds(bounds, { padding: [40, 60] });
+      selectPlace(matches[0]);
+      showPinCard(matches[0]);
+      showStatus(matches.length + ' lugares coinciden con "' + query + '"', 3500);
+    }
+    return true;
+  }
+
+  function textSearchPlace(query) {
+    closePinCard();
+    clearFloatingResultCards();
+    if (isSenaQuery(query)) { searchSenaSedes(); return; }
+    if (searchLocalMatches(query)) return;
+    showStatus('Buscando "' + query + '"...');
+    searchByNameViaOverpass(query).then(function (found) {
+      if (!found) queryNominatim(query);
+    });
+  }
+
+  function queryNominatim(query) {
+    var url = 'https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=co&polygon_geojson=0&viewbox=-75.80,6.40,-75.30,6.00&bounded=0&q=' +
+      encodeURIComponent(query);
+    fetch(url, { headers: { 'Accept': 'application/json' } })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data && data.length > 0) {
+          var r = data[0];
+          var place = {
+            id: 'search-' + (r.osm_id || Date.now()),
+            name: (r.display_name || query).split(',')[0],
+            latitude: parseFloat(r.lat),
+            longitude: parseFloat(r.lon),
+            tags: {},
+            straightDistance: 0,
+            isSena: identifySenaPlace(r.display_name || query),
+            category: getPlaceCategory(r.display_name, {}),
+            detailUrl: resolveDetailUrl(r.display_name || query, identifySenaPlace(r.display_name || query)),
+            walkingDistance: null
+          };
+          handleSearchedPlace(place);
+        } else {
+          showStatus('No pudimos encontrar ese lugar. Intenta con otro nombre.', 5000);
+        }
+      })
+      .catch(function () {
+        showStatus('No pudimos encontrar ese lugar. Intenta con otro nombre.', 5000);
+      });
+  }
+
+  function handleSearchedPlace(place) {
+    currentPlaces.push(place);
+    activeCategory = 'Todos';
+    resetSearchPills();
+    applyCategoryFilter('Todos');
+    focusMapOnPlace(place);
+    renderPlaceMarker(place);
+    calculateWalkingDistance(place);
+    selectPlace(place);
+    renderFloatingResultCards([place]);
+  }
+
+  function resetSearchPills() {
+    var pills = document.querySelectorAll('.category-btn');
+    pills.forEach(function (pill) {
+      if (pill.textContent.trim() === 'Todos') {
+        pill.classList.add('active');
+        pill.classList.remove('bg-white/90', 'text-gray-800', 'border', 'border-gray-100');
+        pill.style.background = '#062573';
+        pill.style.color = '#fff';
+      } else {
+        pill.classList.remove('active');
+        pill.classList.add('bg-white/90', 'text-gray-800', 'border', 'border-gray-100');
+        pill.style.background = '';
+        pill.style.color = '';
+      }
+    });
+  }
+
+  function focusMapOnPlace(place) {
+    map.flyTo([place.latitude, place.longitude], 16, { duration: 1.4 });
+  }
+
+  /* -------------------- Navegación al detalle -------------------- */
+
+  function navigateToDetailPage(place) {
+    if (place.detailUrl) {
+      window.location.href = place.detailUrl;
+      return;
+    }
+    selectPlace(place);
+    showStatus('Pronto tendremos información detallada de ' + place.name, 3000);
+  }
+
+  /* -------------------- Controles -------------------- */
+
+  function setupControls() {
+    if (el.locationBtn) {
+      el.locationBtn.addEventListener('click', function () {
+        if (!('geolocation' in navigator)) {
+          handleLocationError();
+          return;
+        }
+        closePinCard();
+        showStatus('Buscando tu ubicación...');
+        el.locationBtn.classList.add('locating');
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            el.locationBtn.classList.remove('locating');
+            var coords = { lat: position.coords.latitude, lng: position.coords.longitude };
+            userPosition = coords;
+            lastLocationUpdate = Date.now();
+            showUserLocation(coords);
+            map.flyTo(coords, 15, { duration: 1.2 });
+            findNearbyPlaces(coords);
+            showStatus('Tu ubicación fue actualizada.', 3000);
+          },
+          function () {
+            el.locationBtn.classList.remove('locating');
+            handleLocationError();
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+        );
+      });
+    }
+    setupCategoryPills();
+  }
+
+  /* -------------------- Arranque -------------------- */
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeMap);
+  } else {
+    initializeMap();
+  }
+})();
+</script>
+<!-- END: Beci Interactive Map Component JS -->
 </body></html>
