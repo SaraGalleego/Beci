@@ -403,16 +403,28 @@
       font-family: 'Montserrat', 'Poppins', system-ui, sans-serif;
       cursor: pointer;
       pointer-events: auto;
-      transform: translate(-50%, -100%);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      animation: beciResultCardIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      /* transform is set via JS (anti-overlap positioning) */
+      transition: box-shadow 0.15s ease;
+      animation: beciResultCardIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
     @keyframes beciResultCardIn {
-      0% { opacity: 0; transform: translate(-50%, -88%) scale(0.9); }
-      100% { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+      /* Pure opacity+scale — position is managed by JS */
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
     }
     #beci-map-component .beci-search-card:hover {
       box-shadow: 0 14px 30px rgba(40, 30, 60, 0.3);
+    }
+
+    /* --- Connector lines (card → pin) --- */
+    #beci-map-component .beci-connectors-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 944; /* below cards (z-index 945) */
+      overflow: visible;
     }
     #beci-map-component .beci-search-card .rc-row {
       display: flex;
@@ -941,7 +953,8 @@
     searchInput: document.getElementById('beci-map-search-input'),
     searchIcon: document.querySelector('.beci-map-search-icon'),
     locationBtn: document.getElementById('beci-location-btn'),
-    searchCardsLayer: document.getElementById('beci-search-cards-layer')
+    searchCardsLayer: document.getElementById('beci-search-cards-layer'),
+    connectorsSvg: null
   };
 
   /* -------------------- Utilidades -------------------- */
@@ -1536,6 +1549,14 @@
   function renderFloatingResultCards(places) {
     clearFloatingResultCards();
     if (!map || !el.searchCardsLayer) return;
+
+    /* Crear la capa SVG para los connectors (debe ir primero para quedar debajo) */
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'beci-connectors-svg');
+    svg.setAttribute('aria-hidden', 'true');
+    el.searchCardsLayer.appendChild(svg);
+    el.connectorsSvg = svg;
+
     (places || []).forEach(function (place) {
       var info = placeStatusInfo(place);
 
@@ -1583,17 +1604,110 @@
       });
 
       el.searchCardsLayer.appendChild(card);
-      resultCards.push({ place: place, element: card });
+
+      /* Crear la línea SVG que conecta esta card con su pin */
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('stroke', 'rgba(138, 86, 172, 0.45)');
+      line.setAttribute('stroke-width', '1.5');
+      line.setAttribute('stroke-dasharray', '4,3');
+      line.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(line);
+
+      resultCards.push({ place: place, element: card, connector: line });
     });
     updateFloatingResultCards();
   }
 
   function updateFloatingResultCards() {
-    if (!map || !el.searchCardsLayer) return;
-    resultCards.forEach(function (entry) {
+    if (!map || !el.searchCardsLayer || !resultCards.length) return;
+
+    var MARGIN = 8;      /* Margen mínimo con los bordes del mapa */
+    var PIN_GAP = 8;     /* Gap entre borde inferior de la card y el pin */
+    var PAD = 6;         /* Padding extra al resolver colisiones */
+    var MAX_ITER = 12;   /* Máximo de iteraciones de resolución */
+
+    var mapW = el.map.clientWidth;
+    var mapH = el.map.clientHeight;
+
+    /* PASO 1 — Posición inicial: cada card centrada encima de su pin */
+    var items = resultCards.map(function (entry) {
       var p = map.latLngToContainerPoint([entry.place.latitude, entry.place.longitude]);
-      entry.element.style.left = p.x + 'px';
-      entry.element.style.top = (p.y - 8) + 'px';
+      var cardW = entry.element.offsetWidth || 210;
+      var cardH = entry.element.offsetHeight || 90;
+      return {
+        entry: entry,
+        pinX: p.x,
+        pinY: p.y,
+        x: p.x - cardW / 2,
+        y: p.y - cardH - PIN_GAP,
+        w: cardW,
+        h: cardH
+      };
+    });
+
+    /* PASO 2 — Clamp inicial al viewport */
+    items.forEach(function (item) {
+      item.x = Math.max(MARGIN, Math.min(item.x, mapW - item.w - MARGIN));
+      item.y = Math.max(MARGIN, Math.min(item.y, mapH - item.h - MARGIN));
+    });
+
+    /* PASO 3 — Resolución iterativa de colisiones */
+    for (var iter = 0; iter < MAX_ITER; iter++) {
+      var anyOverlap = false;
+      for (var i = 0; i < items.length; i++) {
+        for (var j = i + 1; j < items.length; j++) {
+          var a = items[i];
+          var b = items[j];
+
+          var overlapX = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+          var overlapY = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+
+          if (overlapX > 0 && overlapY > 0) {
+            anyOverlap = true;
+            /* Separar sobre el eje con menor solapamiento */
+            if (overlapX < overlapY) {
+              /* Separación horizontal */
+              var pushX = (overlapX / 2) + PAD;
+              if (a.pinX <= b.pinX) { a.x -= pushX; b.x += pushX; }
+              else                  { a.x += pushX; b.x -= pushX; }
+            } else {
+              /* Separación vertical (preferimos subir las cards) */
+              var pushY = (overlapY / 2) + PAD;
+              if (a.pinY <= b.pinY) { a.y -= pushY; b.y += pushY; }
+              else                  { a.y += pushY; b.y -= pushY; }
+            }
+            /* Re-clamp tras desplazamiento */
+            a.x = Math.max(MARGIN, Math.min(a.x, mapW - a.w - MARGIN));
+            a.y = Math.max(MARGIN, Math.min(a.y, mapH - a.h - MARGIN));
+            b.x = Math.max(MARGIN, Math.min(b.x, mapW - b.w - MARGIN));
+            b.y = Math.max(MARGIN, Math.min(b.y, mapH - b.h - MARGIN));
+          }
+        }
+      }
+      if (!anyOverlap) break;
+    }
+
+    /* PASO 4 — Aplicar posiciones y dibujar connectors */
+    items.forEach(function (item) {
+      item.entry.element.style.left = item.x + 'px';
+      item.entry.element.style.top  = item.y + 'px';
+
+      if (item.entry.connector) {
+        /* Línea desde el centro-inferior de la card hasta la punta del pin */
+        var cardCenterX = item.x + item.w / 2;
+        var cardBottomY = item.y + item.h;
+        item.entry.connector.setAttribute('x1', cardCenterX);
+        item.entry.connector.setAttribute('y1', cardBottomY);
+        item.entry.connector.setAttribute('x2', item.pinX);
+        item.entry.connector.setAttribute('y2', item.pinY);
+
+        /* Ocultar el connector si la card está prácticamente sobre el pin */
+        var dist = Math.sqrt(
+          Math.pow(cardCenterX - item.pinX, 2) +
+          Math.pow(cardBottomY - item.pinY, 2)
+        );
+        item.entry.connector.style.display = dist > 20 ? '' : 'none';
+      }
     });
   }
 
@@ -1604,6 +1718,11 @@
         entry.element.parentNode.removeChild(entry.element);
       }
     });
+    /* Eliminar la capa SVG de connectors */
+    if (el.connectorsSvg && el.connectorsSvg.parentNode) {
+      el.connectorsSvg.parentNode.removeChild(el.connectorsSvg);
+      el.connectorsSvg = null;
+    }
     resultCards = [];
   }
 
