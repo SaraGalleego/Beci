@@ -416,15 +416,61 @@
       box-shadow: 0 14px 30px rgba(40, 30, 60, 0.3);
     }
 
-    /* --- Connector lines (card → pin) --- */
-    #beci-map-component .beci-connectors-svg {
+    /* --- Triángulo indicador en la card (apunta a la ubicación del pin) --- */
+    #beci-map-component .beci-search-card::after {
+      content: '';
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
       pointer-events: none;
-      z-index: 944; /* below cards (z-index 945) */
-      overflow: visible;
+      z-index: 1;
+    }
+    /* Card sobre el pin -> Triángulo abajo apuntando al pin */
+    #beci-map-component .beci-search-card.tail-bottom::after,
+    #beci-map-component .beci-search-card:not([class*="tail-"])::after {
+      bottom: -8px;
+      left: var(--sc-tail-x, 50%);
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 8px solid rgba(255, 251, 243, 0.98);
+      filter: drop-shadow(0 2px 1px rgba(40, 30, 60, 0.12));
+    }
+    /* Card debajo del pin -> Triángulo arriba apuntando al pin */
+    #beci-map-component .beci-search-card.tail-top::after {
+      top: -8px;
+      left: var(--sc-tail-x, 50%);
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 8px solid rgba(255, 251, 243, 0.98);
+      filter: drop-shadow(0 -2px 1px rgba(40, 30, 60, 0.12));
+    }
+    /* Card a la derecha del pin -> Triángulo a la izquierda apuntando al pin */
+    #beci-map-component .beci-search-card.tail-left::after {
+      left: -8px;
+      top: var(--sc-tail-y, 50%);
+      transform: translateY(-50%);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 8px solid rgba(255, 251, 243, 0.98);
+      filter: drop-shadow(-2px 0 1px rgba(40, 30, 60, 0.12));
+    }
+    /* Card a la izquierda del pin -> Triángulo a la derecha apuntando al pin */
+    #beci-map-component .beci-search-card.tail-right::after {
+      right: -8px;
+      top: var(--sc-tail-y, 50%);
+      transform: translateY(-50%);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 8px solid rgba(255, 251, 243, 0.98);
+      filter: drop-shadow(2px 0 1px rgba(40, 30, 60, 0.12));
+    }
+
+    /* --- Pines de Leaflet siempre por encima de las cards flotantes --- */
+    #beci-map-component .leaflet-marker-pane {
+      z-index: 960 !important;
+    }
+    #beci-map-component .leaflet-shadow-pane {
+      z-index: 955 !important;
     }
     #beci-map-component .beci-search-card .rc-row {
       display: flex;
@@ -953,8 +999,7 @@
     searchInput: document.getElementById('beci-map-search-input'),
     searchIcon: document.querySelector('.beci-map-search-icon'),
     locationBtn: document.getElementById('beci-location-btn'),
-    searchCardsLayer: document.getElementById('beci-search-cards-layer'),
-    connectorsSvg: null
+    searchCardsLayer: document.getElementById('beci-search-cards-layer')
   };
 
   /* -------------------- Utilidades -------------------- */
@@ -1137,7 +1182,7 @@
     }
     map = L.map('beci-map', {
       center: MEDELLIN,
-      zoom: 13,
+      zoom: 12,
       zoomControl: true
     });
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1200,7 +1245,7 @@
     userPosition = coords;
     lastLocationUpdate = now;
     showUserLocation(coords);
-    map.flyTo(coords, 15, { duration: 1.2 });
+    map.flyTo(coords, 14, { duration: 1.2 });
     findNearbyPlaces(coords);
   }
 
@@ -1212,7 +1257,7 @@
       return;
     }
     userPosition = { lat: MEDELLIN.lat, lng: MEDELLIN.lng };
-    map.flyTo([MEDELLIN.lat, MEDELLIN.lng], 14, { duration: 1 });
+    map.flyTo([MEDELLIN.lat, MEDELLIN.lng], 12, { duration: 1 });
     findNearbyPlaces(MEDELLIN);
   }
 
@@ -1366,7 +1411,7 @@
         resetSearchPills();
         applyCategoryFilter('Todos');
         var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
-        map.fitBounds(bounds, { padding: [40, 60], maxZoom: 16 });
+        map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
         selectPlace(currentPlaces[0]);
         renderFloatingResultCards(currentPlaces);
         showStatus(currentPlaces.length + ' lugares encontrados para "' + term + '".', 4500);
@@ -1423,7 +1468,7 @@
     });
     applyCategoryFilter('Todos');
     var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
-    map.fitBounds(bounds, { padding: [50, 70], maxZoom: 15 });
+    map.fitBounds(bounds, { padding: [60, 60], maxZoom: 12 });
     selectPlace(currentPlaces[0]);
     renderFloatingResultCards(currentPlaces);
     showStatus(currentPlaces.length + ' sedes del SENA en Medellín y su área metropolitana.', 5000);
@@ -1488,7 +1533,7 @@
     marker.place = place;
     marker.on('click', function () {
       selectPlace(place);
-      map.flyTo([place.latitude, place.longitude], Math.max(map.getZoom(), 16), { duration: 1 });
+      map.flyTo([place.latitude, place.longitude], Math.min(Math.max(map.getZoom(), 14), 15), { duration: 1 });
       showPinCard(place);
     });
     marker._defaultIcon = icon;
@@ -1550,13 +1595,6 @@
     clearFloatingResultCards();
     if (!map || !el.searchCardsLayer) return;
 
-    /* Crear la capa SVG para los connectors (debe ir primero para quedar debajo) */
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'beci-connectors-svg');
-    svg.setAttribute('aria-hidden', 'true');
-    el.searchCardsLayer.appendChild(svg);
-    el.connectorsSvg = svg;
-
     (places || []).forEach(function (place) {
       var info = placeStatusInfo(place);
 
@@ -1604,16 +1642,7 @@
       });
 
       el.searchCardsLayer.appendChild(card);
-
-      /* Crear la línea SVG que conecta esta card con su pin */
-      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('stroke', 'rgba(138, 86, 172, 0.45)');
-      line.setAttribute('stroke-width', '1.5');
-      line.setAttribute('stroke-dasharray', '4,3');
-      line.setAttribute('stroke-linecap', 'round');
-      svg.appendChild(line);
-
-      resultCards.push({ place: place, element: card, connector: line });
+      resultCards.push({ place: place, element: card });
     });
     updateFloatingResultCards();
   }
@@ -1621,92 +1650,167 @@
   function updateFloatingResultCards() {
     if (!map || !el.searchCardsLayer || !resultCards.length) return;
 
-    var MARGIN = 8;      /* Margen mínimo con los bordes del mapa */
-    var PIN_GAP = 8;     /* Gap entre borde inferior de la card y el pin */
-    var PAD = 6;         /* Padding extra al resolver colisiones */
-    var MAX_ITER = 12;   /* Máximo de iteraciones de resolución */
-
+    var MARGIN = 10;
     var mapW = el.map.clientWidth;
     var mapH = el.map.clientHeight;
 
-    /* PASO 1 — Posición inicial: cada card centrada encima de su pin */
+    // Obtener información geométrica de cada card respecto a la pantalla
     var items = resultCards.map(function (entry) {
       var p = map.latLngToContainerPoint([entry.place.latitude, entry.place.longitude]);
-      var cardW = entry.element.offsetWidth || 210;
-      var cardH = entry.element.offsetHeight || 90;
+      var cardW = entry.element.offsetWidth || 195;
+      var cardH = entry.element.offsetHeight || 78;
       return {
         entry: entry,
         pinX: p.x,
         pinY: p.y,
-        x: p.x - cardW / 2,
-        y: p.y - cardH - PIN_GAP,
         w: cardW,
-        h: cardH
+        h: cardH,
+        x: 0,
+        y: 0,
+        dir: 'tail-bottom'
       };
     });
 
-    /* PASO 2 — Clamp inicial al viewport */
+    var placedBoxes = [];
+
+    // Para cada card, evaluar la mejor posición:
+    // 1. TOP (sobre la ubicación)
+    // 2. RIGHT (al lado derecho)
+    // 3. LEFT (al lado izquierdo)
+    // 4. BOTTOM (debajo)
+    // Garantizando siempre que la card NO tape el icono del pin (altura 32px, ancho 28px)
     items.forEach(function (item) {
-      item.x = Math.max(MARGIN, Math.min(item.x, mapW - item.w - MARGIN));
-      item.y = Math.max(MARGIN, Math.min(item.y, mapH - item.h - MARGIN));
+      var px = item.pinX;
+      var py = item.pinY;
+      var w = item.w;
+      var h = item.h;
+
+      var slots = [
+        {
+          name: 'top',
+          dir: 'tail-bottom',
+          x: px - w / 2,
+          y: py - 42 - h, // Card bottom queda a py - 42 (10px arriba del pin que mide 32px)
+          basePenalty: 0
+        },
+        {
+          name: 'right',
+          dir: 'tail-left',
+          x: px + 26,      // Card left queda a 12px a la derecha del borde del pin (ancho 28px)
+          y: py - 16 - h / 2,
+          basePenalty: 15
+        },
+        {
+          name: 'left',
+          dir: 'tail-right',
+          x: px - 26 - w,  // Card right queda a 12px a la izquierda del borde del pin
+          y: py - 16 - h / 2,
+          basePenalty: 25
+        },
+        {
+          name: 'bottom',
+          dir: 'tail-top',
+          x: px - w / 2,
+          y: py + 12,      // Card top queda 12px debajo de la punta del pin
+          basePenalty: 45
+        }
+      ];
+
+      var bestSlot = null;
+      var bestScore = Infinity;
+
+      slots.forEach(function (slot) {
+        var sx = slot.x;
+        var sy = slot.y;
+        var score = slot.basePenalty;
+
+        // Penalización si se sale de la pantalla
+        if (sx < MARGIN) score += (MARGIN - sx) * 6 + 300;
+        if (sx + w > mapW - MARGIN) score += ((sx + w) - (mapW - MARGIN)) * 6 + 300;
+        if (sy < MARGIN) score += (MARGIN - sy) * 6 + 400;
+        if (sy + h > mapH - MARGIN) score += ((sy + h) - (mapH - MARGIN)) * 6 + 400;
+
+        // Penalización si se solapa con cards ya ubicadas
+        placedBoxes.forEach(function (pb) {
+          var ox = Math.min(sx + w, pb.x + pb.w) - Math.max(sx, pb.x);
+          var oy = Math.min(sy + h, pb.y + pb.h) - Math.max(sy, pb.y);
+          if (ox > 0 && oy > 0) {
+            score += (ox * oy) * 3 + 1200;
+          }
+        });
+
+        // Penalización si tapa otros pines en el mapa
+        items.forEach(function (other) {
+          if (other === item) return;
+          var pinL = other.pinX - 16;
+          var pinR = other.pinX + 16;
+          var pinT = other.pinY - 34;
+          var pinB = other.pinY + 4;
+          var ox = Math.min(sx + w, pinR) - Math.max(sx, pinL);
+          var oy = Math.min(sy + h, pinB) - Math.max(sy, pinT);
+          if (ox > 0 && oy > 0) {
+            score += 1000;
+          }
+        });
+
+        if (score < bestScore) {
+          bestScore = score;
+          bestSlot = slot;
+        }
+      });
+
+      item.x = bestSlot.x;
+      item.y = bestSlot.y;
+      item.dir = bestSlot.dir;
+
+      placedBoxes.push({ x: item.x, y: item.y, w: w, h: h });
     });
 
-    /* PASO 3 — Resolución iterativa de colisiones */
-    for (var iter = 0; iter < MAX_ITER; iter++) {
-      var anyOverlap = false;
+    // Relajación suave en caso de que aún exista alguna coincidencia parcial
+    for (var iter = 0; iter < 8; iter++) {
+      var moved = false;
       for (var i = 0; i < items.length; i++) {
         for (var j = i + 1; j < items.length; j++) {
           var a = items[i];
           var b = items[j];
-
-          var overlapX = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
-          var overlapY = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
-
-          if (overlapX > 0 && overlapY > 0) {
-            anyOverlap = true;
-            /* Separar sobre el eje con menor solapamiento */
-            if (overlapX < overlapY) {
-              /* Separación horizontal */
-              var pushX = (overlapX / 2) + PAD;
-              if (a.pinX <= b.pinX) { a.x -= pushX; b.x += pushX; }
-              else                  { a.x += pushX; b.x -= pushX; }
+          var ox = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+          var oy = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+          if (ox > 0 && oy > 0) {
+            moved = true;
+            if (ox < oy) {
+              var shiftX = (ox / 2) + 5;
+              if (a.pinX <= b.pinX) { a.x -= shiftX; b.x += shiftX; }
+              else { a.x += shiftX; b.x -= shiftX; }
             } else {
-              /* Separación vertical (preferimos subir las cards) */
-              var pushY = (overlapY / 2) + PAD;
-              if (a.pinY <= b.pinY) { a.y -= pushY; b.y += pushY; }
-              else                  { a.y += pushY; b.y -= pushY; }
+              var shiftY = (oy / 2) + 5;
+              if (a.pinY <= b.pinY) { a.y -= shiftY; b.y += shiftY; }
+              else { a.y += shiftY; b.y -= shiftY; }
             }
-            /* Re-clamp tras desplazamiento */
-            a.x = Math.max(MARGIN, Math.min(a.x, mapW - a.w - MARGIN));
-            a.y = Math.max(MARGIN, Math.min(a.y, mapH - a.h - MARGIN));
-            b.x = Math.max(MARGIN, Math.min(b.x, mapW - b.w - MARGIN));
-            b.y = Math.max(MARGIN, Math.min(b.y, mapH - b.h - MARGIN));
           }
         }
       }
-      if (!anyOverlap) break;
+      if (!moved) break;
     }
 
-    /* PASO 4 — Aplicar posiciones y dibujar connectors */
+    // Aplicar coordenadas finales, clases y cálculo exacto del triangulito indicador
     items.forEach(function (item) {
-      item.entry.element.style.left = item.x + 'px';
-      item.entry.element.style.top  = item.y + 'px';
+      item.x = Math.max(MARGIN, Math.min(item.x, mapW - item.w - MARGIN));
+      item.y = Math.max(MARGIN, Math.min(item.y, mapH - item.h - MARGIN));
 
-      if (item.entry.connector) {
-        /* Línea desde el centro-inferior de la card hasta la punta del pin */
-        var cardCenterX = item.x + item.w / 2;
-        var cardBottomY = item.y + item.h;
-        item.entry.connector.setAttribute('x1', cardCenterX);
-        item.entry.connector.setAttribute('y1', cardBottomY);
-        item.entry.connector.setAttribute('x2', item.pinX);
-        item.entry.connector.setAttribute('y2', item.pinY);
+      var elCard = item.entry.element;
+      elCard.style.left = item.x + 'px';
+      elCard.style.top  = item.y + 'px';
 
-        /* Ocultar el connector si la card está prácticamente sobre el pin */
-        var dist = Math.sqrt(
-          Math.pow(cardCenterX - item.pinX, 2) +
-          Math.pow(cardBottomY - item.pinY, 2)
-        );
-        item.entry.connector.style.display = dist > 20 ? '' : 'none';
+      elCard.classList.remove('tail-bottom', 'tail-top', 'tail-left', 'tail-right');
+      elCard.classList.add(item.dir);
+
+      // Posicionar el triangulito para que apunte exactamente al pin
+      if (item.dir === 'tail-bottom' || item.dir === 'tail-top') {
+        var tailX = Math.max(16, Math.min(item.w - 16, item.pinX - item.x));
+        elCard.style.setProperty('--sc-tail-x', tailX + 'px');
+      } else {
+        var tailY = Math.max(14, Math.min(item.h - 14, (item.pinY - 16) - item.y));
+        elCard.style.setProperty('--sc-tail-y', tailY + 'px');
       }
     });
   }
@@ -1718,11 +1822,6 @@
         entry.element.parentNode.removeChild(entry.element);
       }
     });
-    /* Eliminar la capa SVG de connectors */
-    if (el.connectorsSvg && el.connectorsSvg.parentNode) {
-      el.connectorsSvg.parentNode.removeChild(el.connectorsSvg);
-      el.connectorsSvg = null;
-    }
     resultCards = [];
   }
 
@@ -1859,16 +1958,16 @@
     if (!map) return;
     if (activeCategory === 'Todos') {
       var base = userPosition || MEDELLIN;
-      map.flyTo([base.lat, base.lng], userPosition ? 15 : 14, { duration: 0.9 });
+      map.flyTo([base.lat, base.lng], userPosition ? 14 : 12, { duration: 0.9 });
       return;
     }
     var visible = currentPlaces.filter(function (p) { return p.category === activeCategory; });
     if (!visible.length) return;
     if (visible.length === 1) {
-      map.flyTo([visible[0].latitude, visible[0].longitude], 16, { duration: 0.9 });
+      map.flyTo([visible[0].latitude, visible[0].longitude], 14, { duration: 0.9 });
     } else {
       var bounds = L.latLngBounds(visible.map(function (p) { return [p.latitude, p.longitude]; }));
-      map.fitBounds(bounds, { padding: [40, 60] });
+      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
     }
   }
 
@@ -1949,7 +2048,7 @@
       showStatus('Encontrado en tu zona: ' + matches[0].name, 3500);
     } else {
       var bounds = L.latLngBounds(matches.map(function (m) { return [m.latitude, m.longitude]; }));
-      map.fitBounds(bounds, { padding: [40, 60] });
+      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
       selectPlace(matches[0]);
       showPinCard(matches[0]);
       showStatus(matches.length + ' lugares coinciden con "' + query + '"', 3500);
@@ -2028,7 +2127,7 @@
   }
 
   function focusMapOnPlace(place) {
-    map.flyTo([place.latitude, place.longitude], 16, { duration: 1.4 });
+    map.flyTo([place.latitude, place.longitude], 14, { duration: 1.2 });
   }
 
   /* -------------------- Navegación al detalle -------------------- */
@@ -2061,7 +2160,7 @@
             userPosition = coords;
             lastLocationUpdate = Date.now();
             showUserLocation(coords);
-            map.flyTo(coords, 15, { duration: 1.2 });
+            map.flyTo(coords, 14, { duration: 1.2 });
             findNearbyPlaces(coords);
             showStatus('Tu ubicación fue actualizada.', 3000);
           },
