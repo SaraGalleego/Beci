@@ -51,6 +51,8 @@
       margin-bottom: -100%;
     }
   </style>
+<!-- Datos de lugares (fuente única compartida con HomeBeci.html y Ubicate.html) -->
+<script src="beci-data.js"></script>
 </head>
 <body class="bg-image lg:bg-gradient-to-r lg:from-[#fcf7f2] lg:to-[#f5e8f3] h-screen text-gray-900 overflow-hidden font-poppins antialiased flex flex-col justify-center">
 <div class="w-full max-w-screen-xl mx-auto h-screen relative flex flex-col shadow-2xl overflow-hidden bg-white/10 lg:bg-transparent lg:shadow-none">
@@ -111,7 +113,7 @@
 </div>
 <!-- Cards container: given the white background card container on md (tablet) up to lg -->
 <div class="w-full md:max-lg:bg-white/60 md:max-lg:backdrop-blur-xl md:max-lg:rounded-[40px] md:max-lg:shadow-md md:max-lg:p-6">
-<div class="grid grid-cols-1 md:grid-cols-3 lg:flex lg:justify-center pb-6 px-4 w-full gap-6">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:flex lg:justify-center pb-6 px-4 w-full gap-6" id="favorites-grid">
 <!-- Card 1 -->
 <article class="relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] lg:w-[355px] lg:h-[400px] lg:aspect-auto hover:scale-[1.02] hover:shadow-xl group">
 <img alt="Biblioteca Pública Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAco0QYjQptDRJYSPBGf6MY2X9DHXUzxj9pznImZzNHX4QVApcmCfuIn9A4z4Mg1CQ8mjtZvMNTSwO0zxadbimkOrs-349gdbP9kfzv9OnVZF1bHA2QH_JEmoxdZ6hC-xobYDjFu2OQXu0eqf7mGqjyhFn-9IKuoEdLRg51KqCrxl_7CTT6DbBax8AE52n7D2_BoJ9qoQtNV05v2eCf5jOKOrBupQrzd3J8HQkxEzcZh4MyF1CTCXCpRYzG17ldFsWFq_oO7bd8Ks68UWk">
@@ -294,4 +296,118 @@
 
 
 
+<script data-purpose="dynamic-favorites">
+  (function () {
+    'use strict';
+
+    var DATA = (typeof window.LUGARES_BECI !== 'undefined' && Array.isArray(window.LUGARES_BECI)) ? window.LUGARES_BECI : [];
+    var grid = document.getElementById('favorites-grid');
+    if (!DATA.length || !grid) return;
+
+    function normalizeText(str) {
+      return (str || '').toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, ' ').trim();
+    }
+
+    function isFav(id) {
+      try { return localStorage.getItem('fav_' + id) === 'true'; } catch (e) { return false; }
+    }
+
+    function setFav(id, fav) {
+      try { localStorage.setItem('fav_' + id, fav ? 'true' : 'false'); } catch (e) {}
+    }
+
+    /* Tarjetas estáticas de la página (para no duplicarlas) */
+    var STATIC_NAMES = [
+      'biblioteca publica piloto', 'confamas antioquia', 'naturaleza',
+      'parque explora', 'jardin botanico', 'museo de antioquia'
+    ];
+
+    var CATEGORY_EMOJI = {
+      educativos: '\ud83c\udf93', deportivos: '\u26bd', cultura: '\ud83c\udfad',
+      tecnologia: '\ud83d\udca1', arte: '\ud83c\udfa8', recreativos: '\ud83c\udf33',
+      institucionales: '\ud83c\udfdb\ufe0f', salud: '\ud83d\udc9a', otros: '\ud83d\udccd'
+    };
+
+    function categoryPhoto(category) {
+      var emoji = CATEGORY_EMOJI[category] || CATEGORY_EMOJI['otros'];
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150">' +
+        '<rect width="200" height="150" rx="16" fill="#f3e9dd"/>' +
+        '<text x="100" y="98" font-size="58" text-anchor="middle">' + emoji + '</text></svg>';
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, function (m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
+
+    var favorites = DATA.filter(function (p) {
+      if (!isFav(p.id)) return false;
+      var n = normalizeText(p.nombre);
+      return STATIC_NAMES.indexOf(n) === -1;
+    });
+
+    if (!favorites.length) return;
+
+    var heartSvg = '<svg class="w-6 h-6 text-blue-700 stroke-current transition-colors duration-300 transform" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>';
+
+    favorites.forEach(function (place) {
+      var fallback = categoryPhoto(place.categoria || 'otros');
+      var img = place.img || fallback;
+
+      var article = document.createElement('article');
+      article.className = 'relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] lg:w-[355px] lg:h-[400px] lg:aspect-auto hover:scale-[1.02] hover:shadow-xl group';
+      article.style.opacity = '0';
+
+      var pic = document.createElement('img');
+      pic.alt = place.alt || place.nombre;
+      pic.className = 'w-full h-full object-cover';
+      pic.src = img;
+      pic.loading = 'lazy';
+      pic.onerror = function () { pic.onerror = null; pic.src = fallback; };
+
+      var grad = document.createElement('div');
+      grad.className = 'absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 md:p-5';
+      var name = document.createElement('h3');
+      name.className = 'text-white font-bold text-base md:text-xl leading-tight drop-shadow-md';
+      name.textContent = place.nombre;
+      grad.appendChild(name);
+
+      var heart = document.createElement('button');
+      heart.type = 'button';
+      heart.setAttribute('aria-pressed', 'true');
+      heart.className = 'absolute top-4 right-4 w-12 h-12 rounded-full glassmorphism flex items-center justify-center heart-toggle is-active transition-transform active:scale-95';
+      heart.setAttribute('data-place-id', place.id);
+      heart.innerHTML = heartSvg;
+
+      heart.addEventListener('click', function (e) {
+        e.preventDefault();
+        setFav(place.id, false);
+        heart.setAttribute('aria-pressed', 'false');
+        heart.classList.remove('is-active');
+        article.classList.add('card-removing');
+        setTimeout(function () {
+          if (article.parentNode) article.parentNode.removeChild(article);
+        }, 400);
+      });
+
+      pic.addEventListener('click', function () {
+        if (place.detailUrl) window.location.href = place.detailUrl;
+      });
+
+      article.appendChild(pic);
+      article.appendChild(grad);
+      article.appendChild(heart);
+      grid.appendChild(article);
+
+      requestAnimationFrame(function () {
+        article.style.transition = 'opacity 0.4s ease';
+        article.style.opacity = '1';
+      });
+    });
+  })();
+</script>
 </body></html>

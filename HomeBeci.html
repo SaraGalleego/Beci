@@ -35,6 +35,8 @@
   </script>
 <!-- Phosphor Icons for UI elements -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css">
+<!-- Datos de lugares (fuente única compartida con Ubicate.html y TrabajaconBeci.html) -->
+<script src="beci-data.js"></script>
 <style data-purpose="custom-utilities">
     /* Hide scrollbar for horizontal scrolling lists */
     .hide-scrollbar::-webkit-scrollbar {
@@ -133,11 +135,17 @@ comunidad</h1>
 </div>
 </div></section><section class="z-20 lg:px-16 pt-0">
 <!-- Search Bar Container -->
-<div class="flex items-center mb-6 px-6 lg:pt-12 lg:px-12 lg:pb-0 gap-2 justify-start lg:-mt-16"><!-- Search Input -->
+<div class="relative flex items-center mb-6 px-6 lg:pt-12 lg:px-12 lg:pb-0 gap-2 justify-start lg:-mt-16" id="home-search-bar-wrap"><!-- Search Input -->
 <div class="flex-1 bg-white/80 backdrop-blur-sm rounded-full px-5 flex items-center shadow-[0_4px_14px_0_rgba(0,0,0,0.05)] border border-white/40 w-full py-2 w-[85%] md:py-3 md:px-8 lg:py-4 lg:px-10">
-<i class="ph ph-magnifying-glass text-xl text-gray-500 mr-3 md:text-2xl lg:text-3xl"></i>
-<input class="bg-transparent border-none p-0 flex-1 text-sm text-gray-700 placeholder-gray-500 focus:ring-0 outline-none w-full truncate md:text-xl lg:text-2xl" placeholder="¿Qué lugares quieres chismosear hoy?" type="text">
-<i class="ph ph-faders text-xl text-gray-500 ml-3 md:text-2xl lg:text-3xl"></i>
+<i class="ph ph-magnifying-glass text-xl text-gray-500 mr-3 md:text-2xl lg:text-3xl beci-search-icon" id="home-search-icon"></i>
+<input id="home-search-input" class="bg-transparent border-none p-0 flex-1 text-sm text-gray-700 placeholder-gray-500 focus:ring-0 outline-none w-full truncate md:text-xl lg:text-2xl" placeholder="¿Qué lugares quieres chismosear hoy?" type="text" aria-label="Buscar lugares">
+<button id="home-filter-btn" type="button" aria-label="Filtros" class="flex items-center justify-center shrink-0 ml-3 p-1.5 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"><i class="ph ph-faders text-xl text-gray-500 md:text-2xl lg:text-3xl"></i></button>
+</div>
+<!-- Filter Dropdown -->
+<div id="home-filter-dropdown" class="hidden absolute top-full mt-2 right-0 lg:right-8 z-50 w-[240px] bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-gray-100 p-4">
+<p class="text-sm font-semibold text-gray-700 mb-3">Filtrar por categoría</p>
+<div id="home-filter-options" class="flex flex-col gap-1.5"></div>
+<button id="home-filter-clear" type="button" class="mt-3 w-full text-sm font-semibold text-gray-500 hover:text-gray-800 py-2.5 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors">Limpiar filtros</button>
 </div>
 <!-- Location Icon / Ubicate (link to map) -->
 <a href="Ubicate.html" aria-label="Ubícate" class="flex flex-col items-center justify-center shrink-0 w-10 items-end ml-auto relative cursor-pointer group hover:opacity-85 active:scale-95 transition-all" title="Ver el mapa y ubicarme">
@@ -168,7 +176,7 @@ comunidad</h1>
         const container = document.getElementById('category-scroll-container');
         if (!container) return;
 
-        const updateMask = () => {
+        const updateMask = () => {  
           const scrollLeft = container.scrollLeft;
           const maxScroll = container.scrollWidth - container.clientWidth;
           const isAtStart = scrollLeft <= 5;
@@ -243,75 +251,19 @@ comunidad</h1>
 <!-- END: SearchAndFiltersSection -->
 <!-- BEGIN: MainContentSection -->
 <main class="px-6 flex-1 relative z-10">
-<h2 class="text-base font-semibold text-gray-800 mb-4">Lugares mas visitados</h2>
-<div class="flex flex-col gap-4">
-<!-- Card 1 -->
-<article class="bg-white/95 rounded-[24px] p-2 pr-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex gap-4 items-center relative overflow-hidden backdrop-blur-md">
-<!-- Image -->
-<div class="w-32 h-32 rounded-[20px] bg-gray-200 overflow-hidden shrink-0">
-<img alt="Sedes Sena" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgKjcugBrqvwk3uwYBU0epxuk6elihtROzWAfXRPZzuPbS9QlLole7z_5V_h5leJIX4Jo0XwDGr8O7P-PDMlpreXZQe_sPgQfw5Sku6lVK00NEoCN1xycOxfcgN_chNf6qRVaCJupk235jq9V7EgtK95ybB5fdYCS2ywyOHXhLWr_CQOliIeyBtnyokkwjyCPWVPT-q9stcRc76udhnXRO0Y8th7d_cNt22j-kzgEHku_x5kufyE59yg">
+<h2 id="home-normal-title" class="text-base font-semibold text-gray-800 mb-4">Lugares mas visitados</h2>
+<div id="home-normal-container" class="flex flex-col gap-4">
 </div>
-<!-- Content -->
-<div class="flex-1 py-2">
-<div class="flex justify-between items-start mb-1">
-<h3 class="font-bold text-[17px] text-black">Sedes Sena</h3>
-<button class="fav-btn p-1.5 rounded-full text-gray-400 mt-[-4px] mr-[-4px] transition-colors duration-300" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;">
-<i class="ph ph-heart text-[22px] transition-transform duration-300"></i>
-</button>
+<!-- Search / Filter results replace the normal zone -->
+<div id="home-results-section" class="hidden">
+<h2 class="text-base font-semibold text-gray-800 mb-4">Resultados</h2>
+<div id="home-results-container" class="flex flex-col gap-4">
 </div>
-<div class="flex items-center text-gray-600 text-[13px] mb-3">
-<i class="ph ph-map-pin mr-1 text-[16px]"></i>
-<span class="">Antioquia</span>
+<div id="home-empty-state" class="hidden flex flex-col items-center text-center py-14 px-4 gap-3">
+<i class="ph ph-magnifying-glass text-5xl text-gray-300"></i>
+<p class="text-gray-700 font-semibold text-base">No encontramos lugares con esa búsqueda.</p>
+<p class="text-gray-500 text-sm">Prueba con otro nombre o cambia los filtros.</p>
 </div>
-<div class="flex flex-wrap gap-2">
-<span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Aprender</span>
-<span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Crear</span>
-<span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Crecer</span>
-</div>
-</div>
-</article>
-<!-- Card 2 -->
-<article class="bg-white/95 rounded-[24px] p-2 pr-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex gap-4 items-center relative overflow-hidden backdrop-blur-md">
-<!-- Image -->
-<div class="w-32 h-32 rounded-[20px] bg-gray-200 overflow-hidden shrink-0">
-<img alt="I.E Marco Fidel" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLand2FjeXIyYdS_mngS3qC_kTvQQALkL-SSVQvwA4NhzoB8V2SDS_-TQbT4uCfAC8P0reiIWzd23CZtGM52Ch30Y94uJ4Pz2aGGg0-Wta9Z10wgzQhKMZYeREximRipkSJtU3pmWMeGNIdJ0U9ZOdl3NYhOWYAncGV7Mn9iH0KovxhyLyu0O-lLIVfEcsPWPcDggTu9xX3aPQHajzoPWJT9VO6AcDtGaVxxO0D0a_ddw-Wsa-TyOUmw">
-</div>
-<!-- Content -->
-<div class="flex-1 py-2">
-<div class="flex justify-between items-start mb-1">
-<h3 class="font-bold text-[17px] text-black">I.E Marco Fidel</h3>
-<button class="fav-btn p-1.5 rounded-full text-gray-400 mt-[-4px] mr-[-4px] transition-colors duration-300" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;">
-<i class="ph ph-heart text-[22px] transition-transform duration-300"></i>
-</button>
-</div>
-<div class="flex items-center text-gray-600 text-[13px] mb-3">
-<i class="ph ph-map-pin mr-1 text-[16px]"></i>
-<span class="">Poblado, Medellín</span>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Aprender</span>
-<span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Crear</span>
-<span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Crecer</span>
-</div>
-</div>
-</article>
-<!-- Card 3 (Partial for scroll indication) -->
-<article class="bg-white/95 rounded-[24px] p-2 pr-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex gap-4 items-center relative overflow-hidden backdrop-blur-md mb-6">
-<!-- Image -->
-<div class="w-32 h-32 rounded-[20px] bg-gray-200 overflow-hidden shrink-0">
-<img alt="Universidades San" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqOxnLnBCMygnDRkZQY92j39sG68ryddg5PtSyIJx0aLSxakU_m7UQ3Eh641-5RDKRSCggmNWu3h1cLTWiH2BxHVoZK76-zAfbkKpYFDEQxmZLKGpL-AzXyK32IMOST9jZmMNh72jm5G4gQA2ZbZhF8LC8N4dhFVXBgzWj3EBuaCQixbJ7ayWv7MyQWFYw0hbllX4UCDagV7LJIozOnEaejt4Ba-3SNRZJHdTkx9Zm8hOPJEgSdivOxA">
-</div>
-<!-- Content -->
-<div class="flex-1 py-2">
-<div class="flex justify-between items-start mb-1">
-<h3 class="font-bold text-[17px] text-black truncate pr-2">Universidades&nbsp;<div class="">San</div></h3>
-<button class="fav-btn p-1.5 rounded-full text-gray-400 mt-[-4px] mr-[-4px] transition-colors duration-300" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;">
-<i class="ph ph-heart text-[22px] transition-transform duration-300"></i>
-</button>
-</div>
-<!-- Rest of content cut off for visual effect like mockup -->
-<div class="flex items-center text-gray-600 text-[13px] mb-3"><i class="ph ph-map-pin mr-1 text-[16px]"></i><span class="">Antioquia</span></div><div class="flex flex-wrap gap-2"><span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Aprender</span><span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Crear</span><span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">Crecer</span></div></div>
-</article>
 </div>
 </main>
 <!-- END: MainContentSection -->
@@ -354,45 +306,373 @@ comunidad</h1>
 </li></ul>
 </nav>
 <!-- END: BottomNavigation -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.category-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Reset all buttons to inactive state
-        buttons.forEach(b => {
-          b.classList.remove('bg-[#062573]', 'text-white', 'active');
-          b.classList.add('bg-white/90', 'text-gray-800', 'border', 'border-gray-100', 'hover:bg-[#062573]', 'hover:text-white', 'hover:border-[#062573]');
-        });
-        // Set clicked button to active state
-        btn.classList.add('bg-[#062573]', 'text-white', 'active');
-        btn.classList.remove('bg-white/90', 'text-gray-800', 'border', 'border-gray-100', 'hover:bg-[#062573]', 'hover:text-white', 'hover:border-[#062573]');
+<script data-purpose="home-beci-logic">
+(function () {
+  'use strict';
+
+  var SENA_PAGE = 'TrabajaconBeci.html';
+  var REGULAR_PAGE = 'NoTrabajaconBeci.html';
+
+  var DATA = (typeof window.LUGARES_BECI !== 'undefined' && Array.isArray(window.LUGARES_BECI)) ? window.LUGARES_BECI : [];
+  var SENA_DATA = (typeof window.SENA_SEDES !== 'undefined') ? window.SENA_SEDES : {};
+
+  var state = { query: '', category: 'Todos', filterOpen: false };
+
+  /* ---------- Reutilizado de Ubicate.html ---------- */
+
+  function normalizeText(str) {
+    return (str || '').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function identifySenaPlace(name) {
+    return name && name.toLowerCase().indexOf('sena') !== -1;
+  }
+
+  function matchSenaSede(name) {
+    var n = normalizeText(name);
+    if (!n) return null;
+    var keys = Object.keys(SENA_DATA);
+    for (var k = 0; k < keys.length; k++) {
+      var sede = SENA_DATA[keys[k]];
+      var tokens = (sede && sede.tokens) || [];
+      for (var t = 0; t < tokens.length; t++) {
+        var token = normalizeText(tokens[t]);
+        if (token && n.indexOf(token) !== -1) return keys[k];
+      }
+    }
+    return null;
+  }
+
+  function resolveDetailUrl(name, isSena) {
+    if (isSena) {
+      var key = matchSenaSede(name);
+      if (key) return SENA_PAGE + '?sede=' + key;
+      return SENA_PAGE + '?lugar=' + encodeURIComponent(name);
+    }
+    return REGULAR_PAGE + '?lugar=' + encodeURIComponent(name);
+  }
+
+  /* ---------- Categorías (mismas de Ubicate) ---------- */
+
+  var CATEGORY_LABELS = {
+    educativos: 'Educativos',
+    deportivos: 'Deportivos',
+    cultura: 'Cultura',
+    recreativos: 'Recreativos',
+    tecnologia: 'Tecnología',
+    arte: 'Arte',
+    salud: 'Salud',
+    institucionales: 'Institucionales',
+    otros: 'Otros'
+  };
+
+  var CATEGORY_EMOJI = {
+    educativos: '\ud83c\udf93', deportivos: '\u26bd', cultura: '\ud83c\udfad',
+    tecnologia: '\ud83d\udca1', arte: '\ud83c\udfa8', recreativos: '\ud83c\udf33',
+    institucionales: '\ud83c\udfdb\ufe0f', salud: '\ud83d\udc9a', otros: '\ud83d\udccd'
+  };
+
+  function getCategoryPhoto(category) {
+    var emoji = CATEGORY_EMOJI[category] || CATEGORY_EMOJI['otros'];
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150">' +
+      '<rect width="200" height="150" rx="16" fill="#f3e9dd"/>' +
+      '<text x="100" y="98" font-size="58" text-anchor="middle">' + emoji + '</text></svg>';
+    return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+  }
+
+  var DEFAULT_PILL_LABELS = ['Todos', 'Educativos', 'Deportivos', 'Cultura', 'Salud', 'Institucionales', 'Recreativos', 'Tecnología', 'Arte'];
+  var CATEGORY_BY_NORMALIZED = {
+    'todos': 'Todos', 'todas': 'Todos',
+    'educativos': 'educativos', 'deportivos': 'deportivos', 'cultura': 'cultura',
+    'salud': 'salud', 'institucionales': 'institucionales', 'recreativos': 'recreativos',
+    'tecnologia': 'tecnologia', 'arte': 'arte'
+  };
+
+  /* ---------- Utilidades de render ---------- */
+
+  function $(id) { return document.getElementById(id); }
+
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"']/g, function (m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+  }
+
+  function isFav(id) {
+    try { return localStorage.getItem('fav_' + id) === 'true'; } catch (e) { return false; }
+  }
+
+  function setFav(id, fav) {
+    try { localStorage.setItem('fav_' + id, fav ? 'true' : 'false'); } catch (e) {}
+  }
+
+  function placePills(place) {
+    var list = (place.pills && place.pills.length) ? place.pills : [CATEGORY_LABELS[place.categoria] || 'Lugar'];
+    return list.map(function (p) {
+      return '<span class="bg-[#FFA6D9] text-black text-[10px] font-semibold px-2.5 py-1 rounded-full">' + escapeHtml(p) + '</span>';
+    }).join('');
+  }
+
+  function cardHtml(place) {
+    var fallback = getCategoryPhoto(place.categoria || 'otros');
+    var src = place.img || fallback;
+    var fav = isFav(place.id);
+    var favBtnClass = 'fav-btn beci-fav p-1.5 rounded-full transition-colors duration-300 mt-[-4px] mr-[-4px] ' +
+      (fav ? 'text-[#062573]' : 'text-gray-400');
+    var heartClass = fav ? 'ph-fill ph-heart' : 'ph ph-heart';
+
+    return '<article class="beci-card bg-white/95 rounded-[24px] p-2 pr-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex gap-4 items-center relative overflow-hidden backdrop-blur-md cursor-pointer hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow" data-beci-place="' + escapeHtml(place.id) + '">' +
+      '<div class="w-32 h-32 rounded-[20px] bg-gray-200 overflow-hidden shrink-0">' +
+      '<img alt="' + escapeHtml(place.alt || place.nombre) + '" class="w-full h-full object-cover" loading="lazy" src="' + src + '" onerror="this.onerror=null;this.src=\'' + fallback + '\';">' +
+      '</div>' +
+      '<div class="flex-1 py-2 min-w-0">' +
+      '<div class="flex justify-between items-start mb-1">' +
+      '<h3 class="font-bold text-[17px] text-black truncate pr-2">' + escapeHtml(place.nombre) + '</h3>' +
+      '<button type="button" class="' + favBtnClass + '" data-place-id="' + escapeHtml(place.id) + '" style="background: rgba(255,255,255,0.4); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3); box-shadow: rgba(0,0,0,0.08) 0px 4px 12px;" aria-label="Favorito">' +
+      '<i class="' + heartClass + ' text-[22px] transition-transform duration-300"></i>' +
+      '</button>' +
+      '</div>' +
+      '<div class="flex items-center text-gray-600 text-[13px] mb-3">' +
+      '<i class="ph ph-map-pin mr-1 text-[16px]"></i>' +
+      '<span class="truncate">' + escapeHtml(place.sector || 'Medellín') + '</span>' +
+      '</div>' +
+      '<div class="flex flex-wrap gap-2">' + placePills(place) + '</div>' +
+      '</div>' +
+      '</article>';
+  }
+
+  function getPlaceById(id) {
+    for (var i = 0; i < DATA.length; i++) {
+      if (String(DATA[i].id) === String(id)) return DATA[i];
+    }
+    return null;
+  }
+
+  /* ---------- Filtrado (búsqueda + categoría) ---------- */
+
+  function getFilteredPlaces() {
+    var q = normalizeText(state.query);
+    var catKey = state.category === 'Todos' ? null : CATEGORY_BY_NORMALIZED[normalizeText(state.category)];
+    return DATA.filter(function (p) {
+      if (catKey && (p.categoria || 'otros') !== catKey) return false;
+      if (!q) return true;
+      var hay = [p.nombre, p.sector, p.descripcion, CATEGORY_LABELS[p.categoria], p.categoria]
+        .map(normalizeText).join(' ');
+      hay += ' ' + (p.tokens || []).map(normalizeText).join(' ');
+      return hay.indexOf(q) !== -1;
+    });
+  }
+
+  function updateView() {
+    var normalTitle = $('home-normal-title');
+    var normalContainer = $('home-normal-container');
+    var resultsSection = $('home-results-section');
+    var resultsContainer = $('home-results-container');
+    var emptyState = $('home-empty-state');
+
+    var searching = state.query || state.category !== 'Todos';
+
+    if (!searching) {
+      if (normalTitle) normalTitle.style.display = '';
+      if (normalContainer) normalContainer.style.display = '';
+      if (resultsSection) resultsSection.classList.add('hidden');
+      return;
+    }
+
+    if (normalTitle) normalTitle.style.display = 'none';
+    if (normalContainer) normalContainer.style.display = 'none';
+    if (resultsSection) resultsSection.classList.remove('hidden');
+
+    var places = getFilteredPlaces();
+    if (resultsContainer) resultsContainer.innerHTML = places.map(cardHtml).join('');
+    if (emptyState) emptyState.classList.toggle('hidden', places.length > 0);
+  }
+
+  /* ---------- Favoritos ---------- */
+
+  function toggleFav(btn) {
+    var id = btn.getAttribute('data-place-id');
+    var fav = !isFav(id);
+    setFav(id, fav);
+    btn.classList.toggle('text-[#062573]', fav);
+    btn.classList.toggle('text-gray-400', !fav);
+    var icon = btn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('ph-fill', fav);
+    }
+    btn.classList.remove('animate-pop');
+    void btn.offsetWidth;
+    btn.classList.add('animate-pop');
+    updateView();
+  }
+
+  /* ---------- Pills y dropdown de filtros ---------- */
+
+  function updatePillStates() {
+    document.querySelectorAll('.category-btn').forEach(function (btn) {
+      var active = btn.textContent.trim() === state.category;
+      if (active) {
+        btn.classList.add('active');
+        btn.classList.remove('bg-white/90', 'text-gray-800', 'border', 'border-gray-100');
+        btn.classList.add('bg-[#062573]', 'text-white');
+        btn.style.background = '#062573';
+        btn.style.color = '#fff';
+      } else {
+        btn.classList.remove('active', 'bg-[#062573]', 'text-white');
+        btn.classList.add('bg-white/90', 'text-gray-800', 'border', 'border-gray-100');
+        btn.style.background = '';
+        btn.style.color = '';
+      }
+    });
+  }
+
+  function updateFilterOptionStates() {
+    document.querySelectorAll('.filter-option').forEach(function (opt) {
+      var active = opt.getAttribute('data-filter') === state.category;
+      if (active) {
+        opt.classList.add('bg-[#062573]', 'text-white');
+        opt.classList.remove('text-gray-700', 'hover:bg-gray-50');
+      } else {
+        opt.classList.remove('bg-[#062573]', 'text-white');
+        opt.classList.add('text-gray-700', 'hover:bg-gray-50');
+      }
+    });
+  }
+
+  function applyCategory(label) {
+    state.category = label || 'Todos';
+    updatePillStates();
+    updateView();
+  }
+
+  function toggleDropdown(force) {
+    var open = force !== undefined ? force : !state.filterOpen;
+    state.filterOpen = open;
+    var dd = $('home-filter-dropdown');
+    if (dd) dd.classList.toggle('hidden', !open);
+    updateFilterOptionStates();
+  }
+
+  /* ---------- Inicialización ---------- */
+
+  function initSearch() {
+    var input = $('home-search-input');
+    if (!input) return;
+    input.addEventListener('input', function () {
+      state.query = String(this.value || '').trim();
+      updateView();
+    });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        updateView();
+      }
+    });
+    var icon = $('home-search-icon');
+    if (icon) {
+      icon.addEventListener('click', function () { updateView(); });
+    }
+  }
+
+  function initCategoryPills() {
+    document.querySelectorAll('.category-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        applyCategory(btn.textContent.trim());
       });
+    });
+  }
+
+  function initFilterUI() {
+    var btn = $('home-filter-btn');
+    if (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDropdown();
+      });
+    }
+    var options = $('home-filter-options');
+    if (options) {
+      options.innerHTML = DEFAULT_PILL_LABELS.map(function (label) {
+        return '<button type="button" class="filter-option text-left w-full px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-filter="' + escapeHtml(label) + '">' + escapeHtml(label) + '</button>';
+      }).join('');
+      options.addEventListener('click', function (e) {
+        var opt = e.target.closest('.filter-option');
+        if (!opt) return;
+        applyCategory(opt.getAttribute('data-filter'));
+        closeDropdown();
+      });
+    }
+    var clear = $('home-filter-clear');
+    if (clear) {
+      clear.addEventListener('click', function () {
+        var input = $('home-search-input');
+        if (input) input.value = '';
+        state.query = '';
+        applyCategory('Todos');
+        closeDropdown();
+      });
+    }
+    document.addEventListener('click', function (e) {
+      var dd = $('home-filter-dropdown');
+      var fBtn = $('home-filter-btn');
+      if (state.filterOpen && dd && !dd.contains(e.target) && !(fBtn && fBtn.contains(e.target))) {
+        closeDropdown();
+      }
+    });
+  }
+
+  function closeDropdown() { toggleDropdown(false); }
+
+  function initCards() {
+    var containers = ['home-normal-container', 'home-results-container'];
+    containers.forEach(function (id) {
+      var container = $(id);
+      if (!container) return;
+      container.addEventListener('click', function (e) {
+        var favBtn = e.target.closest('.beci-fav');
+        if (favBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFav(favBtn);
+          return;
+        }
+        var card = e.target.closest('.beci-card');
+        if (!card) return;
+        var place = getPlaceById(card.getAttribute('data-beci-place'));
+        if (place && place.detailUrl) {
+          window.location.href = place.detailUrl;
+        }
+      });
+    });
+  }
+
+  function init() {
+    if (!DATA.length) return;
+    DATA.forEach(function (p) {
+      p.detailUrl = resolveDetailUrl(p.nombre, !!p.isSena);
     });
 
-    const favButtons = document.querySelectorAll('.fav-btn');
-    favButtons.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const icon = this.querySelector('i');
-        
-        // Toggle color and fill
-        if (this.classList.contains('text-[#062573]')) {
-          this.classList.remove('text-[#062573]');
-          this.classList.add('text-gray-400');
-          icon.classList.remove('ph-fill');
-        } else {
-          this.classList.remove('text-gray-400');
-          this.classList.add('text-[#062573]');
-          icon.classList.add('ph-fill');
-        }
-        
-        // Trigger animation
-        this.classList.remove('animate-pop');
-        // Trigger reflow
-        void this.offsetWidth;
-        this.classList.add('animate-pop');
-      });
-    });
-  });
+    var featured = DATA.filter(function (p) { return p.destacado; });
+    if (!featured.length) featured = DATA.filter(function (p) { return p.isSena; }).slice(0, 3);
+    var container = $('home-normal-container');
+    if (container) container.innerHTML = featured.map(cardHtml).join('');
+
+    initSearch();
+    initCategoryPills();
+    initFilterUI();
+    initCards();
+    updatePillStates();
+    updateView();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 </body></html>
