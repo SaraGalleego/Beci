@@ -383,163 +383,6 @@
       100% { opacity: 1; transform: scale(1); }
     }
 
-    /* --- Floating result cards (one above each search pin) --- */
-    #beci-map-component .beci-search-cards-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 945;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    #beci-map-component .beci-search-card {
-      position: absolute;
-      width: min(210px, 46vw);
-      box-sizing: border-box;
-      padding: 8px 10px;
-      background: rgba(255, 251, 243, 0.97);
-      border-radius: 14px;
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 10px 24px rgba(40, 30, 60, 0.22);
-      font-family: 'Montserrat', 'Poppins', system-ui, sans-serif;
-      cursor: pointer;
-      pointer-events: auto;
-      /* transform is set via JS (anti-overlap positioning) */
-      transition: box-shadow 0.15s ease;
-      animation: beciResultCardIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    @keyframes beciResultCardIn {
-      /* Pure opacity+scale — position is managed by JS */
-      0% { opacity: 0; transform: scale(0.85); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-    #beci-map-component .beci-search-card:hover {
-      box-shadow: 0 14px 30px rgba(40, 30, 60, 0.3);
-    }
-
-    /* --- Triángulo indicador en la card (apunta a la ubicación del pin) --- */
-    #beci-map-component .beci-search-card::after {
-      content: '';
-      position: absolute;
-      pointer-events: none;
-      z-index: 1;
-    }
-    /* Card sobre el pin -> Triángulo abajo apuntando al pin */
-    #beci-map-component .beci-search-card.tail-bottom::after,
-    #beci-map-component .beci-search-card:not([class*="tail-"])::after {
-      bottom: -8px;
-      left: var(--sc-tail-x, 50%);
-      transform: translateX(-50%);
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-top: 8px solid rgba(255, 251, 243, 0.98);
-      filter: drop-shadow(0 2px 1px rgba(40, 30, 60, 0.12));
-    }
-    /* Card debajo del pin -> Triángulo arriba apuntando al pin */
-    #beci-map-component .beci-search-card.tail-top::after {
-      top: -8px;
-      left: var(--sc-tail-x, 50%);
-      transform: translateX(-50%);
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-bottom: 8px solid rgba(255, 251, 243, 0.98);
-      filter: drop-shadow(0 -2px 1px rgba(40, 30, 60, 0.12));
-    }
-    /* Card a la derecha del pin -> Triángulo a la izquierda apuntando al pin */
-    #beci-map-component .beci-search-card.tail-left::after {
-      left: -8px;
-      top: var(--sc-tail-y, 50%);
-      transform: translateY(-50%);
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      border-right: 8px solid rgba(255, 251, 243, 0.98);
-      filter: drop-shadow(-2px 0 1px rgba(40, 30, 60, 0.12));
-    }
-    /* Card a la izquierda del pin -> Triángulo a la derecha apuntando al pin */
-    #beci-map-component .beci-search-card.tail-right::after {
-      right: -8px;
-      top: var(--sc-tail-y, 50%);
-      transform: translateY(-50%);
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      border-left: 8px solid rgba(255, 251, 243, 0.98);
-      filter: drop-shadow(2px 0 1px rgba(40, 30, 60, 0.12));
-    }
-
-    /* --- Pines de Leaflet siempre por encima de las cards flotantes --- */
-    #beci-map-component .leaflet-marker-pane {
-      z-index: 960 !important;
-    }
-    #beci-map-component .leaflet-shadow-pane {
-      z-index: 955 !important;
-    }
-    #beci-map-component .beci-search-card .rc-row {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      min-width: 0;
-    }
-    #beci-map-component .beci-search-card .rc-photo {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #f3e9dd;
-    }
-    #beci-map-component .beci-search-card .rc-main {
-      flex: 1;
-      min-width: 0;
-    }
-    #beci-map-component .beci-search-card .rc-name {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #111b33;
-      line-height: 1.2;
-      margin: 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    #beci-map-component .beci-search-card .rc-meta {
-      font-size: 10.5px;
-      color: #6b7280;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    #beci-map-component .beci-search-card .rc-status {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px dashed rgba(0, 0, 0, 0.08);
-      font-size: 10px;
-      font-weight: 700;
-    }
-    #beci-map-component .beci-search-card .rc-status .rc-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    #beci-map-component .beci-search-card .rc-status.green .rc-dot {
-      background: #23c16b;
-      box-shadow: 0 0 6px rgba(35, 193, 107, 0.55);
-    }
-    #beci-map-component .beci-search-card .rc-status.orange .rc-dot {
-      background: #f59e0b;
-      box-shadow: 0 0 6px rgba(245, 158, 11, 0.55);
-    }
-    #beci-map-component .beci-search-card .rc-status.green {
-      color: #17964f;
-    }
-    #beci-map-component .beci-search-card .rc-status.orange {
-      color: #b45309;
-    }
-
     /* Location button active state */
     #beci-map-component .beci-map-controls button.locating {
       color: #062573;
@@ -826,7 +669,6 @@
 </button>
 </div>
 <div id="beci-map-status" class="beci-map-status" role="status"></div>
-<div id="beci-search-cards-layer" class="beci-search-cards-layer"></div>
 </section>
 <!-- END: Beci Interactive Map Component -->
 </div>
@@ -966,7 +808,6 @@
 
   var MEDELLIN = { lat: 6.2442, lng: -75.5812 };
   var NEARBY_RADIUS_METERS = 1500;
-  var SEARCH_RADIUS_METERS = 5000;
   var MAX_PLACES = 15;
   var MAX_DISTANCE_BATCH = 4;
 
@@ -979,77 +820,6 @@
   var SENA_FALLBACK_KEY = 'complejo-norte';
   var SENA_SEDES_DATA = (typeof window.SENA_SEDES !== 'undefined') ? window.SENA_SEDES : {};
 
-  /* Catálogo de lugares principales e icónicos de Medellín y Valle de Aburrá */
-  var LUGARES_PRINCIPALES_BECI = [
-    // --- EDUCATIVOS (SENA y Universidades) ---
-    { id: 'sena-complejo-norte', name: 'Complejo Norte SENA', sector: 'Pedregal, Medellín', latitude: 6.3022365, longitude: -75.5682972, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=complejo-norte' },
-    { id: 'sena-ctma', name: 'CTMA SENA', sector: 'Complejo Norte, Medellín', latitude: 6.3002955, longitude: -75.5682575, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=ctma' },
-    { id: 'sena-servicios', name: 'Centro de Servicios SENA', sector: 'La Alpujarra, Medellín', latitude: 6.2554544, longitude: -75.5751145, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=servicios-gestion-empresarial' },
-    { id: 'sena-comercio', name: 'Centro de Comercio SENA', sector: 'Centro, Medellín', latitude: 6.2548554, longitude: -75.5749547, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=centro-comercio' },
-    { id: 'sena-moda', name: 'Centro de Moda SENA', sector: 'Itagüí', latitude: 6.1804305, longitude: -75.606357, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=moda' },
-    { id: 'sena-actividad-fisica', name: 'Centro Actividad Física SENA', sector: 'Complejo Norte', latitude: 6.3031, longitude: -75.5692, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=actividad-fisica' },
-    { id: 'sena-complejo-sur', name: 'Complejo Sur SENA', sector: 'Itagüí', latitude: 6.1808044, longitude: -75.6037657, category: 'educativos', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=complejo-sur' },
-    { id: 'udea', name: 'Universidad de Antioquia (UdeA)', sector: 'Ciudad Universitaria', latitude: 6.2678, longitude: -75.5686, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Universidad%20de%20Antioquia' },
-    { id: 'unal', name: 'Universidad Nacional de Colombia', sector: 'Sede Medellín', latitude: 6.2612, longitude: -75.5783, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Universidad%20Nacional' },
-    { id: 'eafit', name: 'Universidad EAFIT', sector: 'El Poblado', latitude: 6.2007, longitude: -75.5784, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Universidad%20EAFIT' },
-    { id: 'itm-robledo', name: 'ITM - Campus Robledo', sector: 'Robledo', latitude: 6.2758, longitude: -75.5912, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=ITM%20Robledo' },
-    { id: 'bpp', name: 'Biblioteca Pública Piloto', sector: 'Carlos E. Restrepo', latitude: 6.2595, longitude: -75.5862, category: 'educativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Biblioteca%20Publica%20Piloto' },
-
-    // --- DEPORTIVOS ---
-    { id: 'atanasio', name: 'Unidad Deportiva Atanasio Girardot', sector: 'Estadio', latitude: 6.2569, longitude: -75.5905, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Unidad%20Deportiva%20Atanasio%20Girardot' },
-    { id: 'ud-belen', name: 'Unidad Deportiva de Belén', sector: 'Belén', latitude: 6.2289, longitude: -75.5954, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Unidad%20Deportiva%20Belen' },
-    { id: 'juan-pablo-ii-dep', name: 'Parque Juan Pablo II (Acuático)', sector: 'Guayabal', latitude: 6.2167, longitude: -75.5919, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Juan%20Pablo%20II' },
-    { id: 'patinodromo', name: 'Patinódromo María Luisa Calle', sector: 'Guayabal', latitude: 6.2178, longitude: -75.5878, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Patinodromo%20Maria%20Luisa%20Calle' },
-    { id: 'polideportivo-envigado', name: 'Polideportivo Sur de Envigado', sector: 'Envigado', latitude: 6.1624, longitude: -75.5898, category: 'deportivos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Polideportivo%20Sur%20Envigado' },
-
-    // --- CULTURA ---
-    { id: 'museo-antioquia', name: 'Museo de Antioquia (Plaza Botero)', sector: 'Centro Medellín', latitude: 6.2529, longitude: -75.5689, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20de%20Antioquia' },
-    { id: 'parque-explora', name: 'Parque Explora', sector: 'Zona Norte', latitude: 6.2709, longitude: -75.5658, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Explora' },
-    { id: 'jardin-botanico', name: 'Jardín Botánico de Medellín', sector: 'Zona Norte', latitude: 6.2705, longitude: -75.5623, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Jardin%20Botanico' },
-    { id: 'planetario', name: 'Planetario de Medellín', sector: 'Zona Norte', latitude: 6.2702, longitude: -75.5668, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Planetario%20de%20Medellin' },
-    { id: 'casa-memoria', name: 'Museo Casa de la Memoria', sector: 'Parque Bicentenario', latitude: 6.2444, longitude: -75.5562, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20Casa%20de%20la%20Memoria' },
-    { id: 'teatro-metropolitano', name: 'Teatro Metropolitano', sector: 'Alpujarra', latitude: 6.2427, longitude: -75.5786, category: 'cultura', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Teatro%20Metropolitano' },
-
-    // --- SALUD ---
-    { id: 'san-vicente', name: 'Hospital San Vicente Fundación', sector: 'Prado Centro', latitude: 6.2625, longitude: -75.5658, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Hospital%20San%20Vicente%20Fundacion' },
-    { id: 'pablo-tobon', name: 'Hospital Pablo Tobón Uribe', sector: 'Robledo', latitude: 6.2778, longitude: -75.5847, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Hospital%20Pablo%20Tobon%20Uribe' },
-    { id: 'americas', name: 'Clínica Las Américas', sector: 'La Mota', latitude: 6.2235, longitude: -75.5968, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Clinica%20Las%20Americas' },
-    { id: 'general-medellin', name: 'Hospital General de Medellín', sector: 'Perpetuo Socorro', latitude: 6.2348, longitude: -75.5742, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Hospital%20General%20de%20Medellin' },
-    { id: 'cardio-vid', name: 'Clínica Cardio VID', sector: 'Robledo', latitude: 6.2795, longitude: -75.5815, category: 'salud', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Clinica%20Cardio%20VID' },
-
-    // --- INSTITUCIONALES ---
-    { id: 'alpujarra', name: 'Centro Administrativo La Alpujarra', sector: 'Alpujarra', latitude: 6.2447, longitude: -75.5738, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Centro%20Administrativo%20La%20Alpujarra' },
-    { id: 'plaza-mayor', name: 'Plaza Mayor Medellín', sector: 'Alpujarra', latitude: 6.2415, longitude: -75.5768, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Plaza%20Mayor%20Medellin' },
-    { id: 'edificio-epm', name: 'Edificio Inteligente EPM', sector: 'Alpujarra', latitude: 6.2428, longitude: -75.5785, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Edificio%20EPM' },
-    { id: 'concejo-medellin', name: 'Concejo de Medellín', sector: 'Alpujarra', latitude: 6.2452, longitude: -75.5746, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Concejo%20de%20Medellin' },
-    { id: 'terminal-norte', name: 'Terminal de Transporte Norte', sector: 'Caribe', latitude: 6.2775, longitude: -75.5702, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Terminal%20del%20Norte' },
-    { id: 'terminal-sur', name: 'Terminal de Transporte Sur', sector: 'Guayabal', latitude: 6.2128, longitude: -75.5878, category: 'institucionales', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Terminal%20del%20Sur' },
-
-    // --- RECREATIVOS ---
-    { id: 'pueblito-paisa', name: 'Cerro Nutibara y Pueblito Paisa', sector: 'Belén', latitude: 6.2365, longitude: -75.5812, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Pueblito%20Paisa' },
-    { id: 'parque-arvi', name: 'Parque Arví', sector: 'Santa Elena', latitude: 6.2825, longitude: -75.5015, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Arvi' },
-    { id: 'parque-deseos', name: 'Parque de los Deseos', sector: 'Zona Norte', latitude: 6.2698, longitude: -75.5661, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20de%20los%20Deseos' },
-    { id: 'parque-norte', name: 'Parque Norte', sector: 'Zona Norte', latitude: 6.2745, longitude: -75.5645, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Norte' },
-    { id: 'ciudad-rio', name: 'Parque Lineal Ciudad del Río', sector: 'El Poblado', latitude: 6.2235, longitude: -75.5742, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Ciudad%20del%20Rio' },
-    { id: 'parque-lleras', name: 'Parque Lleras', sector: 'El Poblado', latitude: 6.2088, longitude: -75.5678, category: 'recreativos', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Lleras' },
-
-    // --- TECNOLOGÍA ---
-    { id: 'ruta-n', name: 'Complejo Ruta N (Innovación)', sector: 'Zona Norte', latitude: 6.2655, longitude: -75.5672, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Ruta%20N' },
-    { id: 'explora-tech', name: 'Parque Explora MakerSpace', sector: 'Zona Norte', latitude: 6.2709, longitude: -75.5658, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Parque%20Explora%20Tech' },
-    { id: 'mova', name: 'Centro de Innovación MOVA', sector: 'Zona Norte', latitude: 6.2682, longitude: -75.5638, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Centro%20MOVA' },
-    { id: 'vivero-software', name: 'Vivero del Software', sector: 'Belén', latitude: 6.2305, longitude: -75.5902, category: 'tecnologia', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Vivero%20del%20Software' },
-    { id: 'sena-ctma-tech', name: 'CTMA SENA - Automatización 4.0', sector: 'Complejo Norte', latitude: 6.3002955, longitude: -75.5682575, category: 'tecnologia', isSena: true, detailUrl: 'TrabajaconBeci.html?sede=ctma' },
-
-    // --- ARTE ---
-    { id: 'mamm', name: 'MAMM - Arte Moderno', sector: 'Ciudad del Río', latitude: 6.2232, longitude: -75.5748, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20de%20Arte%20Moderno%20MAMM' },
-    { id: 'museo-ant-arte', name: 'Museo de Antioquia (Galerías)', sector: 'Centro', latitude: 6.2529, longitude: -75.5689, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Museo%20de%20Antioquia' },
-    { id: 'teatro-tobon', name: 'Teatro Pablo Tobón Uribe', sector: 'La Candelaria', latitude: 6.2482, longitude: -75.5585, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Teatro%20Pablo%20Tobon%20Uribe' },
-    { id: 'palacio-cultura', name: 'Palacio de la Cultura Uribe Uribe', sector: 'Plaza Botero', latitude: 6.2519, longitude: -75.5679, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Palacio%20de%20la%20Cultura' },
-    { id: 'moravia-cultural', name: 'Centro Cultural Moravia', sector: 'Moravia', latitude: 6.2748, longitude: -75.5608, category: 'arte', isSena: false, detailUrl: 'NoTrabajaconBeci.html?lugar=Centro%20Cultural%20Moravia' }
-  ];
-
-  var ALL_PLACES_POOL = LUGARES_PRINCIPALES_BECI.slice();
-
   var map;
   var userPosition = null;
   var currentPlaces = [];
@@ -1059,7 +829,6 @@
   var watchId = null;
   var lastLocationUpdate = 0;
   var pinCard = null;
-  var resultCards = [];
 
   var userDot, userDotInner, userLabelMarker;
 
@@ -1069,8 +838,7 @@
     status: document.getElementById('beci-map-status'),
     searchInput: document.getElementById('beci-map-search-input'),
     searchIcon: document.querySelector('.beci-map-search-icon'),
-    locationBtn: document.getElementById('beci-location-btn'),
-    searchCardsLayer: document.getElementById('beci-search-cards-layer')
+    locationBtn: document.getElementById('beci-location-btn')
   };
 
   /* -------------------- Utilidades -------------------- */
@@ -1124,13 +892,13 @@
 
   var CATEGORY_RULES = [
     { key: 'educativos', matchTag: function (tags) { return AMENITY_IN(tags, ['school', 'university', 'college', 'library', 'training']); }, re: /escuela|colegio|instituto|universidad|sena|campus|biblioteca|academia|liceo|institucion educativa/ },
-    { key: 'deportivos', matchTag: function (tags) { return LEISURE_IN(tags, ['sports_centre', 'stadium', 'fitness_centre', 'pitch', 'playground']) || !!tags['sport']; }, re: /deportivo|estadio|gimnasio|cancha|coliseo|club deportivo|polideportivo|patinodromo/ },
-    { key: 'tecnologia', matchTag: function () { return false; }, re: /tecnol|ciencia|innovacion|innovación|investigaci|parque tecn|ctei|ruta n|software|mova/ },
-    { key: 'arte', matchTag: function (tags) { return TOURISM_IN(tags, ['gallery']) || AMENITY_IN(tags, ['arts_centre']); }, re: /arte|galeria|galería|museo|teatro|exposicion/ },
-    { key: 'cultura', matchTag: function (tags) { return TOURISM_IN(tags, ['museum', 'attraction']) || AMENITY_IN(tags, ['library', 'community_centre', 'arts_centre']); }, re: /museo|galer|teatro|biblioteca|cultural|centro|planetario|botanico/ },
-    { key: 'recreativos', matchTag: function (tags) { return LEISURE_IN(tags, ['park', 'garden']) || TOURISM_IN(tags, ['theme_park', 'zoo']); }, re: /parque|recrea|zona verde|jardin|jardín|plaza|unidad deportiva|pueblito/ },
-    { key: 'institucionales', matchTag: function (tags) { return tags['office'] === 'government' || AMENITY_IN(tags, ['public_building', 'townhall']); }, re: /alcaldia|alcaldía|gobernacion|gobernación|institucion|institución|entidad|secretaria|departamento|sede|alpujarra|concejo|terminal/ },
-    { key: 'salud', matchTag: function (tags) { return AMENITY_IN(tags, ['hospital', 'clinic', 'doctors']); }, re: /hospital|clinica|clínica|salud|centro de salud|cardio/ }
+    { key: 'deportivos', matchTag: function (tags) { return LEISURE_IN(tags, ['sports_centre', 'stadium', 'fitness_centre', 'pitch', 'playground']) || !!tags['sport']; }, re: /deportivo|estadio|gimnasio|cancha|coliseo|club deportivo|polideportivo/ },
+    { key: 'tecnologia', matchTag: function () { return false; }, re: /tecnol|ciencia|innovacion|investigaci|parque tecn|ctei/ },
+    { key: 'arte', matchTag: function (tags) { return TOURISM_IN(tags, ['gallery']) || AMENITY_IN(tags, ['arts_centre']); }, re: /arte|galeria|museo|teatro/ },
+    { key: 'cultura', matchTag: function (tags) { return TOURISM_IN(tags, ['museum', 'attraction']) || AMENITY_IN(tags, ['library', 'community_centre', 'arts_centre']); }, re: /museo|galer|teatro|biblioteca|cultural|centro/ },
+    { key: 'recreativos', matchTag: function (tags) { return LEISURE_IN(tags, ['park', 'garden']) || TOURISM_IN(tags, ['theme_park', 'zoo']); }, re: /parque|recrea|zona verde|jardin|plaza|unidad deportiva/ },
+    { key: 'institucionales', matchTag: function (tags) { return tags['office'] === 'government' || AMENITY_IN(tags, ['public_building']); }, re: /alcaldia|institucion|entidad|secretaria|departamento|sede/ },
+    { key: 'salud', matchTag: function () { return false; }, re: /salud publica|hospital universitario/ }
   ];
 
   function AMENITY_IN(tags, list) {
@@ -1158,9 +926,9 @@
 
   var BLACKLIST_NAME = [
     'restaurante', 'restaurant', 'cafe', 'bar', 'hotel', 'banco', 'bank',
-    'supermercado', 'supermarket', 'tienda',
+    'supermercado', 'supermarket', 'tienda', 'clinica', 'clínica', 'hospital',
     'iglesia', 'church', 'gasolinera', 'farmacia', 'drogueria', 'droguería',
-    'centro comercial', 'discoteca', 'estacion de servicio',
+    'centro comercial', 'discoteca', 'estacion de servicio', 'terminal',
     'parqueadero', 'parking'
   ];
 
@@ -1218,18 +986,18 @@
     arte: '🎨',
     recreativos: '🌳',
     institucionales: '🏛️',
-    salud: '🏥',
+    salud: '💚',
     otros: '📍'
   };
 
   var CATEGORY_LABELS = {
-    educativos: 'Educativo',
+    educativos: 'Escuela / Universidad',
     deportivos: 'Deportivo',
     tecnologia: 'Tecnología',
     arte: 'Arte y Cultura',
     cultura: 'Cultura',
-    recreativos: 'Recreativo',
-    institucionales: 'Institucional',
+    recreativos: 'Parque / Recreación',
+    institucionales: 'Institución',
     salud: 'Salud',
     otros: 'Lugar cercano'
   };
@@ -1253,7 +1021,7 @@
     }
     map = L.map('beci-map', {
       center: MEDELLIN,
-      zoom: 12,
+      zoom: 13,
       zoomControl: true
     });
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1262,21 +1030,10 @@
     }).addTo(map);
 
     setupControls();
-    setupSearch();
-
-    // Cargar inmediatamente los lugares principales más importantes al ingresar
-    loadPlacesForCategory('Todos', MEDELLIN);
-
     requestUserLocation();
 
-    map.on('click', function () {
-      closePinCard();
-      clearFloatingResultCards();
-    });
-    map.on('move zoom', function () {
-      positionPinCard();
-      updateFloatingResultCards();
-    });
+    map.on('click', closePinCard);
+    map.on('move zoom', positionPinCard);
 
     var resizeTimer = null;
     window.addEventListener('resize', function () {
@@ -1315,25 +1072,25 @@
     var now = Date.now();
     if (userPosition) {
       var moved = haversineMeters(userPosition, coords);
-      if (moved < 200 && (now - lastLocationUpdate) < 20000) return;
+      if (moved < 300 && (now - lastLocationUpdate) < 20000) return;
     }
     userPosition = coords;
     lastLocationUpdate = now;
     showUserLocation(coords);
-
-    // Actualizar lugares más cercanos a la ubicación real del usuario
-    loadPlacesForCategory(activeCategory, coords);
+    map.flyTo(coords, 15, { duration: 1.2 });
     findNearbyPlaces(coords);
   }
 
   function handleLocationError() {
-    showStatus('Ubicación predeterminada en Medellín. Mostrando lugares principales.', 4000);
-    if (!userPosition) {
-      userPosition = { lat: MEDELLIN.lat, lng: MEDELLIN.lng };
+    showStatus('No pudimos acceder a tu ubicación. Mostramos lugares cerca de Medellín.', 6000);
+    if (userPosition) {
+      showUserLocation(userPosition);
+      findNearbyPlaces(userPosition);
+      return;
     }
-    if (!currentPlaces || currentPlaces.length === 0) {
-      loadPlacesForCategory(activeCategory, MEDELLIN);
-    }
+    userPosition = { lat: MEDELLIN.lat, lng: MEDELLIN.lng };
+    map.flyTo([MEDELLIN.lat, MEDELLIN.lng], 14, { duration: 1 });
+    findNearbyPlaces(MEDELLIN);
   }
 
   /* Marcador rosa de "Estás aquí" + etiqueta */
@@ -1403,11 +1160,8 @@
 
   function aggregateNearbyPlaces(elements, origin) {
     var seen = {};
-    ALL_PLACES_POOL.forEach(function (p) {
-      seen[normalizeText(p.name)] = true;
-    });
+    var candidates = [];
 
-    var added = false;
     elements.forEach(function (el_) {
       if (el_.tags && typeof el_.tags !== 'object') return;
       var tags = el_.tags || {};
@@ -1415,133 +1169,45 @@
       if (!name) return;
       if (!isRelevantPlace(name, tags)) return;
 
-      var norm = normalizeText(name);
-      if (seen[norm]) return;
-      seen[norm] = true;
-
       var lat, lng;
       if (el_.type === 'node') { lat = el_.lat; lng = el_.lon; }
       else if (el_.center || typeof el_.center === 'object') { lat = el_.center.lat; lng = el_.center.lon; }
       else if (el_.lat) { lat = el_.lat; lng = el_.lon; }
       if (!lat || !lng) return;
 
+      var id = el_.type + '-' + el_.id;
+      if (seen[id]) return;
+      seen[id] = true;
+
       var meters = haversineMeters(origin, { lat: lat, lng: lng });
-      var isSena = identifySenaPlace(name);
-      ALL_PLACES_POOL.push({
-        id: 'osm-' + el_.type + '-' + el_.id,
+      candidates.push({
+        id: id,
         name: name,
-        sector: 'Cercano a ti',
         latitude: lat,
         longitude: lng,
         tags: tags,
         straightDistance: meters,
-        isSena: isSena,
+        isSena: identifySenaPlace(name),
         category: getPlaceCategory(name, tags),
-        detailUrl: resolveDetailUrl(name, isSena),
-        walkingDistance: null
-      });
-      added = true;
-    });
-
-    if (added) {
-      loadPlacesForCategory(activeCategory, origin);
-    }
-  }
-
-  /* -------------------- Búsqueda por nombre (mínimo 5 km) -------------------- */
-
-  function escapeRegex(str) {
-    return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  function searchByNameViaOverpass(term) {
-    clearPlaces();
-    showStatus('Buscando "' + term + '" en un radio de ' + (SEARCH_RADIUS_METERS / 1000) + ' km...');
-    var center = userPosition || MEDELLIN;
-    var q = escapeRegex(normalizeText(term));
-    var query =
-      '[out:json][timeout:30];(' +
-      'node["name"~"' + q + '",i](around:' + SEARCH_RADIUS_METERS + ',' + center.lat + ',' + center.lng + ');' +
-      'way["name"~"' + q + '",i](around:' + SEARCH_RADIUS_METERS + ',' + center.lat + ',' + center.lng + ');' +
-      ');out center;';
-
-    return fetch('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: 'data=' + encodeURIComponent(query)
-    })
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        aggregateNearbyPlaces(data.elements || [], center);
-        if (!currentPlaces.length) {
-          showStatus('No encontramos "' + term + '" en un radio de ' + (SEARCH_RADIUS_METERS / 1000) + ' km. Probamos en toda la ciudad...', 4500);
-          return false;
-        }
-        activeCategory = 'Todos';
-        resetSearchPills();
-        applyCategoryFilter('Todos');
-        var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
-        map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
-        selectPlace(currentPlaces[0]);
-        renderFloatingResultCards(currentPlaces);
-        showStatus(currentPlaces.length + ' lugares encontrados para "' + term + '".', 4500);
-        return true;
-      })
-      .catch(function () {
-        showStatus('No pudimos completar esa búsqueda. Probamos en toda la ciudad...', 4500);
-        return false;
-      });
-  }
-
-  /* -------------------- Todas las sedes SENA (beci-data.js) -------------------- */
-
-  function isSenaQuery(query) {
-    var q = normalizeText(query);
-    return !!q && q.indexOf('sena') !== -1;
-  }
-
-  function buildPlacesFromSenaData() {
-    var origin = userPosition || MEDELLIN;
-    var places = [];
-    Object.keys(SENA_SEDES_DATA).forEach(function (key) {
-      var d = SENA_SEDES_DATA[key];
-      if (!d || typeof d.lat === 'undefined') return;
-      places.push({
-        id: 'sede-' + key,
-        name: d.nombre,
-        latitude: d.lat,
-        longitude: d.lng,
-        tags: {},
-        straightDistance: haversineMeters(origin, { lat: d.lat, lng: d.lng }),
-        isSena: true,
-        category: getPlaceCategory(d.nombre, {}),
-        detailUrl: SENA_PAGE + '?sede=' + key,
+        detailUrl: resolveDetailUrl(name, identifySenaPlace(name)),
         walkingDistance: null
       });
     });
-    return places;
-  }
 
-  function searchSenaSedes() {
-    var places = buildPlacesFromSenaData();
-    clearPlaces();
-    currentPlaces = places;
-    if (!currentPlaces.length) {
-      showStatus('No tenemos coordenadas de las sedes del SENA todavía.', 5000);
+    candidates.sort(function (a, b) { return a.straightDistance - b.straightDistance; });
+    currentPlaces = candidates.slice(0, MAX_PLACES);
+
+    if (currentPlaces.length === 0) {
+      showStatus('No encontramos lugares relevantes cerca de tu ubicación.', 5000);
       return;
     }
-    activeCategory = 'Todos';
-    resetSearchPills();
+
     currentPlaces.forEach(function (p) {
       renderPlaceMarker(p);
       calculateWalkingDistance(p);
     });
-    applyCategoryFilter('Todos');
-    var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
-    map.fitBounds(bounds, { padding: [60, 60], maxZoom: 12 });
-    selectPlace(currentPlaces[0]);
-    renderFloatingResultCards(currentPlaces);
-    showStatus(currentPlaces.length + ' sedes del SENA en Medellín y su área metropolitana.', 5000);
+
+    applyCategoryFilter(activeCategory);
   }
 
   /* -------------------- Distancia caminando (OSRM) -------------------- */
@@ -1603,7 +1269,7 @@
     marker.place = place;
     marker.on('click', function () {
       selectPlace(place);
-      map.flyTo([place.latitude, place.longitude], Math.min(Math.max(map.getZoom(), 14), 15), { duration: 1 });
+      map.flyTo([place.latitude, place.longitude], Math.max(map.getZoom(), 16), { duration: 1 });
       showPinCard(place);
     });
     marker._defaultIcon = icon;
@@ -1648,7 +1314,6 @@
 
   function clearPlaces() {
     closePinCard();
-    clearFloatingResultCards();
     currentPlaces.forEach(function (p) {
       if (p.marker) {
         map.removeLayer(p.marker);
@@ -1657,242 +1322,6 @@
     });
     currentPlaces = [];
     selectedPlace = null;
-  }
-
-  /* -------------------- Cards flotantes sobre los pines -------------------- */
-
-  function renderFloatingResultCards(places) {
-    clearFloatingResultCards();
-    if (!map || !el.searchCardsLayer) return;
-
-    (places || []).forEach(function (place) {
-      var info = placeStatusInfo(place);
-
-      var card = document.createElement('div');
-      card.className = 'beci-search-card';
-
-      var row = document.createElement('div');
-      row.className = 'rc-row';
-
-      var photo = document.createElement('img');
-      photo.className = 'rc-photo';
-      photo.alt = place.name;
-      photo.src = getCategoryPhoto(place.category);
-
-      var main = document.createElement('div');
-      main.className = 'rc-main';
-
-      var name = document.createElement('p');
-      name.className = 'rc-name';
-      name.textContent = place.name;
-
-      var meta = document.createElement('p');
-      meta.className = 'rc-meta';
-      meta.textContent = (CATEGORY_LABELS[place.category] || CATEGORY_LABELS['otros']) +
-        ' · ' + formatDistance(place.straightDistance);
-
-      main.appendChild(name);
-      main.appendChild(meta);
-      row.appendChild(photo);
-      row.appendChild(main);
-      card.appendChild(row);
-
-      var status = document.createElement('div');
-      status.className = 'rc-status ' + info.colorClass;
-      var dot = document.createElement('span');
-      dot.className = 'rc-dot';
-      var txt = document.createElement('span');
-      txt.textContent = info.text;
-      status.appendChild(dot);
-      status.appendChild(txt);
-      card.appendChild(status);
-
-      card.addEventListener('click', function () {
-        navigateToDetailPage(place);
-      });
-
-      el.searchCardsLayer.appendChild(card);
-      resultCards.push({ place: place, element: card });
-    });
-    updateFloatingResultCards();
-  }
-
-  function updateFloatingResultCards() {
-    if (!map || !el.searchCardsLayer || !resultCards.length) return;
-
-    var MARGIN = 10;
-    var mapW = el.map.clientWidth;
-    var mapH = el.map.clientHeight;
-
-    // Obtener información geométrica de cada card respecto a la pantalla
-    var items = resultCards.map(function (entry) {
-      var p = map.latLngToContainerPoint([entry.place.latitude, entry.place.longitude]);
-      var cardW = entry.element.offsetWidth || 195;
-      var cardH = entry.element.offsetHeight || 78;
-      return {
-        entry: entry,
-        pinX: p.x,
-        pinY: p.y,
-        w: cardW,
-        h: cardH,
-        x: 0,
-        y: 0,
-        dir: 'tail-bottom'
-      };
-    });
-
-    var placedBoxes = [];
-
-    // Para cada card, evaluar la mejor posición:
-    // 1. TOP (sobre la ubicación)
-    // 2. RIGHT (al lado derecho)
-    // 3. LEFT (al lado izquierdo)
-    // 4. BOTTOM (debajo)
-    // Garantizando siempre que la card NO tape el icono del pin (altura 32px, ancho 28px)
-    items.forEach(function (item) {
-      var px = item.pinX;
-      var py = item.pinY;
-      var w = item.w;
-      var h = item.h;
-
-      var slots = [
-        {
-          name: 'top',
-          dir: 'tail-bottom',
-          x: px - w / 2,
-          y: py - 42 - h, // Card bottom queda a py - 42 (10px arriba del pin que mide 32px)
-          basePenalty: 0
-        },
-        {
-          name: 'right',
-          dir: 'tail-left',
-          x: px + 26,      // Card left queda a 12px a la derecha del borde del pin (ancho 28px)
-          y: py - 16 - h / 2,
-          basePenalty: 15
-        },
-        {
-          name: 'left',
-          dir: 'tail-right',
-          x: px - 26 - w,  // Card right queda a 12px a la izquierda del borde del pin
-          y: py - 16 - h / 2,
-          basePenalty: 25
-        },
-        {
-          name: 'bottom',
-          dir: 'tail-top',
-          x: px - w / 2,
-          y: py + 12,      // Card top queda 12px debajo de la punta del pin
-          basePenalty: 45
-        }
-      ];
-
-      var bestSlot = null;
-      var bestScore = Infinity;
-
-      slots.forEach(function (slot) {
-        var sx = slot.x;
-        var sy = slot.y;
-        var score = slot.basePenalty;
-
-        // Penalización si se sale de la pantalla
-        if (sx < MARGIN) score += (MARGIN - sx) * 6 + 300;
-        if (sx + w > mapW - MARGIN) score += ((sx + w) - (mapW - MARGIN)) * 6 + 300;
-        if (sy < MARGIN) score += (MARGIN - sy) * 6 + 400;
-        if (sy + h > mapH - MARGIN) score += ((sy + h) - (mapH - MARGIN)) * 6 + 400;
-
-        // Penalización si se solapa con cards ya ubicadas
-        placedBoxes.forEach(function (pb) {
-          var ox = Math.min(sx + w, pb.x + pb.w) - Math.max(sx, pb.x);
-          var oy = Math.min(sy + h, pb.y + pb.h) - Math.max(sy, pb.y);
-          if (ox > 0 && oy > 0) {
-            score += (ox * oy) * 3 + 1200;
-          }
-        });
-
-        // Penalización si tapa otros pines en el mapa
-        items.forEach(function (other) {
-          if (other === item) return;
-          var pinL = other.pinX - 16;
-          var pinR = other.pinX + 16;
-          var pinT = other.pinY - 34;
-          var pinB = other.pinY + 4;
-          var ox = Math.min(sx + w, pinR) - Math.max(sx, pinL);
-          var oy = Math.min(sy + h, pinB) - Math.max(sy, pinT);
-          if (ox > 0 && oy > 0) {
-            score += 1000;
-          }
-        });
-
-        if (score < bestScore) {
-          bestScore = score;
-          bestSlot = slot;
-        }
-      });
-
-      item.x = bestSlot.x;
-      item.y = bestSlot.y;
-      item.dir = bestSlot.dir;
-
-      placedBoxes.push({ x: item.x, y: item.y, w: w, h: h });
-    });
-
-    // Relajación suave en caso de que aún exista alguna coincidencia parcial
-    for (var iter = 0; iter < 8; iter++) {
-      var moved = false;
-      for (var i = 0; i < items.length; i++) {
-        for (var j = i + 1; j < items.length; j++) {
-          var a = items[i];
-          var b = items[j];
-          var ox = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
-          var oy = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
-          if (ox > 0 && oy > 0) {
-            moved = true;
-            if (ox < oy) {
-              var shiftX = (ox / 2) + 5;
-              if (a.pinX <= b.pinX) { a.x -= shiftX; b.x += shiftX; }
-              else { a.x += shiftX; b.x -= shiftX; }
-            } else {
-              var shiftY = (oy / 2) + 5;
-              if (a.pinY <= b.pinY) { a.y -= shiftY; b.y += shiftY; }
-              else { a.y += shiftY; b.y -= shiftY; }
-            }
-          }
-        }
-      }
-      if (!moved) break;
-    }
-
-    // Aplicar coordenadas finales, clases y cálculo exacto del triangulito indicador
-    items.forEach(function (item) {
-      item.x = Math.max(MARGIN, Math.min(item.x, mapW - item.w - MARGIN));
-      item.y = Math.max(MARGIN, Math.min(item.y, mapH - item.h - MARGIN));
-
-      var elCard = item.entry.element;
-      elCard.style.left = item.x + 'px';
-      elCard.style.top  = item.y + 'px';
-
-      elCard.classList.remove('tail-bottom', 'tail-top', 'tail-left', 'tail-right');
-      elCard.classList.add(item.dir);
-
-      // Posicionar el triangulito para que apunte exactamente al pin
-      if (item.dir === 'tail-bottom' || item.dir === 'tail-top') {
-        var tailX = Math.max(16, Math.min(item.w - 16, item.pinX - item.x));
-        elCard.style.setProperty('--sc-tail-x', tailX + 'px');
-      } else {
-        var tailY = Math.max(14, Math.min(item.h - 14, (item.pinY - 16) - item.y));
-        elCard.style.setProperty('--sc-tail-y', tailY + 'px');
-      }
-    });
-  }
-
-  function clearFloatingResultCards() {
-    if (!el.searchCardsLayer) return;
-    resultCards.forEach(function (entry) {
-      if (entry.element && entry.element.parentNode) {
-        entry.element.parentNode.removeChild(entry.element);
-      }
-    });
-    resultCards = [];
   }
 
   /* -------------------- Tarjeta emergente del pin -------------------- */
@@ -2009,73 +1438,37 @@
     pinCard = null;
   }
 
-  /* ============================================================
-     CARGA Y FILTRADO DE LUGARES POR CATEGORÍA
-     Ordenados por proximidad al usuario
-     ============================================================ */
-  function loadPlacesForCategory(category, targetCenter) {
-    targetCenter = targetCenter || userPosition || MEDELLIN;
-    var norm = normalizeText(category);
-    var isAll = category === 'Todos' || norm === 'todos' || !category;
-    activeCategory = isAll ? 'Todos' : norm;
-
-    // Calcular distancia en línea recta de todos los lugares en el pool al usuario
-    ALL_PLACES_POOL.forEach(function (p) {
-      p.straightDistance = haversineMeters(targetCenter, { lat: p.latitude, lng: p.longitude });
-    });
-
-    // Filtrar y ordenar por distancia (más cercanos primero)
-    var pool = [];
-    if (activeCategory === 'Todos') {
-      // Para "Todos": ordenar por proximidad al usuario y tomar los 6 principales
-      pool = ALL_PLACES_POOL.slice().sort(function (a, b) {
-        return a.straightDistance - b.straightDistance;
-      }).slice(0, 6);
-    } else {
-      pool = ALL_PLACES_POOL.filter(function (p) {
-        var cat = p.category || getPlaceCategory(p.name, p.tags);
-        return cat === activeCategory;
-      }).sort(function (a, b) {
-        return a.straightDistance - b.straightDistance;
-      }).slice(0, 6);
-    }
-
-    clearPlaces();
-    currentPlaces = pool;
-
-    if (!currentPlaces.length) {
-      showStatus('No encontramos lugares de ' + (category || 'esta categoría') + ' registrados.', 3500);
-      return;
-    }
-
-    currentPlaces.forEach(function (p) {
-      renderPlaceMarker(p);
-      calculateWalkingDistance(p);
-    });
-
-    // Renderizar inmediatamente las cards flotantes con sus triangulitos
-    renderFloatingResultCards(currentPlaces);
-
-    // Ajustar mapa
-    if (currentPlaces.length === 1) {
-      map.flyTo([currentPlaces[0].latitude, currentPlaces[0].longitude], 14, { duration: 0.9 });
-    } else {
-      var bounds = L.latLngBounds(currentPlaces.map(function (p) { return [p.latitude, p.longitude]; }));
-      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
-    }
-
-    var label = category || 'Todos';
-    if (label === 'Todos') {
-      showStatus('Lugares principales más cercanos a ti.', 2200);
-    } else {
-      showStatus('Lugares de ' + label + ' más cercanos a ti.', 2500);
-    }
-  }
-
   /* -------------------- Filtro por categoría -------------------- */
 
   function applyCategoryFilter(category) {
-    loadPlacesForCategory(category, userPosition || MEDELLIN);
+    activeCategory = category;
+    var isAll = category === 'Todos';
+    var cat = isAll ? null : category.toLowerCase();
+    currentPlaces.forEach(function (p) {
+      var visible = isAll || p.category === cat;
+      if (p.marker) {
+        if (visible && !map.hasLayer(p.marker)) p.marker.addTo(map);
+        if (!visible && map.hasLayer(p.marker)) map.removeLayer(p.marker);
+      }
+    });
+  }
+
+  /* Re-centra el mapa sobre los pines visibles del filtro activo */
+  function fitMapToVisiblePlaces() {
+    if (!map) return;
+    if (activeCategory === 'Todos') {
+      var base = userPosition || MEDELLIN;
+      map.flyTo([base.lat, base.lng], userPosition ? 15 : 14, { duration: 0.9 });
+      return;
+    }
+    var visible = currentPlaces.filter(function (p) { return p.category === activeCategory; });
+    if (!visible.length) return;
+    if (visible.length === 1) {
+      map.flyTo([visible[0].latitude, visible[0].longitude], 16, { duration: 0.9 });
+    } else {
+      var bounds = L.latLngBounds(visible.map(function (p) { return [p.latitude, p.longitude]; }));
+      map.fitBounds(bounds, { padding: [40, 60] });
+    }
   }
 
   function setupCategoryPills() {
@@ -2093,9 +1486,8 @@
         pill.style.background = '#062573';
         pill.style.color = '#fff';
         closePinCard();
-
-        var catName = pill.textContent.trim();
-        loadPlacesForCategory(catName, userPosition || MEDELLIN);
+        applyCategoryFilter(pill.textContent.trim());
+        fitMapToVisiblePlaces();
       });
     });
   }
@@ -2139,13 +1531,11 @@
     if (matches.length === 1) {
       focusMapOnPlace(matches[0]);
       selectPlace(matches[0]);
-      showPinCard(matches[0]);
       showStatus('Encontrado en tu zona: ' + matches[0].name, 3500);
     } else {
       var bounds = L.latLngBounds(matches.map(function (m) { return [m.latitude, m.longitude]; }));
-      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
+      map.fitBounds(bounds, { padding: [40, 60] });
       selectPlace(matches[0]);
-      showPinCard(matches[0]);
       showStatus(matches.length + ' lugares coinciden con "' + query + '"', 3500);
     }
     return true;
@@ -2153,17 +1543,9 @@
 
   function textSearchPlace(query) {
     closePinCard();
-    clearFloatingResultCards();
-    if (isSenaQuery(query)) { searchSenaSedes(); return; }
     if (searchLocalMatches(query)) return;
     showStatus('Buscando "' + query + '"...');
-    searchByNameViaOverpass(query).then(function (found) {
-      if (!found) queryNominatim(query);
-    });
-  }
-
-  function queryNominatim(query) {
-    var url = 'https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=co&polygon_geojson=0&viewbox=-75.80,6.40,-75.30,6.00&bounded=0&q=' +
+    var url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=co&polygon_geojson=0&q=' +
       encodeURIComponent(query);
     fetch(url, { headers: { 'Accept': 'application/json' } })
       .then(function (res) { return res.json(); })
@@ -2201,7 +1583,6 @@
     renderPlaceMarker(place);
     calculateWalkingDistance(place);
     selectPlace(place);
-    renderFloatingResultCards([place]);
   }
 
   function resetSearchPills() {
@@ -2222,7 +1603,7 @@
   }
 
   function focusMapOnPlace(place) {
-    map.flyTo([place.latitude, place.longitude], 14, { duration: 1.2 });
+    map.flyTo([place.latitude, place.longitude], 16, { duration: 1.4 });
   }
 
   /* -------------------- Navegación al detalle -------------------- */
@@ -2255,7 +1636,7 @@
             userPosition = coords;
             lastLocationUpdate = Date.now();
             showUserLocation(coords);
-            map.flyTo(coords, 14, { duration: 1.2 });
+            map.flyTo(coords, 15, { duration: 1.2 });
             findNearbyPlaces(coords);
             showStatus('Tu ubicación fue actualizada.', 3000);
           },

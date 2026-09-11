@@ -1,0 +1,335 @@
+<!DOCTYPE html><html class="h-full" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Beci - Tus Insignias Obtenidas</title>
+<!-- Tailwind CSS CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: DM Sans & Poppins -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"DM Sans"', 'sans-serif'],
+            sans: ['"Poppins"', 'sans-serif'],
+          },
+          colors: {
+            beciNavy: '#0F265C',
+            beciPurple: '#6D44C8',
+            beciTagGray: '#9FA5B2',
+            beciPink: '#FF2E79',
+          },
+          boxShadow: {
+            'card': '0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02)',
+            'capsule': '0 2px 6px rgba(109, 68, 200, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .font-dmsans-black {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+    }
+    .beci-bg-surface {
+      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCor9X3mWlgMR9TTpskhIBFlWEIhozRS_zajrt_bFz0UBGeZzcG9PwKg3BnwGPUXFyokdZlC1mF2alrcjHbV6Kt1hp1ABuWVU8UoLljCvI6Zz6GZWyhMofJnHoU0Hkdl56SUv83llS47pGef85OZ4uriuhn_eCMhW-62SfJDVzkUCwCNXSiQ657sC3zLxDBjImQGE9oomfOsn3ofef0zdAAoQV2B8uY4JwlXamP2Jgm9Sxd42j7GnH91eX_LpmDfz4ktd8');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #faf8ff;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="beci-bg-surface min-h-full flex flex-col text-slate-800 selection:bg-purple-200 antialiased">
+<!-- BEGIN: Desktop & Tablet Navigation Header -->
+<header class="hidden md:flex sticky top-0 w-full z-50 px-6 lg:px-12 py-3.5 bg-white/80 backdrop-blur-md border-b border-white/60 shadow-sm" data-purpose="desktop-navbar">
+<div class="w-full max-w-7xl mx-auto flex items-center justify-between">
+<a class="flex items-center gap-2 group" href="#inicio">
+<img alt="Beci Logo" class="h-11 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5nAzhiUydmTrZXpyd_yQ2f29GgmR9Ww6DsUqaR1Z5qEAJGhB9eU27lKO04cApqfwZWsu1Wqh1YhQ1J9oFPR-mE0s_-CiQLNJeT8DawDlIAF1Eici6LCoJ5njFWlqYq61HCTPshzzOMLjdIGjxXqfV3QwDkzCdskChlCfXvBv8xUkIFmTCtxaI2dI2pqHS2yzYg_qsk6wrA2XWOPHCC-M8_dwIJ7ZzJL54KHXtTE17sa80Xki1j_aIG6R0MDBan0Ck-7s">
+</a>
+<nav class="flex items-center gap-2 lg:gap-3">
+<a class="flex items-center gap-2 px-4 py-2 rounded-full font-medium text-[14px] text-[#623EBE] bg-purple-50/90 hover:bg-purple-100/70 transition-colors shadow-sm" href="#inicio">
+<svg class="w-4 h-4 stroke-[2] stroke-current fill-none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+<span class="">Inicio</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2 rounded-full font-medium text-[14px] text-[#1E293B] hover:bg-white/70 hover:text-[#623EBE] transition-colors" href="#favoritos">
+<svg class="w-4 h-4 fill-current stroke-current" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<span class="">Tus Favoritos</span>
+</a>
+<a class="flex items-center gap-1.5 px-4 py-2 rounded-full font-semibold text-[14px] text-[#7839EE] hover:bg-white/70 transition-colors" href="#sobre-beci">
+<span class="font-extrabold tracking-tight">Beci</span>
+<span class="font-normal text-slate-700">Sobre Beci</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2 rounded-full font-medium text-[14px] text-[#64748B] hover:bg-white/70 hover:text-slate-800 transition-colors" href="#ayuda">
+<svg class="w-4 h-4 stroke-[2] stroke-current fill-none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+</svg>
+<span class="">¿Te ayudamos?</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2 rounded-full font-medium text-[14px] text-[#64748B] hover:bg-white/70 hover:text-slate-800 transition-colors" href="#perfil">
+<svg class="w-4 h-4 stroke-[2] stroke-current fill-none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+<span class="">Vecino</span>
+</a>
+</nav>
+</div>
+</header>
+<!-- END: Desktop & Tablet Navigation Header -->
+<!-- BEGIN: Main Responsive Page Content -->
+<main class="w-full flex-1 flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-3 md:pt-8 pb-28 md:pb-16">
+<div class="w-full max-w-7xl mx-auto flex flex-col items-center">
+<!-- Mobile Top Logo Only -->
+<header class="w-full flex py-2 md:hidden justify-start" data-purpose="app-header">
+<div class="w-36 h-20 relative flex items-center justify-center">
+<img alt="Beci Logo" class="w-full h-auto object-contain drop-shadow-sm pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK7cUEU1BZlOQak6DUL2ToacG2BOEOzYqxnGDuWZdGkZz0hGHgUNEW6f6jjwfLdS92mFtagZAFf11yrFsjrPDQlFThV1PeOBet12cP82bm6TGNNYOQTlSzjiPimwpBYpC_EycCKNkA_FL4oYlQ1hfdjgXKgAEjItGVkt8PkJJTb8Hv-cx0DTZSc3GV4881mdOEuLshd2Q08nIqJiSo9ngL8PJBFYDS7INDWuv-gtUexXTgfBDGft4UZLB1pJQT3PPLjDk">
+</div>
+</header>
+<!-- Profile Header Card Section -->
+<section class="w-full flex justify-center mt-4 md:mt-2" data-purpose="user-profile-section">
+<div class="relative bg-white/95 backdrop-blur-md rounded-[32px] md:rounded-[36px] shadow-card border border-white/90 pt-4 pb-4 px-6 md:px-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 w-full max-w-[370px] sm:max-w-lg md:max-w-xl lg:max-w-2xl transition-all">
+<div class="relative -mt-12 sm:-mt-10 md:-mt-14 mb-1 flex-shrink-0">
+<div class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden shadow-md bg-white border-4 border-white">
+<img alt="Foto de perfil del usuario" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdMDUbyv58l5X3-iSLsJ1c9CTqA3P0um1CmEzuhayeOkY53aXJee-P4NhyrJgRB2g7APdjRp6xPQb1t_Ycx-T_oH1OLshtz5pMcIyInawfLUquX1PVBk3VqCvr7-DjJbpMmPkLxCH9-tdhs8MSWsi3x9IVhYcwDQGB7t3QZ7f8oVl3n0OM4cnFtXZ60gvGhmljvKpaPJOCBbOhBED7daEWoPr013ucJ5CWhdwrAs3_1YlTYFPhqe9fusqyg9HZohRC_qs">
+</div>
+<button aria-label="Ver detalles de nivel" class="absolute bottom-0 right-0 backdrop-blur-md bg-white/80 border border-white shadow-sm rounded-full p-1.5 flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer" type="button">
+<img alt="Medalla de nivel 3D" class="w-6 h-6 object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.15)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk71Xfqt7TsZ2qiuTydm3_m_tCQXsm3x3oP3OU9MH7fBNN1TsWM4Ry5WzpETvsLqpeSYhSOPWt3Wp0iV6pVXLUlphVMXklV2bQSJE_PS68AkbEuM-f5GrO37VJGmczXCr8a_Jui2IrBxwlQudyHBxuNBleY7J1SU1DZ9EPXxuBGkoc_zhzr5SfZuj_aOtOxPFmoqouWA412la9pb3Snin8ty1UJftMUsSYw3PhMEfibD5SfNZ49dv8zOLTkVBwO-V_2T5tYco13en7-j8">
+</button>
+</div>
+<div class="text-center sm:text-left flex flex-col items-center sm:items-start">
+<div class="flex items-center gap-2">
+<span class="text-base md:text-lg font-bold text-slate-800 tracking-tight">Jacob Montes</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-[#6D44C8]">Nivel 1</span>
+</div>
+<p class="text-[12px] md:text-[13px] text-slate-500 font-medium">Vecino activo en la comunidad</p>
+</div>
+</div>
+</section>
+<!-- Screen Title with Characteristic Underline -->
+<section class="mt-5 mb-5 md:mt-7 md:mb-8 text-center px-4" data-purpose="screen-title">
+<h1 class="font-dmsans-black text-[26px] sm:text-3xl md:text-[34px] lg:text-[38px] leading-[1.15] text-[#0A0D14] tracking-tight">
+          Tus Insignias Obtenidas
+        </h1>
+<div class="mt-2.5 flex justify-center">
+<div class="w-24 h-1.5 bg-[#14327A] rounded-full"></div>
+</div>
+</section>
+<!-- Responsive Badges Grid -->
+<section class="w-full grid grid-cols-1 gap-3.5 sm:gap-4 lg:gap-6 lg:max-w-2xl md:max-w-xl mx-auto" data-purpose="badges-list">
+<!-- 1. Principiante (Unlocked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Estrella Dorada" class="w-12 h-12 sm:w-14 sm:h-14 object-contain drop-shadow-md group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDff2YkRwM44paQrBDxeAap6ojhLqWSTIvxy5OvwA7FuO3zHoEQ_Iz14JZa-7UjeUFfiB9l5tgL7U6SknbvlBvB335BhF_z5DVcLDWr1PLtXpj2yxetbc5Lwv4gYzwhszaDGJE5MOJXkKVCwd_7yAfG6VYI9HzRrGZK4skNs4yl4rtnxAYCQNc7zVWejBRkfxPqh-t63JYhwgM2w1K6Msh8m1XF0DUL1wNox8l0dZu1fhqbaj2KBy53u68S7NCBEMrrpdc">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-gradient-to-r from-[#623EBE] to-[#7B4BD6] text-white text-[11.5px] sm:text-[12px] font-semibold px-3.5 py-0.5 rounded-full shadow-capsule tracking-wide">
+                Principiante
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Veci! ¡Ya tienes una insignia!, sigue explorando con nosotros y sube de rango.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Completado" class="w-10 h-10 sm:w-11 sm:h-11 object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8NvSXcv2Ybyb4NwTfAd0TvBRstEzQv_B4_xINW2f-o4BoDya88RkjtcNtP_s9jHXaZbydh5uINoW37X10oaZCZghRnFRzlTX4dqRLBdh8-EsJh_ws91PNfA_soe-J3MNvQm7SaiNzcUY-sIdi5Q5NN4mW-OzqTJwd6LLqF5rLsEyLIyjcmm85mw2rJ_iKoHYKFibzSl16EOKCeYtBpMVX8iaSI8SKwtoV3P_4tyXqSyKsh73_ukk7R_s66NTnmVsxfz4">
+</div>
+</article>
+<!-- 2. Destino Favorito (Locked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada" class="w-11 h-11 sm:w-12 sm:h-12 object-contain opacity-90 drop-shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7qFkwgSiUzXkNR1uKJXOBU0z2W_1TJcZkHomQ1E-8_8vmNF2PksBdVuUd2eHo2P1r9SoP2QNXqutmwN6p988vbSPW_QvSB73_k7kqtGrsHU2YszhAlVeP0j1KONnSeEHEzzMY8cRKY_stYD_o9UFR2pCst2V4jCxrh8-Om-YR0Zohm46KiXwoPJdD-fI0CaSqdq-zKlnHA5KQzcpTKYBk2KeQyXkRU9dR5TY41C-KsSf-nPOKs0tctmALb3-Y53elIoI">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-[#A4ABB8] text-white text-[11px] sm:text-[11.5px] font-medium px-3.5 py-0.5 rounded-full tracking-wide">
+                Destino Favorito
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Veci! Guarda tu primera institución como favorita.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Bloqueado" class="w-9 h-9 sm:w-10 sm:h-10 object-contain opacity-80 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzWKM2OrLBm8DCX1zbuLDrIFqEQRCcScNaob5Xh83dYd8GpqHEipLAjEVNab3Imex2Vs2Qxk0dXJ-RE_7jsTplZzz6I6qd679s-i1cGnGw-BmXt8W2KaNUqk_E_4wkVn1j9JRN8ReUHgxsZ2puuGz5evY3S4A_1hAJ5KENsg7FUEEEjBLPkW-ybAs-9hD6C5VEWE-ZUs9saJwfmY8OVXv5Kg4R54qG4PKjKM42idb31g2iTnuHAv5ZhJ-rezQRXoC7t6U">
+</div>
+</article>
+<!-- 3. Puertas Abiertas (Locked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada" class="w-11 h-11 sm:w-12 sm:h-12 object-contain opacity-90 drop-shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-HVlIbgE9sSh9cxV3-ajCMEGbe09S2C62PtCOmjaO07Tl3MbXtqQRhQYDeTDP3oCh9GducuvXu2N4j0nN5dIh2wUGw7R4SBQ_ef_-gwKETw7NsSWt4HA_QJWg5PvqCkuNQTKjtPmF7nslapDHQILI-Yc2urXoW2etpwU0-Xjv7sG_AJSqW-lu12aja0Xl0gCZQFr-YmbR-qloJzuEBBC1SxIO-XvkIGJFqwsT5uWv676TEXrB1F7sVQooCZ4_Q57skh8">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-[#A4ABB8] text-white text-[11px] sm:text-[11.5px] font-medium px-3.5 py-0.5 rounded-full tracking-wide">
+                Puertas Abiertas
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Que esperas Veci!, explora tu primera institución.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Bloqueado" class="w-9 h-9 sm:w-10 sm:h-10 object-contain opacity-80 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjnjR1YLSC6BGX8WFhvDYfRS5X5cn_e6bXaHmjdZpiWX2xK_6I_rhq28DHB2boHf0obnWn4X1R7_9k0YNqsySiiWs7PUncJes0VWuYPns1zWAuDNU8Y1QjhespAg4BRjKmHEfSN_AakVr2Sh9Wv964GV8jAfhfCyaNNhDLm3jRTIRGA1rqCH0t2A4zTt1vHMz5q1Pad_pGjqJWoZ7C9gzV1C8XKOtcG0Ap_OwEWhFYzeu0Y27gX8ejRLqiliX7ccmipAk">
+</div>
+</article>
+<!-- 4. Mirada Curiosa (Locked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada" class="w-11 h-11 sm:w-12 sm:h-12 object-contain opacity-90 drop-shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi_ytpnmCzIuYMliLhcvHbyqD1f6ggmWXepCVsEZdCkOOpNvDqXeoJMnfSx_poRLGNZRmWRJg_9pXgwcwQ1sfbr1RdJ8n1qqbhJ2mpJQeeybr1ZyFajjUTm2DDEwDC4WeWTHqg8OnXIPccA-4bb06AeYANh0jJAwE2v3_FOHrtb_21RtdJX16gBXr3KsRFAs29b97UScoms1h182NshAbp_WQbE4umOvKSCWMyL-RH678K3tuPLnbA7UB6mO29cRy4ZN4">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-[#A4ABB8] text-white text-[11px] sm:text-[11.5px] font-medium px-3.5 py-0.5 rounded-full tracking-wide">
+                Mirada Curiosa
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Veci! échale un ojo al perfil de 5 instituciones destacadas.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Bloqueado" class="w-9 h-9 sm:w-10 sm:h-10 object-contain opacity-80 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxScPZ-xTot8hFXEilpvRtsdGPp8Ejr-FbTaH1o71oyWryEUIENRj5nloMVBUwLZquZbLOf7fgEw00MVvjsic_PcXOM4TMvdfXbSOy3kIH0-EjOEndQ5kWjLcKmKFWcADgC0Y4ikzNW-YdcBJP7ZjS7cTaLP_glAN-uG1385_Syn9W9wxGMa3eQ6HfpqcZsnugKiuFHNT2sqvRTD7sojO8l7XXLhNtYU9t45qYa9wIgfVx1G2vrfVbKsTfAUSTqH8eK8M">
+</div>
+</article>
+<!-- 5. Explorador Activo (Locked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada" class="w-11 h-11 sm:w-12 sm:h-12 object-contain opacity-90 drop-shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg7NvG7ALNLTpZ8cOpmd858qFv1O7vEINCuJY4l7VcRFD2sKmCb2kUodijdzMMIdvy47WCjB6MinZRfkDm7LD3f0XMDPCP43NKcvqXnCq6WlnmWKwwtI8P25f1Q1a8UjC0vyEFHKn5esXrciGzqdVEAc5XSeJrd9CH-Ao4KKvpjjrcEFNhD2-03ji2ERZegh02wTE-pIUxqIuzHIBZB-Pzh23F_dsrjUkLw_vAw78PDCjZh8hpNsGXqCWGkvyC2WFSXCY">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-[#A4ABB8] text-white text-[11px] sm:text-[11.5px] font-medium px-3.5 py-0.5 rounded-full tracking-wide">
+                Explorador Activo
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Veci! Visita 3 instituciones distintas en tu comunidad.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Bloqueado" class="w-9 h-9 sm:w-10 sm:h-10 object-contain opacity-80 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiVxJoU4N3S5axUEDYcVKHzmi77WbvD15HNW-zTbL4t7dT0-IUF6waRKejt4-bCkduSIB1yUplRNPmbXBgh3XGnjYlZTcHv_SrX51tL8M7Hr3_sHP5mSRvCu7gnelbaV2DKVRpKIUpzHcZxtE0CeNuF7fj5I2vUuXAoM399o623pEhEzytcRknkwc4lfqGhz7RmrqQikOsohTPTB_p859cVm5DUdL1Y6PEcs-_720p8F4gBwpOOW3V_ydoY_iG_IlaWNs">
+</div>
+</article>
+<!-- 6. Amigo de Beci (Locked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada" class="w-11 h-11 sm:w-12 sm:h-12 object-contain opacity-90 drop-shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuWiQ4iSnj4-PfFoQjs3CLonptNoP7Zy73-RV-VdbgaIlDmM6xcRnYqj6gE8LvluLz0zyksw6naA074MX-S3yDkcSIAG8RqAngQ1LvBcPQzbXgZYCYF8sfffz91Mk8Fvsy4Gwi6SeDrqzAzgjA3mQmpzyogSaW-Rde8Uuz7dphPMryjc84xYQ2BpZaQIspamv2YjwGBatd6diQHeJ0scklUBfduzyzi4Ik9gP8iSi5HIXsEEUckHWVgqxTU77VFlRxa1g">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-[#A4ABB8] text-white text-[11px] sm:text-[11.5px] font-medium px-3.5 py-0.5 rounded-full tracking-wide">
+                Amigo de Beci
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Veci! Completa tu perfil con todos tus datos y gustos.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Bloqueado" class="w-9 h-9 sm:w-10 sm:h-10 object-contain opacity-80 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxeCRv5njHCWqWxUyUAy7fpVeT5qw69jUIaoy6y7j_rYMFiXCjQo6VwTcxJhu219liGQ9cdqL4v5T21-IDEgCrA1lPufw9DrBuj1OSx2y3KNNr99dWfy8y7Dd9D5dJevU6G0JptCqho4_m5ckHpB_NPfVwMTiaSvrwSeyAOiohV2ydRJ2zXRUUPbAfQ5OhJu4uDqkOqPbXbkOPN3Dk7vU0KoOYwjYIrZwZ6RQqxMtmY2aBbtG8LvjKrdWQmtlk3TDs9oY">
+</div>
+</article>
+<!-- 7. Comunidad Unida (Locked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada" class="w-11 h-11 sm:w-12 sm:h-12 object-contain opacity-90 drop-shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKtHu_0X5sueLzZteCKjF8irBP2XsjzpMC0Z57UO-xK5YrEUK2MXzPjy1Q702O99FYIhyVgMrmsnkY3-FDY0zmB_hxJ2LxYjLPM8yD41qEF5xd7PlLXZEWOFnbA-8QPh5qWblpPt3xbMIi8fSidL31FVt5T2P-Cdn4sTLxFP_jzYW4O9bEb8LyF-3vfaw0tgkxBGW9k5gOv5ZfFl8iuc0j-8mJcjNVfZNZSxw_0syFmzshjjIpZ5WA59o3XOkS6goKUrg">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-[#A4ABB8] text-white text-[11px] sm:text-[11.5px] font-medium px-3.5 py-0.5 rounded-full tracking-wide">
+                Comunidad Unida
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Veci! Comparte una recomendación en la sección de ayuda.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Bloqueado" class="w-9 h-9 sm:w-10 sm:h-10 object-contain opacity-80 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbnnrGpn3qetuY4_wpy79h3pojIMoYt96URCoKI-3RUSr7bMWDqVndLITl2SrHn_iN7hxHUSuw7sYeC--5mtQOc_KR_fcYKfnBSnJAtcuzRLc72mXwKiNOow_wMGpUnrsePpVGvIW8wvIvwfwlRPZKWhDOwJX_57rW6LUOh4qoav2Or7YJTVo5nzWDKn0N0AJrqMaiZRMd0r7h-YGs38csJ0pxsIAklpdZrcABi1EUab94DooZn-PU4fYvOBUrbpDJofQ">
+</div>
+</article>
+<!-- 8. Vecino Maestro (Locked) -->
+<article class="bg-white/95 backdrop-blur-sm rounded-[24px] p-4 sm:p-5 shadow-card border border-white/80 flex items-center justify-between gap-3 hover:shadow-md hover:border-white transition-all duration-200 group">
+<div class="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada" class="w-11 h-11 sm:w-12 sm:h-12 object-contain opacity-90 drop-shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTOjMLY0Lacqo8qWKLoRMExgE5vcYYJeW0Mz0sJf-_9WtFiDqIVQ5foGYA2XA3nE9yA2NhbnAY17GHolkcLlFzO6OW5n-dV1hDnMf2qbjrMk7gqYYhrS8pqMuZC18RN7LSySgL6IG2z64FLS3kJ-mbRGD6k_r2c7-wrb8ahpqdWmBIFLv-5R-pxhbTWrRwKrVayQiAE_XYvUfIei9RrUeZrLELaFaQlYHtrDBA_vjyoT7VskyreuIHLx37lP8RuDZuddY">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="inline-flex mb-1">
+<span class="bg-[#A4ABB8] text-white text-[11px] sm:text-[11.5px] font-medium px-3.5 py-0.5 rounded-full tracking-wide">
+                Vecino Maestro
+              </span>
+</div>
+<p class="text-[12px] sm:text-[13px] font-normal leading-[1.35] text-slate-700">
+              ¡Veci! Desbloquea todas las insignias previas para ser un Maestro.
+            </p>
+</div>
+<div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+<img alt="Bloqueado" class="w-9 h-9 sm:w-10 sm:h-10 object-contain opacity-80 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAAkFn7EvoPl0AqTmt9j0ylyKJjr2V-AnBev3T-7KlKjF2VBGtAXUyqCWU3YVQ7RwPQkB80K7Am2hZ_Sci6AmO4HJ0epxfViLUJ6A7C_4hyHDe-VjYaM-BChOa5eeT67SxpTbnSPvShu5WlIi3CPsrWUs7TUftTN8RYEyMgDf8ob6q3dOLHK5AhYUi7g4hHe2-BYozoUkUJPU1NZmpOLfdvSP0_DW2adFnm1dJQ7AOdisFWB9AbiZlfOIpR0_WJGwa34E">
+</div>
+</article>
+</section>
+</div>
+</main>
+<!-- END: Main Responsive Page Content -->
+<!-- BEGIN: Mobile Floating Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] px-3 pb-3 pt-1 z-40 md:hidden" data-purpose="bottom-navigation-bar">
+<div class="bg-white/90 backdrop-blur-xl border border-white/60 rounded-[30px] px-2 py-2 shadow-card flex items-center justify-around">
+<a class="flex flex-col items-center justify-center flex-1 text-[#623EBE] group" href="#inicio">
+<svg class="w-6 h-6 stroke-[1.8] stroke-current fill-none transition-transform group-active:scale-95" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+<span class="text-[10px] font-medium mt-0.5">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 text-[#1E293B] group" href="#favoritos">
+<svg class="w-6 h-6 fill-current stroke-current transition-transform group-active:scale-95" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<span class="text-[10px] font-medium mt-0.5">Tus Favoritos</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 text-[#7839EE] group" href="#sobre-beci">
+<div class="h-6 flex items-center font-extrabold text-[15px] tracking-tight transition-transform group-active:scale-95">Beci</div>
+<span class="text-[10px] font-medium mt-0.5">Sobre Beci</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 text-[#64748B] group" href="#ayuda">
+<svg class="w-6 h-6 stroke-[1.8] stroke-current fill-none transition-transform group-active:scale-95" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+</svg>
+<span class="text-[9.5px] font-medium mt-0.5 whitespace-nowrap">¿Te ayudamos?</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 text-[#64748B] group" href="#perfil">
+<svg class="w-6 h-6 stroke-[1.8] stroke-current fill-none transition-transform group-active:scale-95" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+<span class="text-[10px] font-medium mt-0.5">Vecino</span>
+</a>
+</div>
+</nav>
+<!-- END: Mobile Floating Bottom Navigation Bar -->
+
+
+</body></html>

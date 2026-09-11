@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Beci - Tus Favoritos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#b6c4ff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#445aa7",
+                        "on-surface-variant": "#444651",
+                        "glass-border": "rgba(255, 255, 255, 0.5)",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary-container": "#7b90e2",
+                        "error": "#ba1a1a",
+                        "glass-surface": "rgba(255, 255, 255, 0.4)",
+                        "nebula-cream": "#FDF3E6",
+                        "on-secondary-fixed-variant": "#1b5200",
+                        "outline-variant": "#c5c5d3",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#7b2f15",
+                        "surface-bright": "#faf8ff",
+                        "inverse-on-surface": "#f1f0f7",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#92fc60",
+                        "on-secondary-fixed": "#072100",
+                        "surface-variant": "#e3e1e9",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#062573",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#77de46",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#3a0b00",
+                        "nebula-peach": "#FDAC44",
+                        "surface-dim": "#dbd9e0",
+                        "surface-container-high": "#e9e7ee",
+                        "primary": "#001249",
+                        "background": "#faf8ff",
+                        "secondary": "#276c00",
+                        "surface-container": "#efedf4",
+                        "inverse-surface": "#2f3036",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary-container": "#dc7959",
+                        "on-primary-fixed-variant": "#2a418e",
+                        "tertiary": "#340900",
+                        "secondary-fixed": "#92fc60",
+                        "tertiary-fixed-dim": "#ffb59e",
+                        "tertiary-container": "#581500",
+                        "on-background": "#1a1b20",
+                        "nebula-lavender": "#F4DBF0",
+                        "surface-container-highest": "#e3e1e9",
+                        "on-primary-fixed": "#001550",
+                        "institutional-forest": "#336926",
+                        "on-primary": "#ffffff",
+                        "institutional-orange": "#FF6C01",
+                        "surface": "#faf8ff",
+                        "surface-container-low": "#f4f3fa",
+                        "outline": "#757682",
+                        "on-secondary-container": "#2a7300",
+                        "on-surface": "#1a1b20"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-desktop": "120px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "container-max-width": "1280px",
+                        "stack-md": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["DM Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["DM Sans"],
+                        "display-lg": ["DM Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "900" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "900" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #062573, #445aa7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .purple-pill {
+            background-color: #8b5cf6;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative font-body-md text-on-surface" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB6GipjsFna55rCgisbNQr5ntnW-NbqbD0rD3ee1MdhwVqjllsjdD0ZWCqjddur7aJGjgoI95i9NwZzJdLnsuWO8LOev4UKgDsGAZYwkG6ds_TiwGAkpBtdd6tfKYzAZFWAzHJNzI7CI9N2WgboMNT2sWgHk-mPZMLV2O1k-WoHc-o-526JNaAxSP7idPi7FbZ4Ne51rX2aSzNRJ4MjOmh3nA0lqp0QsGR1e60BrSHoLoLt44PpZMu50iKl9x1jfRbji14&quot;); background-size: cover; background-attachment: fixed; background-position: center center;">
+<!-- Top Spacer for safe area -->
+<div class="h-8"></div>
+<!-- Header Logo -->
+<nav class="hidden md:flex items-center justify-between px-8 lg:px-16 py-3 bg-white/90 backdrop-blur-md shadow-sm border-b border-white/60 sticky top-0 z-50 w-full"><div class="flex items-center"><img alt="Beci Logo" class="h-12 w-auto object-contain hover:scale-105 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3j3OWgecPv27l0dRdtjCWhE1goOHfHs2G8JFewKPn7DsTw5Kd8bKaWPZR_IY3KBaWJQM75wzn12I_K058G5qh3CAWXMhY5-du66E_nnH2hCIDDZMYP9gyyzzsJ2TklKt0SAed_xt3Jy0okpoIIryxjGe5ehrJFeK79ZDGDGImnYFShghVTqw3qZlNr7CWQhai0aOsKrNIVQGZDZtrVMFbMPIZciv46n_g-ZHbHi067IJrmv8ZQXNnm0Rt-L60ITn_6vo"></div><div class="flex items-center gap-8 lg:gap-12 font-bold text-[17px]"><a class="text-primary relative py-1 hover:text-surface-tint transition-colors" href="#">Inicio<span class="absolute bottom-0 left-0 w-full h-[3px] bg-primary rounded-full"></span></a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Tus Favoritos</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Sobre Beci</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">¿Te ayudamos?</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Vecino</a></div></nav><header class="w-full flex justify-start px-margin-mobile mb-2 md:hidden"><img alt="Beci Logo" class="w-32 h-auto object-contain drop-shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEt9KoiviXBul5yej0GjdZNqu2mzVwbrlURA-8GqWtICeFaK37B-xPoEAslcg-d4KsZVQRl6M6Hawyo783IYjtcU7onHdKdD1DdFInuCGtb8dZwV6z7KZffHvD1l7SkkbxEuhErN9a56zOU0D0AoeYjyiSHIGsjHczfkWRv0nPQLksXazGnSFxwErYDGAOhYUK0myGiAaDGXWIjLtdvRBnCS2IvCnjuIOlJKoprF0STSY77UMEEFyYap3EAZ1S3WNRzOE"></header>
+<main class="px-margin-mobile pb-32 max-w-container-max-width mx-auto max-w-md max-w-[450px] gap-2 md:max-w-5xl" style="height: calc(-48px + 100vh); max-height: calc(-48px + 100vh); display: flex; flex-direction: column;">
+<!-- Profile Card -->
+<section class="relative pt-8 md:pt-10 md:mb-6"><!-- Mobile Avatar Structure (visible < md) --><div class="md:hidden absolute left-1/2 transform -translate-x-1/2 z-10 -top-2 flex justify-center"><div class="relative"><img alt="Professional headshot" class="rounded-full object-cover border-surface-container-lowest w-20 h-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><button aria-label="Configuración" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-7 h-7 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all z-10 p-0.5" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; overflow: visible;"><img alt="Configuración" class="object-contain w-4 h-4 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ" style="filter: drop-shadow(rgba(0, 18, 73, 0.2) 0px 1px 1.5px); transform: scale(1.03); transform-origin: center center; max-width: none;"></button></div></div><!-- Mobile Content Box --><div class="md:hidden glass-card rounded-[32px] pb-4 px-6 flex flex-col items-center text-center w-full max-w-md mx-auto pt-10"><h1 class="text-headline-lg-mobile font-headline-lg-mobile text-on-background relative inline-block">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-primary-container"></span></h1><div class="flex items-center gap-1 mt-1 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">location_on</span><p class="font-body-md text-body-md">Medellín Antioquia</p></div></div><!-- Desktop Card Structure (visible >= md) matching perfil (2).png --><div class="hidden md:flex items-center bg-white/95 rounded-[40px] px-12 py-8 shadow-sm border border-white max-w-5xl mx-auto gap-8"><div class="relative shrink-0"><img alt="Jacob Montes" class="rounded-full object-cover w-28 h-28 border-2 border-surface-container-low shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><button aria-label="Configuración" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all shadow-md" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.8);"><img alt="Configuración" class="object-contain w-5 h-5 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ"></button></div><div class="flex flex-col justify-center items-start text-left"><h1 class="text-[32px] font-bold text-[#1a1b20] relative inline-block leading-tight tracking-tight">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[3px] bg-[#1a1b20] rounded-full"></span></h1><div class="flex items-center gap-1.5 mt-2 text-[#444651]"><span class="material-symbols-outlined text-[20px] text-gray-500">location_on</span><p class="text-[18px] font-medium">Medellín Antioquia</p></div></div></div></section>
+<!-- Unified Badges Section (Mobile, Tablet, Desktop) -->
+<section class="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto mt-6 md:mt-4">
+<div class="glass-card bg-white/80 backdrop-blur-md border border-white/60 rounded-full flex items-center shadow-sm p-1.5 md:p-2">
+<!-- Pill Button -->
+<a href="#insignias" aria-label="Insignias Obtenidas" class="purple-pill text-white rounded-full font-bold shadow-sm px-3.5 py-1.5 text-xs md:text-sm shrink-0 z-10 hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center inline-block">Insignias Obtenidas</a>
+<!-- Left Navigation Arrow (shown when scrolled) -->
+<button aria-label="Insignias anteriores" class="hidden text-primary font-bold cursor-pointer shrink-0 z-10 focus:outline-none items-center justify-center p-1 hover:scale-110 active:scale-95 transition-transform" id="prev-badges-btn">
+<span class="material-symbols-outlined text-[20px] md:text-[22px]">chevron_left</span>
+</button>
+<!-- Visible Window of 4 Badges Carousel -->
+<div class="relative overflow-hidden flex-1 mx-1.5 md:mx-3" id="badges-viewport">
+<!-- 4 items visible at a time: exactly w-[calc(25%-6px)] md:w-[calc(25%-9px)] with gap-2 md:gap-3 -->
+<div class="flex items-center gap-2 md:gap-3 transition-transform duration-500 ease-out" id="badges-track">
+<!-- Badge 1 (Active Gold Star) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Estrella Dorada" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain drop-shadow-sm hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG5dKFdEb0OCBHBzPlznxaOy6Q3Jw9x6GvFe32sEUKw66zX-HYJZXZ7O5GeNhvtAEaXWt5ft5_YuQgeCpA00LWrR0UTIviHO4Ua77cTr4fQxfxCb-V3_UMZq0d9sPcS-po7Q71s1Foc7OTABSCXuQmp_gHxPrPZ3h1SUW8mlbcAn9yihNbxNOk-Nnp99i1M89cIaV9UVCIBkM0ooNYhHAsmBZ3Sfz2Z-BYVjvnqbmf6oFP1d8bAPTV6fPt0mJS4vCA7JhN6kZ8bItjVbI">
+</div>
+<!-- Badge 2 (Silver Star) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada 1" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain opacity-70 hover:opacity-100 hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb74XC52FLI5q8mS4M4C9KhcQfcv9q4ZuIKHjdAQLhLiHmgI5opNqIigPpPCKeoa9w4dAJu5dlxjsGW08bVoY7cOq8abXmPplfMFT_LIDv1Z9qUSoH07ZeK5KgJb2z5-x--HS9N_e0uUos3fPGWP7VZHJvlh74ZGgvJuj5EUHGi8xnAOfitRuuS3UgV1dD_3Wi9kVDcuiUd-bJyFcQiqsP0-bykfWs0JQgVeyUVbTT0xKUB1dgORukzAz0I0jaroi4HOru9aPEUjaYU4k">
+</div>
+<!-- Badge 3 (Silver Star) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada 2" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain opacity-70 hover:opacity-100 hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb74XC52FLI5q8mS4M4C9KhcQfcv9q4ZuIKHjdAQLhLiHmgI5opNqIigPpPCKeoa9w4dAJu5dlxjsGW08bVoY7cOq8abXmPplfMFT_LIDv1Z9qUSoH07ZeK5KgJb2z5-x--HS9N_e0uUos3fPGWP7VZHJvlh74ZGgvJuj5EUHGi8xnAOfitRuuS3UgV1dD_3Wi9kVDcuiUd-bJyFcQiqsP0-bykfWs0JQgVeyUVbTT0xKUB1dgORukzAz0I0jaroi4HOru9aPEUjaYU4k">
+</div>
+<!-- Badge 4 (Silver Star) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Bloqueada 3" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain opacity-70 hover:opacity-100 hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb74XC52FLI5q8mS4M4C9KhcQfcv9q4ZuIKHjdAQLhLiHmgI5opNqIigPpPCKeoa9w4dAJu5dlxjsGW08bVoY7cOq8abXmPplfMFT_LIDv1Z9qUSoH07ZeK5KgJb2z5-x--HS9N_e0uUos3fPGWP7VZHJvlh74ZGgvJuj5EUHGi8xnAOfitRuuS3UgV1dD_3Wi9kVDcuiUd-bJyFcQiqsP0-bykfWs0JQgVeyUVbTT0xKUB1dgORukzAz0I0jaroi4HOru9aPEUjaYU4k">
+</div>
+<!-- Badge 5 (Extra Badge page 2) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Bronce 1" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain opacity-70 hover:opacity-100 hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIMXDhnQgDZgWURTwXkH9Yglw-ZqeG8gMIl2TA5VLkGZTDapmQiY5DXhOeFil5G60qcJtCWAHOiP1duzN3Cm5uCHsGIqrcWSjJNeO8cj8Jssqq16AS3l6xduD8M6b6t5Mel_3kduLtROwlzB6nWk7GrejihQWRk246vdxPNqxfs02yCrBqf_vaSeCbGZKyE21d1jlrWU-Vs0OpSC__YDLqyeZYZR1_FYZYU2SXt_0sygrNVWHI2Z5koEXUKh44y1hFOXU">
+</div>
+<!-- Badge 6 (Extra Badge page 2) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Bronce 2" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain opacity-70 hover:opacity-100 hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASkZT_CeOKkDrUqc_EeKGqFdHrWS2oCSuf6fFQe81OytlHSkzGcmXgTqLlyQKpjiWQaNnfsznf9ZVJMHwSsYA6P0EW4Czbsh8r6NArr_cUx8q-AA7JGSWAMMb32JG_3r0mWizy4eihxzMJmYACsj0f1h7zMQcUHbAchXErhY1vNDjA-3DDCRyC42SdbCRAqBr5ZikkMQ2zq0UHy6M7NONBjBylVONq5EtHxEIKTVn0Oyo0eBHzLr1e-R4e-10nXE2SyYE">
+</div>
+<!-- Badge 7 (Extra Badge page 2) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Bronce 3" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain opacity-70 hover:opacity-100 hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4869pS5X_XSclPbvfzMItoMpfdSqxMFijecjSw7uO6Bqs471bKKy6UvbebnbKeWBKcONS23HWXn23H8rcHZPc2QRU1SFYfyu2PPct4Dxki7ZzyrqS9wcSDAIhE_R0wxwRTOvkshTd6pS4ntHJtdkKBkT0U4NGm15LSKJSB2xJnjVSUL_fkv300YlvQ-Gg5vNd8pnfoFN4x0ReicaQYCtl2M9zG5K-qv5-yiY7MFb4FKev3MtgUSpC3i4LDptvwitqyrY">
+</div>
+<!-- Badge 8 (Extra Badge page 2) -->
+<div class="w-[calc(25%-6px)] md:w-[calc(25%-9px)] shrink-0 flex items-center justify-center">
+<img alt="Insignia Bronce 4" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain opacity-70 hover:opacity-100 hover:scale-110 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5AwgI8Ds2x-5MEFcR1EmhO0sfhnkVyAYHpv7H44e8YpvAQgJCow6OH9BbhwcUi-klj5n5_jYALOpvhPSFWKRp2NrAdoeJAiw7sJaki6VZ_uyiB_W5D7CsY36u96dfs8pL6uDJ5crshqQbqdRr4nVSsKiNEj_csoQmex7_b69v60wBnezFsypo1bPL8Gg2RqnQTKxSqAfC7WYGRXQPk4xUkGtvxQTJ5AskbJ4oigMayf4nMUXGeAo_WQk9j_ALpp7Muzs">
+</div>
+</div>
+</div>
+<!-- Right Navigation Arrow -->
+<button aria-label="Ver más insignias" class="text-primary font-bold cursor-pointer shrink-0 z-10 focus:outline-none flex items-center justify-center p-1 pr-1.5 hover:scale-110 active:scale-95 transition-transform" id="next-badges-btn">
+<span class="material-symbols-outlined text-[20px] md:text-[22px]">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Visited Places -->
+<section class="w-full max-w-md md:max-w-5xl mx-auto mt-6 md:mt-8 space-y-3.5 md:space-y-6" style="overflow: hidden auto; flex: 1 1 0%; min-height: 0px; padding-bottom: 110px;"><div class="flex flex-col items-center w-full mb-3 md:mb-6"><h2 class="font-bold text-black text-center relative inline-block pb-1.5 text-[16px] md:text-[24px]">Lugares Visitados<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-14 md:w-20 h-[3px] md:h-[4px] bg-[#001249] rounded-full"></span></h2></div><!-- Mobile Places List (< md) --><div class="flex flex-col space-y-3.5 md:hidden"><!-- Card 1: Parque Explora --><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Parque Explora" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Parque Explora</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5">Aranjuez, Medellín</p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crear</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crecer</span></div></div></div><!-- Card 2: Biblioteca Piloto --><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Biblioteca Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCko6I3POeJOzZRmJb03LNzTjJWIIG9SAwTcr-Q39T7ORWlnjSahJ69ghQuLyOXQ4cojG-r0GzT3o-rXWYcOA_CyrroZUO0voeSlGtayzam4PxLZoD1N27EMWS7wLidEEfjry0q6xueOxJkddgtJx7MUn7H2IkQ8NJ3e2rc82HNc9H0pVgPLxtIusr2nPnbXe1OiozM5YWhvFihZ1LUi4fMvIZtTa57D67VFjf7fBqIvLRx7TBMigxpBA"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Biblioteca Piloto</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5 flex items-center gap-0.5"><span class="material-symbols-outlined text-[13px] leading-none text-gray-500">location_on</span><span class="">Carlos E. Restrepo, Medellín</span></p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crear</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crecer</span></div></div></div><!-- Card 3: Jardín Botánico --><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Jardín Botánico" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPXeA2HnrrHYESGQogZmAoe-ATMzou_YeRO_BJMF09WlAQidjou85S7HBjHI2SpMspITVZrJSv8q7s19AjUGecg98rECMSutImb11pk9SGX9JlJduC6ejhHKFvMaUBGEd7akCJwYOQz2fg2fAcPO0ycUibYX6Q6lQwN3-u0sTMXZsG6ykhs2rfiNhxPRkpdGG3r19QuMIPOyBSLZko6Tv2lLTMkZ4JAIOmiUgmbxMvWLMFHcxgdSGNxok9NUQFmIECLMaFMoypNtmnIY"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Jardín Botánico</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5 flex items-center gap-0.5"><span class="material-symbols-outlined text-[13px] leading-none text-gray-500">location_on</span><span class="">Bosque, Medellín</span></p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crear</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crecer</span></div></div></div><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Planetario Medellín" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Planetario Medellín</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5 flex items-center gap-0.5"><span class="material-symbols-outlined text-[13px] leading-none text-gray-500">location_on</span><span class="">Aranjuez, Medellín</span></p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Cultura</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span></div></div></div></div><!-- Desktop Places Grid (>= md) matching perfil (2).png 2-column layout --><!-- Tablet Places List (md:flex lg:hidden) con exactamente 4 tarjetas verticales -->
+<div class="hidden md:flex lg:hidden flex-col gap-5 w-full max-2xl mx-auto">
+<!-- Tarjeta 1: Parque Explora -->
+<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
+<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
+<img alt="Parque Explora" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c">
+</div>
+<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
+<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
+<div>
+<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Parque Explora</h3>
+<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
+</div>
+</div>
+</div>
+<!-- Tarjeta 2: Biblioteca Piloto -->
+<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
+<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
+<img alt="Biblioteca Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCko6I3POeJOzZRmJb03LNzTjJWIIG9SAwTcr-Q39T7ORWlnjSahJ69ghQuLyOXQ4cojG-r0GzT3o-rXWYcOA_CyrroZUO0voeSlGtayzam4PxLZoD1N27EMWS7wLidEEfjry0q6xueOxJkddgtJx7MUn7H2IkQ8NJ3e2rc82HNc9H0pVgPLxtIusr2nPnbXe1OiozM5YWhvFihZ1LUi4fMvIZtTa57D67VFjf7fBqIvLRx7TBMigxpBA">
+</div>
+<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
+<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
+<div>
+<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Biblioteca Piloto</h3>
+<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Carlos E. Restrepo, Medellín</p>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
+</div>
+</div>
+</div>
+<!-- Tarjeta 3: Jardín Botánico -->
+<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
+<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
+<img alt="Jardín Botánico" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPXeA2HnrrHYESGQogZmAoe-ATMzou_YeRO_BJMF09WlAQidjou85S7HBjHI2SpMspITVZrJSv8q7s19AjUGecg98rECMSutImb11pk9SGX9JlJduC6ejhHKFvMaUBGEd7akCJwYOQz2fg2fAcPO0ycUibYX6Q6lQwN3-u0sTMXZsG6ykhs2rfiNhxPRkpdGG3r19QuMIPOyBSLZko6Tv2lLTMkZ4JAIOmiUgmbxMvWLMFHcxgdSGNxok9NUQFmIECLMaFMoypNtmnIY">
+</div>
+<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
+<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
+<div>
+<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Jardín Botánico</h3>
+<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Bosque, Medellín</p>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
+</div>
+</div>
+</div>
+<!-- Tarjeta 4: Planetario Medellín -->
+<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
+<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
+<img alt="Planetario de Medellín" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c">
+</div>
+<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
+<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
+<div>
+<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Planetario Medellín</h3>
+<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Cultura</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Desktop Places Grid (>= lg) intacta con su diseño original de 2 columnas -->
+<div class="hidden lg:grid lg:grid-cols-2 gap-6 w-full">
+<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
+<div class="w-[42%] h-full shrink-0 relative overflow-hidden">
+<img alt="Parque Explora" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c">
+</div>
+<div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative">
+<button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
+<div>
+<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Parque Explora</h3>
+<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
+</div>
+</div>
+</div>
+<div class="flex bg-white rounded-[24px] overflow-hidden flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
+<div class="w-[42%] h-full shrink-0 relative overflow-hidden">
+<img alt="Biblioteca Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCko6I3POeJOzZRmJb03LNzTjJWIIG9SAwTcr-Q39T7ORWlnjSahJ69ghQuLyOXQ4cojG-r0GzT3o-rXWYcOA_CyrroZUO0voeSlGtayzam4PxLZoD1N27EMWS7wLidEEfjry0q6xueOxJkddgtJx7MUn7H2IkQ8NJ3e2rc82HNc9H0pVgPLxtIusr2nPnbXe1OiozM5YWhvFihZ1LUi4fMvIZtTa57D67VFjf7fBqIvLRx7TBMigxpBA">
+</div>
+<div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative">
+<button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
+<div>
+<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Biblioteca Piloto</h3>
+<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Carlos E. Restrepo, Medellín</p>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
+<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white"><div class="w-[42%] h-full shrink-0 relative overflow-hidden"><img alt="Jardín Botánico" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPXeA2HnrrHYESGQogZmAoe-ATMzou_YeRO_BJMF09WlAQidjou85S7HBjHI2SpMspITVZrJSv8q7s19AjUGecg98rECMSutImb11pk9SGX9JlJduC6ejhHKFvMaUBGEd7akCJwYOQz2fg2fAcPO0ycUibYX6Q6lQwN3-u0sTMXZsG6ykhs2rfiNhxPRkpdGG3r19QuMIPOyBSLZko6Tv2lLTMkZ4JAIOmiUgmbxMvWLMFHcxgdSGNxok9NUQFmIECLMaFMoypNtmnIY"></div><div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative"><button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button><div><h3 class="text-[18px] font-bold text-gray-900 leading-snug">Jardín Botánico</h3><p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Bosque, Medellín</p></div><div class="flex flex-wrap items-center gap-2 mt-auto pt-2"><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span></div></div></div><div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white"><div class="w-[42%] h-full shrink-0 relative overflow-hidden"><img alt="Planetario Medellín" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c"></div><div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative"><button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button><div><h3 class="text-[18px] font-bold text-gray-900 leading-snug">Planetario Medellín</h3><p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p></div><div class="flex flex-wrap items-center gap-2 mt-auto pt-2"><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Cultura</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span></div></div></div></div><!-- Bottom spacer for navigation bar --><div class="h-6"></div></section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 bg-glass-surface backdrop-blur-md shadow-lg border-t border-glass-border rounded-t-3xl pt-4 md:hidden">
+<!-- Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant opacity-70 hover:bg-white/10 dark:hover:bg-black/10 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: &quot;FILL&quot; 0;">home</span>
+<span class="text-label-sm font-label-sm">Inicio</span>
+</a>
+<!-- Tus Favoritos (Active) -->
+<a class="flex flex-col items-center justify-center text-primary-container dark:text-primary-fixed-dim font-bold transform -translate-y-1 transition-all duration-300 scale-110 ease-out" href="#">
+<span class="material-symbols-outlined mb-1 text-primary-container" style="font-variation-settings: &quot;FILL&quot; 1;">favorite</span>
+<span class="text-label-sm font-label-sm text-primary-container">Tus Favoritos</span>
+</a>
+<!-- Sobre Beci -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant opacity-70 hover:bg-white/10 dark:hover:bg-black/10 transition-colors" href="#">
+<span class="text-primary font-black text-lg mb-1 leading-none">Beci</span>
+<span class="text-label-sm font-label-sm">Sobre Beci</span>
+</a>
+<!-- ¿Te ayudamos? -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant opacity-70 hover:bg-white/10 dark:hover:bg-black/10 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: &quot;FILL&quot; 0;">help_center</span>
+<span class="text-label-sm font-label-sm">¿Te ayudamos?</span>
+</a>
+<!-- Vecino -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant opacity-70 hover:bg-white/10 dark:hover:bg-black/10 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: &quot;FILL&quot; 0;">person</span>
+<span class="text-label-sm font-label-sm">Vecino</span>
+</a>
+</nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('badges-track');
+        const nextBtn = document.getElementById('next-badges-btn');
+        const prevBtn = document.getElementById('prev-badges-btn');
+        const pillBtn = document.getElementById('badges-pill-btn');
+        
+        let currentPage = 0; // 0: items 1-4, 1: items 5-8
+        const totalPages = 2;
+
+        const updateCarousel = () => {
+            if (currentPage === 0) {
+                track.style.transform = 'translateX(0%)';
+                prevBtn.classList.add('hidden');
+                prevBtn.classList.remove('flex');
+                nextBtn.classList.remove('hidden');
+                nextBtn.classList.add('flex');
+            } else {
+                track.style.transform = 'translateX(-50%)';
+                prevBtn.classList.remove('hidden');
+                prevBtn.classList.add('flex');
+                nextBtn.classList.add('hidden');
+                nextBtn.classList.remove('flex');
+            }
+        };
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentPage = 1;
+                updateCarousel();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentPage = 0;
+                updateCarousel();
+            });
+        }
+
+        if (pillBtn) {
+            pillBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentPage = currentPage === 0 ? 1 : 0;
+                updateCarousel();
+            });
+        }
+    });
+</script>
+
+
+</body></html>

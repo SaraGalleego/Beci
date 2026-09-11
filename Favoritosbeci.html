@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tus Favoritos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,900&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style data-purpose="custom-fonts">
+    .font-dmsans { font-family: 'DM Sans', sans-serif; }
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+  </style>
+<style data-purpose="custom-utilities">
+    .glassmorphism {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    @media (max-width: 1023px) {
+      .bg-image {
+        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAyd0p3Nk9V357H_hp5CeBnqGaB6eVCNwHE1vsYXkGPT4PHdq_QLtztkJD7IFgkfRUw4fhwT-hRPlOy51-UwdvYFRjTSZVqW7YJzLKzt1xWL5CNlFHxp3AFQRTPQyd8-_CaAA02AoB1wMicBUis97iKYnRWOTiu_JZrZAoKjobSQtbslQ7uzz7nSLhWhliuWQh9Fkz3RA98iOHbavCLvxTOx0orXdLWRUp2gqNh52B8uE3Ri5S-c40x2tYufxuffX4prfM');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    @keyframes heart-bounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.7); }
+      100% { transform: scale(1); }
+    }
+    .is-bouncing {
+      animation: heart-bounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .card-removing {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: scale(0.9) translateY(-10px);
+      margin-bottom: -100%;
+    }
+  </style>
+</head>
+<body class="bg-image lg:bg-gradient-to-r lg:from-[#fcf7f2] lg:to-[#f5e8f3] h-screen text-gray-900 overflow-hidden font-poppins antialiased flex flex-col justify-center">
+<div class="w-full max-w-screen-xl mx-auto h-screen relative flex flex-col shadow-2xl overflow-hidden bg-white/10 lg:bg-transparent lg:shadow-none">
+<!-- BEGIN: Header Section -->
+<header class="pt-12 pb-4 px-6 shrink-0 flex-none z-10 flex flex-col items-center md:px-16 md:pt-14 md:pb-8 lg:px-16 lg:pt-0 lg:pb-0 lg:flex-row lg:justify-between lg:items-center lg:h-[110px] lg:bg-[#fefaf9] lg:glassmorphism-none lg:shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center md:gap-8 self-start w-full md:w-auto md:self-start">
+<img alt="Beci Logo" class="h-28 mb-4 object-contain self-start md:h-20 lg:w-[130px] lg:h-auto md:mb-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-bn1xkuxsMtNQyVPTKPQ99Du6Jd3mgTBMDLq9oLvuGSv5_AaB3fXszz5HLyJo57saIzD8aFoTPZuY0lkAJ4I70zIg4EWI0D9H9e19VdILiiUc_RepAKV6T91F1veT0qgWSz-y9mSgL_iiOJb3SNbieZtOJ1voVK1Hot-n2Zk2t_7lntaHhu4vm_XMu-u08fDwHQVC6lab5g7IQSVjYiENQvIasrAXiLI21dP5k9VEqxJKvJ3nuqvazttKy1owjO1TeVY">
+</div>
+<!-- Title Area -->
+<div class="flex items-center mb-4 gap-1 self-start md:hidden">
+<!-- 3D Heart Icon -->
+<div class="flex items-center justify-center shrink-0 w-14 h-14"><img alt="Favoritos" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5vm5QUhFx6e0Dw1f6e91fd40bCT7ENMGPdjXXUU67zaM3YSg_E8Kbh5yV-zVq75MpD2T7XV9Oae0M3PCWd6UhAgHlkSxagUqowQxrowz1sjwzA6DEOksXb8Gl5WbjZNp1h7bTMQ5V_kBei7z4q2d-qjdmGbWxA2BSX4ApFkoYSdHmak9_VP9FitpcGQQmL9eGC-S6uC8-VnIR6G9KZ6FknacMSnv7dTc0DvDXairYDYhVz4E-lcBt-5BV0Scri8YuJHk"></div>
+<h1 class="text-3xl font-dmsans font-black text-black tracking-tight">Tus Favoritos</h1>
+</div>
+<!-- Subtitle -->
+<p class="text-center text-[17px] font-medium leading-tight text-black max-w-[320px] md:hidden">
+        Aquí encuentras los lugares que has conocido y te han gustado.
+      </p>
+<nav class="hidden lg:flex lg:items-center">
+<ul class="flex items-center gap-6 text-sm font-medium text-gray-500 lg:gap-10">
+<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="#">Inicio</a></li>
+<li class="hidden md:block lg:hidden"><a class="text-blue-700 font-bold border-b-2 border-blue-700 pb-1" href="#">Tus Favoritos</a></li>
+<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="#">Beci</a></li>
+<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="#">¿Te ayudamos?</a></li>
+<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="#">Vecino</a></li>
+<!-- Desktop Navigation Items -->
+<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="#">
+<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span class="">Inicio</span>
+</a></li>
+<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1" href="#">
+<svg class="w-7 h-7 text-blue-700" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path></svg>
+<span class="text-blue-700 font-bold">Tus Favoritos</span>
+</a></li>
+<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="#">
+<span class="font-bold text-lg text-[#7a48d6] leading-7">Beci</span>
+<span class="text-gray-900">Sobre Beci</span>
+</a></li>
+<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="#">
+<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span class="">¿Te ayudamos?</span>
+</a></li>
+<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="#">
+<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span class="">Vecino</span>
+</a></li>
+</ul>
+</nav></header>
+<!-- END: Header Section -->
+<!-- BEGIN: Cards List Section -->
+<main class="flex-1 overflow-y-auto hide-scrollbar px-10 pb-28 pt-2 z-0 md:px-10 md:pt-6 md:pb-28 md:my-6 md:mx-8 md:flex md:flex-col md:items-center lg:px-[60px] lg:pt-[65px] lg:pb-28 lg:mt-[45px] lg:mb-12 lg:mx-[60px]">
+<!-- Desktop / Tablet Title Area -->
+<div class="hidden md:flex flex-col items-center w-full text-center md:max-lg:mb-2">
+<div class="flex items-center gap-6"><img alt="Corazón Favoritos" class="w-12 h-12 md:h-14 md:w-auto lg:h-14 lg:w-auto shrink-0 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ8L_ymNxeMG1l0-LGlRo8KVb6f7P4zLMtjVUPOKYfwZSwWoYGyEiEsqV-bhgZvvpG9hLjsBeajIgzcUVV_njb6QrG_f4f4Mc9q5-Bp9HGgWzT-i6aOhLsuucMb0hv0gySQwnfGExUztKQnGHV_1636iQXp8JerBivbLBPAnVuoRkUR8c7FosMReQvcGkJX7DcVpVDalSLpN23kK3i2gxEqglTRmPfXw_7OXXbfjt74paBY0bklNcU2KP09X267UPPbX4"><span class="text-3xl md:text-4xl lg:text-5xl font-dmsans font-black text-black tracking-tight leading-none">Tus Favoritos</span></div>
+<p class="text-lg md:text-xl lg:text-[25px] font-medium text-black mt-4 md:mt-5 lg:mt-[30px] mb-8 lg:mb-[65px] px-4">
+    Aquí encuentras los lugares que has conocido y te han gustado.
+  </p>
+</div>
+<!-- Cards container: given the white background card container on md (tablet) up to lg -->
+<div class="w-full md:max-lg:bg-white/60 md:max-lg:backdrop-blur-xl md:max-lg:rounded-[40px] md:max-lg:shadow-md md:max-lg:p-6">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:flex lg:justify-center pb-6 px-4 w-full gap-6">
+<!-- Card 1 -->
+<article class="relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] lg:w-[355px] lg:h-[400px] lg:aspect-auto hover:scale-[1.02] hover:shadow-xl group">
+<img alt="Biblioteca Pública Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAco0QYjQptDRJYSPBGf6MY2X9DHXUzxj9pznImZzNHX4QVApcmCfuIn9A4z4Mg1CQ8mjtZvMNTSwO0zxadbimkOrs-349gdbP9kfzv9OnVZF1bHA2QH_JEmoxdZ6hC-xobYDjFu2OQXu0eqf7mGqjyhFn-9IKuoEdLRg51KqCrxl_7CTT6DbBax8AE52n7D2_BoJ9qoQtNV05v2eCf5jOKOrBupQrzd3J8HQkxEzcZh4MyF1CTCXCpRYzG17ldFsWFq_oO7bd8Ks68UWk">
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 md:p-5 lg:p-6">
+<h3 class="text-white font-bold text-base md:text-xl lg:text-xl leading-tight drop-shadow-md">Biblioteca Pública Piloto</h3>
+</div>
+<button aria-pressed="true" class="absolute top-4 right-4 w-12 h-12 rounded-full glassmorphism flex items-center justify-center heart-toggle is-active transition-transform active:scale-95" data-place-id="piloto">
+<svg class="w-6 h-6 text-blue-700 stroke-current fill-current transition-colors duration-300 transform" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path> </svg>
+</button>
+</article>
+<!-- Card 2 -->
+<article class="relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] lg:w-[355px] lg:h-[400px] lg:aspect-auto hover:scale-[1.02] hover:shadow-xl group">
+<img alt="Confama" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALMKXXquT4ouMttr-3QmELjcrFjiPxAA2DQvB5d562EEoEzDuULeOj1JUO3kTbL_a7x3PVHqgHbyzVEjJFc5tDtgzIC-GxW30sUOO21rc6zoRSb2b5L9QifjRZ61R_hbmkfhYphF3KMvV2V3juISL2AmQZcbDRR2jYmigOXzlT4hNvdS0IKS3Hfq3oUCCqoZQbb5CjlOH0r1t-SfUKKrJVUYNqbweaEheUcQeeJPij-_VmNztC1QSY8HpOo40HCjK8c9koOVaxV6brQqE">
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 md:p-5 lg:p-6">
+<h3 class="text-white font-bold text-base md:text-xl lg:text-xl leading-tight drop-shadow-md">Confamas Antioquia</h3>
+</div>
+<button aria-pressed="true" class="absolute top-4 right-4 w-12 h-12 rounded-full glassmorphism flex items-center justify-center heart-toggle is-active transition-transform active:scale-95" data-place-id="confama">
+<svg class="w-6 h-6 text-blue-700 stroke-current fill-current transition-colors duration-300 transform" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path> </svg>
+</button>
+</article>
+<!-- Card 3 -->
+<article class="relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] lg:w-[355px] lg:h-[400px] lg:aspect-auto hover:scale-[1.02] hover:shadow-xl group">
+<img alt="Nature scene" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0aBf4muQaMTTbVzn8J71vf7etDLm9WbpGeDisp8RafosEFxYA6SSneOy63UftIoXzJhTbDdqcw3RWyGGZR7Ii02M7PqExtLV8JuR33eelLMih4CPLHQ2lnSBvdkqmKExKPBr6ywHCtzomsiKQ6VnxSvh491lTg8JoCxlX7utXwz2E7DxPlVSYiduMJIlN9FTPp7CLMI6j3NWZgKo9U-4kwIB1fzrmqXKeU9gMvJFliLizU7jSJfUqIKqmgv3tHaWG6tKkHvmqVw54tiM">
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 md:p-5 lg:p-6">
+<h3 class="text-white font-bold text-base md:text-xl lg:text-xl leading-tight drop-shadow-md">Naturaleza</h3>
+</div>
+<button aria-pressed="true" class="absolute top-4 right-4 w-12 h-12 rounded-full glassmorphism flex items-center justify-center heart-toggle transition-transform active:scale-95 is-active" data-place-id="nature">
+<svg class="w-6 h-6 text-blue-700 stroke-current transition-colors duration-300 transform fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path> </svg>
+</button>
+</article>
+<article class="relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] hover:scale-[1.02] hover:shadow-xl group hidden md:block lg:hidden"><img alt="Parque Explora" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0aBf4muQaMTTbVzn8J71vf7etDLm9WbpGeDisp8RafosEFxYA6SSneOy63UftIoXzJhTbDdqcw3RWyGGZR7Ii02M7PqExtLV8JuR33eelLMih4CPLHQ2lnSBvdkqmKExKPBr6ywHCtzomsiKQ6VnxSvh491lTg8JoCxlX7utXwz2E7DxPlVSYiduMJIlN9FTPp7CLMI6j3NWZgKo9U-4kwIB1fzrmqXKeU9gMvJFliLizU7jSJfUqIKqmgv3tHaWG6tKkHvmqVw54tiM"><div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 md:p-5"><h3 class="text-white font-bold text-base md:text-xl leading-tight drop-shadow-md">Parque Explora</h3></div><button aria-pressed="true" class="absolute top-4 right-4 w-12 h-12 rounded-full glassmorphism flex items-center justify-center heart-toggle is-active transition-transform active:scale-95" data-place-id="explora"><svg class="w-6 h-6 text-blue-700 stroke-current fill-current transition-colors duration-300 transform" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></button></article><article class="relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] hover:scale-[1.02] hover:shadow-xl group hidden md:block lg:hidden"><img alt="Jardín Botánico" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALMKXXquT4ouMttr-3QmELjcrFjiPxAA2DQvB5d562EEoEzDuULeOj1JUO3kTbL_a7x3PVHqgHbyzVEjJFc5tDtgzIC-GxW30sUOO21rc6zoRSb2b5L9QifjRZ61R_hbmkfhYphF3KMvV2V3juISL2AmQZcbDRR2jYmigOXzlT4hNvdS0IKS3Hfq3oUCCqoZQbb5CjlOH0r1t-SfUKKrJVUYNqbweaEheUcQeeJPij-_VmNztC1QSY8HpOo40HCjK8c9koOVaxV6brQqE"><div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 md:p-5"><h3 class="text-white font-bold text-base md:text-xl leading-tight drop-shadow-md">Jardín Botánico</h3></div><button aria-pressed="true" class="absolute top-4 right-4 w-12 h-12 rounded-full glassmorphism flex items-center justify-center heart-toggle is-active transition-transform active:scale-95" data-place-id="jardin"><svg class="w-6 h-6 text-blue-700 stroke-current fill-current transition-colors duration-300 transform" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></button></article><article class="relative w-full rounded-3xl overflow-hidden shadow-sm aspect-video md:aspect-[3/4] transition-all duration-300 h-full md:rounded-[30px] hover:scale-[1.02] hover:shadow-xl group hidden md:block lg:hidden"><img alt="Museo de Antioquia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAco0QYjQptDRJYSPBGf6MY2X9DHXUzxj9pznImZzNHX4QVApcmCfuIn9A4z4Mg1CQ8mjtZvMNTSwO0zxadbimkOrs-349gdbP9kfzv9OnVZF1bHA2QH_JEmoxdZ6hC-xobYDjFu2OQXu0eqf7mGqjyhFn-9IKuoEdLRg51KqCrxl_7CTT6DbBax8AE52n7D2_BoJ9qoQtNV05v2eCf5jOKOrBupQrzd3J8HQkxEzcZh4MyF1CTCXCpRYzG17ldFsWFq_oO7bd8Ks68UWk"><div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 md:p-5"><h3 class="text-white font-bold text-base md:text-xl leading-tight drop-shadow-md">Museo de Antioquia</h3></div><button aria-pressed="true" class="absolute top-4 right-4 w-12 h-12 rounded-full glassmorphism flex items-center justify-center heart-toggle is-active transition-transform active:scale-95" data-place-id="museo"><svg class="w-6 h-6 text-blue-700 stroke-current fill-current transition-colors duration-300 transform" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></button></article></div>
+</div>
+</main>
+<!-- END: Cards List Section -->
+<!-- BEGIN: Bottom Navigation -->
+<nav class="absolute bottom-0 w-full glassmorphism pb-6 pt-3 px-2 z-20 rounded-t-3xl border-b-0 border-x-0 lg:hidden">
+<ul class="flex justify-between items-center text-xs font-medium text-gray-500 max-w-screen-lg mx-auto">
+<!-- Inicio -->
+<li class="flex-1">
+<a class="nav-item flex flex-col items-center gap-1 group" href="#">
+<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="">Inicio</span>
+</a>
+</li>
+<!-- Tus Favoritos (Active) -->
+<li class="flex-1">
+<a class="nav-item nav-item--active flex flex-col items-center gap-1" href="#">
+<svg class="w-7 h-7 text-blue-700" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
+</svg>
+<span class="text-blue-700 font-semibold text-center leading-tight">Tus Favoritos</span>
+</a>
+</li>
+<!-- Beci -->
+<li class="flex-1">
+<a class="nav-item flex flex-col items-center gap-1 group" href="#">
+<span class="font-bold text-lg text-[#7a48d6]">Beci</span>
+<span class="">Sobre Beci</span>
+</a>
+</li>
+<!-- ¿Te ayudamos? -->
+<li class="flex-1">
+<a class="nav-item flex flex-col items-center gap-1 group" href="#">
+<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-center leading-tight">¿Te ayudamos?</span>
+</a>
+</li>
+<!-- Vecino -->
+<li class="flex-1">
+<a class="nav-item flex flex-col items-center gap-1 group" href="#">
+<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="">Vecino</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- END: Bottom Navigation -->
+</div>
+<script data-purpose="interactions">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Manage Favorites State
+      const buttons = document.querySelectorAll('.heart-toggle');
+      buttons.forEach(btn => {
+        const placeId = btn.getAttribute('data-place-id');
+        if (!placeId) return;
+        
+        // Initialize from localStorage
+        let storedFav = localStorage.getItem('fav_' + placeId);
+        if (storedFav === null) {
+          // Default to selected if no stored state, except for nature which defaults to false
+          storedFav = placeId === 'nature' ? 'false' : 'true';
+          localStorage.setItem('fav_' + placeId, storedFav);
+        }
+        
+        const isFav = storedFav === 'true';
+        btn.setAttribute('aria-pressed', isFav);
+        btn.classList.toggle('is-active', isFav);
+        
+        const svg = btn.querySelector('svg');
+        if (isFav) {
+          svg.classList.add('text-blue-700', 'fill-current');
+          svg.classList.remove('text-blue-700', 'fill-transparent');
+        } else {
+          svg.classList.add('text-blue-700', 'fill-transparent');
+          svg.classList.remove('text-blue-700', 'fill-current');
+        }
+        
+        // Toggle interaction
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const currentState = this.getAttribute('aria-pressed') === 'true';
+          const newState = !currentState;
+          
+          this.setAttribute('aria-pressed', newState);
+          this.classList.toggle('is-active', newState);
+          
+          // Apply bounce animation
+          const svg = this.querySelector('svg');
+          
+          // Reset animation state to allow re-triggering
+          svg.classList.remove('is-bouncing');
+          void svg.offsetWidth; // trigger reflow
+          svg.classList.add('is-bouncing');
+          
+          setTimeout(() => svg.classList.remove('is-bouncing'), 300);
+          
+          // Save to localStorage
+          localStorage.setItem('fav_' + placeId, newState);
+          
+          // Update visual SVG state
+          if (newState) {
+            svg.classList.add('text-blue-700', 'fill-current');
+            svg.classList.remove('text-blue-700', 'fill-transparent');
+          } else {
+            svg.classList.add('text-blue-700', 'fill-transparent');
+            svg.classList.remove('text-blue-700', 'fill-current');
+          }
+        });
+      });
+
+      // Simple active state toggler for navigation items
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          navItems.forEach(nav => nav.classList.remove('nav-item--active'));
+          this.classList.add('nav-item--active');
+        });
+      });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
