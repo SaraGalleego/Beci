@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Beci - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..900&amp;family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .gradient-bg {
+            background: radial-gradient(circle at top left, #FFDAC4 0%, #FDF3E6 50%, #F4DBF0 100%);
+        }
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+        @keyframes peek-a-boo {
+            0% { transform: translateX(100%); }
+            15% { transform: translateX(0); }
+            85% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+        .peek-a-boo-anim {
+            animation: peek-a-boo 8s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f6ece0",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-secondary-container": "#6f4300",
+                        "on-surface": "#1f1b13",
+                        "inverse-surface": "#353027",
+                        "secondary-container": "#fead45",
+                        "surface-bright": "#fff8f2",
+                        "background": "#fff8f2",
+                        "tertiary-container": "#372837",
+                        "tertiary-fixed-dim": "#d7bfd4",
+                        "on-secondary": "#ffffff",
+                        "outline": "#757682",
+                        "surface-container-highest": "#ebe1d4",
+                        "on-primary-container": "#7b90e2",
+                        "on-tertiary-fixed-variant": "#534152",
+                        "primary-container": "#062573",
+                        "surface-tint": "#445aa7",
+                        "on-primary-fixed-variant": "#2a418e",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f9efe2",
+                        "secondary-fixed-dim": "#ffb964",
+                        "secondary-fixed": "#ffddba",
+                        "primary": "#001249",
+                        "outline-variant": "#c5c5d3",
+                        "on-secondary-fixed": "#2b1700",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#b6c4ff",
+                        "tertiary": "#221322",
+                        "secondary": "#875300",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#fcf2e5",
+                        "surface-dim": "#e2d9cc",
+                        "on-tertiary-container": "#a38ea1",
+                        "on-primary-fixed": "#001550",
+                        "on-surface-variant": "#444651",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#f4dbf0",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "surface": "#fff8f2",
+                        "surface-container-high": "#f0e7da",
+                        "on-tertiary-fixed": "#251725",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#ebe1d4",
+                        "on-background": "#1f1b13"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "container-max": "1200px",
+                        "gutter": "20px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Poppins"],
+                        "display-lg-mobile": ["DM Sans"],
+                        "headline-sm": ["DM Sans"],
+                        "headline-md": ["DM Sans"],
+                        "counter": ["Poppins"],
+                        "label-bold": ["Poppins"],
+                        "display-lg": ["DM Sans"],
+                        "body-md": ["Poppins"],
+                        "body-sm": ["Poppins"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", { "lineHeight": "1.5", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "900" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "900" }],
+                        "counter": ["12px", { "lineHeight": "1.0", "fontWeight": "700" }],
+                        "label-bold": ["14px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="gradient-bg min-h-screen flex flex-col items-center justify-center font-body-md text-on-surface relative overflow-x-hidden">
+<!-- Header Section -->
+<div class="w-full max-w-md px-gutter pt-lg pb-md flex justify-between items-start z-10">
+<div class="flex flex-col gap-sm items-center">
+<button class="text-primary hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-3xl font-bold">arrow_back_ios_new</span>
+</button>
+<img alt="Beci Logo" class="w-32 h-auto mt-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4L2CwzKWwF-YEN9xIrI2FFmQndjSeHr8HBtHDGv6DpNm3MAqKagQlOZI4wBIin4yIAhAxLpmZofKKlcL-DzLo1W2vF7h4HhuNnaM7_wH2jZZTQDGoPnUw8Irg8SfiqHQGtf49tVscS4Flt6SGLRIkquW2HmTAxCyPRQ9HtH5fy3ax1PBUSvuoeVHxX5scCdjC-ESGR0BvCC63pYUIxw1FMepgQCb8N-ZRo9w88HUyB10GWDXsgEDCoKJParFnbYNEfoE">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary mt-sm text-center">¡Inicia Sesión!</h1>
+<h2 class="font-headline-sm text-headline-sm text-on-surface-variant font-medium text-center">¡Continua explorando<br>Veci!</h2>
+</div>
+<div class="w-32 -mr-8 -mt-4 md:fixed md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[30vw] md:max-w-[400px] md:z-0 md:mr-0 md:mt-0"><img alt="Beci Mascot" class="w-full h-auto object-contain drop-shadow-2xl peek-a-boo-anim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCYpTOgr_RMPLDMGl2z6QsLokVB8ABOG223cy9krwTX8DhHCRb48EPyhmPib_F4l79JqvKylfrHcnGLjjGcRy9W2yfqHtK78vrib69UlbKVWjdLfIeog-RUn2ila_CyyYoXWSSNxE2x85kJW_Rz3lWOCEw9jiMCu_L2IbiAgs8X_QX-GCMCN2Y_43nPaQexQBDjGmBqgwnh2TdmxwFgkgxLBRW8xkRwbgsNAMVRdFN9oZeD_r1tXzYVRDDcBOHFJJZEljEHoLJDeiBkqQ"></div>
+</div>
+<!-- Login Card -->
+<div class="w-full max-w-md px-gutter pb-xl z-20 flex-grow flex flex-col justify-end mb-20 md:mb-0">
+<div class="bg-surface/80 backdrop-blur-xl border border-white/40 rounded-t-[40px] md:rounded-b-xl shadow-[0_10px_40px_rgba(6,37,115,0.08)] p-md pt-lg flex flex-col gap-md relative overflow-hidden">
+<p class="font-title-lg text-title-lg text-center text-primary mb-sm">¡Que bueno verte por aca<br>Vecino!</p>
+<!-- Form -->
+<form class="flex flex-col gap-sm">
+<!-- Email Input -->
+<div class="relative">
+<input id="loginEmail" class="w-full bg-surface-container-lowest border-outline-variant rounded-full py-3 px-6 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="Correo" required="" type="email">
+</div>
+<!-- Password Input -->
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-outline-variant rounded-full py-3 px-6 pr-12 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" id="password" placeholder="Contraseña" required="" type="password">
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" id="togglePassword" type="button">
+<span class="material-symbols-outlined" id="eyeIcon">visibility</span>
+</button>
+</div>
+<div class="flex justify-start px-4">
+<a class="text-sm font-body-sm text-on-surface-variant hover:text-primary underline decoration-outline-variant hover:decoration-primary transition-colors" href="#">¿Olvidaste tu contraseña?</a>
+</div>
+<p class="hidden text-error text-sm font-medium text-center mt-1" id="login-error"></p>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-3 mt-4">
+<button class="w-full bg-primary-container text-on-primary font-title-lg text-title-lg py-3 px-6 rounded-full active:scale-95 transition-transform shadow-[0_4px_14px_rgba(6,37,115,0.25)] flex items-center justify-center transition-all" type="submit">
+                        Iniciar Sesión
+                    </button>
+<button class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md py-3 px-8 rounded-full hover:bg-surface-container-low active:scale-95 transition-all flex items-center justify-between gap-3 shadow-sm" type="button"><img alt="Google Icon" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCEoWBkDJRLag1-6ETvsQ2KM6pXJOhqK86aN55Yb2xFg_VOqhGi-yaqPrC9ihM3LQFi1BmhHeCtKpZN6g47hZ4sySnD4_q9iamy4Td-ysByvDSQad87bDIkmsv5Anp40U0tAWc6kq8_ewom198aqTMvCAJ5l1wYS7lb572diVWxNaMe_YPxorlHnI-9QbjCKSnA5On3n-5DsmvNYy050Fb9LuHU9Z59ShK6a-RXhUlJbPrWMOOdVdv9MJ3dxef3hvcCDU"><span class="flex-grow text-center whitespace-nowrap font-medium text-lg">Continuar con Google</span><div class="w-6"></div></button>
+</div>
+</form>
+</div>
+</div>
+<!-- Scripts -->
+<script src="beci-auth.js"></script>
+<!-- Script for Password Toggle -->
+<script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        const eyeIcon = document.querySelector('#eyeIcon');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            eyeIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+    </script>
+<script>
+        (function () {
+            const AUTH = window.BeciAuth;
+            if (!AUTH) return;
+            const form = document.querySelector('form');
+            const err = document.getElementById('login-error');
+
+            function showError(msg) {
+                if (err) {
+                    err.textContent = msg;
+                    err.classList.remove('hidden');
+                }
+            }
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const email = document.getElementById('loginEmail');
+                    const pass = document.getElementById('password');
+                    if (!email || !pass) return;
+                    if (!email.value.trim()) return showError('Escribe tu correo.');
+                    if (!pass.value) return showError('Escribe tu contraseña.');
+                    const res = AUTH.login(email.value, pass.value);
+                    if (!res.ok) return showError(res.error);
+                    AUTH.redirectAfterAuth('HomeBeci.html');
+                });
+            }
+        })();
+    </script>
+
+
+
+</body></html>

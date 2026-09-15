@@ -79,6 +79,7 @@
   </style>
 <!-- Datos de lugares (fuente única compartida con HomeBeci.html y Ubicate.html) -->
 <script src="beci-data.js"></script>
+<script src="beci-auth.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center font-sans antialiased selection:bg-pink-200 md:p-8 lg:p-10">
 <!-- Responsive Container: Mobile modal view centered on small screens, full-bleed on tablet & desktop -->
@@ -105,6 +106,10 @@
       const filledIcon = document.getElementById('heartIconFilled');
 
       favBtn.addEventListener('click', () => {
+        if (window.BeciAuth && !BeciAuth.isLoggedIn()) {
+          BeciAuth.showLoginGate();
+          return;
+        }
         const isPressed = favBtn.getAttribute('aria-pressed') === 'true';
         
         if (!isPressed) {
@@ -167,6 +172,9 @@
       if (!lugar) return;
 
       var places = (typeof window.LUGARES_BECI !== 'undefined' && Array.isArray(window.LUGARES_BECI)) ? window.LUGARES_BECI : [];
+      if (typeof window.LUGARES_BUSCADOR !== 'undefined' && Array.isArray(window.LUGARES_BUSCADOR)) {
+        places = places.concat(window.LUGARES_BUSCADOR);
+      }
       var found = null;
       for (var i = 0; i < places.length; i++) {
         if (places[i].nombre && places[i].nombre.toLowerCase() === lugar.toLowerCase()) {
