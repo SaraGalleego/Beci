@@ -79,6 +79,7 @@
   </style>
 <!-- Datos de las sedes SENA (fuente única compartida con Ubicate.html) -->
 <script src="beci-data.js"></script>
+<script src="beci-auth.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center font-sans antialiased selection:bg-pink-200 md:p-8 lg:p-10">
 <!-- Responsive Container: Mobile modal view centered on small screens, full-bleed on tablet & desktop -->
@@ -105,6 +106,10 @@
       const filledIcon = document.getElementById('heartIconFilled');
 
       favBtn.addEventListener('click', () => {
+        if (window.BeciAuth && !BeciAuth.isLoggedIn()) {
+          BeciAuth.showLoginGate();
+          return;
+        }
         const isPressed = favBtn.getAttribute('aria-pressed') === 'true';
         
         if (!isPressed) {

@@ -37,6 +37,7 @@
 <script src="https://unpkg.com/@phosphor-icons/web"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css">
 <!-- Datos de lugares (fuente única compartida con Ubicate.html y TrabajaconBeci.html) -->
 <script src="beci-data.js"></script>
+<script src="beci-auth.js"></script>
 <style data-purpose="custom-utilities">
     /* Hide scrollbar for horizontal scrolling lists */
     .hide-scrollbar::-webkit-scrollbar {
@@ -94,6 +95,27 @@
     .animate-pop {
       animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
+    /* Skeleton de búsqueda */
+    @keyframes beci-shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-block {
+      background: linear-gradient(90deg, #eceaf1 25%, #f7f5f9 37%, #eceaf1 63%);
+      background-size: 400% 100%;
+      animation: beci-shimmer 1.3s ease-in-out infinite;
+      border-radius: 8px;
+    }
+
+    /* Aparición de tarjetas de resultados */
+    @keyframes beci-fade-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+    .beci-card {
+      animation: beci-fade-up 0.4s ease both;
+    }
   </style>
 <style>
     body {
@@ -148,29 +170,29 @@ comunidad</h1>
 <button id="home-filter-clear" type="button" class="mt-3 w-full text-sm font-semibold text-gray-500 hover:text-gray-800 py-2.5 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors">Limpiar filtros</button>
 </div>
 <!-- Location Icon / Ubicate (link to map) -->
-<a href="Ubicate.html" aria-label="Ubícate" class="flex flex-col items-center justify-center shrink-0 w-10 items-end ml-auto relative cursor-pointer group hover:opacity-85 active:scale-95 transition-all" title="Ver el mapa y ubicarme">
-<div class="bg-contain bg-no-repeat bg-center mb-1 drop-shadow-md w-10 h-10 md:scale-125 lg:scale-150" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB9JaziIEMse1Jo9oxX7D0gJl4aFkJf5PXzsCSBodks-H8_2Ob8HJMQ4qper3zqK-Y1oNiR5QdiqEDl_MOPJOdOL1WN_OdA7BnnhXEC3y7bfq90q3GGN4rMkkbp2p8xuCCVsa191pBCWLXmBozwvXPMmOhb1H9HOpWmxQeukhskRwXMLGAMvLO4DOpAcJBuUd6Yv_SLznRd_225b7VV8uGzPR-v9CJsyxq_YQKnLCj0z4AXlq88_Nf0Y4RQBflxzGDFIwHxbzbZp9n2MPE&quot;); width: 26.4px; height: 26.4px; position: absolute; top: 0px; z-index: 50; transform: scale(1.1);"></div>
-<span class="text-[10px] font-medium mt-8 md:text-sm lg:text-base md:mt-10 lg:mt-12 group-hover:text-[#8A56AC] transition-colors">Ubicate</span>
+<a href="Ubicate.html" aria-label="Ubícate" class="flex flex-col items-center justify-center shrink-0 ml-auto relative cursor-pointer group hover:opacity-85 active:scale-95 transition-all" title="Ver el mapa y ubicarme">
+<img src="img/Ubicacion.png" alt="Ubicate" class="w-[2.43rem] h-[2.43rem] md:w-[2.97rem] md:h-[2.97rem] lg:w-[3.79rem] lg:h-[3.79rem] object-contain mb-1 drop-shadow-md group-hover:scale-105 transition-transform">
+<span class="text-[10px] font-medium md:text-sm lg:text-base text-gray-500 group-hover:text-[#8A56AC] transition-colors whitespace-nowrap">Ubicate</span>
 </a></div>
 <!-- Filter Pills --> 
 <div class="relative group mb-6 overflow-hidden lg:pt-12 lg:px-12 lg:pb-0"><div class="flex items-center gap-2 px-6 lg:px-16"><div class="flex-1 relative overflow-hidden">
 <div class="flex overflow-x-auto hide-scrollbar gap-3 pb-2 flex-nowrap lg:flex-wrap lg:overflow-x-visible scroll-smooth min-h-[48px] pr-2" id="category-scroll-container" style="mask-image: linear-gradient(to right, black 95%, transparent 100%); transition: mask-image 0.3s ease;">
-<button class="category-btn btn-shine rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300 bg-[#062573] text-white active">
+<button class="category-btn btn-shine rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300 bg-[#062573] text-white active">
         Todos
       </button>
-<button class="category-btn btn-shine rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300 bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573]">
+<button class="category-btn btn-shine rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300 bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573]">
         Educativos
       </button>
-<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300">
         Deportivos
       </button>
-<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300">
         Cultura
       </button>
-<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300">
         Salud
       </button>
-<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Institucionales</button><button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Recreativos</button><button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Tecnología</button><button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] transition-all duration-300">Arte</button></div>
+<button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300">Institucionales</button><button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300">Recreativos</button><button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300">Tecnología</button><button class="category-btn btn-shine bg-white/90 text-gray-800 border border-gray-100 hover:bg-[#062573] hover:text-white hover:border-[#062573] rounded-full px-6 py-2 text-sm font-semibold whitespace-nowrap shadow-sm shrink-0 min-w-[100px] lg:px-8 lg:py-3 lg:text-base lg:min-w-[130px] transition-all duration-300">Arte</button></div>
 <script>
       (function() {
         const container = document.getElementById('category-scroll-container');
@@ -257,6 +279,41 @@ comunidad</h1>
 <!-- Search / Filter results replace the normal zone -->
 <div id="home-results-section" class="hidden">
 <h2 class="text-base font-semibold text-gray-800 mb-4">Resultados</h2>
+<div id="home-loading-state" class="hidden flex flex-col gap-4" aria-hidden="true">
+<div class="flex gap-4 items-center p-2 pr-4 rounded-[24px] bg-white/70">
+<div class="w-32 h-32 rounded-[20px] skeleton-block shrink-0"></div>
+<div class="flex-1 py-2">
+<div class="skeleton-block h-5 w-3/4 rounded-full mb-3"></div>
+<div class="skeleton-block h-4 w-1/2 rounded-full mb-3"></div>
+<div class="flex gap-2">
+<div class="skeleton-block h-5 w-16 rounded-full"></div>
+<div class="skeleton-block h-5 w-16 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-4 items-center p-2 pr-4 rounded-[24px] bg-white/70">
+<div class="w-32 h-32 rounded-[20px] skeleton-block shrink-0"></div>
+<div class="flex-1 py-2">
+<div class="skeleton-block h-5 w-2/3 rounded-full mb-3"></div>
+<div class="skeleton-block h-4 w-1/2 rounded-full mb-3"></div>
+<div class="flex gap-2">
+<div class="skeleton-block h-5 w-16 rounded-full"></div>
+<div class="skeleton-block h-5 w-20 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-4 items-center p-2 pr-4 rounded-[24px] bg-white/70">
+<div class="w-32 h-32 rounded-[20px] skeleton-block shrink-0"></div>
+<div class="flex-1 py-2">
+<div class="skeleton-block h-5 w-4/5 rounded-full mb-3"></div>
+<div class="skeleton-block h-4 w-1/3 rounded-full mb-3"></div>
+<div class="flex gap-2">
+<div class="skeleton-block h-5 w-14 rounded-full"></div>
+<div class="skeleton-block h-5 w-16 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
 <div id="home-results-container" class="flex flex-col gap-4">
 </div>
 <div id="home-empty-state" class="hidden flex flex-col items-center text-center py-14 px-4 gap-3">
@@ -317,6 +374,8 @@ comunidad</h1>
   var SENA_DATA = (typeof window.SENA_SEDES !== 'undefined') ? window.SENA_SEDES : {};
 
   var state = { query: '', category: 'Todos', filterOpen: false };
+  var searchLoadingTimer = null;
+  var SEARCH_LOADING_MS = 400;
 
   /* ---------- Reutilizado de Ubicate.html ---------- */
 
@@ -465,16 +524,27 @@ comunidad</h1>
     });
   }
 
+  function renderResults() {
+    var loadingState = $('home-loading-state');
+    var resultsContainer = $('home-results-container');
+    var emptyState = $('home-empty-state');
+    if (loadingState) loadingState.classList.add('hidden');
+    var places = getFilteredPlaces();
+    if (resultsContainer) resultsContainer.innerHTML = places.map(cardHtml).join('');
+    if (emptyState) emptyState.classList.toggle('hidden', places.length > 0);
+  }
+
   function updateView() {
     var normalTitle = $('home-normal-title');
     var normalContainer = $('home-normal-container');
     var resultsSection = $('home-results-section');
-    var resultsContainer = $('home-results-container');
-    var emptyState = $('home-empty-state');
+    var loadingState = $('home-loading-state');
 
     var searching = state.query || state.category !== 'Todos';
 
     if (!searching) {
+      clearTimeout(searchLoadingTimer);
+      if (loadingState) loadingState.classList.add('hidden');
       if (normalTitle) normalTitle.style.display = '';
       if (normalContainer) normalContainer.style.display = '';
       if (resultsSection) resultsSection.classList.add('hidden');
@@ -485,14 +555,27 @@ comunidad</h1>
     if (normalContainer) normalContainer.style.display = 'none';
     if (resultsSection) resultsSection.classList.remove('hidden');
 
-    var places = getFilteredPlaces();
-    if (resultsContainer) resultsContainer.innerHTML = places.map(cardHtml).join('');
-    if (emptyState) emptyState.classList.toggle('hidden', places.length > 0);
+    if (!state.query) {
+      renderResults();
+      return;
+    }
+
+    clearTimeout(searchLoadingTimer);
+    var resultsContainer = $('home-results-container');
+    var emptyState = $('home-empty-state');
+    if (resultsContainer) resultsContainer.innerHTML = '';
+    if (emptyState) emptyState.classList.add('hidden');
+    if (loadingState) loadingState.classList.remove('hidden');
+    searchLoadingTimer = setTimeout(renderResults, SEARCH_LOADING_MS);
   }
 
   /* ---------- Favoritos ---------- */
 
   function toggleFav(btn) {
+    if (window.BeciAuth && !BeciAuth.isLoggedIn()) {
+      BeciAuth.showLoginGate();
+      return;
+    }
     var id = btn.getAttribute('data-place-id');
     var fav = !isFav(id);
     setFav(id, fav);
@@ -505,7 +588,7 @@ comunidad</h1>
     btn.classList.remove('animate-pop');
     void btn.offsetWidth;
     btn.classList.add('animate-pop');
-    updateView();
+    renderResults();
   }
 
   /* ---------- Pills y dropdown de filtros ---------- */

@@ -172,7 +172,9 @@
   left: 150%;
   transition: left 0.6s ease;
 }
-</style></head>
+</style>
+<script src="beci-auth.js"></script>
+</head>
 <body class="bg-gradient-animated relative min-h-screen text-on-surface font-body-md overflow-x-hidden flex flex-col items-center antialiased">
 <div class="grain-overlay"></div>
 <main class="w-full max-w-container-max relative z-10 flex-grow flex flex-col items-center pb-24 md:pb-0">
@@ -200,10 +202,10 @@
 <span class="font-label-bold text-on-surface">Continuar con Google</span>
 </button>
 <div class="flex flex-col md:flex-row gap-6 w-full">
-<input class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Nombre" type="text">
-<input class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Apellido" type="text">
+<input id="regNombre" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Nombre" type="text">
+<input id="regApellido" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Apellido" type="text">
 </div>
-<input class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Correo" type="email">
+<input id="regCorreo" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Correo" type="email">
 <div class="relative w-full">
 <input class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all pr-12" id="password" placeholder="Contraseña" type="password">
 <button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" onclick="togglePassword()" type="button">
@@ -211,14 +213,15 @@
 </button>
 </div>
 <label class="flex items-center gap-3 cursor-pointer pl-2">
-<input class="rounded text-primary-container focus:ring-primary-container border-outline-variant w-5 h-5" type="checkbox">
+<input id="regTerminos" class="rounded text-primary-container focus:ring-primary-container border-outline-variant w-5 h-5" type="checkbox">
 <span class="font-body-sm text-on-surface">Acepto terminos y condiciones</span>
 </label>
 <div class="flex flex-col items-center mt-4">
-<button class="bg-primary-container text-white font-headline-sm text-headline-sm-mobile md:text-headline-sm py-4 px-12 rounded-full shadow-[0_4px_15px_rgba(6,37,115,0.2)] hover:shadow-[0_6px_20px_rgba(6,37,115,0.25)] active:scale-95 transition-all" id="btn-register-main">
+<p class="hidden text-error text-sm font-medium mb-2" id="register-error"></p>
+<button class="bg-primary-container text-white font-headline-sm text-headline-sm-mobile md:text-headline-sm py-4 px-12 rounded-full shadow-[0_4px_15px_rgba(6,37,115,0.2)] hover:shadow-[0_6px_20px_rgba(6,37,115,0.25)] active:scale-95 transition-all" id="btn-register-main" type="button">
                         Registrarme
                     </button>
-<a class="mt-6 font-body-sm text-on-surface hover:text-primary underline underline-offset-4 transition-colors" href="#">
+<a id="login-link" class="mt-6 font-body-sm text-on-surface hover:text-primary underline underline-offset-4 transition-colors" href="InicioBeci.html">
                         ¿Ya tienes una cuenta?
                     </a>
 </div>
@@ -237,5 +240,49 @@
                 eyeIcon.textContent = 'visibility';
             }
         }
+    </script>
+<script>
+        (function () {
+            const AUTH = window.BeciAuth;
+            if (!AUTH) return;
+
+            const btn = document.getElementById('btn-register-main');
+            const err = document.getElementById('register-error');
+            const link = document.getElementById('login-link');
+            const current = window.location.pathname.split('/').pop() + (window.location.search || '');
+            if (link) link.href = 'InicioBeci.html?redirect=' + encodeURIComponent(current);
+
+            function showError(msg) {
+                if (err) {
+                    err.textContent = msg;
+                    err.classList.remove('hidden');
+                }
+            }
+
+            function onRegister() {
+                const nombre = document.getElementById('regNombre');
+                const apellido = document.getElementById('regApellido');
+                const correo = document.getElementById('regCorreo');
+                const password = document.getElementById('password');
+                const terminos = document.getElementById('regTerminos');
+                if (!nombre || !apellido || !correo || !password || !terminos) return;
+
+                if (!nombre.value.trim() || !apellido.value.trim()) return showError('Completa tu nombre y apellido.');
+                if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo.value.trim())) return showError('Escribe un correo válido.');
+                if (password.value.length < 6) return showError('La contraseña debe tener al menos 6 caracteres.');
+                if (!terminos.checked) return showError('Debes aceptar los términos y condiciones.');
+
+                const res = AUTH.register({
+                    nombre: nombre.value,
+                    apellido: apellido.value,
+                    correo: correo.value,
+                    password: password.value
+                });
+                if (!res.ok) return showError(res.error);
+                AUTH.redirectAfterAuth('HomeBeci.html');
+            }
+
+            if (btn) btn.addEventListener('click', onRegister);
+        })();
     </script>
 </body></html>
