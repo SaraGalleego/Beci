@@ -370,7 +370,12 @@ comunidad</h1>
   var SENA_PAGE = 'TrabajaconBeci.html';
   var REGULAR_PAGE = 'NoTrabajaconBeci.html';
 
-  var DATA = (typeof window.LUGARES_BECI !== 'undefined' && Array.isArray(window.LUGARES_BECI)) ? window.LUGARES_BECI : [];
+  var LUGARES_BECI_DATA = (typeof window.LUGARES_BECI !== 'undefined' && Array.isArray(window.LUGARES_BECI)) ? window.LUGARES_BECI : [];
+  var LUGARES_BUSCADOR_DATA = (typeof window.LUGARES_BUSCADOR !== 'undefined' && Array.isArray(window.LUGARES_BUSCADOR)) ? window.LUGARES_BUSCADOR : [];
+  // Pool completo para búsqueda textual (incluye LUGARES_BUSCADOR)
+  var DATA = LUGARES_BECI_DATA.concat(LUGARES_BUSCADOR_DATA);
+  // Pool solo para filtros por categoría y "destacados" (solo LUGARES_BECI)
+  var DATA_CATEGORIES = LUGARES_BECI_DATA;
   var SENA_DATA = (typeof window.SENA_SEDES !== 'undefined') ? window.SENA_SEDES : {};
 
   var state = { query: '', category: 'Todos', filterOpen: false };
@@ -738,8 +743,9 @@ comunidad</h1>
       p.detailUrl = resolveDetailUrl(p.nombre, !!p.isSena);
     });
 
-    var featured = DATA.filter(function (p) { return p.destacado; });
-    if (!featured.length) featured = DATA.filter(function (p) { return p.isSena; }).slice(0, 3);
+    // Featured y filtros por categoría usan solo DATA_CATEGORIES (LUGARES_BECI)
+    var featured = DATA_CATEGORIES.filter(function (p) { return p.destacado; });
+    if (!featured.length) featured = DATA_CATEGORIES.filter(function (p) { return p.isSena; }).slice(0, 3);
     var container = $('home-normal-container');
     if (container) container.innerHTML = featured.map(cardHtml).join('');
 

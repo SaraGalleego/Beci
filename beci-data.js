@@ -324,15 +324,17 @@ var LUGARES_BECI = [
     tokens: ['unidad deportiva', 'deporte', 'canchas', 'gimnasio', 'piscina']
   },
   {
-    id: 'confama',
-    nombre: 'Confama',
+    id: 'comfama',
+    nombre: 'Comfama',
     sector: 'Medellín',
-    descripcion: 'Caja de compensación familiar con servicios de bienestar, educación y recreación.',
+    descripcion: 'Caja de compensación familiar (Comfama) con servicios de bienestar, educación y recreación, con varias sedes en la ciudad.',
     categoria: 'institucionales',
     isSena: false,
-    tokens: ['confama', 'caja de compensacion', 'bienestar'],
+    tokens: ['comfama', 'confama', 'caja de compensacion', 'bienestar'],
+    lat: 6.2409324,
+    lng: -75.5526942,
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuALMKXXquT4ouMttr-3QmELjcrFjiPxAA2DQvB5d562EEoEzDuULeOj1JUO3kTbL_a7x3PVHqgHbyzVEjJFc5tDtgzIC-GxW30sUOO21rc6zoRSb2b5L9QifjRZ61R_hbmkfhYphF3KMvV2V3juISL2AmQZcbDRR2jYmigOXzlT4hNvdS0IKS3Hfq3oUCCqoZQbb5CjlOH0r1t-SfUKKrJVUYNqbweaEheUcQeeJPij-_VmNztC1QSY8HpOo40HCjK8c9koOVaxV6brQqE',
-    alt: 'Confama'
+    alt: 'Comfama'
   },
 
   /* ---------- Educativos (adicionales) ---------- */
@@ -847,6 +849,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['epm', 'empresas publicas', 'servicios publicos', 'energia'],
+    lat: 6.2454289,
+    lng: -75.5780734,
     img: 'img/lugares/institucionales-2.svg',
     alt: 'EPM'
   },
@@ -858,6 +862,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['comfenalco', 'caja de compensacion', 'bienestar'],
+    lat: 6.2240469,
+    lng: -75.5976906,
     img: 'img/lugares/institucionales.svg',
     alt: 'Comfenalco Antioquia'
   },
@@ -869,6 +875,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['colsubsidio', 'caja de compensacion', 'bienestar'],
+    lat: 6.2493,
+    lng: -75.5662,
     img: 'img/lugares/institucionales-2.svg',
     alt: 'Colsubsidio'
   },
@@ -948,6 +956,32 @@ var LUGARES_BECI = [
     tokens: ['aeropuerto', 'olaya herrera', 'vuelos', 'avion'],
     img: 'img/lugares/institucionales-2.svg',
     alt: 'Aeropuerto Olaya Herrera'
+  },
+  {
+    id: 'centro-administrativo-alpujarra',
+    nombre: 'Centro Administrativo La Alpujarra',
+    sector: 'Alpujarra, Medellín',
+    descripcion: 'Complejo administrativo que alberga la Gobernación de Antioquia, la Alcaldía de Medellín y otras entidades públicas.',
+    categoria: 'institucionales',
+    isSena: false,
+    tokens: ['centro administrativo', 'alpujarra', 'gobernacion', 'alcaldia', 'entidades publicas'],
+    lat: 6.2447,
+    lng: -75.5738,
+    img: 'img/lugares/institucionales.svg',
+    alt: 'Centro Administrativo La Alpujarra'
+  },
+  {
+    id: 'plaza-mayor-medellin',
+    nombre: 'Plaza Mayor Medellín',
+    sector: 'Alpujarra, Medellín',
+    descripcion: 'Centro de convenciones y eventos de Medellín, epicentro de ferias, congresos y exposiciones.',
+    categoria: 'institucionales',
+    isSena: false,
+    tokens: ['plaza mayor', 'convenciones', 'eventos', 'ferias', 'alpujarra'],
+    lat: 6.2415,
+    lng: -75.5768,
+    img: 'img/lugares/institucionales-2.svg',
+    alt: 'Plaza Mayor Medellín'
   },
 
   /* ---------- Salud ---------- */
@@ -1116,6 +1150,19 @@ var LUGARES_BECI = [
     img: 'img/lugares/salud.svg',
     alt: 'Secretaría de Salud de Medellín'
   },
+  {
+    id: 'clinica-cardio-vid',
+    nombre: 'Clínica Cardio VID',
+    sector: 'Robledo, Medellín',
+    descripcion: 'Clínica especializada en cardiología y servicios cardiovasculares de alta complejidad.',
+    categoria: 'salud',
+    isSena: false,
+    tokens: ['clinica cardio vid', 'cardiologia', 'cardiovascular', 'robledo', 'salud'],
+    lat: 6.2795,
+    lng: -75.5815,
+    img: 'img/lugares/salud-2.svg',
+    alt: 'Clínica Cardio VID'
+  },
 
   /* ---------- Tecnología ---------- */
   {
@@ -1283,6 +1330,45 @@ var LUGARES_BECI = [
     img: 'img/lugares/tecnologia.svg',
     alt: 'Cedezo San Antonio de Prado'
   },
+  {
+    id: 'parque-explora-makerspace',
+    nombre: 'Parque Explora MakerSpace',
+    sector: 'Zona Norte, Medellín',
+    descripcion: 'Espacio de creación y prototipado dentro de Parque Explora para experimentar con tecnología, robótica y fabricación digital.',
+    categoria: 'tecnologia',
+    isSena: false,
+    tokens: ['parque explora makerspace', 'makerspace', 'fabricacion digital', 'robotica', 'tecnologia'],
+    lat: 6.2709,
+    lng: -75.5658,
+    img: 'img/lugares/tecnologia.svg',
+    alt: 'Parque Explora MakerSpace'
+  },
+  {
+    id: 'centro-innovacion-mova',
+    nombre: 'Centro de Innovación MOVA',
+    sector: 'Zona Norte, Medellín',
+    descripcion: 'Centro de innovación pública de Medellín para la transformación digital y la innovación ciudadana.',
+    categoria: 'tecnologia',
+    isSena: false,
+    tokens: ['centro innovacion mova', 'mova', 'innovacion publica', 'transformacion digital', 'tecnologia'],
+    lat: 6.2682,
+    lng: -75.5638,
+    img: 'img/lugares/tecnologia-2.svg',
+    alt: 'Centro de Innovación MOVA'
+  },
+  {
+    id: 'vivero-software',
+    nombre: 'Vivero del Software',
+    sector: 'Belén, Medellín',
+    descripcion: 'Iniciativa para el desarrollo de talento en software y tecnología en el sector de Belén.',
+    categoria: 'tecnologia',
+    isSena: false,
+    tokens: ['vivero del software', 'software', 'tecnologia', 'belén', 'talento'],
+    lat: 6.2305,
+    lng: -75.5902,
+    img: 'img/lugares/tecnologia.svg',
+    alt: 'Vivero del Software'
+  },
 
   /* ---------- Arte ---------- */
   {
@@ -1446,9 +1532,22 @@ var LUGARES_BECI = [
     descripcion: 'Edificio patrimonial del centro con salas de exposiciones y eventos culturales.',
     categoria: 'arte',
     isSena: false,
-    tokens: ['palacio de la cultura', 'exposiciones', 'arquitectura', 'arte'],
+    tokens: ['palacio de la cultura', 'exposiciones', 'arquitectura', 'arte', 'uribe uribe'],
     img: 'img/lugares/arte.svg',
     alt: 'Palacio de la Cultura'
+  },
+  {
+    id: 'centro-cultural-moravia',
+    nombre: 'Centro Cultural Moravia',
+    sector: 'Moravia, Medellín',
+    descripcion: 'Centro cultural comunitario en el barrio Moravia con talleres, exposiciones y actividades artísticas.',
+    categoria: 'arte',
+    isSena: false,
+    tokens: ['centro cultural moravia', 'moravia', 'cultura', 'talleres', 'arte comunitario'],
+    lat: 6.2748,
+    lng: -75.5608,
+    img: 'img/lugares/arte-2.svg',
+    alt: 'Centro Cultural Moravia'
   }
 ];
 
@@ -1473,6 +1572,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['cesde', 'centro de estudios superiores', 'formacion tecnica', 'tecnicos laborales', 'estudios'],
+    lat: 6.2516,
+    lng: -75.5628,
     img: 'img/lugares/educativos.svg',
     alt: 'CESDE Medellín'
   },
@@ -1484,6 +1585,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['uniminuto', 'minuto de dios', 'corporacion universitaria', 'bello', 'universidad'],
+    lat: 6.3112337,
+    lng: -75.5548322,
     img: 'img/lugares/educativos-2.svg',
     alt: 'UNIMINUTO Bello'
   },
@@ -1495,6 +1598,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['udem', 'universidad de medellin', 'belen', 'los alpes', 'metroplus'],
+    lat: 6.2310101,
+    lng: -75.6114011,
     img: 'img/lugares/educativos.svg',
     alt: 'Universidad de Medellín'
   },
@@ -1506,6 +1611,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['eia', 'escuela de ingenieria', 'envigado', 'las palmas', 'ingenieria'],
+    lat: 6.1569601,
+    lng: -75.5168548,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Universidad EIA'
   },
@@ -1517,6 +1624,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['ces', 'institucion universitaria ces', 'medicina', 'salud', 'pregrados', 'poblado'],
+    lat: 6.2085474,
+    lng: -75.5528451,
     img: 'img/lugares/educativos.svg',
     alt: 'Institución Universitaria CES'
   },
@@ -1528,6 +1637,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['remington', 'uniremington', 'corporacion universitaria', 'parque berrio', 'centro'],
+    lat: 6.2504039,
+    lng: -75.5685413,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Uniremington'
   },
@@ -1539,6 +1650,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['colegio mayor', 'colmayor', 'institucion universitaria', 'robledo'],
+    lat: 6.2732226,
+    lng: -75.5912113,
     img: 'img/lugares/educativos.svg',
     alt: 'Colegio Mayor de Antioquia'
   },
@@ -1550,6 +1663,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['tdea', 'tecnologico de antioquia', 'robledo', 'institucion publica', 'tecnologia'],
+    lat: 6.2802776,
+    lng: -75.5828041,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Tecnológico de Antioquia'
   },
@@ -1561,6 +1676,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['luis amigo', 'funlam', 'funcafull', 'universidad catolica', 'la america'],
+    lat: 6.2595772,
+    lng: -75.5833620,
     img: 'img/lugares/educativos.svg',
     alt: 'Universidad Católica Luis Amigó'
   },
@@ -1572,6 +1689,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['lasallista', 'unilasallista', 'caldas', 'veterinaria', 'campus'],
+    lat: 6.0996724,
+    lng: -75.6384875,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Unilasallista'
   },
@@ -1583,6 +1702,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['esumer', 'institucion universitaria', 'mercadeo', 'negocios', 'robledo'],
+    lat: 6.2777615,
+    lng: -75.5905736,
     img: 'img/lugares/educativos.svg',
     alt: 'Institución Universitaria Esumer'
   },
@@ -1780,6 +1901,58 @@ var LUGARES_BUSCADOR = [
     tokens: ['unidad deportiva san javier', 'san javier', 'deportes', 'canchas', 'comuna 13'],
     img: 'img/lugares/deportivos.svg',
     alt: 'Unidad Deportiva San Javier'
+  },
+  {
+    id: 'ud-belen',
+    nombre: 'Unidad Deportiva de Belén',
+    sector: 'Belén, Medellín',
+    descripcion: 'Unidad deportiva en el sector de Belén con canchas, piscinas y espacios para la práctica deportiva.',
+    categoria: 'deportivos',
+    isSena: false,
+    tokens: ['unidad deportiva belen', 'belen', 'deportes', 'canchas', 'piscina'],
+    lat: 6.2289,
+    lng: -75.5954,
+    img: 'img/lugares/deportivos.svg',
+    alt: 'Unidad Deportiva de Belén'
+  },
+  {
+    id: 'parque-juan-pablo-ii',
+    nombre: 'Parque Juan Pablo II (Acuático)',
+    sector: 'Guayabal, Medellín',
+    descripcion: 'Parque acuático y recreativo en Guayabal con piscinas y zonas de esparcimiento.',
+    categoria: 'deportivos',
+    isSena: false,
+    tokens: ['parque juan pablo ii', 'acuatico', 'guayabal', 'piscina', 'recreacion'],
+    lat: 6.2167,
+    lng: -75.5919,
+    img: 'img/lugares/deportivos-2.svg',
+    alt: 'Parque Juan Pablo II'
+  },
+  {
+    id: 'patinodromo-maria-luisa-calle',
+    nombre: 'Patinódromo María Luisa Calle',
+    sector: 'Guayabal, Medellín',
+    descripcion: 'Escenario deportivo especializado en patinaje de velocidad, nombrado en honor a la medallista olímpica María Luisa Calle.',
+    categoria: 'deportivos',
+    isSena: false,
+    tokens: ['patinodromo', 'maria luisa calle', 'patinaje', 'ciclismo', 'guayabal'],
+    lat: 6.2178,
+    lng: -75.5878,
+    img: 'img/lugares/deportivos.svg',
+    alt: 'Patinódromo María Luisa Calle'
+  },
+  {
+    id: 'polideportivo-sur-envigado',
+    nombre: 'Polideportivo Sur de Envigado',
+    sector: 'Envigado',
+    descripcion: 'Complejo deportivo del municipio de Envigado con múltiples escenarios para la práctica deportiva.',
+    categoria: 'deportivos',
+    isSena: false,
+    tokens: ['polideportivo sur', 'envigado', 'deportes', 'complejo deportivo'],
+    lat: 6.1624,
+    lng: -75.5898,
+    img: 'img/lugares/deportivos-2.svg',
+    alt: 'Polideportivo Sur de Envigado'
   },
 
   /* ---------- Recreativos ---------- */
