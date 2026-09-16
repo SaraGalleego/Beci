@@ -132,6 +132,8 @@ var LUGARES_BECI = [
     isSena: true,
     tokens: ['sena', 'complejo norte', 'pedregal'],
     pills: ['Aprender', 'Crear', 'Crecer'],
+    lat: 6.302511,
+    lng: -75.568047,
     img: INSTITUCIONES_BECI.imgPlaceholder,
     alt: 'Complejo Sena Norte',
     destacado: true
@@ -145,6 +147,8 @@ var LUGARES_BECI = [
     isSena: true,
     tokens: ['sena', 'ctma', 'manufactura', 'tecnologia'],
     pills: ['Aprender', 'Crear', 'Crecer'],
+    lat: 6.300295,
+    lng: -75.568258,
     img: INSTITUCIONES_BECI.imgPlaceholder,
     alt: 'CTMA SENA'
   },
@@ -157,6 +161,8 @@ var LUGARES_BECI = [
     isSena: true,
     tokens: ['sena', 'servicios', 'gestion empresarial', 'alpujarra'],
     pills: ['Aprender', 'Crear', 'Crecer'],
+    lat: 6.255454,
+    lng: -75.575114,
     img: INSTITUCIONES_BECI.imgPlaceholder,
     alt: 'Centro de Servicios y Gestión Empresarial SENA'
   },
@@ -169,6 +175,8 @@ var LUGARES_BECI = [
     isSena: true,
     tokens: ['sena', 'centro de comercio', 'comercio'],
     pills: ['Aprender', 'Crear', 'Crecer'],
+    lat: 6.254855,
+    lng: -75.574955,
     img: INSTITUCIONES_BECI.imgPlaceholder,
     alt: 'Centro de Comercio SENA'
   },
@@ -181,6 +189,8 @@ var LUGARES_BECI = [
     isSena: true,
     tokens: ['sena', 'moda', 'diseno', 'confeccion'],
     pills: ['Aprender', 'Crear', 'Crecer'],
+    lat: 6.18043,
+    lng: -75.606357,
     img: INSTITUCIONES_BECI.imgPlaceholder,
     alt: 'Centro de Formación en Diseño, Confección y Moda SENA'
   },
@@ -193,6 +203,8 @@ var LUGARES_BECI = [
     isSena: true,
     tokens: ['sena', 'actividad fisica', 'deporte', 'cultura'],
     pills: ['Aprender', 'Crear', 'Crecer'],
+    lat: 6.3031,
+    lng: -75.5692,
     img: INSTITUCIONES_BECI.imgPlaceholder,
     alt: 'Centro de Formación en Actividad Física y Cultura SENA'
   },
@@ -205,6 +217,8 @@ var LUGARES_BECI = [
     isSena: true,
     tokens: ['sena', 'complejo sur', 'itagui'],
     pills: ['Aprender', 'Crear', 'Crecer'],
+    lat: 6.180804,
+    lng: -75.603766,
     img: INSTITUCIONES_BECI.imgPlaceholder,
     alt: 'Complejo Sur SENA'
   },
@@ -218,6 +232,8 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['marco fidel', 'colegio', 'escuela', 'ie', 'institucion educativa'],
+    lat: 6.21006,
+    lng: -75.57492,
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBLand2FjeXIyYdS_mngS3qC_kTvQQALkL-SSVQvwA4NhzoB8V2SDS_-TQbT4uCfAC8P0reiIWzd23CZtGM52Ch30Y94uJ4Pz2aGGg0-Wta9Z10wgzQhKMZYeREximRipkSJtU3pmWMeGNIdJ0U9ZOdl3NYhOWYAncGV7Mn9iH0KovxhyLyu0O-lLIVfEcsPWPcDggTu9xX3aPQHajzoPWJT9VO6AcDtGaVxxO0D0a_ddw-Wsa-TyOUmw',
     alt: 'I.E Marco Fidel',
     destacado: true
@@ -230,6 +246,8 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['universidad', 'san buenaventura', 'poblado'],
+    lat: 6.254614,
+    lng: -75.573007,
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqOxnLnBCMygnDRkZQY92j39sG68ryddg5PtSyIJx0aLSxakU_m7UQ3Eh641-5RDKRSCggmNWu3h1cLTWiH2BxHVoZK76-zAfbkKpYFDEQxmZLKGpL-AzXyK32IMOST9jZmMNh72jm5G4gQA2ZbZhF8LC8N4dhFVXBgzWj3EBuaCQixbJ7ayWv7MyQWFYw0hbllX4UCDagV7LJIozOnEaejt4Ba-3SNRZJHdTkx9Zm8hOPJEgSdivOxA',
     alt: 'Universidad de San Buenaventura',
     destacado: true
@@ -242,7 +260,9 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['universidad', 'udea', 'antioquia'],
-    pills: ['Aprender', 'Crear', 'Crecer']
+    pills: ['Aprender', 'Crear', 'Crecer'],
+  lat: 6.26798,
+  lng: -75.568759,
   },
   {
     id: 'unal-medellin',
@@ -252,7 +272,9 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['universidad', 'nacional', 'unal'],
-    pills: ['Aprender', 'Crear', 'Crecer']
+    pills: ['Aprender', 'Crear', 'Crecer'],
+  lat: 6.26672,
+  lng: -75.5775,
   },
   {
     id: 'piloto',
@@ -262,6 +284,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['biblioteca', 'lectura', 'cultura', 'piloto'],
+    lat: 6.300558,
+    lng: -75.574258,
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAco0QYjQptDRJYSPBGf6MY2X9DHXUzxj9pznImZzNHX4QVApcmCfuIn9A4z4Mg1CQ8mjtZvMNTSwO0zxadbimkOrs-349gdbP9kfzv9OnVZF1bHA2QH_JEmoxdZ6hC-xobYDjFu2OQXu0eqf7mGqjyhFn-9IKuoEdLRg51KqCrxl_7CTT6DbBax8AE52n7D2_BoJ9qoQtNV05v2eCf5jOKOrBupQrzd3J8HQkxEzcZh4MyF1CTCXCpRYzG17ldFsWFq_oO7bd8Ks68UWk',
     alt: 'Biblioteca Pública Piloto'
   },
@@ -273,6 +297,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['parque explora', 'ciencia', 'tecnologia', 'museo'],
+    lat: 6.270621,
+    lng: -75.565575,
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD0aBf4muQaMTTbVzn8J71vf7etDLm9WbpGeDisp8RafosEFxYA6SSneOy63UftIoXzJhTbDdqcw3RWyGGZR7Ii02M7PqExtLV8JuR33eelLMih4CPLHQ2lnSBvdkqmKExKPBr6ywHCtzomsiKQ6VnxSvh491lTg8JoCxlX7utXwz2E7DxPlVSYiduMJIlN9FTPp7CLMI6j3NWZgKo9U-4kwIB1fzrmqXKeU9gMvJFliLizU7jSJfUqIKqmgv3tHaWG6tKkHvmqVw54tiM',
     alt: 'Parque Explora'
   },
@@ -283,7 +309,9 @@ var LUGARES_BECI = [
     descripcion: 'Museo en el centro de Medellín con arte colombiano y obras del maestro Fernando Botero.',
     categoria: 'cultura',
     isSena: false,
-    tokens: ['museo', 'antioquia', 'arte', 'botero', 'cultura']
+    tokens: ['museo', 'antioquia', 'arte', 'botero', 'cultura'],
+  lat: 6.252408,
+  lng: -75.569145,
   },
   {
     id: 'jardin-botanico',
@@ -293,6 +321,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['jardin botanico', 'naturaleza', 'parque', 'verde'],
+    lat: 6.270548,
+    lng: -75.563529,
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD0aBf4muQaMTTbVzn8J71vf7etDLm9WbpGeDisp8RafosEFxYA6SSneOy63UftIoXzJhTbDdqcw3RWyGGZR7Ii02M7PqExtLV8JuR33eelLMih4CPLHQ2lnSBvdkqmKExKPBr6ywHCtzomsiKQ6VnxSvh491lTg8JoCxlX7utXwz2E7DxPlVSYiduMJIlN9FTPp7CLMI6j3NWZgKo9U-4kwIB1fzrmqXKeU9gMvJFliLizU7jSJfUqIKqmgv3tHaWG6tKkHvmqVw54tiM',
     alt: 'Jardín Botánico'
   },
@@ -303,7 +333,9 @@ var LUGARES_BECI = [
     descripcion: 'Parque de diversiones y espacios verdes en el norte de Medellín.',
     categoria: 'recreativos',
     isSena: false,
-    tokens: ['parque norte', 'parque', 'juegos', 'atracciones']
+    tokens: ['parque norte', 'parque', 'juegos', 'atracciones'],
+  lat: 6.272335,
+  lng: -75.567854,
   },
   {
     id: 'atanasio-girardot',
@@ -312,7 +344,9 @@ var LUGARES_BECI = [
     descripcion: 'Estadio de fútbol y escenario de eventos deportivos en Medellín.',
     categoria: 'deportivos',
     isSena: false,
-    tokens: ['estadio', 'atanasio', 'futbol', 'deporte']
+    tokens: ['estadio', 'atanasio', 'futbol', 'deporte'],
+  lat: 6.256827,
+  lng: -75.590147,
   },
   {
     id: 'unidad-deportiva',
@@ -321,7 +355,9 @@ var LUGARES_BECI = [
     descripcion: 'Complejo deportivo con canchas, piscinas y espacios para la práctica deportiva.',
     categoria: 'deportivos',
     isSena: false,
-    tokens: ['unidad deportiva', 'deporte', 'canchas', 'gimnasio', 'piscina']
+    tokens: ['unidad deportiva', 'deporte', 'canchas', 'gimnasio', 'piscina'],
+  lat: 6.256818,
+  lng: -75.589428,
   },
   {
     id: 'comfama',
@@ -346,6 +382,8 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['universidad', 'eafit', 'poblado', 'ingenieria'],
+    lat: 6.200202,
+    lng: -75.578485,
     img: 'img/lugares/educativos.svg',
     alt: 'Universidad EAFIT'
   },
@@ -357,6 +395,8 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['universidad', 'upb', 'pontificia', 'robledo'],
+    lat: 6.241944,
+    lng: -75.589529,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Universidad Pontificia Bolivariana'
   },
@@ -368,6 +408,8 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['universidad', 'itm', 'tecnologico', 'tecnologia', 'ingenieria'],
+    lat: 6.2713,
+    lng: -75.61091,
     img: 'img/lugares/educativos.svg',
     alt: 'Instituto Tecnológico Metropolitano'
   },
@@ -379,6 +421,8 @@ var LUGARES_BECI = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['universidad', 'pascual bravo', 'boston', 'educacion superior'],
+    lat: 6.274526,
+    lng: -75.587165,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Institución Universitaria Pascual Bravo'
   },
@@ -392,6 +436,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['coliseo', 'ivan de bedout', 'baloncesto', 'futsal', 'deporte'],
+    lat: 6.256369,
+    lng: -75.587988,
     img: 'img/lugares/deportivos.svg',
     alt: 'Coliseo Iván de Bedout'
   },
@@ -403,6 +449,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['velodromo', 'cochise', 'ciclismo', 'pista', 'deporte'],
+    lat: 6.2553,
+    lng: -75.5895,
     img: 'img/lugares/deportivos-2.svg',
     alt: 'Velódromo Cochise'
   },
@@ -414,6 +462,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['complejo acuatico', 'piscina', 'natacion', 'clavados', 'deporte'],
+    lat: 6.255024,
+    lng: -75.591071,
     img: 'img/lugares/deportivos.svg',
     alt: 'Complejo Acuático de Medellín'
   },
@@ -425,6 +475,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'la esperanza', 'popular', 'deporte', 'recreacion'],
+    lat: 6.287077,
+    lng: -75.544925,
     img: 'img/lugares/deportivos-2.svg',
     alt: 'UVA La Esperanza'
   },
@@ -436,6 +488,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'los sue\u00f1os', 'manrique', 'versalles', 'deporte'],
+    lat: 6.263621,
+    lng: -75.542207,
     img: 'img/lugares/deportivos.svg',
     alt: 'UVA de los Sueños'
   },
@@ -447,6 +501,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'la armonia', 'manrique', 'santa ines', 'piscina'],
+    lat: 6.274518,
+    lng: -75.545423,
     img: 'img/lugares/deportivos-2.svg',
     alt: 'UVA de la Armonía'
   },
@@ -458,6 +514,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'la imaginacion', 'villa hermosa', 'deporte'],
+    lat: 6.252813,
+    lng: -75.555752,
     img: 'img/lugares/deportivos.svg',
     alt: 'UVA de la Imaginación'
   },
@@ -469,6 +527,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'ilusion verde', 'los naranjos', 'poblado', 'deporte'],
+    lat: 6.24732,
+    lng: -75.59458,
     img: 'img/lugares/deportivos-2.svg',
     alt: 'UVA Ilusión Verde'
   },
@@ -480,6 +540,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'san javier', 'deporte'],
+    lat: 6.25198,
+    lng: -75.61269,
     img: 'img/lugares/deportivos.svg',
     alt: 'UVA San Javier'
   },
@@ -491,6 +553,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'castilla', 'deporte'],
+    lat: 6.293693,
+    lng: -75.566806,
     img: 'img/lugares/deportivos-2.svg',
     alt: 'UVA Castilla'
   },
@@ -502,6 +566,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'robledo', 'deporte'],
+    lat: 6.27167,
+    lng: -75.61091,
     img: 'img/lugares/deportivos.svg',
     alt: 'UVA Robledo'
   },
@@ -513,6 +579,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'sol de oriente', 'santo domingo', 'villa hermosa', 'deporte'],
+    lat: 6.36596,
+    lng: -75.54247,
     img: 'img/lugares/deportivos-2.svg',
     alt: 'UVA Sol de Oriente'
   },
@@ -524,6 +592,8 @@ var LUGARES_BECI = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['uva', 'cordialidad', 'santo domingo savio', 'deporte'],
+    lat: 6.298771,
+    lng: -75.546302,
     img: 'img/lugares/deportivos.svg',
     alt: 'UVA de la Cordialidad'
   },
@@ -537,6 +607,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['museo', 'arte moderno', 'mamm', 'ciudad del rio', 'cultura'],
+    lat: 6.21959,
+    lng: -75.57383,
     img: 'img/lugares/cultura.svg',
     alt: 'Museo de Arte Moderno de Medellín'
   },
@@ -548,6 +620,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['museo', 'casa de la memoria', 'memoria', 'cultura', 'paz'],
+    lat: 6.24592,
+    lng: -75.556556,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Museo Casa de la Memoria'
   },
@@ -559,6 +633,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['museo', 'el castillo', 'poblado', 'arte', 'cultura'],
+    lat: 6.190155,
+    lng: -75.569528,
     img: 'img/lugares/cultura.svg',
     alt: 'Museo El Castillo'
   },
@@ -570,6 +646,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['museo', 'gardel', 'tango', 'casa gardeliana', 'cultura'],
+    lat: 6.25969,
+    lng: -75.56602,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Casa Museo Gardeliana'
   },
@@ -581,6 +659,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['museo', 'pedro nel gomez', 'murales', 'arte', 'cultura'],
+    lat: 6.26531,
+    lng: -75.58475,
     img: 'img/lugares/cultura.svg',
     alt: 'Casa Museo Pedro Nel Gómez'
   },
@@ -592,6 +672,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['teatro', 'metropolitano', 'opera', 'musica', 'cultura'],
+    lat: 6.243176,
+    lng: -75.577508,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Teatro Metropolitano'
   },
@@ -603,6 +685,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['teatro', 'pablo tobon', 'cultura', 'espectaculos'],
+    lat: 6.24747,
+    lng: -75.5591,
     img: 'img/lugares/cultura.svg',
     alt: 'Teatro Pablo Tobón Uribe'
   },
@@ -614,6 +698,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['teatro', 'camilo torres', 'udea', 'cultura'],
+    lat: 6.267861,
+    lng: -75.569278,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Teatro Camilo Torres'
   },
@@ -625,6 +711,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['biblioteca', 'espana', 'santo domingo', 'lectura', 'cultura'],
+    lat: 6.294695,
+    lng: -75.544196,
     img: 'img/lugares/cultura.svg',
     alt: 'Parque Biblioteca España'
   },
@@ -636,6 +724,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['biblioteca', 'belen', 'lectura', 'cultura'],
+    lat: 6.224016,
+    lng: -75.598125,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Parque Biblioteca Belén'
   },
@@ -647,6 +737,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['biblioteca', 'san javier', 'lectura', 'cultura'],
+    lat: 6.254793,
+    lng: -75.613572,
     img: 'img/lugares/cultura.svg',
     alt: 'Parque Biblioteca San Javier'
   },
@@ -658,6 +750,8 @@ var LUGARES_BECI = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['planetario', 'astronomia', 'ciencia', 'estrellas', 'cultura'],
+    lat: 6.268904,
+    lng: -75.566116,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Planetario de Medellín'
   },
@@ -671,6 +765,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['arvi', 'santa elena', 'senderismo', 'naturaleza', 'parque'],
+    lat: 6.281397,
+    lng: -75.502688,
     img: 'img/lugares/recreativos.svg',
     alt: 'Parque Arví'
   },
@@ -682,6 +778,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['cerro nutibara', 'pueblito paisa', 'mirador', 'parque'],
+    lat: 6.236171,
+    lng: -75.579908,
     img: 'img/lugares/recreativos-2.svg',
     alt: 'Cerro Nutibara y Pueblito Paisa'
   },
@@ -693,6 +791,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['cerro el volador', 'robledo', 'senderismo', 'naturaleza'],
+    lat: 6.266565,
+    lng: -75.582908,
     img: 'img/lugares/recreativos.svg',
     alt: 'Cerro El Volador'
   },
@@ -704,6 +804,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['pies descalzos', 'parque', 'centro', 'arena'],
+    lat: 6.244735,
+    lng: -75.576884,
     img: 'img/lugares/recreativos-2.svg',
     alt: 'Parque de los Pies Descalzos'
   },
@@ -715,6 +817,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['parque de los deseos', 'aranjuez', 'cine', 'parque'],
+    lat: 6.26818,
+    lng: -75.566171,
     img: 'img/lugares/recreativos.svg',
     alt: 'Parque de los Deseos'
   },
@@ -726,6 +830,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['parque lleras', 'poblado', 'rumba', 'restaurantes'],
+    lat: 6.20764,
+    lng: -75.56941,
     img: 'img/lugares/recreativos-2.svg',
     alt: 'Parque Lleras'
   },
@@ -737,6 +843,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['la presidenta', 'parque', 'poblado', 'rio'],
+    lat: 6.207826,
+    lng: -75.570038,
     img: 'img/lugares/recreativos.svg',
     alt: 'Parque La Presidenta'
   },
@@ -748,6 +856,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['juanes', 'san javier', 'parque', 'musica'],
+    lat: 6.29237,
+    lng: -75.568794,
     img: 'img/lugares/recreativos-2.svg',
     alt: 'Parque Juanes de la Paz'
   },
@@ -759,6 +869,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['parque bolivar', 'centro', 'parque'],
+    lat: 6.252922,
+    lng: -75.564606,
     img: 'img/lugares/recreativos.svg',
     alt: 'Parque Bolívar'
   },
@@ -770,6 +882,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['parque berrio', 'centro', 'catedral', 'plaza'],
+    lat: 6.250015,
+    lng: -75.568136,
     img: 'img/lugares/recreativos-2.svg',
     alt: 'Parque Berrío'
   },
@@ -781,6 +895,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['parque san antonio', 'centro', 'plaza', 'eventos'],
+    lat: 6.245668,
+    lng: -75.568159,
     img: 'img/lugares/recreativos.svg',
     alt: 'Parque San Antonio'
   },
@@ -792,6 +908,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['las luces', 'plaza de las luces', 'centro', 'parque'],
+    lat: 6.24939,
+    lng: -75.57116,
     img: 'img/lugares/recreativos-2.svg',
     alt: 'Plaza de las Luces'
   },
@@ -803,6 +921,8 @@ var LUGARES_BECI = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['ciudad del rio', 'parque', 'guayabal', 'skate'],
+    lat: 6.221893,
+    lng: -75.573162,
     img: 'img/lugares/recreativos.svg',
     alt: 'Parque Ciudad del Río'
   },
@@ -816,6 +936,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['alcaldia', 'medellin', 'alpujarra', 'gobierno', 'tramites'],
+    lat: 6.244698,
+    lng: -75.573776,
     img: 'img/lugares/institucionales.svg',
     alt: 'Alcaldía de Medellín'
   },
@@ -827,6 +949,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['concejo', 'medellin', 'alpujarra', 'corporacionpublica'],
+    lat: 6.244471,
+    lng: -75.57407,
     img: 'img/lugares/institucionales-2.svg',
     alt: 'Concejo de Medellín'
   },
@@ -838,6 +962,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['camara de comercio', 'empresarios', 'registro mercantil', 'emprender'],
+    lat: 6.24607,
+    lng: -75.56464,
     img: 'img/lugares/institucionales.svg',
     alt: 'Cámara de Comercio de Medellín'
   },
@@ -888,6 +1014,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['metro', 'transporte', 'metrocable', 'tranvia', 'movilidad'],
+    lat: 6.272667,
+    lng: -75.578085,
     img: 'img/lugares/institucionales-2.svg',
     alt: 'Metro de Medellín'
   },
@@ -899,6 +1027,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['registraduria', 'cedula', 'pasaporte', 'identificacion', 'tramites'],
+    lat: 6.25439,
+    lng: -75.56811,
     img: 'img/lugares/institucionales.svg',
     alt: 'Registraduría Nacional'
   },
@@ -910,6 +1040,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['personeria', 'derechos', 'quejas', 'medellin'],
+    lat: 6.244204,
+    lng: -75.574644,
     img: 'img/lugares/institucionales-2.svg',
     alt: 'Personería de Medellín'
   },
@@ -921,6 +1053,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['policia', 'seguridad', 'metropolitana', 'convivencia'],
+    lat: 6.256212,
+    lng: -75.589361,
     img: 'img/lugares/institucionales.svg',
     alt: 'Policía Metropolitana'
   },
@@ -932,6 +1066,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['terminal norte', 'buses', 'transporte', 'terminal'],
+    lat: 6.278643,
+    lng: -75.571091,
     img: 'img/lugares/institucionales-2.svg',
     alt: 'Terminal del Norte'
   },
@@ -943,6 +1079,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['terminal sur', 'buses', 'transporte', 'terminal'],
+    lat: 6.19724,
+    lng: -75.57285,
     img: 'img/lugares/institucionales.svg',
     alt: 'Terminal del Sur'
   },
@@ -954,6 +1092,8 @@ var LUGARES_BECI = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['aeropuerto', 'olaya herrera', 'vuelos', 'avion'],
+    lat: 6.220022,
+    lng: -75.589037,
     img: 'img/lugares/institucionales-2.svg',
     alt: 'Aeropuerto Olaya Herrera'
   },
@@ -993,6 +1133,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['hospital', 'pablo tobon', 'salud', 'clinica'],
+    lat: 6.277364,
+    lng: -75.579983,
     img: 'img/lugares/salud.svg',
     alt: 'Hospital Pablo Tobón Uribe'
   },
@@ -1004,6 +1146,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['hospital', 'san vicente', 'salud', 'universitario'],
+    lat: 6.23216,
+    lng: -75.58327,
     img: 'img/lugares/salud-2.svg',
     alt: 'Hospital San Vicente Fundación'
   },
@@ -1015,6 +1159,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['hospital general', 'salud', 'urgencias', 'medellin'],
+    lat: 6.234348,
+    lng: -75.572664,
     img: 'img/lugares/salud.svg',
     alt: 'Hospital General de Medellín'
   },
@@ -1026,6 +1172,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['hospital infantil', 'niños', 'pediatria', 'salud'],
+    lat: 6.23227,
+    lng: -75.58302,
     img: 'img/lugares/salud-2.svg',
     alt: 'Hospital Infantil San Vicente'
   },
@@ -1037,6 +1185,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica', 'las americas', 'salud', 'especialistas'],
+    lat: 6.214023,
+    lng: -75.594922,
     img: 'img/lugares/salud.svg',
     alt: 'Clínica Las Américas'
   },
@@ -1048,6 +1198,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica', 'el rosario', 'salud', 'urgencias'],
+    lat: 6.193722,
+    lng: -75.557486,
     img: 'img/lugares/salud-2.svg',
     alt: 'Clínica El Rosario'
   },
@@ -1059,6 +1211,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica medellin', 'aguacatala', 'salud', 'hospitalizacion'],
+    lat: 6.251224,
+    lng: -75.563916,
     img: 'img/lugares/salud.svg',
     alt: 'Clínica Medellín'
   },
@@ -1070,6 +1224,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica del prado', 'salud', 'prado', 'urgencias'],
+    lat: 6.222339,
+    lng: -75.574882,
     img: 'img/lugares/salud-2.svg',
     alt: 'Clínica del Prado'
   },
@@ -1081,6 +1237,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica soma', 'salud', 'diagnostico', 'especialistas'],
+    lat: 6.22119,
+    lng: -75.58192,
     img: 'img/lugares/salud.svg',
     alt: 'Clínica Soma'
   },
@@ -1092,6 +1250,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica antioquia', 'salud', 'urgencias'],
+    lat: 6.269462,
+    lng: -75.558888,
     img: 'img/lugares/salud-2.svg',
     alt: 'Clínica Antioquia'
   },
@@ -1103,6 +1263,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica', 'bolivariana', 'upb', 'robledo', 'salud'],
+    lat: 6.276842,
+    lng: -75.582176,
     img: 'img/lugares/salud.svg',
     alt: 'Clínica Universitaria Bolivariana'
   },
@@ -1114,6 +1276,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['ips universitaria', 'udea', 'salud', 'antioquia'],
+    lat: 6.268218,
+    lng: -75.568564,
     img: 'img/lugares/salud-2.svg',
     alt: 'IPS Universitaria'
   },
@@ -1125,6 +1289,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['metrosalud', 'salud', 'unidades', 'publica'],
+    lat: 6.214501,
+    lng: -75.571064,
     img: 'img/lugares/salud.svg',
     alt: 'Metrosalud'
   },
@@ -1136,6 +1302,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['liga', 'cancer', 'oncologia', 'salud'],
+    lat: 6.22036,
+    lng: -75.56868,
     img: 'img/lugares/salud-2.svg',
     alt: 'Liga Contra el Cáncer'
   },
@@ -1147,6 +1315,8 @@ var LUGARES_BECI = [
     categoria: 'salud',
     isSena: false,
     tokens: ['secretaria de salud', 'salud', 'programas', 'bienestar'],
+    lat: 6.24655,
+    lng: -75.56799,
     img: 'img/lugares/salud.svg',
     alt: 'Secretaría de Salud de Medellín'
   },
@@ -1173,6 +1343,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['ruta n', 'innovacion', 'tecnologia', 'emprendimiento', 'startups'],
+    lat: 6.265121,
+    lng: -75.566751,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Ruta N'
   },
@@ -1184,6 +1356,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['valle del software', 'software', 'robledo', 'tecnologia', 'coworking'],
+    lat: 6.26056,
+    lng: -75.59457,
     img: 'img/lugares/tecnologia-2.svg',
     alt: 'Centro del Valle del Software'
   },
@@ -1195,6 +1369,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['facultad de minas', 'universidad nacional', 'ingenieria', 'robledo', 'tecnologia'],
+    lat: 6.2658,
+    lng: -75.57802,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Facultad de Minas'
   },
@@ -1206,6 +1382,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['tecnoparque', 'sena', 'innovacion', 'tecnologia', 'proyectos'],
+    lat: 6.25198,
+    lng: -75.5669,
     img: 'img/lugares/tecnologia-2.svg',
     alt: 'Tecnoparque SENA'
   },
@@ -1217,6 +1395,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'popular', 'emprendimiento', 'empleo'],
+    lat: 6.292676,
+    lng: -75.541672,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Cedezo Popular'
   },
@@ -1228,6 +1408,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'manrique', 'emprendimiento', 'empleo'],
+    lat: 6.2653,
+    lng: -75.5515,
     img: 'img/lugares/tecnologia-2.svg',
     alt: 'Cedezo Manrique'
   },
@@ -1239,6 +1421,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'aranjuez', 'emprendimiento', 'empleo'],
+    lat: 6.27891,
+    lng: -75.55871,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Cedezo Aranjuez'
   },
@@ -1250,6 +1434,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'castilla', 'emprendimiento', 'empleo'],
+    lat: 6.299305,
+    lng: -75.56628,
     img: 'img/lugares/tecnologia-2.svg',
     alt: 'Cedezo Castilla'
   },
@@ -1261,6 +1447,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'villa hermosa', 'emprendimiento', 'empleo'],
+    lat: 6.251,
+    lng: -75.553,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Cedezo Villa Hermosa'
   },
@@ -1272,6 +1460,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'centro', 'candelaria', 'emprendimiento'],
+    lat: 6.2477,
+    lng: -75.5655,
     img: 'img/lugares/tecnologia-2.svg',
     alt: 'Cedezo Centro'
   },
@@ -1283,6 +1473,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'san javier', 'emprendimiento', 'empleo'],
+    lat: 6.25372,
+    lng: -75.61229,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Cedezo San Javier'
   },
@@ -1294,6 +1486,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'belen', 'emprendimiento', 'empleo'],
+    lat: 6.21685,
+    lng: -75.56335,
     img: 'img/lugares/tecnologia-2.svg',
     alt: 'Cedezo Belén'
   },
@@ -1305,6 +1499,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'santa cruz', 'emprendimiento', 'empleo'],
+    lat: 6.2873,
+    lng: -75.5591,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Cedezo Santa Cruz'
   },
@@ -1316,6 +1512,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'san cristobal', 'emprendimiento', 'empleo'],
+    lat: 6.27449,
+    lng: -75.63318,
     img: 'img/lugares/tecnologia-2.svg',
     alt: 'Cedezo San Cristóbal'
   },
@@ -1327,6 +1525,8 @@ var LUGARES_BECI = [
     categoria: 'tecnologia',
     isSena: false,
     tokens: ['cedezo', 'san antonio de prado', 'emprendimiento', 'empleo'],
+    lat: 6.18213,
+    lng: -75.64534,
     img: 'img/lugares/tecnologia.svg',
     alt: 'Cedezo San Antonio de Prado'
   },
@@ -1379,6 +1579,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['galeria', 'alonso garces', 'arte', 'exposiciones'],
+    lat: 6.25016,
+    lng: -75.56899,
     img: 'img/lugares/arte.svg',
     alt: 'Galería Alonso Garcés'
   },
@@ -1390,6 +1592,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['galeria', 'la oficina', 'arte', 'exposiciones'],
+    lat: 6.22999,
+    lng: -75.56951,
     img: 'img/lugares/arte-2.svg',
     alt: 'Galería La Oficina'
   },
@@ -1401,6 +1605,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['galeria', 'duque arango', 'arte', 'poblado'],
+    lat: 6.2481,
+    lng: -75.5702,
     img: 'img/lugares/arte.svg',
     alt: 'Galería Duque Arango'
   },
@@ -1412,6 +1618,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['espacio', 'el dorado', 'arte', 'exposiciones'],
+    lat: 6.2528,
+    lng: -75.57497,
     img: 'img/lugares/arte-2.svg',
     alt: 'Espacio El Dorado'
   },
@@ -1423,6 +1631,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['casa tres patios', 'arte', 'residencias', 'contemporaneo'],
+    lat: 6.260617,
+    lng: -75.562243,
     img: 'img/lugares/arte.svg',
     alt: 'Casa Tres Patios'
   },
@@ -1434,6 +1644,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['esculturas', 'cerro nutibara', 'arte', 'parque'],
+    lat: 6.23617,
+    lng: -75.5799,
     img: 'img/lugares/arte-2.svg',
     alt: 'Parque de las Esculturas'
   },
@@ -1445,6 +1657,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['comuna 13', 'grafiti', 'arte urbano', 'san javier', 'escaleras'],
+    lat: 6.2705,
+    lng: -75.6235,
     img: 'img/lugares/arte.svg',
     alt: 'Comuna 13 arte urbano'
   },
@@ -1456,6 +1670,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['mercadillo', 'san alejo', 'artesanias', 'parque bolivar', 'arte'],
+    lat: 6.24534,
+    lng: -75.5753,
     img: 'img/lugares/arte-2.svg',
     alt: 'Mercadillo de San Alejo'
   },
@@ -1467,6 +1683,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['museo', 'upb', 'arte', 'robledo', 'exposiciones'],
+    lat: 6.24097,
+    lng: -75.59227,
     img: 'img/lugares/arte.svg',
     alt: 'Museo UPB'
   },
@@ -1478,6 +1696,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['cinemateca', 'cine', 'peliculas', 'arte'],
+    lat: 6.24075,
+    lng: -75.57938,
     img: 'img/lugares/arte-2.svg',
     alt: 'Cinemateca Municipal'
   },
@@ -1489,6 +1709,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['galeria', 'parque de los deseos', 'arte', 'exposiciones'],
+    lat: 6.26527,
+    lng: -75.56412,
     img: 'img/lugares/arte.svg',
     alt: 'Galería de Arte del Parque de los Deseos'
   },
@@ -1500,6 +1722,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['bellas artes', 'arte', 'musica', 'formacion'],
+    lat: 6.24968,
+    lng: -75.57029,
     img: 'img/lugares/arte-2.svg',
     alt: 'Instituto de Bellas Artes'
   },
@@ -1511,6 +1735,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['cementerio', 'san pedro', 'museo', 'esculturas', 'patrimonio'],
+    lat: 6.26463,
+    lng: -75.57607,
     img: 'img/lugares/arte.svg',
     alt: 'Cementerio Museo San Pedro'
   },
@@ -1522,6 +1748,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['casa teatro', 'poblado', 'teatro', 'arte'],
+    lat: 6.188072,
+    lng: -75.580662,
     img: 'img/lugares/arte-2.svg',
     alt: 'Casa Teatro El Poblado'
   },
@@ -1533,6 +1761,8 @@ var LUGARES_BECI = [
     categoria: 'arte',
     isSena: false,
     tokens: ['palacio de la cultura', 'exposiciones', 'arquitectura', 'arte', 'uribe uribe'],
+    lat: 6.251695,
+    lng: -75.568056,
     img: 'img/lugares/arte.svg',
     alt: 'Palacio de la Cultura'
   },
@@ -1715,6 +1945,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['politecnico', 'jaime isaza cadavid', 'elpoli', 'agraria', 'deporte', 'el poblado'],
+    lat: 6.23134,
+    lng: -75.5681,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Politécnico Jaime Isaza Cadavid'
   },
@@ -1726,6 +1958,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['colegiatura', 'colegiatura colombiana', 'las palmas', 'diseno de modas', 'el poblado'],
+    lat: 6.208835,
+    lng: -75.546122,
     img: 'img/lugares/educativos.svg',
     alt: 'Colegiatura Colombiana'
   },
@@ -1737,6 +1971,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['iue', 'institucion universitaria de envigado', 'envigado', 'universidad publica'],
+    lat: 6.16977,
+    lng: -75.59509,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Institución Universitaria de Envigado'
   },
@@ -1748,6 +1984,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['san jose de la salle', 'la salle', 'colegio', 'centro'],
+    lat: 6.203189,
+    lng: -75.546749,
     img: 'img/lugares/educativos.svg',
     alt: 'Colegio San José de la Salle'
   },
@@ -1759,6 +1997,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['colombo americano', 'ingles', 'idiomas', 'cultura americana', 'centro'],
+    lat: 6.2175,
+    lng: -75.57378,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Centro Colombo Americano'
   },
@@ -1770,6 +2010,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['montessori', 'colegio', 'bilingue', 'el poblado'],
+    lat: 6.177316,
+    lng: -75.562071,
     img: 'img/lugares/educativos.svg',
     alt: 'Colegio Montessori'
   },
@@ -1781,6 +2023,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'educativos',
     isSena: false,
     tokens: ['colegio aleman', 'aleman', 'bilingue', 'trilingue', 'los balsos'],
+    lat: 6.15931,
+    lng: -75.5567,
     img: 'img/lugares/educativos-2.svg',
     alt: 'Colegio Alemán de Medellín'
   },
@@ -1794,6 +2038,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'salud',
     isSena: false,
     tokens: ['somer', 'clinica', 'rionegro', 'oriente antioqueno', 'hospital'],
+    lat: 6.14076,
+    lng: -75.377098,
     img: 'img/lugares/salud.svg',
     alt: 'Clínica Somer'
   },
@@ -1805,6 +2051,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'salud',
     isSena: false,
     tokens: ['hospital mental', 'salud mental', 'psiquiatria', 'bello'],
+    lat: 6.324968,
+    lng: -75.565128,
     img: 'img/lugares/salud-2.svg',
     alt: 'Hospital Mental de Antioquia'
   },
@@ -1816,6 +2064,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'salud',
     isSena: false,
     tokens: ['clinica ces', 'ces', 'hospital', 'poblado', 'salud'],
+    lat: 6.257464,
+    lng: -75.565482,
     img: 'img/lugares/salud.svg',
     alt: 'Clínica CES'
   },
@@ -1829,6 +2079,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['matacandelas', 'teatro', 'bombona', 'girardot', 'independiente'],
+    lat: 6.244509,
+    lng: -75.564585,
     img: 'img/lugares/cultura.svg',
     alt: 'Teatro Matacandelas'
   },
@@ -1840,6 +2092,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['museo del agua', 'agua', 'epm', 'alpujarra', 'interactivo'],
+    lat: 6.27127,
+    lng: -75.56623,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Museo del Agua EPM'
   },
@@ -1851,6 +2105,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['otraparte', 'fernando gonzalez', 'casa museo', 'envigado', 'filosofia'],
+    lat: 6.179313,
+    lng: -75.584018,
     img: 'img/lugares/cultura.svg',
     alt: 'Casa Museo Otraparte'
   },
@@ -1862,6 +2118,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['catedral', 'catedral metropolitana', 'basilica', 'parque bolivar', 'iglesia'],
+    lat: 6.25224,
+    lng: -75.56336,
     img: 'img/lugares/cultura-2.svg',
     alt: 'Catedral Basílica Metropolitana'
   },
@@ -1873,6 +2131,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'cultura',
     isSena: false,
     tokens: ['plaza botero', 'botero', 'esculturas', 'centro', 'arte urbano'],
+    lat: 6.251847,
+    lng: -75.568639,
     img: 'img/lugares/cultura.svg',
     alt: 'Plaza Botero'
   },
@@ -1886,6 +2146,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'institucionales',
     isSena: false,
     tokens: ['area metropolitana', 'valle de aburra', 'ambiente', 'transporte', 'metropolitana'],
+    lat: 6.242124,
+    lng: -75.574119,
     img: 'img/lugares/institucionales.svg',
     alt: 'Área Metropolitana del Valle de Aburrá'
   },
@@ -1899,6 +2161,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'deportivos',
     isSena: false,
     tokens: ['unidad deportiva san javier', 'san javier', 'deportes', 'canchas', 'comuna 13'],
+    lat: 6.255464,
+    lng: -75.628055,
     img: 'img/lugares/deportivos.svg',
     alt: 'Unidad Deportiva San Javier'
   },
@@ -1964,6 +2228,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['tucan', 'parque de diversiones', 'piscina', 'recreacion', 'las palmas', 'toboganes'],
+    lat: 6.24337,
+    lng: -75.5945,
     img: 'img/lugares/recreativos.svg',
     alt: 'Parque Tucán'
   },
@@ -1975,6 +2241,8 @@ var LUGARES_BUSCADOR = [
     categoria: 'recreativos',
     isSena: false,
     tokens: ['zoologico', 'santa fe', 'animales', 'sabaneta', 'naturaleza'],
+    lat: 6.22333,
+    lng: -75.58921,
     img: 'img/lugares/recreativos-2.svg',
     alt: 'Zoológico Santa Fe'
   }

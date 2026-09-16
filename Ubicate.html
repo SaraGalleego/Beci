@@ -1014,6 +1014,8 @@
   var NEARBY_RADIUS_METERS = 1500;
   var SEARCH_RADIUS_METERS = 20000;
   var MAX_PLACES = 15;
+  // Máximo de lugares por zona recuperados de Overpass para mantener el mapa ligero.
+  var MAX_ZONE = 60;
   var MAX_DISTANCE_BATCH = 4;
 
   /* Navegación de tarjetas:
@@ -1059,6 +1061,10 @@
   var userPosition = null;
   var currentPlaces = [];
   var selectedPlace = null;
+  // Todos los marcadores actualmente visibles en el mapa (cards + dinámicos + precargados)
+  var renderedMarkers = [];
+  // Cache por categoría de lugares descubiertos en la zona visible (Overpass)
+  var ZONE_CACHE = {};
   var activeCategory = 'Todos';
   var statusTimer = null;
   var watchId = null;
@@ -1070,6 +1076,9 @@
   // marca de tiempo de la última petición manual de ubicación (botón "Mi ubicación")
   // -86400000 = -24h en ms para que el primer onLocationSuccess automático NO active el guard de 25s
   var manualLocateAt = -86400000;
+  // true → mientras la carga recién terminada muestra cards flotantes; una vez que el mapa
+  // se asienta, las siguientes vistas (movimiento manual) solo muestran marcadores morados.
+  var showCards = true;
 
   var userDot, userDotInner, userLabelMarker;
 
@@ -1312,6 +1321,27 @@
       updateFloatingResultCards();
     });
 
+    // ============================================================
+    // ACTUALIZACIÓN AUTOMÁTICA AL MOVER EL MAPA
+    // Cuando el usuario termina de mover el mapa (evento moveend),
+    // se consulta OSM/Overpass dentro de la zona visible actual y
+    // los nuevos lugares descubiertos aparecen SOLO como marcadores
+    // morados (sin cards automáticas; la card sale al hacer click).
+    // ============================================================
+    var moveEndTimer = null;
+    map.on('moveend', function () {
+      // Si acabamos de renderizar cards (carga inicial / cambio de filtro),
+      // consumir ese asentamiento de la vista sin lanzar la consulta.
+      if (showCards) {
+        showCards = false;
+        return;
+      }
+      clearTimeout(moveEndTimer);
+      moveEndTimer = setTimeout(function () {
+        queryPlacesInBounds();
+      }, 400);
+    });
+
     var resizeTimer = null;
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
@@ -1322,6 +1352,10 @@
 
     setTimeout(function () { if (map) map.invalidateSize(); }, 150);
     setTimeout(function () { if (map) map.invalidateSize(); }, 500);
+
+    // Precargar en segundo plano los lugares reales de la vista inicial para que
+    // los filtros tengan datos al instante (sin el mensaje de "no hay lugares").
+    setTimeout(function () { if (map) prefetchVisibleZone(); }, 700);
   }
 
   /* -------------------- Geolocalización -------------------- */
@@ -1746,6 +1780,8 @@
   }
 
   function renderPlaceMarker(place) {
+    // Evitar duplicar un marcador que ya está en el mapa
+    if (place.marker && map.hasLayer(place.marker)) return;
     var icon = placePinSvg('#8A56AC');
     var marker = L.marker([place.latitude, place.longitude], { icon: icon, title: place.name, riseOnHover: true });
     marker.place = place;
@@ -1757,6 +1793,7 @@
     marker._defaultIcon = icon;
     marker.addTo(map);
     place.marker = marker;
+    renderedMarkers.push(marker);
   }
 
   /* -------------------- Selección y distancia -------------------- */
@@ -1780,10 +1817,10 @@
   }
 
   function resetAllPlaceMarkers() {
-    currentPlaces.forEach(function (p) {
-      if (p.marker) {
-        p.marker.setIcon(p.marker._defaultIcon);
-        p.marker.setZIndexOffset(0);
+    renderedMarkers.forEach(function (marker) {
+      if (marker.place && marker.place.marker) {
+        marker.place.marker.setIcon(marker.place.marker._defaultIcon);
+        marker.place.marker.setZIndexOffset(0);
       }
     });
   }
@@ -1797,12 +1834,13 @@
   function clearPlaces() {
     closePinCard();
     clearFloatingResultCards();
-    currentPlaces.forEach(function (p) {
-      if (p.marker) {
-        map.removeLayer(p.marker);
-        if (map.hasLayer(p.marker)) map.removeLayer(p.marker);
+    renderedMarkers.forEach(function (marker) {
+      if (marker) {
+        map.removeLayer(marker);
+        if (map.hasLayer(marker)) map.removeLayer(marker);
       }
     });
+    renderedMarkers = [];
     currentPlaces = [];
     selectedPlace = null;
   }
@@ -2161,7 +2199,7 @@
      CARGA Y FILTRADO DE LUGARES POR CATEGORÍA
      Ordenados por proximidad al usuario
      ============================================================ */
-  function loadPlacesForCategory(category, targetCenter, keepView) {
+  function loadPlacesForCategory(category, targetCenter, keepView, silentEmpty) {
     targetCenter = targetCenter || userPosition || MEDELLIN;
     var norm = normalizeText(category);
     var isAll = category === 'Todos' || norm === 'todos' || !category;
@@ -2172,37 +2210,36 @@
       p.straightDistance = haversineMeters(targetCenter, { lat: p.latitude, lng: p.longitude });
     });
 
-    // Filtrar y ordenar por distancia (más cercanos primero)
-    var pool = [];
-    if (activeCategory === 'Todos') {
-      // Para "Todos": ordenar por proximidad al usuario y tomar los 6 principales
-      pool = ALL_PLACES_POOL.slice().sort(function (a, b) {
-        return a.straightDistance - b.straightDistance;
-      }).slice(0, 6);
-    } else {
-      pool = ALL_PLACES_POOL.filter(function (p) {
-        var cat = p.category || getPlaceCategory(p.name, p.tags);
-        return cat === activeCategory;
-      }).sort(function (a, b) {
-        return a.straightDistance - b.straightDistance;
-      }).slice(0, 6);
-    }
-
-    clearPlaces();
-    currentPlaces = pool;
-
-    // Asignar detailUrl a cada lugar para navegación
-    currentPlaces.forEach(function (p) {
-      p.detailUrl = resolveDetailUrl(p.name, p.isSena);
+    // Todos los lugares de la categoría ordenados por proximidad
+    var byDistance = ALL_PLACES_POOL.slice().sort(function (a, b) {
+      return a.straightDistance - b.straightDistance;
+    });
+    var allCat = isAll ? byDistance : byDistance.filter(function (p) {
+      var cat = p.category || getPlaceCategory(p.name, p.tags);
+      return cat === activeCategory;
     });
 
-    if (!currentPlaces.length) {
-      showStatus('No encontramos lugares de ' + (category || 'esta categoría') + ' registrados.', 3500);
+    clearPlaces();
+
+    // Marcadores: se colocan para TODA la categoría (con tope para rendimiento);
+    // cards flotantes: solo los 6 más cercanos.
+    var markersToRender = allCat.slice(0, MAX_ZONE);
+    markersToRender.forEach(function (p) {
+      renderPlaceMarker(p);
+    });
+
+    currentPlaces = allCat.slice(0, 6);
+
+    if (!currentPlaces.length && !markersToRender.length) {
+      if (!silentEmpty) {
+        showStatus('Acércate o ajusta el zoom para descubrir más lugares en tu zona.', 3500);
+        showCards = false;
+      }
       return;
     }
 
     currentPlaces.forEach(function (p) {
-      renderPlaceMarker(p);
+      p.detailUrl = resolveDetailUrl(p.name, p.isSena);
       calculateWalkingDistance(p);
     });
 
@@ -2225,6 +2262,161 @@
     } else {
       showStatus('Lugares de ' + label + ' más cercanos a ti.', 2500);
     }
+
+    // Las siguientes vistas por movimiento manual ya no regeneran cards flotantes.
+    if (showCards) {
+      setTimeout(function () { showCards = false; }, 900);
+    }
+  }
+
+  /* ============================================================
+     CONSULTA DINÁMICA POR ZONA VISIBLE (Overpass / OSM)
+     ------------------------------------------------------------
+     Cada categoría de las píldoras se traduce a tags reales de
+     OpenStreetMap. Al terminar de mover el mapa (moveend), o al
+     cambiar de filtro, se consultan los límites visibles y los
+     lugares encontrados se agregan como marcadores morados REUSANDO
+     la infraestructura existente (pool, renderPlaceMarker, cards al
+     hacer click). No se inventan lugares: todo sale de Overpass.
+     ============================================================ */
+  var CATEGORY_TAG_CLAUSE = {
+    educativos: 'node["amenity"~"^(school|university|college|library)$"](bbox);way["amenity"~"^(school|university|college|library)$"](bbox);',
+    deportivos: 'node["leisure"~"^(sports_centre|stadium|fitness_centre|pitch|playground)$"](bbox);node["sport"](bbox);way["leisure"~"^(sports_centre|stadium|fitness_centre|pitch|playground)$"](bbox);way["sport"](bbox);',
+    cultura: 'node["tourism"~"^(museum|gallery|attraction)$"](bbox);way["tourism"~"^(museum|gallery|attraction)$"](bbox);',
+    salud: 'node["amenity"~"^(hospital|clinic|doctors)$"](bbox);way["amenity"~"^(hospital|clinic|doctors)$"](bbox);',
+    institucionales: 'node["office"~"government"](bbox);way["office"~"government"](bbox);',
+    recreativos: 'node["leisure"~"^(park|garden)$"](bbox);way["leisure"~"^(park|garden)$"](bbox);',
+    tecnologia: 'node["name"~"^(ruta n|mova|tecnoparque|valle del software|coworking|makerspace)$",i](bbox);way["name"~"^(ruta n|mova|tecnoparque|valle del software|coworking|makerspace)$",i](bbox);',
+    arte: 'node["tourism"~"^(gallery|artwork)$"](bbox);way["tourism"~"^(gallery|artwork)$"](bbox);'
+  };
+
+  function queryPlacesInBounds(done, force) {
+    if (!map) { if (done) done(0); return; }
+    // Durante una búsqueda explícita no se pisan sus resultados.
+    if (isSearchMode) { if (done) done(0); return; }
+    // En el flujo automático de movimiento del mapa, no lanzar consulta
+    // mientras acabamos de renderizar cards (force=true usado en filtros).
+    if (showCards && !force) { if (done) done(0); return; }
+
+    var clauses;
+    if (activeCategory === 'Todos' || activeCategory === 'todos') {
+      var all = [];
+      Object.keys(CATEGORY_TAG_CLAUSE).forEach(function (k) { all.push(CATEGORY_TAG_CLAUSE[k]); });
+      all.push('node["name"~"sena",i](bbox);way["name"~"sena",i](bbox);');
+      clauses = all.join('');
+    } else {
+      clauses = CATEGORY_TAG_CLAUSE[activeCategory];
+      if (!clauses) { if (done) done(0); return; }
+    }
+
+    var origin = map.getCenter();
+    // Límites visibles actuales del mapa: la consulta se hace dentro de la zona
+    // que el usuario está viendo realmente (norte/sur/este/oeste).
+    var b = map.getBounds();
+    var bboxPart = b.getSouth() + ',' + b.getWest() + ',' + b.getNorth() + ',' + b.getEast();
+
+    // Evitar consultas duplicadas cuando la zona y el filtro no cambiaron.
+    var key = activeCategory + '@' + bboxPart;
+    if (key === lastZoneQueryKey) { if (done) done(0); return; }
+    lastZoneQueryKey = key;
+
+    clauses = clauses.replace(/\(bbox\)/g, '(' + bboxPart + ')');
+    var query = '[out:json][timeout:25];(' + clauses + ');out center;';
+
+    fetch('https://overpass-api.de/api/interpreter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'data=' + encodeURIComponent(query)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var added = addPlacesFromOverpass(data.elements || [], origin);
+        if (done) done(added);
+      })
+      .catch(function () { if (done) done(0); });
+  }
+
+  // quiet = true → sin toast ni cálculo de distancia (usado en la precarga inicial)
+  function addPlacesFromOverpass(elements, origin, quiet) {
+    var seenPool = {};
+    ALL_PLACES_POOL.forEach(function (p) { seenPool[normalizeText(p.name)] = true; });
+
+    var added = 0;
+    // Límite por consulta para mantener el mapa ligero y evitar cientos de pines.
+    elements.slice(0, MAX_ZONE).forEach(function (el_) {
+      if (el_.tags && typeof el_.tags !== 'object') return;
+      var tags = el_.tags || {};
+      var name = tags.name || tags.operator || '';
+      if (!name) return;
+      if (!isRelevantPlace(name, tags)) return;
+
+      var norm = normalizeText(name);
+      if (seenPool[norm]) return;
+      seenPool[norm] = true;
+
+      var lat, lng;
+      if (el_.type === 'node') { lat = el_.lat; lng = el_.lon; }
+      else if (el_.center) { lat = el_.center.lat; lng = el_.center.lon; }
+      else if (el_.lat) { lat = el_.lat; lng = el_.lon; }
+      if (!lat || !lng) return;
+
+      var isSena = identifySenaPlace(name);
+      var place = {
+        id: 'zone-' + el_.type + '-' + el_.id,
+        name: name,
+        sector: 'Cercano a ti',
+        latitude: lat,
+        longitude: lng,
+        tags: tags,
+        straightDistance: haversineMeters(origin, { lat: lat, lng: lng }),
+        isSena: isSena,
+        category: getPlaceCategory(name, tags),
+        detailUrl: resolveDetailUrl(name, isSena),
+        walkingDistance: null
+      };
+
+      ALL_PLACES_POOL.push(place);
+      renderPlaceMarker(place);
+      if (!quiet) calculateWalkingDistance(place);
+      added++;
+    });
+
+    if (added && !quiet) {
+      showStatus(added + ' lugar' + (added > 1 ? 'es' : '') + ' más encontrados en esta zona.', 2500);
+    }
+    return added;
+  }
+
+  /* Precarga inicial: trae una vez los lugares reales de TODAS las categorías
+     dentro de la vista de arranque (Medellín) para que el primer click en
+     cualquier filtro responda de inmediato, sin esperar la consulta. */
+  var zonePrefetchDone = false;
+  function prefetchVisibleZone() {
+    if (!map || zonePrefetchDone) return;
+    zonePrefetchDone = true;
+    var b = map.getBounds();
+    var bboxPart = b.getSouth() + ',' + b.getWest() + ',' + b.getNorth() + ',' + b.getEast();
+    var all = [];
+    Object.keys(CATEGORY_TAG_CLAUSE).forEach(function (k) { all.push(CATEGORY_TAG_CLAUSE[k]); });
+    all.push('node["name"~"sena",i](bbox);way["name"~"sena",i](bbox);');
+    var clauses = all.join('').replace(/\(bbox\)/g, '(' + bboxPart + ')');
+    var query = '[out:json][timeout:25];(' + clauses + ');out center;';
+
+    fetch('https://overpass-api.de/api/interpreter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'data=' + encodeURIComponent(query)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data || !data.elements) return;
+        var added = addPlacesFromOverpass(data.elements, map.getCenter(), true);
+        // Refrescar la vista incluyendo los lugares precargados (sin mover el mapa).
+        if (added > 0 && !isSearchMode) {
+          loadPlacesForCategory(activeCategory, map.getCenter(), true, true);
+        }
+      })
+      .catch(function () { zonePrefetchDone = false; });
   }
 
   function setupCategoryPills() {
@@ -2247,9 +2439,41 @@
         var catName = pill.textContent.trim();
         // Volver a modo exploración: la geolocalización sí puede recargar lugares
         isSearchMode = false;
-        loadPlacesForCategory(catName, userPosition || MEDELLIN);
+        showCards = true;
+        handleCategorySelection(catName);
       });
     });
+  }
+
+  /* Al seleccionar un filtro:
+     1) se muestran de inmediato los lugares de esa categoría ya disponibles
+        (datos BECI + zonas precargadas de OSM), con sus cards de los más
+        cercanos — no se muestra ningún mensaje de "no hay lugares";
+     2) en segundo plano se consultan los lugares REALES de esa categoría en la
+        zona visible actual (Overpass) y se agregan/integran como marcadores. */
+  var lastZoneQueryKey = '';
+  var lastFilterRequest = 0;
+  function handleCategorySelection(catName) {
+    lastFilterRequest++;
+    var myReq = lastFilterRequest;
+    // Un filtro nuevo debe permitir consultar de nuevo la zona visible.
+    lastZoneQueryKey = '';
+    var center = (map && map.getCenter) ? map.getCenter() : (userPosition || MEDELLIN);
+
+    // Render inmediato con datos ya disponibles: sin mover el mapa y sin avisos.
+    loadPlacesForCategory(catName, center, true, true);
+
+    // Consulta dinámica de la categoría en la zona visible (Overpass), en segundo plano.
+    queryPlacesInBounds(function (addedCount) {
+      if (myReq !== lastFilterRequest) return; // respuesta obsoleta: ya se eligió otro filtro
+      // Los marcadores nuevos ya fueron renderizados; se re-renderiza para ordenar
+      // por proximidad y actualizar las cards si ahora hay datos en la zona.
+      if (addedCount > 0) {
+        loadPlacesForCategory(catName, map.getCenter(), true, true);
+      } else {
+        showCards = false;
+      }
+    }, true);
   }
 
   /* -------------------- Búsqueda de un lugar en Medellín (Nominatim) -------------------- */
@@ -2477,6 +2701,7 @@
             map.flyTo(coords, 14, { duration: 1.2 });
             // Volver a modo exploración: cargar lugares cercanos a la ubicación actual
             isSearchMode = false;
+            showCards = true;
             findNearbyPlaces(coords, true);
             showStatus('Tu ubicación fue actualizada.', 3000);
           },
