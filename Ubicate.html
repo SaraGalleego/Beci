@@ -2569,7 +2569,7 @@
       var bounds = L.latLngBounds(mapPlaces.map(function (m) { return [m.latitude, m.longitude]; }));
       map.fitBounds(bounds, { padding: [60, 60], maxZoom: 13 });
       selectPlace(mapPlaces[0]);
-      showPinCard(mapPlaces[0]);
+      renderFloatingResultCards(mapPlaces);
       showStatus(mapPlaces.length + ' lugares en catálogo local para "' + query + '"', 3500);
     }
     // Devuelve los lugares localizados para que Overpass pueda enriquecer sin duplicarlos.

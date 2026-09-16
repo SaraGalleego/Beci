@@ -390,6 +390,14 @@ comunidad</h1>
       .replace(/[^a-z0-9]+/g, ' ').trim();
   }
 
+  function escapeRegex(str) {
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function matchesQuery(hay, q) {
+    return new RegExp('\\b' + escapeRegex(q)).test(hay);
+  }
+
   function identifySenaPlace(name) {
     return name && name.toLowerCase().indexOf('sena') !== -1;
   }
@@ -525,7 +533,7 @@ comunidad</h1>
       var hay = [p.nombre, p.sector, p.descripcion, CATEGORY_LABELS[p.categoria], p.categoria]
         .map(normalizeText).join(' ');
       hay += ' ' + (p.tokens || []).map(normalizeText).join(' ');
-      return hay.indexOf(q) !== -1;
+      return matchesQuery(hay, q);
     });
   }
 
