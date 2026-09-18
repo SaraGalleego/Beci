@@ -548,6 +548,10 @@
       folders.forEach(folder => {
         folder.addEventListener('click', () => {
           const idx = parseInt(folder.getAttribute('data-index'));
+          if (folder.getAttribute('data-label') === 'Tour Virtual') {
+            window.location.href = '360ctma.html';
+            return;
+          }
           targetAngle = -idx * angleStep;
           animateTo(targetAngle);
         });

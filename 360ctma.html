@@ -435,8 +435,8 @@
         touchZoom: true,
         doubleClickZoom: true,
         keyboardZoom: true,
-        hfov: 90,
-        minHfov: 30,
+        hfov: 100,
+        minHfov: 50,
         maxHfov: 110
       },
       scenes: {
@@ -608,6 +608,15 @@
     // Initial UI & Icons
     lucide.createIcons();
     updateSceneUI('scene-entrada');
+
+    // Diagnóstico WebGL: imprime el límite de textura del dispositivo
+    try {
+      const glCanvas = document.querySelector('#viewer-viewport canvas') || document.createElement('canvas');
+      const gl = glCanvas.getContext('webgl') || glCanvas.getContext('experimental-webgl');
+      if (gl) {
+        console.info('[CTMA 360] MAX_TEXTURE_SIZE = ' + gl.getParameter(gl.MAX_TEXTURE_SIZE) + ' px');
+      }
+    } catch (e) {}
   </script>
 <!-- END: Panoramic Engine & UI Controller Script -->
 </body></html>

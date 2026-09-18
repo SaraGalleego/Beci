@@ -1,0 +1,996 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Mapa - Sedes SENA | Beci</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700;900&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- Datos de sedes SENA -->
+<script src="beci-data.js"></script>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Custom Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sena: {
+              greenLight: '#4DB21A',
+              greenDark: '#336926',
+              deepDark: '#1B2B1B',
+              orange: '#FF6C01',
+              accentLight: '#EAF5E8',
+            }
+          },
+          fontFamily: {
+            dmsans: ['"DM Sans"', 'sans-serif'],
+            poppins: ['"Poppins"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+<!-- Custom Layout & Animations Style -->
+<style data-purpose="custom-animations">
+    @keyframes flotarFondo {
+      0%, 100% { transform: translateY(-6px); }
+      50% { transform: translateY(6px); }
+    }
+
+    .animate-float-bg {
+      animation: flotarFondo 7s ease-in-out infinite;
+    }
+  </style>
+<!-- Beci Map Component Styles -->
+<style data-purpose="beci-map-component">
+    #beci-map-wrap {
+      position: relative;
+      width: 100%;
+      height: calc(100dvh - 11.5rem);
+      min-height: 460px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #e7efe5;
+      box-shadow: 0 12px 30px rgba(27, 43, 27, 0.14);
+      font-family: 'Poppins', system-ui, sans-serif;
+    }
+    #beci-map-wrap .leaflet-container {
+      width: 100%;
+      height: 100%;
+      background: #e7efe5;
+      font-family: 'Poppins', system-ui, sans-serif;
+    }
+    #beci-map {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    /* Zoom controls propios de Leaflet en la esquina inferior derecha */
+    #beci-map-wrap .leaflet-control-zoom {
+      position: absolute;
+      bottom: 14px;
+      right: 12px;
+      top: auto;
+      left: auto;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+    #beci-map-wrap .leaflet-control-zoom a {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      color: #1b2b1b;
+      background: rgba(255, 255, 255, 0.94);
+      font-size: 18px;
+    }
+    #beci-map-wrap .leaflet-control-attribution {
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 9px;
+    }
+
+    /* --- Controles flotantes --- */
+    #beci-map-wrap .beci-map-controls {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #beci-map-wrap .beci-map-controls button {
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      color: #336926;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    #beci-map-wrap .beci-map-controls button:hover {
+      background: #fff;
+      transform: scale(1.06);
+    }
+    #beci-map-wrap .beci-map-controls button:active {
+      transform: scale(0.94);
+    }
+    #beci-map-wrap .beci-map-controls button.locating {
+      color: #ff6c01;
+      animation: beciLocatePulse 1.1s ease-in-out infinite;
+    }
+    @keyframes beciLocatePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 108, 1, 0.34); }
+      50% { box-shadow: 0 0 0 12px rgba(255, 108, 1, 0); }
+    }
+    #beci-map-wrap .beci-map-controls button svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* --- Pill de estado --- */
+    #beci-map-wrap .beci-map-status {
+      position: absolute;
+      z-index: 1100;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: min(88%, 380px);
+      background: rgba(27, 43, 27, 0.92);
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+    }
+    #beci-map-wrap .beci-map-status.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* --- Capa de cards flotantes --- */
+    #beci-map-wrap .beci-search-cards-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 945;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    /* Pines de Leaflet por encima de las cards flotantes */
+    #beci-map-wrap .leaflet-marker-pane {
+      z-index: 960 !important;
+    }
+    #beci-map-wrap .leaflet-shadow-pane {
+      z-index: 955 !important;
+    }
+
+    /* --- Holograma: resplandor base, rayo, escaneo --- */
+    .holo-wrap {
+      position: absolute;
+      pointer-events: none;
+    }
+    .holo-wrap.func .holo-glow {
+      background: radial-gradient(ellipse at center, rgba(255, 150, 40, 0.95) 0%, rgba(255, 108, 1, 0.45) 45%, rgba(255, 108, 1, 0) 72%);
+    }
+    .holo-glow {
+      position: absolute;
+      width: 130px;
+      height: 56px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(255, 120, 25, 0.9) 0%, rgba(255, 108, 1, 0.4) 45%, rgba(255, 108, 1, 0) 72%);
+      transform: translate(-50%, -32%);
+      opacity: 0;
+      animation: glowPulse 2.4s ease-in-out infinite;
+      animation-delay: var(--holo-delay);
+      animation-fill-mode: both;
+      filter: blur(0.5px);
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.9; transform: translate(-50%, -32%) scale(1); }
+      50% { opacity: 0.6; transform: translate(-50%, -32%) scale(1.06); }
+    }
+    .holo-beam {
+      position: absolute;
+      width: 16px;
+      transform: translateX(-50%);
+      background: linear-gradient(to top, rgba(255, 122, 20, 0.95), rgba(255, 185, 95, 0.4));
+      clip-path: polygon(45% 100%, 55% 100%, 90% 0%, 10% 0%);
+      opacity: 0;
+      animation: beamFlicker 3.4s ease-in-out infinite;
+      animation-delay: var(--holo-delay);
+      animation-fill-mode: both;
+    }
+    @keyframes beamFlicker {
+      0%, 100% { opacity: 0.85; }
+      8% { opacity: 0.45; }
+      14% { opacity: 0.95; }
+      45% { opacity: 0.7; }
+      60% { opacity: 0.95; }
+    }
+    .holo-scan {
+      position: absolute;
+      top: calc(var(--beam-h, 56px) - 4px);
+      left: 50%;
+      width: 16px;
+      height: 3px;
+      margin-left: -8px;
+      border-radius: 3px;
+      background: rgba(255, 205, 130, 0.95);
+      box-shadow: 0 0 10px 2px rgba(255, 150, 40, 0.75);
+      opacity: 0;
+      animation: scanUp 2.6s linear infinite;
+      animation-delay: var(--holo-delay);
+      animation-fill-mode: both;
+    }
+    @keyframes scanUp {
+      0% { opacity: 0; transform: translateY(0); }
+      8% { opacity: 0.95; }
+      88% { opacity: 0.9; }
+      100% { opacity: 0; transform: translateY(calc(-1 * var(--beam-h, 56px))); }
+    }
+
+    /* --- Card holograma --- */
+    .ms-card {
+      width: 240px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(22, 31, 26, 0.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 14px 30px rgba(20, 30, 24, 0.4), 0 0 24px rgba(255, 108, 1, 0.25);
+      cursor: pointer;
+      pointer-events: auto;
+      opacity: 0;
+      animation: holoIn 0.7s cubic-bezier(0.22, 0.9, 0.3, 1.22) forwards;
+      animation-delay: var(--holo-delay);
+    }
+    @keyframes holoIn {
+      0% { opacity: 0; transform: translateY(18px) scale(0.82); filter: blur(10px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    .ms-card.func-card {
+      box-shadow: 0 14px 30px rgba(20, 30, 24, 0.42), 0 0 0 1.5px rgba(255, 108, 1, 0.4), 0 0 34px rgba(255, 108, 1, 0.35);
+    }
+
+    /* Triángulo indicador apuntando al pin */
+    .ms-card::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .ms-card.tail-bottom::after {
+      bottom: -8px;
+      left: var(--sc-tail-x, 50%);
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 8px solid rgba(22, 31, 26, 0.96);
+      filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.25));
+    }
+    .ms-card.tail-top::after {
+      top: -8px;
+      left: var(--sc-tail-x, 50%);
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 8px solid rgba(22, 31, 26, 0.96);
+      filter: drop-shadow(0 -2px 1px rgba(0, 0, 0, 0.25));
+    }
+    .ms-card.tail-left::after {
+      left: -8px;
+      top: var(--sc-tail-y, 50%);
+      transform: translateY(-50%);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 8px solid rgba(22, 31, 26, 0.96);
+      filter: drop-shadow(-2px 0 1px rgba(0, 0, 0, 0.25));
+    }
+    .ms-card.tail-right::after {
+      right: -8px;
+      top: var(--sc-tail-y, 50%);
+      transform: translateY(-50%);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 8px solid rgba(22, 31, 26, 0.96);
+      filter: drop-shadow(2px 0 1px rgba(0, 0, 0, 0.25));
+    }
+
+    /* --- Zona de imagen --- */
+    .ms-card-img {
+      position: relative;
+      height: 132px;
+    }
+    .ms-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #2c3a2f;
+    }
+    .ms-card-grad {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.12) 55%, rgba(0, 0, 0, 0.28));
+      pointer-events: none;
+    }
+    .ms-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 0px, rgba(255, 255, 255, 0.045) 1px, transparent 1px, transparent 5px);
+      mix-blend-mode: overlay;
+    }
+    .ms-card-title {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 30px;
+      color: #fff;
+      font-weight: 800;
+      line-height: 1.15;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .ms-card-addr {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255, 255, 255, 0.94);
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    }
+    .ms-card-addr svg {
+      width: 11px;
+      height: 11px;
+      color: #ff6c01;
+      flex-shrink: 0;
+    }
+    .ms-card-addr span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* --- Botón 360 sobre glass --- */
+    .ms-360 {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .ms-360 svg {
+      width: 13px;
+      height: 13px;
+    }
+    .ms-360:hover {
+      transform: scale(1.08);
+      background: rgba(255, 255, 255, 0.26);
+    }
+    .ms-360:active {
+      transform: scale(0.95);
+    }
+
+    /* --- Botón verde "Ver más" con light sweep --- */
+    .ms-vermas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      border: none;
+      padding: 11px 12px;
+      background: linear-gradient(135deg, #4db21a, #336926);
+      color: #fff;
+      font-weight: 800;
+      font-size: 12.5px;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 6px 14px rgba(77, 178, 26, 0.35);
+    }
+    .ms-vermas svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    .ms-vermas:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+    .ms-vermas:active {
+      transform: translateY(0) scale(0.99);
+    }
+    .ms-vermas::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 45%;
+      background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+      transform: translateX(-160%) skewX(-18deg);
+      animation: lightSweep 2.9s 0.9s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes lightSweep {
+      0% { transform: translateX(-160%) skewX(-18deg); }
+      55%, 100% { transform: translateX(320%) skewX(-18deg); }
+    }
+
+    /* --- Toast "Próximamente" --- */
+    #beci-map-wrap #ms-toast {
+      position: absolute;
+      z-index: 1300;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(27, 43, 27, 0.94);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #beci-map-wrap #ms-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-[#F4F9F2] text-[#1B2B1B] font-poppins min-h-screen relative overflow-x-hidden flex flex-col justify-between select-none">
+<!-- BEGIN: AnimatedBackgroundDecorations -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" data-purpose="background-layer">
+<img alt="Fondo decorativo explorar sedes" class="w-full h-full object-cover object-top opacity-70 animate-float-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeVBPo5dGT0aB6kG7rmVkFwOHATbPr0GF2A4HF3r9SXH7K11QJ9PfRYYJWOmVZCcQJ9Y9M3D2EP15OGGQg83LNJxNk87HUWCnNJA8OGNe0Pqv6EO-4S16ja3TdOYw3DeXTHQ1jNMMYYVwqNP6UYULos9tblpG62R_yvvDypg3oQXYq26XiyhL-I-7t-eB4bGdlpkysF5rvMK2t1Fy-iCvleP_DZjhF_ssyuBLlTZ9_KgUiSCEcUHj0YIstlrP0Jq3g8fU">
+</div>
+<!-- END: AnimatedBackgroundDecorations -->
+<!-- BEGIN: MainContentWrapper -->
+<div class="relative z-10 w-full max-w-[430px] md:max-w-xl lg:max-w-2xl mx-auto flex flex-col min-h-screen pb-24">
+<!-- BEGIN: Header -->
+<header class="pt-6 pb-4 px-6 flex items-center justify-between relative" data-purpose="main-header">
+<!-- Back Button -->
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center -ml-2 text-sena-greenDark hover:text-sena-greenLight transition-colors cursor-pointer rounded-full active:bg-black/5" type="button">
+<svg class="w-7 h-7 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Center Title -->
+<h1 class="font-dmsans font-[900] text-3xl tracking-tight text-sena-deepDark text-center absolute left-1/2 -translate-x-1/2 pointer-events-none">
+         Mapa
+       </h1>
+<!-- Balanced spacer for header alignment -->
+<div class="w-10 h-10"></div>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: MapSection -->
+<main class="flex-1 px-3 sm:px-4 flex flex-col justify-start pb-4">
+<!-- BEGIN: Beci Interactive Map Component -->
+<section id="beci-map-wrap" aria-label="Mapa de sedes SENA en Medellín">
+<div id="beci-map"></div>
+<div class="beci-map-controls">
+<button id="beci-locate-btn" type="button" aria-label="Mi ubicación" title="Mi ubicación">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>
+</button>
+</div>
+<div id="beci-map-status" class="beci-map-status" role="status"></div>
+<div id="beci-search-cards-layer" class="beci-search-cards-layer"></div>
+<div id="ms-toast" role="status"></div>
+</section>
+<!-- END: Beci Interactive Map Component -->
+</main>
+<!-- END: MapSection -->
+</div>
+<!-- END: MainContentWrapper -->
+<!-- BEGIN: BottomNavigationBanner -->
+<footer class="fixed bottom-0 left-0 right-0 w-full z-50 bg-[#4DB21A] text-white py-3.5 px-6 shadow-lg rounded-t-2xl" data-purpose="fixed-footer-action-bar">
+<div class="w-full flex items-center justify-end gap-4">
+<span class="font-poppins font-medium text-sm sm:text-base text-white tracking-wide">
+        Enterate de todo
+      </span>
+<button class="bg-[#336926] hover:bg-[#28551e] text-white font-poppins font-semibold text-sm sm:text-base px-6 py-2 rounded-full shadow-md transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center" data-purpose="btn-chismear" style="transition: transform 0.3s;" type="button">
+        Chismear
+      </button>
+</div>
+</footer>
+<!-- END: BottomNavigationBanner -->
+<!-- Map Engine -->
+<script data-purpose="mapasena-engine">
+(function () {
+  'use strict';
+
+  /* ============================================================
+     Mapasena — 7 sedes SENA en Medellín
+     Leaflet + OSM + tarjetas holograma (naranja) sobre cada pin.
+     Solo las cards CTMA y Complejo Norte tienen botones activos.
+     ============================================================ */
+
+  var SENA_SEDES_DATA = (typeof window.SENA_SEDES !== 'undefined') ? window.SENA_SEDES : {};
+
+  var CTMA_PHOTO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFCsXzGzrYnV9n_kTYKjd7G48mBHWv9VT5xLNYE1dh75id-DLKD1xmVBp41mXZFoSsNNrjPoxkx547QtiMQUDVOEJdz7Fsz8Klr3b6O-AcZ2Sb7lfb--Ab9VM1X4uNESPDyEUyE0M707VpIJ4FpFeVpF0zkGbAzRQFn14OqCfcLOL3TujNIJ8NJkQRaIWXvUsVZJVvkiqGunlNOXteF0m7lrF7g6v7RifDBMUsWsKY9dQCi4oB0nIz';
+
+  var FUNCTIONAL = { 'ctma': true, 'complejo-norte': true };
+
+  var ORDER = [
+    'complejo-norte',
+    'ctma',
+    'servicios-gestion-empresarial',
+    'centro-comercio',
+    'moda',
+    'actividad-fisica',
+    'complejo-sur'
+  ];
+
+  var TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+  var PIN_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>';
+  var ICON_360 = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>';
+  var ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
+  var ICON_BULLSEYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>';
+
+  var el = {
+    wrap: document.getElementById('beci-map-wrap'),
+    map: document.getElementById('beci-map'),
+    layer: document.getElementById('beci-search-cards-layer'),
+    status: document.getElementById('beci-map-status'),
+    toast: document.getElementById('ms-toast'),
+    locateBtn: document.getElementById('beci-locate-btn')
+  };
+
+  var map = null;
+  var sedes = [];
+  var wraps = [];
+  var renderedMarkers = [];
+  var selectedId = null;
+  var statusTimer = null;
+  var toastTimer = null;
+  var layoutTimer = null;
+  var userMarker = null;
+
+  function esc(text) {
+    return String(text == null ? '' : text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* -------------------- Utilidades de UI -------------------- */
+
+  function showStatus(message, duration) {
+    if (!el.status) return;
+    el.status.textContent = message;
+    el.status.classList.add('show');
+    if (statusTimer) clearTimeout(statusTimer);
+    statusTimer = setTimeout(function () {
+      el.status.classList.remove('show');
+    }, duration || 4500);
+  }
+
+  function showToast(message) {
+    if (!el.toast) return;
+    el.toast.textContent = message;
+    el.toast.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      el.toast.classList.remove('show');
+    }, 1800);
+  }
+
+  /* -------------------- Datos -------------------- */
+
+  function buildSedes() {
+    ORDER.forEach(function (key) {
+      var d = SENA_SEDES_DATA[key];
+      if (!d || typeof d.lat !== 'number' || typeof d.lng !== 'number') return;
+      sedes.push({
+        key: key,
+        name: d.nombre,
+        sector: d.sector,
+        lat: d.lat,
+        lng: d.lng,
+        img: (FUNCTIONAL[key] ? CTMA_PHOTO : d.img),
+        alt: d.alt || d.nombre,
+        func: !!FUNCTIONAL[key]
+      });
+    });
+  }
+
+  /* -------------------- Pines -------------------- */
+
+  function pinSvg(fill) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 40 46">' +
+      '<path d="M20 2 C12.5 2 7 8.2 7 15.6 C7 25 20 44 20 44 C20 44 33 25 33 15.6 C33 8.2 27.5 2 20 2 Z" fill="' + fill + '"/>' +
+      '<circle cx="20" cy="16" r="7" fill="#ffffff"/></svg>';
+  }
+
+  function pinIcon(selected) {
+    return L.divIcon({
+      html: pinSvg(selected ? '#336926' : '#4DB21A'),
+      className: 'beci-place-icon',
+      iconSize: [28, 32],
+      iconAnchor: [14, 32]
+    });
+  }
+
+  function renderMarker(sede) {
+    var icon = pinIcon(false);
+    var marker = L.marker([sede.lat, sede.lng], { icon: icon, title: sede.name, riseOnHover: true });
+    marker.sede = sede;
+    marker._defaultIcon = icon;
+    marker.on('click', function () {
+      focusSede(sede);
+      map.flyTo([sede.lat, sede.lng], Math.min(Math.max(map.getZoom(), 13), 15), { duration: 0.9 });
+    });
+    marker.addTo(map);
+    sede.marker = marker;
+    renderedMarkers.push(marker);
+  }
+
+  function resetAllMarkers() {
+    renderedMarkers.forEach(function (marker) {
+      if (!marker.sede || !marker.sede.marker) return;
+      marker.sede.marker.setIcon(marker.sede.marker._defaultIcon);
+      marker.sede.marker.setZIndexOffset(0);
+      var w = marker.sede.wrap;
+      if (w) w.classList.remove('pulse');
+    });
+  }
+
+  function focusSede(sede) {
+    resetAllMarkers();
+    selectedId = sede.key;
+    sede.marker.setIcon(pinIcon(true));
+    sede.marker.setZIndexOffset(500);
+    if (sede.wrap) sede.wrap.classList.add('pulse');
+  }
+
+  /* -------------------- Cards holograma -------------------- */
+
+  function action360(sede) {
+    if (sede.func) {
+      window.location.href = '360ctma.html';
+      return;
+    }
+    showToast('Pr\u00f3ximamente');
+  }
+
+  function actionMore(sede) {
+    if (sede.func) {
+      window.location.href = 'CTMA.html';
+      return;
+    }
+    showToast('Pr\u00f3ximamente');
+  }
+
+  function makeCard(sede, idx) {
+    var wrap = document.createElement('div');
+    wrap.className = 'holo-wrap';
+    wrap.setAttribute('data-key', sede.key);
+    wrap.style.setProperty('--holo-delay', (320 + idx * 220) + 'ms');
+    wrap.sede = sede;
+    sede.wrap = wrap;
+
+    var glow = document.createElement('div');
+    glow.className = 'holo-glow';
+
+    var beam = document.createElement('div');
+    beam.className = 'holo-beam';
+    var scan = document.createElement('div');
+    scan.className = 'holo-scan';
+    beam.appendChild(scan);
+
+    var card = document.createElement('div');
+    card.className = 'ms-card' + (sede.func ? ' func-card' : '');
+    card.title = sede.name;
+
+    var titleEl = '<div class="ms-card-title" style="font-size:' + (sede.name.length > 34 ? '12px' : '13.5px') + '">' + esc(sede.name) + '</div>';
+    var addrEl = '<div class="ms-card-addr">' + PIN_ICON + '<span>' + esc(sede.sector) + '</span></div>';
+    var chot360 = '<button type="button" class="ms-360" title="Tour virtual 360\u00b0" aria-label="Tour virtual 360\u00b0 de ' + esc(sede.name) + '">' + ICON_360 + '360\u00b0</button>';
+    var imgEl = '<div class="ms-card-img"><img class="ms-photo" loading="lazy" alt="' + esc(sede.alt) + '" src="' + esc(sede.img) + '"><div class="ms-card-grad"></div>' + titleEl + addrEl + chot360 + '</div>';
+    var btnMore = '<button type="button" class="ms-vermas">Ver m\u00e1s ' + ICON_ARROW + '</button>';
+
+    card.innerHTML = imgEl + btnMore;
+
+    card.querySelector('.ms-360').addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      action360(sede);
+    });
+    card.querySelector('.ms-vermas').addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      actionMore(sede);
+    });
+
+    wrap.appendChild(glow);
+    wrap.appendChild(beam);
+    wrap.appendChild(card);
+    el.layer.appendChild(wrap);
+
+    var entry = { wrap: wrap, cardEl: card, glow: glow, beam: beam, sede: sede };
+    wraps.push(entry);
+    return entry;
+  }
+
+  /* -------------------- Layout anti-solape (de Ubicate) -------------------- */
+
+  function layoutCards() {
+    if (!map || !el.layer) return;
+
+    var MARGIN = 10;
+    var mapW = el.map.clientWidth;
+    var mapH = el.map.clientHeight;
+
+    var items = wraps.map(function (w) {
+      var p = map.latLngToContainerPoint([w.sede.lat, w.sede.lng]);
+      var cw = w.cardEl.offsetWidth || 240;
+      var ch = w.cardEl.offsetHeight || 132;
+      return { w: w, pinX: p.x, pinY: p.y, cw: cw, ch: ch, x: 0, y: 0, dir: 'tail-bottom' };
+    });
+
+    var placedBoxes = [];
+
+    items.forEach(function (item) {
+      var px = item.pinX;
+      var py = item.pinY;
+      var cw = item.cw;
+      var ch = item.ch;
+
+      var slots = [
+        { name: 'top', dir: 'tail-bottom', x: px - cw / 2, y: py - 42 - ch, basePenalty: 0 },
+        { name: 'right', dir: 'tail-left', x: px + 26, y: py - 16 - ch / 2, basePenalty: 15 },
+        { name: 'left', dir: 'tail-right', x: px - 26 - cw, y: py - 16 - ch / 2, basePenalty: 25 },
+        { name: 'bottom', dir: 'tail-top', x: px - cw / 2, y: py + 12, basePenalty: 45 }
+      ];
+
+      var bestSlot = null;
+      var bestScore = Infinity;
+
+      slots.forEach(function (slot) {
+        var sx = slot.x;
+        var sy = slot.y;
+        var score = slot.basePenalty;
+
+        if (sx < MARGIN) score += (MARGIN - sx) * 6 + 300;
+        if (sx + cw > mapW - MARGIN) score += ((sx + cw) - (mapW - MARGIN)) * 6 + 300;
+        if (sy < MARGIN) score += (MARGIN - sy) * 6 + 400;
+        if (sy + ch > mapH - MARGIN) score += ((sy + ch) - (mapH - MARGIN)) * 6 + 400;
+
+        placedBoxes.forEach(function (pb) {
+          var ox = Math.min(sx + cw, pb.x + pb.w) - Math.max(sx, pb.x);
+          var oy = Math.min(sy + ch, pb.y + pb.h) - Math.max(sy, pb.y);
+          if (ox > 0 && oy > 0) score += (ox * oy) * 3 + 1200;
+        });
+
+        items.forEach(function (other) {
+          if (other === item) return;
+          var pinL = other.pinX - 16;
+          var pinR = other.pinX + 16;
+          var pinT = other.pinY - 34;
+          var pinB = other.pinY + 4;
+          var ox = Math.min(sx + cw, pinR) - Math.max(sx, pinL);
+          var oy = Math.min(sy + ch, pinB) - Math.max(sy, pinT);
+          if (ox > 0 && oy > 0) score += 1000;
+        });
+
+        if (score < bestScore) {
+          bestScore = score;
+          bestSlot = slot;
+        }
+      });
+
+      item.x = bestSlot.x;
+      item.y = bestSlot.y;
+      item.dir = bestSlot.dir;
+      placedBoxes.push({ x: item.x, y: item.y, w: cw, h: ch });
+    });
+
+    // Relajación suave entre cards
+    for (var iter = 0; iter < 8; iter++) {
+      var moved = false;
+      for (var i = 0; i < items.length; i++) {
+        for (var j = i + 1; j < items.length; j++) {
+          var a = items[i];
+          var b = items[j];
+          var oxC = Math.min(a.x + a.cw, b.x + b.cw) - Math.max(a.x, b.x);
+          var oyC = Math.min(a.y + a.ch, b.y + b.ch) - Math.max(a.y, b.y);
+          if (oxC > 0 && oyC > 0) {
+            moved = true;
+            if (oxC < oyC) {
+              var shiftX = (oxC / 2) + 5;
+              if (a.pinX <= b.pinX) { a.x -= shiftX; b.x += shiftX; }
+              else { a.x += shiftX; b.x -= shiftX; }
+            } else {
+              var shiftY = (oyC / 2) + 5;
+              if (a.pinY <= b.pinY) { a.y -= shiftY; b.y += shiftY; }
+              else { a.y += shiftY; b.y -= shiftY; }
+            }
+          }
+        }
+      }
+      if (!moved) break;
+    }
+
+    items.forEach(function (item) {
+      item.x = Math.max(MARGIN, Math.min(item.x, mapW - item.cw - MARGIN));
+      item.y = Math.max(MARGIN, Math.min(item.y, mapH - item.ch - MARGIN));
+
+      var w = item.w;
+      w.wrap.style.left = item.x + 'px';
+      w.wrap.style.top = item.y + 'px';
+
+      var ic = w.cardEl;
+      ic.classList.remove('tail-bottom', 'tail-top', 'tail-left', 'tail-right');
+      ic.classList.add(item.dir);
+
+      if (item.dir === 'tail-bottom' || item.dir === 'tail-top') {
+        var tailX = Math.max(16, Math.min(item.cw - 16, item.pinX - item.x));
+        ic.style.setProperty('--sc-tail-x', tailX + 'px');
+      } else {
+        var tailY = Math.max(14, Math.min(item.ch - 14, (item.pinY - 16) - item.y));
+        ic.style.setProperty('--sc-tail-y', tailY + 'px');
+      }
+
+      // Glow en la base del pin
+      w.glow.style.left = item.pinX + 'px';
+      w.glow.style.top = item.pinY + 'px';
+
+      // Rayo: desde el pin hasta la parte inferior de la card (si está arriba)
+      var cardBottom = item.y + item.ch;
+      var gap = item.pinY - 8 - cardBottom;
+      var beamTop;
+      var beamH;
+      if (gap > 10) {
+        beamTop = cardBottom + 3;
+        beamH = gap - 3;
+      } else {
+        beamTop = item.pinY - 62;
+        beamH = 58;
+      }
+      w.beam.style.left = item.pinX + 'px';
+      w.beam.style.top = beamTop + 'px';
+      w.beam.style.height = beamH + 'px';
+      w.wrap.style.setProperty('--beam-h', beamH + 'px');
+    });
+  }
+
+  function scheduleLayout() {
+    if (layoutTimer) return;
+    layoutTimer = setTimeout(function () {
+      layoutTimer = null;
+      layoutCards();
+    }, 80);
+  }
+
+  /* -------------------- Mi ubicación -------------------- */
+
+  function locateUser() {
+    if (!navigator.geolocation) {
+      showToast('Tu navegador no tiene geolocalizaci\u00f3n');
+      return;
+    }
+    el.locateBtn.classList.add('locating');
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      el.locateBtn.classList.remove('locating');
+      var latlng = [pos.coords.latitude, pos.coords.longitude];
+      if (userMarker) map.removeLayer(userMarker);
+      userMarker = L.circleMarker(latlng, {
+        radius: 9,
+        color: '#FF6C01',
+        weight: 3,
+        fillColor: '#FF6C01',
+        fillOpacity: 0.35
+      }).addTo(map);
+      map.flyTo(latlng, Math.max(map.getZoom(), 13), { duration: 1 });
+      showStatus('Est\u00e1s aqu\u00ed', 3000);
+    }, function () {
+      el.locateBtn.classList.remove('locating');
+      showToast('No pudimos obtener tu ubicaci\u00f3n');
+    }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 15000 });
+  }
+
+  /* -------------------- Inicialización -------------------- */
+
+  function initMap() {
+    if (typeof L === 'undefined' || !el.map) return;
+
+    buildSedes();
+    if (!sedes.length) {
+      showStatus('No tenemos coordenadas de las sedes del SENA todavía.', 5000);
+      return;
+    }
+
+    map = L.map('beci-map', { attributionControl: true, zoomControl: false });
+    L.tileLayer(TILE_URL, { maxZoom: 19, attribution: TILE_ATTR }).addTo(map);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    var bounds = L.latLngBounds(sedes.map(function (s) { return [s.lat, s.lng]; }));
+
+    sedes.forEach(function (sede, idx) {
+      renderMarker(sede);
+      makeCard(sede, idx);
+    });
+
+    map.fitBounds(bounds, { padding: [80, 80], maxZoom: 11.3 });
+
+    map.on('move', scheduleLayout);
+    map.on('zoom', scheduleLayout);
+    map.on('resize', scheduleLayout);
+    window.addEventListener('resize', scheduleLayout);
+
+    el.locateBtn.addEventListener('click', locateUser);
+
+    setTimeout(function () {
+      layoutCards();
+    }, 350);
+
+    setTimeout(function () {
+      showStatus(sedes.length + ' sedes del SENA en Medell\u00edn', 4800);
+    }, 650);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
+})();
+</script>
+<!-- END: Map Engine -->
+</body></html>
