@@ -1,0 +1,871 @@
+<!DOCTYPE html><html class="h-full" lang="es" ><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Programas de Formación - Beci Institucional</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;0,9..40,900;1,9..40,900&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"DM Sans"', 'sans-serif'],
+            sans: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            'beci-orange': '#FF6C01',
+            'beci-green-dark': '#336926',
+            'beci-green-light': '#4DB21A',
+            'beci-navy': '#062573',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Estilos globales y tipografías */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      overflow-x: hidden;
+      color: #1a1a1a;
+    }
+
+    h1, h2, h3, .font-heading {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+    }
+
+    /* Animación suave de flotación para elementos orgánicos */
+    @keyframes flotar {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(2deg);
+      }
+    }
+
+    @keyframes flotarLento {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-8px) scale(1.02);
+      }
+    }
+
+    .anim-flotar {
+      animation: flotar 7s ease-in-out infinite;
+    }
+
+    .anim-flotar-delay {
+      animation: flotar 9s ease-in-out 2s infinite;
+    }
+
+    .anim-flotar-slow {
+      animation: flotarLento 11s ease-in-out 1s infinite;
+    }
+
+    /* Light Sweep Button Effect */
+    .btn-light-sweep {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+
+    .btn-light-sweep::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -130%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: rotate(25deg);
+      pointer-events: none;
+      transition: all 0.75s ease;
+    }
+
+    .btn-light-sweep:hover::after {
+      left: 140%;
+    }
+
+    .btn-light-sweep:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 108, 1, 0.35);
+    }
+
+    /* Card Hover Transition */
+    .card-hover {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card-hover:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 25px -5px rgba(51, 105, 38, 0.12);
+      border-color: #4DB21A;
+    }
+
+    /* Glassmorphism Classes */
+    .glass-modal {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    }
+
+    .glass-overlay {
+      background: rgba(40, 60, 40, 0.32);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c3dec0;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4DB21A;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col relative bg-white selection:bg-beci-green-light selection:text-white">
+<!-- ========================================================================= -->
+<!-- 1. FONDO INSTITUCIONAL ANIMADO -->
+<!-- ========================================================================= -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<!-- Capa base con patrón institucional -->
+<div class="absolute inset-0 bg-repeat bg-[length:420px_auto] opacity-35" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuD4NN-5rc_YsAXt3W23Nl2UMA_c59gc38iVpg5ekSCBRrpiywC9FKxO_ZcHMI6qeDWytWBkckcVR2rz7W0IHRtnlBzwxNXwoprbtcKfcoKVkbwfJPd1OHy1A8VUCj8-I1MRSktt6RlMvN5HNjTrPhGewdaCYtLbGn1MdulcTSWTK5b4WAHzi4C1oXGV0UuoE92inhImeTcv6N6pkIL68SsXgQxNtlutmkMM8NbBwbQRtZm_MEQ1zaPnEw6PEW-HH9qoQzo&quot;);"></div>
+<!-- Elementos orgánicos y puntos flotantes con animación sutil (@keyframes flotar) -->
+<div class="absolute -top-12 right-0 w-80 h-96 anim-flotar opacity-70">
+<svg class="w-full h-full" fill="none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Matriz de puntos verdes tenue -->
+<g fill="#A9D49E" opacity="0.6">
+<circle cx="120" cy="40" r="3"></circle>
+<circle cx="135" cy="40" r="3"></circle>
+<circle cx="150" cy="40" r="3"></circle>
+<circle cx="165" cy="40" r="3"></circle>
+<circle cx="120" cy="55" r="3"></circle>
+<circle cx="135" cy="55" r="3"></circle>
+<circle cx="150" cy="55" r="3"></circle>
+<circle cx="165" cy="55" r="3"></circle>
+<circle cx="120" cy="70" r="3"></circle>
+<circle cx="135" cy="70" r="3"></circle>
+<circle cx="150" cy="70" r="3"></circle>
+<circle cx="165" cy="70" r="3"></circle>
+<circle cx="120" cy="85" r="3"></circle>
+<circle cx="135" cy="85" r="3"></circle>
+<circle cx="150" cy="85" r="3"></circle>
+<circle cx="165" cy="85" r="3"></circle>
+</g>
+<!-- Hoja / rama suave -->
+<path d="M160 140 C 150 120, 130 110, 110 115 C 130 135, 145 150, 160 140 Z" fill="#93C886" opacity="0.5"></path>
+<path d="M140 160 C 120 150, 110 130, 115 110 C 135 130, 150 145, 140 160 Z" fill="#A3D498" opacity="0.4"></path>
+</svg>
+</div>
+<div class="absolute bottom-20 -left-10 w-96 h-96 anim-flotar-delay opacity-60">
+<svg class="w-full h-full" fill="none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Aro orgánico grande -->
+<circle cx="60" cy="140" opacity="0.55" r="70" stroke="#B8DFAC" stroke-dasharray="140 30" stroke-linecap="round" stroke-width="9"></circle>
+<circle cx="130" cy="80" opacity="0.6" r="6" stroke="#93C886" stroke-width="3"></circle>
+</svg>
+</div>
+<div class="absolute top-1/2 right-4 w-40 h-40 anim-flotar-slow opacity-50">
+<svg class="w-full h-full" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="30" cy="30" fill="#4DB21A" r="2.5"></circle>
+<circle cx="45" cy="25" fill="#4DB21A" r="2"></circle>
+<circle cx="40" cy="40" fill="#4DB21A" r="2.5"></circle>
+<path d="M60 50 C50 40 40 55 60 70 C70 55 65 45 60 50 Z" fill="#B2DE9F"></path>
+</svg>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- 2. HEADER Y NAVEGACIÓN RESPONSIVE -->
+<!-- ========================================================================= -->
+<!-- Barra superior en Desktop (trasladada desde el footer) -->
+<style>
+  @keyframes lightSweepOnce {
+    0% { left: -130%; opacity: 0; }
+    20% { opacity: 1; }
+    100% { left: 140%; opacity: 0; }
+  }
+  .btn-light-sweep::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .btn-light-sweep:hover::after {
+    animation: lightSweepOnce 0.75s ease 1 forwards !important;
+  }
+</style><header class="relative z-30 w-full bg-white/90 backdrop-blur-md border-b border-beci-green-light/20">
+
+<!-- Barra principal del Header -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+<!-- Logo Beci oficial 3D intacto -->
+<div class="flex items-center space-x-4">
+<a class="inline-block transition-transform hover:scale-105 active:scale-95 focus:outline-none" href="#" title="Beci Inicio">
+<img alt="Beci Logo Oficial" class="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkaPr8Uj_wmpY8uhl7rdgOepID4oQTFrCkfVj7qBpdccCkwIpL3iZUuDTxtKyFMcY23MeOGYoUon906iuIAHXbrEaQmcXH_qlYYhl8vdLwlEQQ9zi5vFuA9OdqGtOKDsGRMKKaJp0Jgr5l4IryFcZn_qkV8q3oeLdUOi7z4Obg9DFxADTIsI39p96OiZLynIdPC6zfYTu2Bk2vRNRC7llcMKuZ2wYpa_iIPJO81gF_lDJjAC0EN6EWxcSkw4X9SseI8XI">
+</a>
+</div>
+<!-- Menú Desktop Horizontal (min-width: 1024px) -->
+<nav class="hidden lg:flex items-center space-x-8 text-[15px] font-medium text-gray-700">
+<a class="hover:text-beci-green-dark transition-colors py-1" href="#">Ayuda</a>
+<a class="hover:text-beci-green-dark transition-colors py-1" href="#">Eventos</a>
+<a class="text-beci-green-dark font-bold border-b-2 border-beci-green-dark py-1" href="#">Explorar Programas</a>
+<a class="hover:text-beci-green-dark transition-colors py-1" href="#">Explorar Sedes</a>
+<a class="hover:text-beci-green-dark transition-colors py-1" href="registratucorreosena.html">Estar al Tanto</a>
+</nav>
+<!-- Botón Menú Hamburguesa (Móvil y Tablet < 1024px) -->
+<div class="lg:hidden flex items-center">
+<button aria-label="Abrir menú" class="p-2 transition-transform hover:scale-105 active:scale-90 focus:outline-none" id="openMenuBtn" type="button">
+<img alt="Menú" class="w-10 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJCLX5sBrFi_a1OkjoySlx-e9-Oi2bhbxSlB-oHEk3x7Y14Bl-nvb0WAQ2ii84jqp2pnFutIUCczYnKJP9TU9jsUFeERPTgeUj-0cccghO-YnTBPmqgH5PX5yNhIPIxUF_YW-9kqGEM74cWYktsGHrBE0zK9mBtagSthxBol2Mg0PYkz5PvJRWJcJX82iGa7hPXKUmweIwEdRt-rfCjfiV7evDDPtT_ZXGQ4pjKnsDqzUBpAffGJ_TTSImsT50bXyk6lM">
+</button>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- 3. CONTENIDO PRINCIPAL: BOTÓN ATRÁS, TÍTULOS Y TARJETAS -->
+<!-- ========================================================================= -->
+<main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-28 flex flex-col lg:pb-28">
+<!-- Botón Atrás & Encabezados -->
+<div class="relative w-full mb-6">
+<!-- Botón Atrás (<) verde oscuro alineado a la izquierda -->
+<button aria-label="Volver" class="absolute left-0 top-1 p-2 text-beci-green-dark hover:text-beci-green-light transition-transform duration-200 hover:-translate-x-1 active:scale-90 focus:outline-none" onclick="window.history.back()" type="button">
+<svg class="w-6 h-6 sm:w-7 sm:h-7 stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Títulos centrados DM Sans Black -->
+<div class="text-center px-10">
+<h1 class="font-heading text-2xl sm:text-3xl md:text-4xl text-gray-900 tracking-tight leading-tight">
+          Áreas de formación
+        </h1>
+<h2 class="font-heading text-2xl sm:text-3xl md:text-4xl text-beci-green-dark mt-0.5 tracking-tight">
+          CTMA
+        </h2>
+</div>
+</div>
+<!-- 4. CONTENEDOR DE TARJETAS DE FORMACIÓN (Lista vertical en móvil / Grid en Desktop) -->
+<div class="w-full flex-1 lg:flex lg:flex-row lg:gap-8 lg:items-start lg:justify-between relative">
+  <!-- Columna Izquierda: Tarjetas apiladas verticalmente en Desktop -->
+  <div class="w-full lg:w-7/12 flex flex-col gap-4 max-w-5xl mx-auto lg:max-w-none">
+    <!-- TARJETA 1: TICS (Activa por defecto con borde destacado verde como en image.png) -->
+    <article id="card-tics" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
+      <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
+        <img alt="Estudiantes en aula de TICS" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7Vh4UOBC60CQCkbD_eqgMZvb3XaSShUmGZP2xO87x_QsSqKlnafHGklD6t1qOfzuYhz1RLYomilRMvnJcYYZj_fR8WE2kmAQANlHzWprWRuMV9ivsHq92rfYyRdzAGwpLjUVrDkEGWbco0pBMa3Txs0wQtzSek-ZL6aEJzVk5ucvBqwfRzA9C5T9wC02WtvjCl7sz8R0asHLbrPR2HWLf1BSMZmHUWiyqz3gcIHjPQx3yj2oxVDgDiB0tN4Ziy4X_8GY89roNS_uc4e0">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr2UJ99zaxyonQcUsbfiE14xwbJ3yyN9Z0rnNEQTwdhnLVtGxx3fGS1ertC_1YC2xd27b3TDUTAQv3sqPGShg0Po5Iwei4_NMHj9XXmY6Y_Ri8ALVAEafC1tm5gbdk0ZStjN-cp--aFh92wUOapPpl3z5-Eh0KSC8OLbf-l2tjx6TqoW2Zlg9jrfQVNkuqD7PcXHJO-VYtFP320e-mepZe9_-vdZYx43cZUeWzl9mJIMd_6BL9N0vbavYGUW6fFCOyHhA" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
+        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-lg sm:text-xl tracking-wider drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">TICS</span>
+      </div>
+      <div class="flex-1 flex flex-col justify-between py-1 pr-1 sm:pr-2">
+        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">Tecnología, desarrollo de software, redes, sistemas y más.</p>
+        <div class="flex justify-end">
+          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('TICS')" type="button">Ver detalles</button>
+        </div>
+      </div>
+    </article>
+    <!-- TARJETA 2: Manufactura -->
+    <article id="card-manufactura" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
+      <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
+        <img alt="Taller de manufactura industrial" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0fo4XmMsdAkQe14MhloEDGeAHScl_dSJHGBzy5Z0AuhW2I4KaPobOWXPq4yJUqgeiEWCBG0Au64GjDWcafjT_B9wpectquAd1bJpdLMiqTZMqFvknTKystHFYbcnT444yHnzq6CQVEs81vn3yOgjRFhIq1kd1Y2_W6JKJ2ZcZ2xMvKUfSa4SGhyMhqkjEka_zaMYRJn8JBdSQiSb_nwJiEetwYlq2PizkXfbxUFieG7l3HiAHCBIxyK6oEzBoWOKWJkclnsj0QkSPZ2U">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_Vc5yX-cTZr30-p4UzrqO6Yxk9HhzVqQdaVqhBUt-cLMWkeotNFPo8zkGIS7rWYkyzjq04-e7LgIxPzaLY0d9fFme49PUvn-53gVtOG_LURiUyoqkXfG2a4WkUAh7aP2tHugZDBos3yZ1M_iTYl24heZ2hcvGhLpRFvzC5tlKmyS9gPsgFbWZeKfW7bUSJr2jgixILE7WCAy51dVh3Ci3FlD7u_2DdPWjU9qg5YX3gncTRMFKLiCbc0QG-eGS4yv_l1U" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
+        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-base sm:text-lg tracking-wider drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">Manufactura</span>
+      </div>
+      <div class="flex-1 flex flex-col justify-between py-1 pr-1 sm:pr-2">
+        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">Procesos de mecanizado, metrología, CNC y manufactura avanzada.</p>
+        <div class="flex justify-end">
+          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('Manufactura')" type="button">Ver detalles</button>
+        </div>
+      </div>
+    </article>
+    <!-- TARJETA 3: Fabricación Digital -->
+    <article id="card-fabricacion" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
+      <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
+        <img alt="Laboratorio de impresión 3D y prototipado" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ0k5m366sLOg3z3R0yHk2MGrGNh3hSDW7Gf50EFRNFISY0sBdme8G_puhTnAS9wZPOgHZUuj7-3nErJYLASZShCUEkjxbEm1JWHzKD1cfN9ffhJHgO36DhsJQtM5GGLzWVPRN-dgScDtbeZqU027acPpSXvZ0EmBHCuk2xQ5DOoeZ-g0mbWfCwpEMZ2Zxzh-lW3uDkpW6vPPBP_Bbc3il8wAeJcAb_18jlwywkAioxm2dNp0YNBPzzB4Vw0hZd6xklV3Skq69mJXRiQs">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLpjNS85IjNg6YrE674DaHSF0no0X-jrmZSyrcTe1-YanHejNLyGcU4GRo4oVniTmeLwtB_x0W96GFKUz3SDC9eRO7yclvsn41xXzadnv0XNgK0aeUHcIydOXLAnpTVUbOi5pYwt08iKaACucAP12yS5v2aZuOHFxCorkyymzBuOO4sWByAUUOPKNVjPdnzIKfCXwv6cEuhsLayQhymmVX9jnq695VvjStBdKhgVxfejBCu8c8RR8oXfNw8KwbKm3xwWM" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
+        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">Fabricación<br>Digital</span>
+      </div>
+      <div class="flex-1 flex flex-col justify-between py-1 pr-1 sm:pr-2">
+        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">Impresión 3D, modelado digital, prototipado y fabricación inteligente.</p>
+        <div class="flex justify-end">
+          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('Fabricacion')" type="button">Ver detalles</button>
+        </div>
+      </div>
+    </article>
+    <!-- TARJETA 4: Automatización -->
+    <article id="card-automatizacion" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
+      <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
+        <img alt="Robótica y automatización industrial" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKComTA0ZQbZTkvsFBQrXd-DXTnl1qdxj5kpCd_oqjbQjRfB-43c_MiwD3EH3r0vb8hiDTxinKwgozcwsw-kNgouKjAaeq92NzLO__bTvam9KguCdujTPwl3ylR6viBCJYWZVLSEYSe1816ckcJQyQOGnHU2tnwVMp9a5QWId_T501MWrltXyqwOZyOcLCGA0U-_LdsAm2czYXjzz6cd0Zu0_dDrlCVnLxS8_1PMny3Wgs1xro9ppG2zitNahfNjgo_XfnOlzpKXhvj40">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCVGjBeBSHvVTnsHgmkykOHVLZmb8lsL6bvU1daHzkPgdi4veXcX4kO5zWlwLf1Qo4uEQs38A58Ccp6VB8O6ZnqxEuOkZbc7NOLxItvV_PhsZtMvfcdJd80jZupJ_y-gjGWdMJrzPQGERen_Qp27aY3g38QXlKy1Z13NMrLNRo8WiagF1JmJzkd7WPsbQKroInjfcj8W3AUvJfNvRZbxhMO5cOvcFQonL1BxsbIzX7rs5SfyucCLnRURiAn6-P7bP8F-s" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
+        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">Automatización</span>
+      </div>
+      <div class="flex-1 flex flex-col justify-between py-1 pr-1 sm:pr-2">
+        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">PLC, robótica, control industrial, instrumentación y más.</p>
+        <div class="flex justify-end">
+          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('Automatizacion')" type="button">Ver detalles</button>
+        </div>
+      </div>
+    </article>
+    <!-- TARJETA 5: Automotriz -->
+    <article id="card-automotriz" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
+      <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
+        <img alt="Taller de mecánica automotriz" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNElDv3TPUWsXPQwJEWD-GD4bNOpFL2ER3iQ4IyNqcfDRxZwN6TkhwOgaCkA2VQ8ej478h7WtqauvoG-oVKwEUBuS9i2H8ACgPLLRwh-CA-AjbIkDjBYVkI9Da2wwgZtEOHAIpy-Z6rCLspTpyjQme_F87YgGxIVoR-Lb4LqqayUWNThDECiNobG0r71-KEC8hfYJH1IUPBD-_nto-Wvy3IGimZNNPmGSdqQarQSmbBaMXhslbVJLyjbR9slouOLzWlf8Do5Bc3Dde5GQ">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo64z1mmeR5fDc7di5sMdBDiVZR1OS2MZtBHsiF6BpeE5uoD2908Am8vnMBparD5KA-7SAOarW-pDKSOlq8la5YSU_LEstjViVY8yKNdRb2tec3YDF3CmfRO-zXo4wFCp976CNeXp3l5l2wk33mC6PEJ5P_qomz286rU5pzX1EBD7H6kKr78ILMdys3em2y5afwc7zIf7maA0c3xFIOI85gqZGKY_PSvVg_59c78sZmMbCOhhzOJcDkA-CMrU6ZYiAawQ" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
+        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">Automotriz</span>
+      </div>
+      <div class="flex-1 flex flex-col justify-between py-1 pr-1 sm:pr-2">
+        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">Mecánica automotriz, diagnóstico electrónico e inyección diésel y gasolina.</p>
+        <div class="flex justify-end">
+          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('Automotriz')" type="button">Ver detalles</button>
+        </div>
+      </div>
+    </article>
+    <!-- TARJETA 6: Electricidad -->
+    <article id="card-electricidad" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
+      <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
+        <img alt="Circuitos eléctricos y tableros industriales" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIUul7WJwZg1URZ-DIeDCarQwvM1hRfWtMF1AqpM8HPFWWPtie0xV8KrBMw1SABq9NPymeTbEx3QI22uMgtq-IIMXF6620CoI-BtJno1ZQet_DM347tI__tuepoXaTRy2DAHNi0Gofe1ApMknz__-m6t0kZtWxiK--SpQxnVEEbRJ1xGoS9G85Z5TjA8KOuQ9N2Hv_OvCi3jlVp39zXUY0vYBqy5A3Ky84AWSg8egvHWfdrJzD7Cit-utykKwYMhojIX8kjry_pswCmLQ">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2BhZffQz2jJt72ehHfawzDIF-OESt10Z8hYxcILKk0fDLogzkgTKPSCpIxeruS_YFG1wrxZ74hOe8SqoUx_HN3FIZx0a1suiYQeiZ-IrV3_-sFXog-Wl7z19O0Lj_b6BjZAjLclbTWoj2UotD8Fb_2b0MmIOrwYZD3aaJYGUtAGWtCxhHP-U6u5aXrSRlFwediaVMBW9BuisE6E3ujCg_421RCM5pdr74Jb0sm5KgceoQWIU50zYGVU4s_7KYgrepQac" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
+        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">Electricidad</span>
+      </div>
+      <div class="flex-1 flex flex-col justify-between py-1 pr-1 sm:pr-2">
+        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">Instalaciones eléctricas industriales, redes de distribución y energía renovable.</p>
+        <div class="flex justify-end">
+          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('Electricidad')" type="button">Ver detalles</button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Columna Derecha: Panel Persistente de Detalles en Desktop (oculto en móvil, réplica exacta de image.png) -->
+  <aside id="desktopDetailsPanel" class="lg:w-5/12 bg-white/95 rounded-[36px] shadow-2xl p-6 sm:p-8 border border-beci-green-light/30 transition-all duration-300 transform relative opacity-0 translate-y-2 hidden" style="transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s, margin-top 0.35s cubic-bezier(0.16, 1, 0.3, 1);">
+    <div class="relative flex items-center justify-center mb-6">
+      <button aria-label="Cerrar panel" class="absolute left-0 top-0 text-beci-green-dark hover:text-beci-green-light transition-transform hover:rotate-90 duration-200 active:scale-90" onclick="closeDesktopDetailsPanel()" type="button"><svg class="w-6 h-6 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+      <h3 id="desktopPanelTitle" class="font-heading text-2xl sm:text-3xl font-black text-gray-900 tracking-wider text-center">Electricidad</h3>
+    </div>
+    <div id="desktopPanelContent" class="space-y-6">
+      <!-- Bloque 1 -->
+      <div class="space-y-2">
+        <h4 id="desktopBlock1Title" class="font-heading text-base sm:text-lg font-extrabold text-gray-900">Electricidad Industrial</h4>
+        <p id="desktopBlock1Desc" class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">Sistemas eléctricos en media y baja tensión, cuadros de distribución, tableros de potencia y centros de carga.</p>
+        <div class="flex items-center justify-between pt-1">
+          <div>
+            <span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span>
+            <span id="desktopBlock1Type" class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span>
+            <span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span>
+            <span id="desktopBlock1Duration" class="block text-xs sm:text-sm text-gray-700">24 Meses</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">
+              Ir a Sofia Plus
+            </a>
+            <span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">
+              Busca el programa directamente en la pagina oficial.
+            </span>
+          </div>
+        </div>
+      </div>
+      <hr class="border-t border-gray-200 my-4">
+      <!-- Bloque 2 -->
+      <div id="desktopBlock2" class="space-y-2">
+        <h4 id="desktopBlock2Title" class="font-heading text-base sm:text-lg font-extrabold text-gray-900">Energías Renovables y Solar Fotovoltaica</h4>
+        <p id="desktopBlock2Desc" class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">Cálculo, montaje y mantenimiento de sistemas fotovoltaicos on-grid y off-grid.</p>
+        <div class="flex items-center justify-between pt-1">
+          <div>
+            <span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span>
+            <span id="desktopBlock2Type" class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span>
+            <span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span>
+            <span id="desktopBlock2Duration" class="block text-xs sm:text-sm text-gray-700">24 Meses</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">
+              Ir a Sofia Plus
+            </a>
+            <span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">
+              Busca el programa directamente en la pagina oficial.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- 5. BARRA INFERIOR (FOOTER NAV - SOLO MÓVIL Y TABLET < 1024px) -->
+<!-- ========================================================================= -->
+<footer class="fixed bottom-0 left-0 right-0 z-20 bg-beci-green-light text-white py-3 shadow-[0_-6px_20px_rgba(0,0,0,0.1)] flex items-center justify-between px-4 sm:px-8">
+<div class="hidden lg:flex items-center space-x-3 text-sm font-medium tracking-wide">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-300 animate-pulse"></span>
+<span class="">¡Conoce todas las convocatorias y novedades en tiempo real!</span>
+</div>
+<div class="flex items-center gap-3 justify-end w-full lg:w-auto">
+<span class="text-sm sm:text-base font-medium tracking-wide">Enterate de todo</span>
+<button class="bg-beci-green-dark hover:bg-beci-green-dark/90 text-white font-heading font-bold text-sm px-6 py-2 rounded-full shadow transition-transform duration-200 hover:scale-110 active:scale-95" type="button" onclick="event.preventDefault(); event.stopPropagation(); window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank');">Chismear</button>
+</div>
+</footer>
+<!-- ========================================================================= -->
+<!-- 6. MODAL 1: DETALLES DEL PROGRAMA TICS (Referencia exacta image_f0b18a.png) -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300 opacity-0 pointer-events-none hidden" id="ticsModal">
+<!-- Telón de fondo con Glassmorphism intenso -->
+<div class="glass-overlay absolute inset-0 transition-opacity duration-300" onclick="closeTicsModal()"></div>
+<!-- Tarjeta del Modal con estilo réplica de image_f0b18a.png -->
+<div class="glass-modal relative w-full max-w-sm sm:max-w-md bg-white rounded-[36px] shadow-2xl p-6 sm:p-7 border border-white/80 overflow-hidden transform transition-all duration-300 scale-95">
+<!-- Botón de cierre superior izquierdo (<) idéntico a la referencia -->
+<button aria-label="Cerrar modal" class="absolute left-6 top-6 text-beci-green-dark hover:text-beci-green-light transition-transform duration-200 active:scale-90 hover:-translate-x-1" onclick="closeTicsModal()" type="button"><svg class="w-6 h-6 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<!-- Título Central -->
+<h3 class="font-heading text-center text-xl sm:text-2xl font-black text-gray-900 tracking-wider mb-5">
+        TICS
+      </h3>
+<!-- Contenido en 2 Bloques con divisor sutil -->
+<div class="space-y-6">
+<!-- Bloque 1: Audio Visuales -->
+<div class="space-y-2">
+<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">
+            Audio Visuales
+          </h4>
+<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
+            Forma profesionales en la producción de contenidos audiovisuales para diferentes medios y plataformas.
+          </p>
+<div class="flex items-center justify-between pt-1">
+<div>
+<span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span>
+<span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span>
+<span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span>
+<span class="block text-xs sm:text-sm text-gray-700">24 Meses</span>
+</div>
+<div class="flex flex-col items-center">
+<a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">
+                Ir a Sofia Plus
+              </a>
+<span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">
+                Busca el programa directamente en la pagina oficial.
+              </span>
+</div>
+</div>
+</div>
+<!-- Separador de línea fina sutil -->
+<hr class="border-t border-gray-200 my-4">
+<!-- Bloque 2: Producción Multimedia -->
+<div class="space-y-2">
+<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">
+            Producción Multimedia
+          </h4>
+<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
+            Forma profesionales en la creación de contenidos digitales, diseño multimedia y producción para diferentes plataformas y medios.
+          </p>
+<div class="flex items-center justify-between pt-1">
+<div>
+<span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span>
+<span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span>
+<span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span>
+<span class="block text-xs sm:text-sm text-gray-700">24 Meses</span>
+</div>
+<div class="flex flex-col items-center">
+<a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">
+                Ir a Sofia Plus
+              </a>
+<span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">
+                Busca el programa directamente en la pagina oficial.
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- 7. MODAL 2: MENÚ HAMBURGUESA (Móvil - Glassmorphism puro, ref menú hamburguesa_2.png) -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 flex p-4 sm:p-6 transition-opacity duration-300 justify-end items-start opacity-0 pointer-events-none" id="hamburguerModal">
+<!-- Fondo translúcido con desenfoque de fondo -->
+<div class="glass-overlay absolute inset-0 transition-opacity duration-300" onclick="closeHamburgerMenu()"></div>
+<!-- Tarjeta con Glassmorphism puro según referencia menú hamburguesa_2.png -->
+<div class="glass-modal relative w-full max-w-xs sm:max-w-sm rounded-[42px] p-6 sm:p-8 border border-white/80 overflow-hidden transform transition-all duration-300 shadow-2xl h-auto scale-95">
+<!-- Icono X verde en la esquina superior izquierda -->
+<button aria-label="Cerrar menú" class="absolute text-beci-green-dark hover:text-beci-green-light transition-transform hover:rotate-90 duration-200 active:scale-90 top-4 right-4" onclick="closeHamburgerMenu()" type="button">
+<svg class="w-7 h-7 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Lista de opciones centradas con divisores finos -->
+<nav class="mt-8 flex flex-col items-center space-y-0 text-center font-heading text-xl sm:text-2xl text-gray-900">
+<a class="w-full py-3.5 hover:text-beci-green-dark transition-colors border-b border-gray-300/70" href="#" onclick="closeHamburgerMenu()">
+          Ayuda
+        </a>
+<a class="w-full py-3.5 hover:text-beci-green-dark transition-colors border-b border-gray-300/70" href="#" onclick="closeHamburgerMenu()">
+          Eventos
+        </a>
+<a class="w-full py-3.5 text-beci-green-dark font-extrabold hover:text-beci-green-light transition-colors border-b border-gray-300/70" href="registratucorreosena.html" onclick="closeHamburgerMenu()">
+          Estar al Tanto
+        </a>
+<a class="w-full py-3.5 hover:text-beci-green-dark transition-colors border-b border-gray-300/70" href="#" onclick="closeHamburgerMenu()">
+          Explorar Sedes
+        </a>
+<a class="w-full pt-3.5 hover:text-beci-green-dark transition-colors pb-3.5" href="#" onclick="closeHamburgerMenu()">
+          Explorar Programas
+        </a>
+</nav>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- 8. MODAL 3: GENÉRICO PARA OTRAS ÁREAS DE FORMACIÓN -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300 opacity-0 pointer-events-none" id="genericModal">
+<div class="glass-overlay absolute inset-0 transition-opacity duration-300" onclick="closeGenericModal()"></div>
+<div class="glass-modal relative w-full max-w-sm sm:max-w-md bg-white rounded-[36px] shadow-2xl p-6 sm:p-7 border border-white/80 overflow-hidden transform transition-all duration-300 scale-95">
+<button aria-label="Cerrar modal" class="absolute left-6 top-6 text-beci-green-dark hover:text-beci-green-light transition-transform hover:-translate-x-0.5 active:scale-90" onclick="closeGenericModal()" type="button"><svg class="w-6 h-6 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h3 class="font-heading text-center text-xl sm:text-2xl font-black text-gray-900 tracking-wider mb-5" id="genericModalTitle">Manufactura</h3>
+<div class="space-y-4">
+<div class="space-y-2">
+<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900" id="genericModalProgram">Manufactura Integral</h4>
+<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal" id="genericModalDesc">Procesos de fabricación de piezas industriales de alta precisión mediante tornos y fresadoras computarizadas.</p>
+<div class="flex items-center justify-between pt-3">
+<div>
+<span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span>
+<span class="block text-xs sm:text-sm text-gray-700" id="genericModalType">Tecnólogo</span>
+<span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span>
+<span class="block text-xs sm:text-sm text-gray-700" id="genericModalDuration">24 Meses</span>
+</div>
+<div class="flex flex-col items-center">
+<a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">
+                Ir a Sofia Plus
+              </a>
+<span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">
+                Busca el programa directamente en la pagina oficial.
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- 9. VANILLA JAVASCRIPT: CONTROLADORES DE MODALES Y COMPORTAMIENTO -->
+<!-- ========================================================================= -->
+<script>
+    // Variables de referencia para modales
+    const ticsModal = document.getElementById('ticsModal');
+    const hamburguerModal = document.getElementById('hamburguerModal');
+    const genericModal = document.getElementById('genericModal');
+
+    const openTicsBtn = document.getElementById('openTicsModalBtn');
+    const openMenuBtn = document.getElementById('openMenuBtn');
+
+    // Función auxiliar para abrir modales con animación suave
+    function showModal(modalEl) {
+      modalEl.classList.remove('opacity-0', 'pointer-events-none');
+      const dialog = modalEl.querySelector('.glass-modal');
+      if (dialog) {
+        dialog.classList.remove('scale-95');
+        dialog.classList.add('scale-100');
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Función auxiliar para cerrar modales
+    function hideModal(modalEl) {
+      const dialog = modalEl.querySelector('.glass-modal');
+      if (dialog) {
+        dialog.classList.remove('scale-100');
+        dialog.classList.add('scale-95');
+      }
+      modalEl.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    }
+
+    // Controladores del modal TICS
+    function openTicsModal() {
+      showModal(ticsModal);
+    }
+
+    function closeTicsModal() {
+      hideModal(ticsModal);
+    }
+
+    if (openTicsBtn) {
+      openTicsBtn.addEventListener('click', openTicsModal);
+    }
+
+    // Controladores del menú Hamburguesa
+    function openHamburgerMenu() {
+      showModal(hamburguerModal);
+    }
+
+    function closeHamburgerMenu() {
+      hideModal(hamburguerModal);
+    }
+
+    if (openMenuBtn) {
+      openMenuBtn.addEventListener('click', openHamburgerMenu);
+    }
+
+    // Modal Genérico para las demás tarjetas
+    function openGenericModal(area, desc, type, duration) {
+      document.getElementById('genericModalTitle').textContent = area;
+      document.getElementById('genericModalProgram').textContent = area + ' Integral';
+      document.getElementById('genericModalDesc').textContent = desc;
+      document.getElementById('genericModalType').textContent = type;
+      document.getElementById('genericModalDuration').textContent = duration;
+      showModal(genericModal);
+    }
+
+    function closeGenericModal() {
+      hideModal(genericModal);
+    }
+
+    // Cierre con la tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeTicsModal();
+        closeHamburgerMenu();
+        closeGenericModal();
+      }
+    });
+
+    // Interacción Chismear
+    const chismearActions = [document.getElementById('mobileChismearBtn'), document.getElementById('desktopChismearBtn')];
+    chismearActions.forEach(btn => {
+      if (btn) {
+        btn.addEventListener('click', () => {
+          openHamburgerMenu();
+        });
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+<script>
+  const programData = {
+    'TICS': {
+      title: 'TICS',
+      cardId: 'card-tics',
+      block1: {
+        title: 'Audio Visuales',
+        desc: 'Forma profesionales en la producción de contenidos audiovisuales para diferentes medios y plataformas.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      },
+      block2: {
+        title: 'Producción Multimedia',
+        desc: 'Forma profesionales en la creación de contenidos digitales, diseño multimedia y producción para diferentes plataformas y medios.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      }
+    },
+    'Manufactura': {
+      title: 'Manufactura',
+      cardId: 'card-manufactura',
+      block1: {
+        title: 'Mecanizado por Control Numérico CNC',
+        desc: 'Procesos de fabricación de piezas industriales de alta precisión mediante tornos y fresadoras computarizadas.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      },
+      block2: {
+        title: 'Diseño de Moldes y Troqueles',
+        desc: 'Desarrollo y modelado de herramental para inyección plástica y estampado metálico.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      }
+    },
+    'Fabricacion': {
+      title: 'Fabricación Digital',
+      cardId: 'card-fabricacion',
+      block1: {
+        title: 'Modelado y Prototipado 3D',
+        desc: 'Formación práctica en diseño CAD/CAM, escaneo e impresión 3D aditiva y prototipado rápido.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      },
+      block2: {
+        title: 'Fabricación Inteligente e Industria 4.0',
+        desc: 'Integración de gemelos digitales, corte láser y manufactura sustractiva avanzada.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      }
+    },
+    'Automatizacion': {
+      title: 'Automatización',
+      cardId: 'card-automatizacion',
+      block1: {
+        title: 'Automatización Industrial',
+        desc: 'Programación de autómatas programables (PLC), integración de sensores y control de procesos en líneas de ensamble.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      },
+      block2: {
+        title: 'Robótica y Mecatrónica',
+        desc: 'Configuración de brazos robóticos articulados, servomotores y visión artificial para la industria.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      }
+    },
+    'Automotriz': {
+      title: 'Automotriz',
+      cardId: 'card-automotriz',
+      block1: {
+        title: 'Mantenimiento Mecatrónico de Automotores',
+        desc: 'Diagnóstico por escáner de sistemas de inyección electrónica diésel y gasolina y tren motriz.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      },
+      block2: {
+        title: 'Vehículos Híbridos y Eléctricos',
+        desc: 'Protocolos de alto voltaje, sistemas de tracción eléctrica y gestión de paquetes de baterías Li-ion.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      }
+    },
+    'Electricidad': {
+      title: 'Electricidad',
+      cardId: 'card-electricidad',
+      block1: {
+        title: 'Electricidad Industrial',
+        desc: 'Sistemas eléctricos en media y baja tensión, cuadros de distribución, tableros de potencia y centros de carga.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      },
+      block2: {
+        title: 'Energías Renovables y Solar Fotovoltaica',
+        desc: 'Cálculo, montaje y mantenimiento de sistemas fotovoltaicos on-grid y off-grid.',
+        type: 'Tecnólogo',
+        duration: '24 Meses'
+      }
+    }
+  };
+
+  function selectDesktopProgram(key) {
+    if (window.innerWidth < 1024) {
+      if (key === 'TICS') {
+        openTicsModal();
+      } else {
+        const data = programData[key];
+        openGenericModal(data.title, data.block1.desc, data.block1.type, data.block1.duration);
+      }
+      return;
+    }
+
+    const data = programData[key];
+    if (!data) return;
+
+    // Highlight active card border
+    ['card-tics', 'card-manufactura', 'card-fabricacion', 'card-automatizacion', 'card-automotriz', 'card-electricidad'].forEach(id => {
+      const card = document.getElementById(id);
+      if (card) {
+        if (id === data.cardId) {
+          card.classList.remove('border-beci-green-light/40', 'border');
+          card.classList.add('border-2', 'border-beci-green-dark');
+        } else {
+          card.classList.remove('border-2', 'border-beci-green-dark');
+          card.classList.add('border', 'border-beci-green-light/40');
+        }
+      }
+    });
+
+    // Update desktop panel
+    const titleEl = document.getElementById('desktopPanelTitle');
+    const b1Title = document.getElementById('desktopBlock1Title');
+    const b1Desc = document.getElementById('desktopBlock1Desc');
+    const b1Type = document.getElementById('desktopBlock1Type');
+    const b1Duration = document.getElementById('desktopBlock1Duration');
+
+    const b2Title = document.getElementById('desktopBlock2Title');
+    const b2Desc = document.getElementById('desktopBlock2Desc');
+    const b2Type = document.getElementById('desktopBlock2Type');
+    const b2Duration = document.getElementById('desktopBlock2Duration');
+
+    if (titleEl) titleEl.textContent = data.title;
+    if (b1Title) b1Title.textContent = data.block1.title;
+    if (b1Desc) b1Desc.textContent = data.block1.desc;
+    if (b1Type) b1Type.textContent = data.block1.type;
+    if (b1Duration) b1Duration.textContent = data.block1.duration;
+
+    if (b2Title) b2Title.textContent = data.block2.title;
+    if (b2Desc) b2Desc.textContent = data.block2.desc;
+    if (b2Type) b2Type.textContent = data.block2.type;
+    if (b2Duration) b2Duration.textContent = data.block2.duration;
+  }
+</script>
+
+<script>
+  function closeDesktopDetailsPanel() {
+    const panel = document.getElementById('desktopDetailsPanel');
+    if (panel) {
+      panel.classList.add('opacity-0', 'translate-y-2');
+      panel.classList.remove('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        panel.classList.add('hidden');
+        panel.classList.remove('lg:block');
+      }, 250);
+    }
+    ['card-tics', 'card-manufactura', 'card-fabricacion', 'card-automatizacion', 'card-automotriz', 'card-electricidad'].forEach(id => {
+      const card = document.getElementById(id);
+      if (card) {
+        card.classList.remove('border-2', 'border-beci-green-dark');
+        card.classList.add('border', 'border-beci-green-light/40');
+      }
+    });
+  }
+
+  // Enhance selectDesktopProgram to smoothly reveal the desktop panel
+  const origSelectDesktopProgram = window.selectDesktopProgram;
+  window.selectDesktopProgram = function(key) {
+    if (typeof origSelectDesktopProgram === 'function') {
+      origSelectDesktopProgram(key);
+    }
+    if (window.innerWidth >= 1024) {
+      const panel = document.getElementById('desktopDetailsPanel');
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.classList.add('lg:block');
+        requestAnimationFrame(() => {
+          panel.classList.remove('opacity-0', 'translate-y-2');
+          panel.classList.add('opacity-100', 'translate-y-0');
+        });
+      }
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

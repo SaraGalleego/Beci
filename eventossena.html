@@ -1,0 +1,1040 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Eventos - Beci</title>
+<!-- Google Fonts: Poppins & DM Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,700;0,9..40,900;1,9..40,700;1,9..40,900&amp;family=Poppins:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"DM Sans"', 'sans-serif'],
+            body: ['"Poppins"', 'sans-serif'],
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              green: '#4DB21A',
+              darkGreen: '#235A1E',
+              chismear: '#28621B',
+              orange: '#FF6C01',
+              lightOrange: '#FFE8D6',
+              bgLight: '#F5FAF4',
+              cardBg: '#FFFFFF',
+              borderGreen: '#E2F0DE',
+              badgeTeal: '#005D63',
+            }
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .font-dm-black {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+    }
+
+    /* Soft shadow neumorphism for calendar keys in mobile */
+    .calendar-day-btn {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 16px;
+    }
+
+    .calendar-day-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* Day numbers typography for mobile */
+    #calendarGrid .calendar-day-btn,
+    #calendarGrid .calendar-day-btn span.day-num {
+      font-family: 'DM Sans', sans-serif !important;
+      font-weight: 900 !important;
+      font-size: 16px !important;
+      line-height: 1 !important;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    /* Diagonal crop for event thumbnail */
+    .diagonal-clip {
+      clip-path: polygon(24% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    .diagonal-clip-desktop {
+      clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* Desktop neumorphic day buttons */
+    .desktop-day-btn {
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .desktop-day-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.09);
+    }
+    .desktop-day-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-[#F4F9F2] min-h-screen p-0 m-0 text-[#1E293B] antialiased">
+<!-- ========================================================================= -->
+<!-- DESKTOP & TABLET VIEW (md:flex) 1:1 BASED ON IMAGE_2 (calendario.png)     -->
+<!-- ========================================================================= -->
+<div class="hidden md:flex flex-col min-h-screen w-full relative overflow-x-hidden" style="background: radial-gradient(circle at 10% 20%, #F5FBF2 0%, #FAF6EE 40%, #FBF1EA 70%, #F8F3EC 100%);">
+<!-- DESKTOP HEADER -->
+<header class="w-full bg-white/95 backdrop-blur-md px-10 lg:px-14 py-4 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-b border-gray-100 z-30 relative">
+<!-- Left: 3D Official BECI Logo -->
+<a class="flex items-center group transition-transform duration-300 hover:scale-105" href="#">
+<img alt="Beci Logo" class="h-14 lg:h-16 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF-Msh5Qb53Telt0VzN089iP-TVidxfz-Ox0wU8GJ_JAFZ0kgbPyCfTjQjiksbCteGzIDHgPBq4N9XFWJgJeFMZLgXleycSMQjUigqtiGr1SqiqK6ZVk1okpvPTjcmW8VkuU0kmH4J0LACtXsWkaaPJxY8mnv5tkjzyGty8tUPWWaVyMizEM3ac3QwGrG3B3PAlMGn5RALsG-6hUAZBuovOoMZlXPW-UT9_t6l_zGc--ihoXZDrZZFWmwV3aezADfTTGw">
+</a>
+<!-- Right: Green Hamburger Button -->
+<button aria-label="Abrir Menú" class="p-2 hover:opacity-85 active:scale-95 transition-all cursor-pointer rounded-xl hover:bg-green-50" onclick="openHamburgerMenu()" type="button">
+<img alt="Menú" class="w-10 lg:w-11 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFg32xe4V5MDwkSkhWvQ1mXe5hCY1hbirFDoTPH_2wWi5PslcPGcEtQMEvLLjDxza8jpJgYIwnp_QDbiHPMLnsVIqm3Doia96BR6txCKqfPTthY1qsOXkB8U_ZhIzyVFuSvLYo_PI_xfd-9jse7UnGKnMdHmjjXUqvsofqmRjcFui2EhtwvNYzezqxAdFonkw3YKHqPFDiOSL2D5R7JeD2dYJZ0TQW8O8nfSA1WAYtiWLNOxpKxprhSECTOXu6cTrUucQ">
+</button>
+</header>
+<!-- BACKGROUND DECORATIONS (SUBTLE DOTS & OUTLINED TRIANGLES) -->
+<!-- Top-Center Dots Pattern -->
+<div class="absolute top-24 left-[48%] -translate-x-1/2 opacity-35 pointer-events-none hidden lg:block z-0">
+<svg fill="none" height="110" viewBox="0 0 120 110" width="120">
+<circle cx="10" cy="10" fill="#589E47" r="3.5"></circle>
+<circle cx="28" cy="10" fill="#589E47" r="3.5"></circle>
+<circle cx="46" cy="10" fill="#589E47" r="3.5"></circle>
+<circle cx="64" cy="10" fill="#589E47" r="3.5"></circle>
+<circle cx="82" cy="10" fill="#589E47" r="3.5"></circle>
+<circle cx="100" cy="10" fill="#589E47" r="3.5"></circle>
+<circle cx="19" cy="26" fill="#589E47" r="3.5"></circle>
+<circle cx="37" cy="26" fill="#589E47" r="3.5"></circle>
+<circle cx="55" cy="26" fill="#589E47" r="3.5"></circle>
+<circle cx="73" cy="26" fill="#589E47" r="3.5"></circle>
+<circle cx="91" cy="26" fill="#589E47" r="3.5"></circle>
+<circle cx="10" cy="42" fill="#589E47" r="3.5"></circle>
+<circle cx="28" cy="42" fill="#589E47" r="3.5"></circle>
+<circle cx="46" cy="42" fill="#589E47" r="3.5"></circle>
+<circle cx="64" cy="42" fill="#589E47" r="3.5"></circle>
+<circle cx="82" cy="42" fill="#589E47" r="3.5"></circle>
+<circle cx="19" cy="58" fill="#589E47" r="3.5"></circle>
+<circle cx="37" cy="58" fill="#589E47" r="3.5"></circle>
+<circle cx="55" cy="58" fill="#589E47" r="3.5"></circle>
+<circle cx="73" cy="58" fill="#589E47" r="3.5"></circle>
+<circle cx="28" cy="74" fill="#589E47" r="3.5"></circle>
+<circle cx="46" cy="74" fill="#589E47" r="3.5"></circle>
+<circle cx="64" cy="74" fill="#589E47" r="3.5"></circle>
+</svg>
+</div>
+<!-- Bottom-Right Dots Pattern -->
+<div class="absolute bottom-6 right-6 opacity-30 pointer-events-none hidden lg:block z-0">
+<svg fill="none" height="120" viewBox="0 0 130 120" width="130">
+<circle cx="20" cy="20" fill="#589E47" r="3.5"></circle>
+<circle cx="38" cy="20" fill="#589E47" r="3.5"></circle>
+<circle cx="56" cy="20" fill="#589E47" r="3.5"></circle>
+<circle cx="74" cy="20" fill="#589E47" r="3.5"></circle>
+<circle cx="92" cy="20" fill="#589E47" r="3.5"></circle>
+<circle cx="29" cy="38" fill="#589E47" r="3.5"></circle>
+<circle cx="47" cy="38" fill="#589E47" r="3.5"></circle>
+<circle cx="65" cy="38" fill="#589E47" r="3.5"></circle>
+<circle cx="83" cy="38" fill="#589E47" r="3.5"></circle>
+<circle cx="38" cy="56" fill="#589E47" r="3.5"></circle>
+<circle cx="56" cy="56" fill="#589E47" r="3.5"></circle>
+<circle cx="74" cy="56" fill="#589E47" r="3.5"></circle>
+<circle cx="47" cy="74" fill="#589E47" r="3.5"></circle>
+<circle cx="65" cy="74" fill="#589E47" r="3.5"></circle>
+</svg>
+</div>
+<!-- Left Green Triangle (Between cards pointing left) -->
+<div class="absolute top-[41%] left-[49%] -translate-x-1/2 pointer-events-none hidden lg:block z-10">
+<svg fill="none" height="26" viewBox="0 0 22 26" width="22">
+<path d="M2 13L20 2L20 24L2 13Z" stroke="#4DB21A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- Bottom-Right Outline Triangle -->
+<div class="absolute bottom-8 right-12 pointer-events-none hidden lg:block z-10">
+<svg class="rotate-45" fill="none" height="28" viewBox="0 0 24 28" width="24">
+<path d="M2 14L22 2L22 26L2 14Z" stroke="#4DB21A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- MAIN TWO-COLUMN CONTENT WRAPPER -->
+<div class="flex-1 w-full max-w-7xl mx-auto px-6 lg:px-12 py-8 lg:py-12 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 relative z-10">
+<!-- ============================================== -->
+<!-- LEFT COLUMN: CALENDAR CARD                     -->
+<!-- ============================================== -->
+<div class="w-full max-w-[510px] bg-[#FBFDF9]/95 rounded-[40px] p-8 lg:p-9 shadow-[0_20px_60px_rgba(35,90,30,0.07)] border border-[#EDF3EC] flex flex-col backdrop-blur-sm relative">
+<!-- Calendar Title & Clean Divider -->
+<div class="mb-6">
+<button aria-label="Seleccionar mes" class="cursor-pointer text-3xl lg:text-4xl font-dm-black text-[#111827] hover:text-[#FF6C01] tracking-tight transition-colors flex items-center gap-2" id="desktopMonthTitleBtn" onclick="openMonthPicker()" type="button"><span id="desktopMonthTitleText" class="">Junio</span><svg class="w-6 h-6 text-[#FF6C01] transition-transform duration-200 hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<div class="w-44 h-[1.5px] bg-[#D8DEC7] mt-2.5"></div>
+</div>
+<!-- Days of Week Header: Do, Lu, M, Mi, Ju, Vi, Sa -->
+<div class="grid grid-cols-7 text-center font-bold text-base lg:text-[17px] mb-4 gap-2 lg:gap-3">
+<span class="text-[#FF6C01]">Do</span>
+<span class="text-[#1E293B]">Lu</span>
+<span class="text-[#1E293B]">Mar</span>
+<span class="text-[#1E293B]">Mie</span>
+<span class="text-[#1E293B]">Ju</span>
+<span class="text-[#1E293B]">Vi</span>
+<span class="text-[#FF6C01]">Sa</span>
+</div>
+<!-- Days 30 Grid (Matching Image 2 exactly) -->
+<div class="grid grid-cols-7 place-items-center gap-2 lg:gap-3 font-dm-black" id="desktopCalendarGrid">
+<!-- ROW 1 -->
+<!-- 01: Weekend Peach with Orange Dot -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FF6C01] text-white flex flex-col items-center justify-center relative cursor-pointer shadow-lg shadow-[#FF6C01]/40 scale-105 z-10 border-2 border-[#FF6C01]" onclick="selectDesktopDay('01', 'Dom')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-white mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">01</span></button>
+<!-- 02: Light Grey Pill/Circle -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]" onclick="selectDesktopDay('02', 'Lun')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">02</span></button>
+<!-- 03 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('03', 'Mar')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">03</span></button>
+<!-- 04 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('04', 'Mie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">04</span></button>
+<!-- 05 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]" onclick="selectDesktopDay('05', 'Jue')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">05</span></button>
+<!-- 06 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('06', 'Vie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">06</span></button>
+<!-- 07: Saturday Peach with Orange Dot -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]" onclick="selectDesktopDay('07', 'Sab')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">07</span></button>
+<!-- ROW 2 -->
+<!-- 08 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('08', 'Dom')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">08</span></button>
+<!-- 09 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('09', 'Lun')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">09</span></button>
+<!-- 10: Event Day Peach with Dot -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]" onclick="selectDesktopDay('10', 'Mar')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">10</span></button>
+<!-- 11: SELECTED / ACTIVE ORANGE -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('11', 'Mie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">11</span></button>
+<!-- 12 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]" onclick="selectDesktopDay('12', 'Jue')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">12</span></button>
+<!-- 13 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('13', 'Vie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">13</span></button>
+<!-- 14 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('14', 'Sab')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">14</span></button>
+<!-- ROW 3 -->
+<!-- 15 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('15', 'Dom')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">15</span></button>
+<!-- 16: Solid Orange Event with Dot -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FF6C01] text-white flex flex-col items-center justify-center relative cursor-pointer shadow-sm" onclick="selectDesktopDay('16', 'Lun')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-white mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">16</span></button>
+<!-- 17 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('17', 'Mar')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">17</span></button>
+<!-- 18 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('18', 'Mie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">18</span></button>
+<!-- 19 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('19', 'Jue')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">19</span></button>
+<!-- 20 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('20', 'Vie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">20</span></button>
+<!-- 21 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('21', 'Sab')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">21</span></button>
+<!-- ROW 4 -->
+<!-- 22 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('22', 'Dom')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">22</span></button>
+<!-- 23 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('23', 'Lun')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">23</span></button>
+<!-- 24 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('24', 'Mar')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">24</span></button>
+<!-- 25 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('25', 'Mie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">25</span></button>
+<!-- 26: Solid Orange Event with Dot -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FF6C01] text-white flex flex-col items-center justify-center relative cursor-pointer shadow-sm" onclick="selectDesktopDay('26', 'Jue')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-white mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">26</span></button>
+<!-- 27 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('27', 'Vie')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">27</span></button>
+<!-- 28 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('28', 'Sab')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">28</span></button>
+<!-- ROW 5 -->
+<!-- 29: Weekend Peach with Orange Dot -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]" onclick="selectDesktopDay('29', 'Dom')" type="button"><span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">29</span></button>
+<!-- 30 -->
+<button class="desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60" onclick="selectDesktopDay('30', 'Lun')" type="button"><span class="text-base lg:text-[17px] leading-none font-bold">30</span></button>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- RIGHT COLUMN: EVENT DETAIL CARD                -->
+<!-- ============================================== -->
+<div class="w-full max-w-[490px] flex flex-col items-center relative">
+<!-- Top Pill: 'Eventos' -->
+<div class="mb-4 bg-white/90 px-8 py-2 rounded-full border border-gray-100 shadow-[0_4px_15px_rgba(0,0,0,0.04)] z-10">
+<h3 class="text-xl lg:text-2xl font-bold font-dm-black text-[#111827] tracking-tight">Eventos</h3>
+</div>
+<!-- Main Slanted/Rotated Card (approx -1.2deg playfully angled) -->
+<div class="w-full bg-[#FCFBF4] rounded-[40px] p-7 lg:p-9 shadow-[0_22px_55px_rgba(0,0,0,0.06)] border border-[#F2EDE1] transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+<!-- Header: Dom (01) Junio -->
+<div class="flex items-center justify-between px-3 mb-8">
+<span class="text-3xl lg:text-[34px] font-dm-black text-[#1F2937] tracking-tight transition-opacity duration-200" id="desktopEventDayText">Dom</span>
+<div class="w-16 h-16 rounded-full bg-[#FF6C01] text-white flex items-center justify-center shadow-lg shadow-[#FF6C01]/30 transition-transform duration-200" id="desktopEventCircle">
+<span class="text-2xl lg:text-3xl font-dm-black tracking-tight" id="desktopEventDayNum">01</span>
+</div>
+<span class="text-3xl lg:text-[34px] font-dm-black text-[#1F2937] tracking-tight">Junio</span>
+</div>
+<!-- Inner White Event Card -->
+<div class="bg-white rounded-[26px] p-4 lg:p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-gray-100/80 flex items-stretch justify-between relative overflow-hidden min-h-[175px] transition-all duration-300" id="desktopEventInnerCard">
+<!-- Left Column Content -->
+<div class="flex flex-col justify-between max-w-[56%] z-10 pr-2">
+<div>
+<!-- 12 pm badge -->
+<div class="bg-[#005257] text-white w-12 h-12 rounded-2xl flex flex-col items-center justify-center shadow-sm" id="desktopEventTimeBadge">
+<span class="text-base font-bold leading-none" id="desktopEventTimeHour">12</span>
+<span class="text-xs font-light opacity-90 leading-tight" id="desktopEventTimePeriod">pm</span>
+</div>
+<!-- Event Title -->
+<h4 class="text-base lg:text-[17px] font-bold text-[#1E293B] leading-snug mt-3 mb-1.5" id="desktopEventTitle">Taller Fotografía Urbana</h4>
+<!-- Location Pin -->
+<div class="flex items-center text-xs lg:text-[13px] text-gray-500 font-medium">
+<svg class="w-3.5 h-3.5 mr-1 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate" id="desktopEventLocation">Biblioteca la piloto</span>
+</div>
+</div>
+<!-- Pill: Gratuito -->
+<div class="mt-3">
+<span class="inline-block bg-[#4DB21A] text-white text-xs lg:text-[13px] font-bold px-4 py-1 rounded-full tracking-wide shadow-sm" id="desktopEventCost">Gratuito</span>
+</div>
+</div>
+<!-- Right Cut Photo (Diagonal Edge) -->
+<div class="absolute right-0 top-0 bottom-0 w-[46%] h-full">
+<img alt="Taller Fotografía Urbana" class="w-full h-full object-cover diagonal-clip-desktop transition-opacity duration-300" id="desktopEventImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MOBILE VIEW (< 768px): FULLY PRESERVED, BLOCKED & INTACT                  -->
+<!-- ========================================================================= -->
+<div class="md:hidden min-h-screen flex justify-center items-center p-0 m-0">
+<!-- Main Mobile Canvas iOS Wrapper -->
+<div class="relative w-full max-w-[430px] min-h-screen bg-[#FAF8FF] shadow-2xl flex flex-col justify-between overflow-hidden" data-purpose="mobile-viewport-container" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAXag3YCZLWwpts8mQcsPREkbD3UYbwVV4sGtlGf7ytpnUZS1xGM8sH6JtRrAeHioe_90BfRMg37Iism47nMgZJQS0EGlAioC_rgJs2z4jcZjRPWzsU30YbQKx9maNMgMT4dssotJ-vw--mGNWcu5PBD3cGZcxHVQTkVMQw3RWuoOhqbBfwA8SlWEZ-KZl0YLbFU844FRsKHwy880kj8cA3GRCaAVq8xbldMVRMRKl3GOqnNNsixCiGmVOzoMBYXhLgvUo&quot;); background-size: cover; background-position: center center;">
+<!-- Top Floating Section (Logo + Nav) -->
+<div class="relative z-10">
+<!-- BEGIN: TopHeader -->
+<header class="relative bg-[#EBF6E9] rounded-b-[42px] px-6 pt-9 pb-5 shadow-sm flex items-center justify-between border-b border-[#D5EED1]">
+<!-- Beci 3D Character Logo -->
+<div class="h-20 flex items-center">
+<img alt="Beci Logo" class="h-20 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1sHy9GqO24ofwrKfGAqY-fv5F1k9QiCwOb11t2b9skdbJJHJhdwucyh3QbpI9jTuuvNZQiIY5tkNbjmDsa4t7ygWFTC3DXzDMV0cVrjcF0HG5gYFYdavqnvkUbHuSp0EXNqGNULyC3cpAjfa4pBtyxbq_UXvwIuTHWVL_5yqfFYywyItQZZ9BwlR0YKkgZ-d_l4FuMohTScIj-bDby1Sf2FnK7-RIjWnIyEPb-bu6fF58jyEmcIPgPLG_vgKRYSJJrz4">
+</div>
+<!-- Green Hamburger Menu -->
+<button aria-label="Menú" class="flex items-center justify-center p-2 focus:outline-none cursor-pointer hover:opacity-80 active:scale-95 transition" id="openMenuBtnMobile" onclick="openHamburgerMenu()" type="button">
+<img alt="Menú" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFbixf2kZvF3Krf6WDumM_lgWhY2DPha-jg79Omnh6Lir3rBWaWV2lXUNeN8DqYvf_LWnv6Kad4Ves_yOaElcrwGmFtetZU0INfetUZCr4IOBiYAYnlmW_OyBJvGf9eIyzfZG8lwD_6NLzb6f0SLABzcZIhiBhMSoiimTc0gx8UbJHOTAFezqDjZLNFxFTAS-1OwgLQDyNlByRPkd_yZ-Y-z_3PT5Gq6zowQAPXxbAQNfM0Wd3WKArb-X7T7MBd1Vt9CU">
+</button>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: SubHeaderNav -->
+<div class="px-6 pt-4 pb-2 flex items-center relative">
+<button aria-label="Atrás" class="text-[#336926] text-3xl font-black transition-transform hover:-translate-x-1 focus:outline-none flex items-center justify-center w-10 h-10 -ml-2 active:scale-90" id="backNavBtn" type="button">
+<svg class="w-7 h-7 text-[#336926]" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<h1 class="absolute left-1/2 -translate-x-1/2 text-2xl font-dm-black tracking-tight text-[#162716]">
+          Eventos
+        </h1>
+</div>
+<!-- END: SubHeaderNav -->
+<!-- BEGIN: MainCalendarCard -->
+<main class="px-5 mt-1">
+<div class="bg-white/95 rounded-[36px] p-5 shadow-[0_15px_40px_rgba(35,90,30,0.08)] border border-[#EAF2E8] relative overflow-hidden backdrop-blur-sm pb-6" id="calendarCardContainer">
+<!-- Month Header Title & 3D Icon -->
+<div class="flex items-center justify-between mb-3 px-1">
+<!-- Interactive Month Heading -->
+<button aria-label="Seleccionar mes" class="group flex items-center gap-2 cursor-pointer bg-slate-100/70 hover:bg-[#FFE8D6]/60 px-3.5 py-1.5 rounded-2xl transition-all duration-200 border border-slate-200/60 hover:border-[#FF6C01]/40 active:scale-95" id="openMonthPickerBtn" type="button">
+<h2 class="text-3xl font-dm-black text-[#111827] tracking-tight group-hover:text-[#FF6C01] transition-colors" id="calendarTitle">Junio</h2>
+<svg class="w-5 h-5 text-[#FF6C01] transition-transform duration-200 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- 3D Calendar Icon Graphic -->
+<div class="w-12 h-14 relative flex items-center justify-center">
+<img alt="Calendario" class="w-12 h-14 object-contain drop-shadow-md cursor-pointer hover:scale-105 transition-transform" id="calendarGraphicBtn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJKmm2gBGg3FbmUbnSxuEP5-4_apxOECjL3V5uKKebBk7Qp8ccihh0o3SaRVB3QrwOodfgSHjBgBa4o9HI00RxvjUGUG2MixcA8xHRlm4xFBCW7yfd5V2alHnMTGn1QOB6tzcIbQu3P-2JO6SpyCyhdLdaO9he7mDHnMv9auFcU3iFMShZvlU8vewT2VRpyW6cLYTm-JuadANIzYsc0kYLzpVeIN4uMQIvXCQIK03rMYbhooUQ4bQZLrCjLhAmDjzMCZE">
+</div>
+</div>
+<!-- Weekday Labels -->
+<div class="grid grid-cols-7 text-center text-[13px] font-bold mb-2.5 px-0.5 gap-3">
+<span class="text-[#FF6C01]">Dom</span>
+<span class="text-[#475569]">Lun</span>
+<span class="text-[#475569]">Mar</span>
+<span class="text-[#475569]">Mie</span>
+<span class="text-[#475569]">Jue</span>
+<span class="text-[#475569]">Vie</span>
+<span class="text-[#FF6C01]">Sab</span>
+</div>
+<!-- Days Grid -->
+<div class="grid grid-cols-7 place-items-center gap-3 min-h-[290px]" id="calendarGrid"><button type="button" data-day="01" aria-label="Día 01 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FF6B00] text-white border-2 border-[#FF6B00] shadow-md scale-105 z-10">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-white mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">01</span>
+          </div>
+        </button><button type="button" data-day="02" aria-label="Día 02 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FFE8D6] text-[#E76215] border border-[#FFDCBE]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">02</span>
+          </div>
+        </button><button type="button" data-day="03" aria-label="Día 03 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">03</span>
+          </div>
+        </button><button type="button" data-day="04" aria-label="Día 04 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">04</span>
+          </div>
+        </button><button type="button" data-day="05" aria-label="Día 05 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FFE8D6] text-[#E76215] border border-[#FFDCBE]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">05</span>
+          </div>
+        </button><button type="button" data-day="06" aria-label="Día 06 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">06</span>
+          </div>
+        </button><button type="button" data-day="07" aria-label="Día 07 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FFE8D6] text-[#E76215] border border-[#FFDCBE]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">07</span>
+          </div>
+        </button><button type="button" data-day="08" aria-label="Día 08 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">08</span>
+          </div>
+        </button><button type="button" data-day="09" aria-label="Día 09 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">09</span>
+          </div>
+        </button><button type="button" data-day="10" aria-label="Día 10 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FFE8D6] text-[#E76215] border border-[#FFDCBE]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">10</span>
+          </div>
+        </button><button type="button" data-day="11" aria-label="Día 11 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FF6B00] text-white border border-[#F26400]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-white mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">11</span>
+          </div>
+        </button><button type="button" data-day="12" aria-label="Día 12 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FFE8D6] text-[#E76215] border border-[#FFDCBE]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">12</span>
+          </div>
+        </button><button type="button" data-day="13" aria-label="Día 13 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">13</span>
+          </div>
+        </button><button type="button" data-day="14" aria-label="Día 14 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">14</span>
+          </div>
+        </button><button type="button" data-day="15" aria-label="Día 15 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">15</span>
+          </div>
+        </button><button type="button" data-day="16" aria-label="Día 16 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FF6B00] text-white border border-[#F26400]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-white mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">16</span>
+          </div>
+        </button><button type="button" data-day="17" aria-label="Día 17 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">17</span>
+          </div>
+        </button><button type="button" data-day="18" aria-label="Día 18 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">18</span>
+          </div>
+        </button><button type="button" data-day="19" aria-label="Día 19 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">19</span>
+          </div>
+        </button><button type="button" data-day="20" aria-label="Día 20 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">20</span>
+          </div>
+        </button><button type="button" data-day="21" aria-label="Día 21 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">21</span>
+          </div>
+        </button><button type="button" data-day="22" aria-label="Día 22 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">22</span>
+          </div>
+        </button><button type="button" data-day="23" aria-label="Día 23 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">23</span>
+          </div>
+        </button><button type="button" data-day="24" aria-label="Día 24 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">24</span>
+          </div>
+        </button><button type="button" data-day="25" aria-label="Día 25 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">25</span>
+          </div>
+        </button><button type="button" data-day="26" aria-label="Día 26 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FF6B00] text-white border border-[#F26400]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-white mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">26</span>
+          </div>
+        </button><button type="button" data-day="27" aria-label="Día 27 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">27</span>
+          </div>
+        </button><button type="button" data-day="28" aria-label="Día 28 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">28</span>
+          </div>
+        </button><button type="button" data-day="29" aria-label="Día 29 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#FFE8D6] text-[#E76215] border border-[#FFDCBE]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-1"></span>
+            <span class="day-num leading-none font-bold text-[16px]">29</span>
+          </div>
+        </button><button type="button" data-day="30" aria-label="Día 30 de Junio" class="relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]">
+          <div class="flex flex-col items-center justify-center h-full">
+            <span class="day-num leading-none font-bold text-[16px]">30</span>
+          </div>
+        </button></div>
+<!-- BEGIN: FloatingEventModal (Mobile inside card) -->
+<div class="absolute inset-x-3 top-[100px] z-30 transition-all duration-300 opacity-0 pointer-events-none" id="eventModalOverlay" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border: 1.5px solid rgba(255, 255, 255, 0.95); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.13) 0px 16px 36px; padding: 18px 14px; margin-top: 12px;">
+<!-- Modal Top Title: Dom [01] Junio -->
+<div class="flex items-center justify-between px-3 text-2xl font-dm-black text-[#1F2937] mb-3">
+<span class="text-[22px] tracking-tight" id="modalDayName">Mie</span>
+<div class="w-11 h-14 rounded-2xl bg-[#FF6C01] text-white flex items-center justify-center font-black shadow-md text-xl tracking-tight leading-none" id="modalDayNumber">11</div>
+<span class="text-[22px] tracking-tight" id="modalMonthName">Junio</span>
+</div>
+<!-- Event Details White Card -->
+<div class="bg-white rounded-[22px] p-3 shadow-[0_6px_20px_rgba(0,0,0,0.07)] border border-gray-100 flex items-stretch justify-between overflow-hidden relative min-h-[142px]">
+<!-- Left Event Info -->
+<div class="flex flex-col justify-between max-w-[55%] z-10 pr-1">
+<div>
+<!-- Time Badge -->
+<div class="bg-[#00585E] text-white w-10 h-10 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+<span class="text-sm font-bold leading-none" id="modalTimeHour">12</span>
+<span class="text-[10px] leading-tight font-light opacity-90" id="modalTimePeriod">pm</span>
+</div>
+<!-- Title -->
+<h3 class="text-[13px] font-bold text-gray-900 leading-tight mt-2 mb-1" id="modalEventTitle">
+                    Taller Fotografía Urbana
+                  </h3>
+<!-- Location with Pin -->
+<div class="flex items-center text-[10px] text-gray-500 font-medium">
+<svg class="w-3 h-3 mr-1 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate" id="modalEventLocation">Biblioteca la piloto</span>
+</div>
+</div>
+<!-- Green Pill Badge -->
+<div class="mt-2">
+<span class="inline-block bg-[#4DB21A] text-white text-[11px] font-bold px-3 py-0.5 rounded-full tracking-wide" id="modalEventCost">
+                    Gratuito
+                  </span>
+</div>
+</div>
+<!-- Right Event Photo with Diagonal Cut -->
+<div class="absolute right-0 top-0 bottom-0 w-[45%] h-full">
+<img alt="Taller Fotografía Urbana" class="w-full h-full object-cover diagonal-clip" id="modalEventImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A">
+</div>
+</div>
+<!-- Close toggle instruction / button -->
+<button aria-label="Cerrar detalle" class="absolute top-2 right-3 text-gray-400 hover:text-gray-700 text-base font-bold" id="closeModalCardBtn" onclick="closeModalState()" type="button">
+              ✕
+            </button>
+</div>
+<!-- END: FloatingEventModal -->
+</div>
+</main>
+<!-- END: MainCalendarCard -->
+</div>
+<!-- BEGIN: BottomGreenBar -->
+<footer class="bg-[#4DB21A] px-6 py-4 flex items-center justify-end gap-3 relative z-10">
+<span class="text-white text-xs font-semibold tracking-wide">
+        Enterate de todo
+      </span>
+<button class="bg-[#336926] active:scale-95 transition text-white text-xs font-bold px-5 py-2 rounded-full shadow-md tracking-wide" id="chismearBtn" type="button">
+        Chismear
+      </button>
+</footer>
+<!-- END: BottomGreenBar -->
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- SHARED MODALS (Month Picker & Hamburger Navigation)                      -->
+<!-- ========================================================================= -->
+<!-- BEGIN: Month Picker Popup Modal -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-5 transition-all duration-300 opacity-0 pointer-events-none" id="monthPickerModal">
+<div class="absolute inset-0 bg-[#336926]/25 backdrop-blur-md transition-opacity" id="monthModalBackdrop"></div>
+<div class="relative w-full max-w-[340px] rounded-[32px] p-6 shadow-[0_20px_50px_rgba(35,90,30,0.25)] border border-white/70 bg-white/85 backdrop-blur-2xl z-10 flex flex-col items-center transform transition-all duration-300 scale-95" id="monthModalContent">
+<div class="w-full flex items-center justify-between mb-5 pb-3 border-b border-gray-200/60">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FF6C01]"></span>
+<h3 class="text-lg font-dm-black text-[#111827] tracking-tight">Seleccionar Mes</h3>
+</div>
+<button aria-label="Cerrar selector de mes" class="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-800 hover:bg-gray-100/70 text-lg font-bold transition active:scale-90" id="closeMonthPickerBtn" type="button">✕</button>
+</div>
+<div class="grid grid-cols-3 gap-2.5 w-full" id="monthsGrid"><button type="button" aria-label="Mes Enero" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Enero</span><span class="text-[10px] opacity-75 font-normal">31 días</span></button><button type="button" aria-label="Mes Febrero" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Febrero</span><span class="text-[10px] opacity-75 font-normal">28 días</span></button><button type="button" aria-label="Mes Marzo" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Marzo</span><span class="text-[10px] opacity-75 font-normal">31 días</span></button><button type="button" aria-label="Mes Abril" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Abril</span><span class="text-[10px] opacity-75 font-normal">30 días</span></button><button type="button" aria-label="Mes Mayo" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Mayo</span><span class="text-[10px] opacity-75 font-normal">31 días</span></button><button type="button" aria-label="Mes Junio" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-[#FF6C01] text-white shadow-md shadow-[#FF6C01]/30 font-dm-black text-sm"><span class="">Junio</span><span class="text-[10px] opacity-75 font-normal">30 días</span></button><button type="button" aria-label="Mes Julio" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Julio</span><span class="text-[10px] opacity-75 font-normal">31 días</span></button><button type="button" aria-label="Mes Agosto" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Agosto</span><span class="text-[10px] opacity-75 font-normal">31 días</span></button><button type="button" aria-label="Mes Septiembre" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Septiembre</span><span class="text-[10px] opacity-75 font-normal">30 días</span></button><button type="button" aria-label="Mes Octubre" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Octubre</span><span class="text-[10px] opacity-75 font-normal">31 días</span></button><button type="button" aria-label="Mes Noviembre" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Noviembre</span><span class="text-[10px] opacity-75 font-normal">30 días</span></button><button type="button" aria-label="Mes Diciembre" class="py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01] border border-gray-200/60"><span class="">Diciembre</span><span class="text-[10px] opacity-75 font-normal">31 días</span></button></div>
+</div>
+</div>
+<!-- BEGIN: Hamburger Navigation Glassmorphism Modal -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-5 transition-all duration-300 opacity-0 pointer-events-none" id="hamburgerMenuModal">
+<div class="absolute inset-0 bg-[#336926]/20 backdrop-blur-xl transition-opacity" id="hamburgerModalBackdrop" onclick="closeHamburgerMenu()"></div>
+<div class="relative w-full max-w-[360px] rounded-[36px] p-7 shadow-[0_20px_50px_rgba(35,90,30,0.22)] border border-white/60 bg-white/80 backdrop-blur-2xl z-10 flex flex-col items-center transform transition-all duration-300 scale-95" id="hamburgerModalContent">
+<button aria-label="Cerrar menú" class="absolute top-6 right-6 w-9 h-9 rounded-full flex items-center justify-center text-[#336926] hover:bg-[#336926]/10 text-2xl font-bold transition active:scale-90" id="closeMenuBtn" onclick="closeHamburgerMenu()" type="button">✕</button>
+<div class="mt-3 mb-6 flex flex-col items-center">
+</div>
+<nav class="w-full flex flex-col text-center divide-y divide-black/10">
+<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="#">Ayuda</a>
+<a class="py-3.5 text-lg font-black text-[#336926] active:scale-95 transition block" href="#">Eventos</a>
+<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="registratucorreosena.html">Estar al Tanto</a>
+<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="#">Explorar Sedes</a>
+<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="#">Explorar Programas</a>
+</nav>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- JAVASCRIPT LOGIC                                                          -->
+<!-- ========================================================================= -->
+<script data-purpose="calendar-data-and-state">
+  const monthsData = [
+    { id: 0, name: "Enero", days: 31, startWeekday: 3, eventDays: [4, 12, 18, 25] },
+    { id: 1, name: "Febrero", days: 28, startWeekday: 6, eventDays: [7, 14, 21] },
+    { id: 2, name: "Marzo", days: 31, startWeekday: 6, eventDays: [8, 15, 22, 29] },
+    { id: 3, name: "Abril", days: 30, startWeekday: 2, eventDays: [5, 11, 19, 27] },
+    { id: 4, name: "Mayo", days: 31, startWeekday: 4, eventDays: [3, 10, 17, 24] },
+    { id: 5, name: "Junio", days: 30, startWeekday: 0, eventDays: [1, 7, 10, 11, 16, 26, 29] },
+    { id: 6, name: "Julio", days: 31, startWeekday: 2, eventDays: [6, 13, 20, 28] },
+    { id: 7, name: "Agosto", days: 31, startWeekday: 5, eventDays: [2, 9, 15, 23] },
+    { id: 8, name: "Septiembre", days: 30, startWeekday: 1, eventDays: [5, 12, 19, 26] },
+    { id: 9, name: "Octubre", days: 31, startWeekday: 3, eventDays: [4, 11, 18, 31] },
+    { id: 10, name: "Noviembre", days: 30, startWeekday: 6, eventDays: [2, 9, 16, 23] },
+    { id: 11, name: "Diciembre", days: 31, startWeekday: 1, eventDays: [7, 14, 24, 31] }
+  ];
+
+  const weekdayNames = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
+  let currentMonthIndex = 5; // Junio
+  let currentSelectedDay = "01";
+  let desktopSelectedDay = "01";
+
+  // Events dictionary for diverse days in Junio
+  const eventsByDay = {
+    "01": {
+      title: "Taller Fotografía Urbana",
+      hour: "12",
+      period: "pm",
+      location: "Biblioteca la piloto",
+      cost: "Gratuito",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A"
+    },
+    "02": {
+      title: "Taller Pintura Acrílica",
+      hour: "02",
+      period: "pm",
+      location: "Salón Mural CTMA",
+      cost: "Gratuito",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAEjOUR8WYyScYKsPPuswAhPHFPyEYNVu2rX0CCCM03L7IKgAGV2Rh0etUKFJjwDoXr3lDe7n4rRTwfEIqqC1vmhd3VRrhmexIWul88svgaDTgjD6xqWdrokOXb9xUo_a07Aj381VHVnFWd8H9LmV76UR0uZ2wICbWEpEKKgRlnpNCN5AkBuqMBsldNLRrYkkoeTc9MXti8p0GnwfDfT4rS6XFmDOl7A9C8ps6gbMQ4pAi86vt1i7_c"
+    },
+    "05": {
+      title: "Seminario Robótica & IA",
+      hour: "10",
+      period: "am",
+      location: "Hub Innovación Medellín",
+      cost: "Gratuito",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCzcrmxajfk_NVwJuTeHU3qP4J_cnv4DGxj80r5ZKJUs6-Qnoms_KTXjHKvBtHKTAhg3uJke_n3VR1JGP3MO0LeWUL53GtltvDZMpKuL8i5DeTeG0vd2sOsztoAssdGIej3MkzdWZ-wivPrjxcLaKkSmCpPBpJKFAoUhEAwAipeN2bFYCTfOn4YfBm7tXriW7GCt6AephaQo0GFVHgJr05ro9z0wfBYlljsF6F7ceu88Fox6TnekABN"
+    },
+    "12": {
+      title: "Feria Empleo SENA",
+      hour: "09",
+      period: "am",
+      location: "Plaza Mayor Medellín",
+      cost: "Gratuito",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCNTvAFRo63B1pVvXcW9sSveCYAE2K-_TMFv7PD31J8X-WZ6iQWpTh-m8YJ5MXir84MiO8KkjT60zmM5sfuY6VD7luPFkZBwIZvfxcCnH2GYGyOc1LDr7y_4Knv_indIjGInWqCClDwcWtoXZSfDY29MBl1g2LjBKFJ66ahaZ5edGOihzL2IH4UGF4UNAKiSwz3SP80e005xID6VuMSF58y1PMY6WzWOXB_E5b9-I36UN3ILApGMSCE"
+    },
+    "07": {
+      title: "Club de Lectura y Café",
+      hour: "10",
+      period: "am",
+      location: "Parque Explora",
+      cost: "Gratuito",
+      image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=700&q=80"
+    },
+    "10": {
+      title: "Cine Club: Nuevas Miradas",
+      hour: "06",
+      period: "pm",
+      location: "Teatro Lido",
+      cost: "Gratuito",
+      image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80"
+    },
+    "11": {
+      title: "Taller Fotografía Urbana",
+      hour: "12",
+      period: "pm",
+      location: "Biblioteca la piloto",
+      cost: "Gratuito",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A"
+    },
+    "16": {
+      title: "Recorrido Patrimonial Beci",
+      hour: "03",
+      period: "pm",
+      location: "Plaza Botero",
+      cost: "Gratuito",
+      image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=700&q=80"
+    },
+    "26": {
+      title: "Concierto Acústico al Aire Libre",
+      hour: "05",
+      period: "pm",
+      location: "Jardín Botánico",
+      cost: "Gratuito",
+      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=700&q=80"
+    },
+    "29": {
+      title: "Feria de Emprendimiento Local",
+      hour: "11",
+      period: "am",
+      location: "Ciudad del Río",
+      cost: "Gratuito",
+      image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80"
+    }
+  };
+
+  // Mobile elements
+  const calendarGrid = document.getElementById('calendarGrid');
+  const calendarTitle = document.getElementById('calendarTitle');
+  const openMonthPickerBtn = document.getElementById('openMonthPickerBtn');
+  const calendarGraphicBtn = document.getElementById('calendarGraphicBtn');
+  const monthPickerModal = document.getElementById('monthPickerModal');
+  const monthModalBackdrop = document.getElementById('monthModalBackdrop');
+  const monthModalContent = document.getElementById('monthModalContent');
+  const closeMonthPickerBtn = document.getElementById('closeMonthPickerBtn');
+  const monthsGrid = document.getElementById('monthsGrid');
+
+  const eventModalOverlay = document.getElementById('eventModalOverlay');
+  const modalDayName = document.getElementById('modalDayName');
+  const modalDayNumber = document.getElementById('modalDayNumber');
+  const modalMonthName = document.getElementById('modalMonthName');
+  const backNavBtn = document.getElementById('backNavBtn');
+
+  // Desktop/Tablet interactive elements
+  const desktopEventDayText = document.getElementById('desktopEventDayText');
+  const desktopEventDayNum = document.getElementById('desktopEventDayNum');
+  const desktopEventTitle = document.getElementById('desktopEventTitle');
+  const desktopEventLocation = document.getElementById('desktopEventLocation');
+  const desktopEventCost = document.getElementById('desktopEventCost');
+  const desktopEventImage = document.getElementById('desktopEventImage');
+  const desktopEventTimeHour = document.getElementById('desktopEventTimeHour');
+  const desktopEventTimePeriod = document.getElementById('desktopEventTimePeriod');
+  const desktopEventInnerCard = document.getElementById('desktopEventInnerCard');
+  const desktopEventCircle = document.getElementById('desktopEventCircle');
+
+  function selectDesktopDay(dayStr, weekday) {
+    desktopSelectedDay = dayStr;
+
+    // Smooth transition effect on event card
+    if (desktopEventInnerCard) {
+      desktopEventInnerCard.classList.add('opacity-40', 'scale-[0.98]');
+      setTimeout(() => {
+        desktopEventInnerCard.classList.remove('opacity-40', 'scale-[0.98]');
+      }, 160);
+    }
+    if (desktopEventCircle) {
+      desktopEventCircle.classList.add('scale-110');
+      setTimeout(() => {
+        desktopEventCircle.classList.remove('scale-110');
+      }, 200);
+    }
+
+    if (desktopEventDayNum) desktopEventDayNum.textContent = dayStr;
+    if (desktopEventDayText) desktopEventDayText.textContent = weekday;
+
+    // Get event data or generate friendly fallback
+    const eventInfo = eventsByDay[dayStr] || {
+      title: `Encuentro Comunitario Beci`,
+      hour: "04",
+      period: "pm",
+      location: "Sede Centro Cultural",
+      cost: "Gratuito",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A"
+    };
+
+    if (desktopEventTitle) desktopEventTitle.textContent = eventInfo.title;
+    if (desktopEventLocation) desktopEventLocation.textContent = eventInfo.location;
+    if (desktopEventCost) desktopEventCost.textContent = eventInfo.cost;
+    if (desktopEventTimeHour) desktopEventTimeHour.textContent = eventInfo.hour;
+    if (desktopEventTimePeriod) desktopEventTimePeriod.textContent = eventInfo.period;
+    if (desktopEventImage && eventInfo.image) desktopEventImage.src = eventInfo.image;
+
+    updateDesktopButtonsStyles(dayStr);
+  }
+
+  function updateDesktopButtonsStyles(selectedDay) {
+    const desktopBtns = document.querySelectorAll('#desktopCalendarGrid .desktop-day-btn');
+    const peachDays = ["01", "02", "05", "07", "10", "12", "29"];
+    const solidOrangeEventDays = ["16", "26"];
+
+    desktopBtns.forEach(btn => {
+      const daySpan = btn.querySelector('span:last-child');
+      if (!daySpan) return;
+      const num = daySpan.textContent.trim();
+
+      if (num === selectedDay) {
+        // Active selected state: full vibrant orange with white text
+        btn.className = "desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FF6C01] text-white flex flex-col items-center justify-center relative cursor-pointer shadow-lg shadow-[#FF6C01]/40 scale-105 z-10 border-2 border-[#FF6C01]";
+        btn.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-white mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">${num}</span>`;
+      } else if (solidOrangeEventDays.includes(num)) {
+        // Solid Orange Event
+        btn.className = "desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FF6C01] text-white flex flex-col items-center justify-center relative cursor-pointer shadow-sm";
+        btn.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-white mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">${num}</span>`;
+      } else if (peachDays.includes(num)) {
+        // Peach with dot
+        btn.className = "desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]";
+        btn.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">${num}</span>`;
+      } else {
+        // Regular light grey day
+        btn.className = "desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60";
+        btn.innerHTML = `<span class="text-base lg:text-[17px] leading-none font-bold">${num}</span>`;
+      }
+    });
+  }
+
+  // Render Month Selector Grid
+  function renderMonthPicker() {
+    if (!monthsGrid) return;
+    monthsGrid.innerHTML = '';
+    monthsData.forEach((m, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.setAttribute('aria-label', `Mes ${m.name}`);
+      const isCurrent = idx === currentMonthIndex;
+      btn.className = 'py-2.5 px-2 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 flex flex-col items-center justify-center border border-gray-200/60 ' +
+        (isCurrent
+          ? 'bg-[#FF6C01] text-white shadow-md border-[#FF6C01]'
+          : 'bg-white/80 hover:bg-[#FFE8D6]/80 text-[#1E293B] hover:text-[#FF6C01]');
+      btn.innerHTML = `<span>${m.name}</span><span class="text-[10px] opacity-75 font-normal">${m.days} días</span>`;
+      btn.addEventListener('click', () => selectMonth(idx));
+      monthsGrid.appendChild(btn);
+    });
+  }
+
+  function getWeekdayString(dayNum) {
+    const m = monthsData[currentMonthIndex];
+    const day = parseInt(dayNum, 10);
+    const index = (m.startWeekday + (day - 1)) % 7;
+    return weekdayNames[index];
+  }
+
+  function openMonthPicker() {
+    renderMonthPicker();
+    if (monthPickerModal) {
+      monthPickerModal.classList.remove('opacity-0', 'pointer-events-none');
+      monthPickerModal.classList.add('opacity-100', 'pointer-events-auto');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMonthPicker() {
+    if (monthPickerModal) {
+      monthPickerModal.classList.add('opacity-0', 'pointer-events-none');
+      monthPickerModal.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+    document.body.style.overflow = '';
+  }
+
+  function selectMonth(idx) {
+    if (idx < 0 || idx >= monthsData.length) return;
+    currentMonthIndex = idx;
+    closeMonthPicker();
+    const m = monthsData[currentMonthIndex];
+    const desktopMonthTitle = document.getElementById('desktopMonthTitleText');
+    if (calendarTitle) calendarTitle.textContent = m.name;
+    if (desktopMonthTitle) desktopMonthTitle.textContent = m.name;
+    const targetDay = m.eventDays && m.eventDays.length ? String(m.eventDays[0]).padStart(2, '0') : '01';
+    currentSelectedDay = targetDay;
+    desktopSelectedDay = targetDay;
+    renderCalendarGrid();
+    renderDesktopCalendarGrid();
+    openEventOnDay(targetDay);
+  }
+
+  // Render the mobile days grid for the current month
+  function renderCalendarGrid() {
+    if (!calendarGrid) return;
+    const m = monthsData[currentMonthIndex];
+    let html = '';
+    for (let d = 1; d <= m.days; d++) {
+      const dayStr = String(d).padStart(2, '0');
+      const hasEvent = (m.eventDays || []).includes(d) || !!eventsByDay[dayStr];
+      const isSelected = dayStr === currentSelectedDay;
+      let cls = 'relative w-10 h-14 rounded-2xl flex flex-col items-center justify-center font-bold text-[16px] calendar-day-btn cursor-pointer py-1.5 ';
+      if (isSelected) {
+        cls += 'bg-[#FF6B00] text-white border-2 border-[#FF6B00] shadow-md scale-105 z-10';
+      } else if (hasEvent) {
+        cls += 'bg-[#FFE8D6] text-[#E76215] border border-[#FFDCBE]';
+      } else {
+        cls += 'bg-[#F3F6F4] text-[#1E293B] border border-[#E9EFEA] hover:bg-[#EAEFEA]';
+      }
+      const dot = (isSelected || hasEvent) ? `<span class="w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : 'bg-[#E76215]'} mb-1"></span>` : '';
+      html += `<button type="button" data-day="${dayStr}" aria-label="Día ${dayStr} de ${m.name}" class="${cls}">
+        <div class="flex flex-col items-center justify-center h-full">${dot}<span class="day-num leading-none font-bold text-[16px]">${dayStr}</span></div>
+      </button>`;
+    }
+    calendarGrid.innerHTML = html;
+    wireMobileDays();
+  }
+
+  // Rebuild the desktop calendar grid for the current month
+  function renderDesktopCalendarGrid() {
+    const desktopGrid = document.getElementById('desktopCalendarGrid');
+    if (!desktopGrid) return;
+    const m = monthsData[currentMonthIndex];
+    let html = '';
+    for (let d = 1; d <= m.days; d++) {
+      const dayStr = String(d).padStart(2, '0');
+      const hasEvent = (m.eventDays || []).includes(d) || !!eventsByDay[dayStr];
+      const isSelected = dayStr === desktopSelectedDay;
+      const weekday = weekdayNames[(m.startWeekday + (d - 1)) % 7];
+      let cls, inner;
+      if (isSelected) {
+        cls = 'desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FF6C01] text-white flex flex-col items-center justify-center relative cursor-pointer shadow-lg shadow-[#FF6C01]/40 scale-105 z-10 border-2 border-[#FF6C01]';
+        inner = `<span class="w-1.5 h-1.5 rounded-full bg-white mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">${dayStr}</span>`;
+      } else if (hasEvent) {
+        cls = 'desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#FFE7D3] text-[#E76215] flex flex-col items-center justify-center relative cursor-pointer border border-[#FFDCBE]';
+        inner = `<span class="w-1.5 h-1.5 rounded-full bg-[#E76215] mb-0.5"></span><span class="text-base lg:text-[17px] leading-none font-bold">${dayStr}</span>`;
+      } else {
+        cls = 'desktop-day-btn w-12 h-12 lg:w-[54px] lg:h-[54px] rounded-full bg-[#EEF2F0] text-[#1E293B] flex items-center justify-center cursor-pointer border border-white/60';
+        inner = `<span class="text-base lg:text-[17px] leading-none font-bold">${dayStr}</span>`;
+      }
+      html += `<button class="${cls}" onclick="selectDesktopDay('${dayStr}', '${weekday}')" type="button">${inner}</button>`;
+    }
+    desktopGrid.innerHTML = html;
+    updateDesktopButtonsStyles(desktopSelectedDay);
+  }
+
+  function wireMobileDays() {
+    if (!calendarGrid) return;
+    calendarGrid.querySelectorAll('button[data-day]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openEventOnDay(btn.getAttribute('data-day'));
+      });
+    });
+  }
+
+  // Opens the mobile floating modal + syncs the desktop card
+  function openEventOnDay(dayStr) {
+    const m = monthsData[currentMonthIndex];
+    const dayNum = parseInt(dayStr, 10);
+    if (!dayNum || dayNum < 1 || dayNum > m.days) return;
+    const weekday = getWeekdayString(dayNum);
+    currentSelectedDay = dayStr;
+
+    const eventInfo = eventsByDay[dayStr] || {
+      title: 'Encuentro Comunitario Beci',
+      hour: '04',
+      period: 'pm',
+      location: 'Sede Centro Cultural',
+      cost: 'Gratuito',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A'
+    };
+
+    if (modalDayName) modalDayName.textContent = weekday;
+    if (modalDayNumber) modalDayNumber.textContent = dayStr;
+    if (modalMonthName) modalMonthName.textContent = m.name;
+    if (modalEventTitle) modalEventTitle.textContent = eventInfo.title;
+    if (modalEventLocation) modalEventLocation.textContent = eventInfo.location;
+    const modalTimeHourEl = document.getElementById('modalTimeHour');
+    const modalTimePeriodEl = document.getElementById('modalTimePeriod');
+    const modalEventCostEl = document.getElementById('modalEventCost');
+    const modalEventImageEl = document.getElementById('modalEventImage');
+    if (modalTimeHourEl) modalTimeHourEl.textContent = eventInfo.hour;
+    if (modalTimePeriodEl) modalTimePeriodEl.textContent = eventInfo.period;
+    if (modalEventCostEl) modalEventCostEl.textContent = eventInfo.cost;
+    if (modalEventImageEl && eventInfo.image) modalEventImageEl.src = eventInfo.image;
+
+    if (eventModalOverlay) {
+      eventModalOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      eventModalOverlay.classList.add('opacity-100', 'pointer-events-auto');
+    }
+
+    if (desktopEventInnerCard) {
+      selectDesktopDay(dayStr, weekday);
+    }
+  }
+
+  function closeModalState() {
+    if (eventModalOverlay) {
+      eventModalOverlay.classList.add('opacity-0', 'pointer-events-none');
+      eventModalOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+  }
+
+  function openHamburgerMenu() {
+    const modal = document.getElementById('hamburgerMenuModal');
+    if (!modal) return;
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHamburgerMenu() {
+    const modal = document.getElementById('hamburgerMenuModal');
+    if (!modal) return;
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    document.body.style.overflow = '';
+  }
+
+  function openSofiaPortal() {
+    window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank');
+  }
+
+  // Wire-up shared modals, navigation and deep-link (?evt=NN)
+  document.addEventListener('DOMContentLoaded', () => {
+    renderMonthPicker();
+    wireMobileDays();
+
+    const openMonthBtn = document.getElementById('openMonthPickerBtn');
+    if (openMonthBtn) openMonthBtn.addEventListener('click', openMonthPicker);
+    const graphicBtn = document.getElementById('calendarGraphicBtn');
+    if (graphicBtn) graphicBtn.addEventListener('click', openMonthPicker);
+    const closeMonthBtn = document.getElementById('closeMonthPickerBtn');
+    if (closeMonthBtn) closeMonthBtn.addEventListener('click', closeMonthPicker);
+    const monthBackdrop = document.getElementById('monthModalBackdrop');
+    if (monthBackdrop) monthBackdrop.addEventListener('click', closeMonthPicker);
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeHamburgerMenu);
+    const hamburgerBackdrop = document.getElementById('hamburgerModalBackdrop');
+    if (hamburgerBackdrop) hamburgerBackdrop.addEventListener('click', closeHamburgerMenu);
+
+    const chismearButton = document.getElementById('chismearBtn');
+    if (chismearButton) chismearButton.addEventListener('click', openSofiaPortal);
+
+    if (backNavBtn) backNavBtn.addEventListener('click', () => history.back());
+
+    // Deep link: eventossena.html?evt=NN opens that day's event directly
+    const params = new URLSearchParams(window.location.search);
+    const evtDay = params.get('evt');
+    const m = monthsData[currentMonthIndex];
+    if (evtDay) {
+      const dayStr = String(parseInt(evtDay, 10)).padStart(2, '0');
+      const dayNum = parseInt(dayStr, 10);
+      if (dayNum >= 1 && dayNum <= m.days) {
+        openEventOnDay(dayStr);
+      }
+    }
+  });
+</script>
+</body>
+</html>
