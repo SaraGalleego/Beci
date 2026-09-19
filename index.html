@@ -151,7 +151,7 @@
         opacity: 0;
         z-index: 20;
         padding-top: 2vh;
-        padding-bottom: calc(4vh + env(safe-area-inset-bottom));
+        padding-bottom: max(env(safe-area-inset-bottom), calc(4vh + env(safe-area-inset-bottom) - 18vh));
         flex-shrink: 0;
     }
 
