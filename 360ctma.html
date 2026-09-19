@@ -220,13 +220,27 @@
           Digital
         </span>
 </button>
-<!-- Thumbnail 4: Robótica -->
-<button class="thumb-item group relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 border-transparent opacity-60 hover:opacity-100 hover:border-white/40" data-scene="scene-robotica">
-<img alt="Robótica e Industria" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRS6Ty4ZjsIR4rM5c6-hqzJZd8fkSXcyTBYZnAE8KVswt_1Fc3YvhN4ZsN9e-kQtuquxa9aBj39e-eWJJJF0-Cg9tk36u_OHEpC5u-OnEDQ_YQ4jFMe7nmW1t8BD3oxqi5pGmPq1UMT311j8eQzDkYuCGh-DKtcFtGptOTz944QSKHL4ZYmO3GzFYLdBasFWyk-SplQiv8mr6H-rbfARQnwLgMn_8xRJbOXEMX7Qvd5__Km7cF31l"/>
-<span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">
-          Robótica
+<!-- Thumbnail 4: 3D -->
+        <button class="thumb-item group relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 border-transparent opacity-60 hover:opacity-100 hover:border-white/40" data-scene="scene-3d">
+        <img alt="Modelado 3D" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="img/3d360.jpg"/>
+        <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">
+          3D
         </span>
-</button>
+        </button>
+        <!-- Thumbnail 5: Multimedia -->
+        <button class="thumb-item group relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 border-transparent opacity-60 hover:opacity-100 hover:border-white/40" data-scene="scene-multimedia">
+        <img alt="Multimedia" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="img/multi360.jpg"/>
+        <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">
+          Multimedia
+        </span>
+        </button>
+        <!-- Thumbnail 6: Audiovisuales -->
+        <button class="thumb-item group relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 border-transparent opacity-60 hover:opacity-100 hover:border-white/40" data-scene="scene-audiovisuales">
+        <img alt="Audiovisuales" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="img/Audio360.jpg"/>
+        <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">
+          Audiovisuales
+        </span>
+        </button>
 </div>
 <!-- Down Arrow -->
 <button class="text-neutral-400 hover:text-white p-1 transition-colors" id="thumb-scroll-down">
@@ -271,11 +285,14 @@
 </button>
 </div>
 <!-- Bottom Center: Horizontal Quick Drawer on Mobile -->
-<div class="md:hidden pointer-events-auto glass-panel px-3 py-1.5 rounded-full flex items-center gap-2 shadow-2xl overflow-x-auto max-w-[50vw]">
-<button class="text-xs px-2.5 py-1 rounded-full bg-sena font-semibold whitespace-nowrap" data-scene="scene-entrada">Entrada</button>
-<button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-hall">Hall</button>
-<button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-digital">Digital</button>
-</div>
+        <div class="md:hidden pointer-events-auto glass-panel px-3 py-1.5 rounded-full flex items-center gap-2 shadow-2xl overflow-x-auto max-w-[50vw]">
+        <button class="text-xs px-2.5 py-1 rounded-full bg-sena font-semibold whitespace-nowrap" data-scene="scene-entrada">Entrada</button>
+        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-hall">Hall</button>
+        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-digital">Digital</button>
+        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-3d">3D</button>
+        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-multimedia">Multimedia</button>
+        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-audiovisuales">Audiovisuales</button>
+        </div>
 <!-- Bottom Right: Minimap Radar & Fullscreen -->
 <div class="pointer-events-auto flex items-end gap-3">
 <!-- Interactive Minimap Box -->
@@ -305,9 +322,12 @@
 <circle cx="50%" cy="50%" fill="rgba(67,185,31,0.05)" r="14" stroke="rgba(67,185,31,0.3)"></circle>
 </svg>
 <!-- Waypoints / POIs on Minimap -->
-<button class="absolute top-[68%] left-[28%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-entrada" title="Ir a Entrada"></button>
-<button class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-hall" title="Ir al Hall"></button>
-<button class="absolute top-[30%] left-[72%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-digital" title="Ir a Digital"></button>
+        <button class="absolute top-[68%] left-[28%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-entrada" title="Ir a Entrada"></button>
+        <button class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-hall" title="Ir al Hall"></button>
+        <button class="absolute top-[30%] left-[72%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-digital" title="Ir a Digital"></button>
+        <button class="absolute top-[22%] left-[85%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-3d" title="Ir a 3D"></button>
+        <button class="absolute top-[15%] left-[80%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-multimedia" title="Ir a Multimedia"></button>
+        <button class="absolute top-[10%] left-[75%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-audiovisuales" title="Ir a Audiovisuales"></button>
 <!-- Current Position & Direction Indicator (Radar Cone) -->
 <div class="absolute top-[68%] left-[28%] -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300" id="radar-player">
 <!-- Cone Field of View -->
@@ -387,12 +407,26 @@
         description: 'Laboratorios de alta computación para modelado 3D, animación digital, producción audiovisual y desarrollo de software avanzado para la industria.',
         coords: { top: '30%', left: '72%' }
       },
-      'scene-robotica': {
-        title: 'Célula de Robótica Industrial',
-        category: 'Automatización y Brazos Robóticos',
-        icon: 'bot',
-        description: 'Entorno de simulación y manufactura flexible con brazos robóticos industriales y controladores lógicos programables (PLC).',
-        coords: { top: '38%', left: '80%' }
+      'scene-3d': {
+        title: 'Laboratorio de Modelado 3D',
+        category: 'Diseño e Ingeniería',
+        icon: 'box',
+        description: 'Espacio especializado en modelado tridimensional, impresión 3D y prototipado rápido para proyectos industriales y creativos.',
+        coords: { top: '22%', left: '85%' }
+      },
+      'scene-multimedia': {
+        title: 'Sala de Multimedia',
+        category: 'Producción Digital',
+        icon: 'layout-grid',
+        description: 'Estudio equipado para edición de video, postproducción, motion graphics y creación de contenidos multimedia interactivos.',
+        coords: { top: '15%', left: '80%' }
+      },
+      'scene-audiovisuales': {
+        title: 'Estudio Audiovisual',
+        category: 'Producción Sonora y Visual',
+        icon: 'mic',
+        description: 'Cabina de grabación profesional, mesa de mezclas y equipo de iluminación para producción de podcasts, locuciones y contenidos sonoros.',
+        coords: { top: '10%', left: '75%' }
       }
     };
 
@@ -477,14 +511,34 @@
           panorama: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=2600&q=85',
           hotSpots: [
             { pitch: 4, yaw: -101, type: 'scene', sceneId: 'scene-hall', targetYaw: 0, targetPitch: 0 },
-            { pitch: 11, yaw: 29, type: 'info', text: 'Workstations de Renderizado 3D', clickHandlerFunc: (e, args) => { openInfoModal('Workstations de Renderizado 3D', 'Equipos equipados con tarjetas gráficas RTX y software autorizado para animación industrial.'); } }
+            { pitch: 11, yaw: 29, type: 'info', text: 'Workstations de Renderizado 3D', clickHandlerFunc: (e, args) => { openInfoModal('Workstations de Renderizado 3D', 'Equipos equipados con tarjetas gráficas RTX y software autorizado para animación industrial.'); } },
+            { pitch: 5, yaw: 45, type: 'scene', sceneId: 'scene-3d', targetYaw: 0, targetPitch: 0 }
           ]
         },
-        'scene-robotica': {
-          title: 'Célula de Robótica Industrial',
-          panorama: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=2600&q=85',
+        'scene-3d': {
+          title: 'Laboratorio de Modelado 3D',
+          panorama: 'img/3d360.jpg',
           hotSpots: [
-            { pitch: 0, yaw: -54, type: 'scene', sceneId: 'scene-entrada', targetYaw: 0, targetPitch: 0 }
+            { pitch: 0, yaw: -45, type: 'scene', sceneId: 'scene-digital', targetYaw: 0, targetPitch: 0 },
+            { pitch: 8, yaw: 30, type: 'scene', sceneId: 'scene-multimedia', targetYaw: 0, targetPitch: 0 },
+            { pitch: 10, yaw: 0, type: 'info', text: 'Impresoras 3D Industriales', clickHandlerFunc: (e, args) => { openInfoModal('Impresoras 3D Industriales', 'Fleet de impresoras FDM y SLA para prototipado funcional y piezas finales.'); } }
+          ]
+        },
+        'scene-multimedia': {
+          title: 'Sala de Multimedia',
+          panorama: 'img/multi360.jpg',
+          hotSpots: [
+            { pitch: -5, yaw: -30, type: 'scene', sceneId: 'scene-3d', targetYaw: 0, targetPitch: 0 },
+            { pitch: 12, yaw: 40, type: 'scene', sceneId: 'scene-audiovisuales', targetYaw: 0, targetPitch: 0 },
+            { pitch: 0, yaw: 0, type: 'info', text: 'Estaciones de Edición 4K', clickHandlerFunc: (e, args) => { openInfoModal('Estaciones de Edición 4K', 'Workstations con DaVinci Resolve, After Effects y Premiere Pro para postproducción profesional.'); } }
+          ]
+        },
+        'scene-audiovisuales': {
+          title: 'Estudio Audiovisual',
+          panorama: 'img/Audio360.jpg',
+          hotSpots: [
+            { pitch: -8, yaw: -40, type: 'scene', sceneId: 'scene-multimedia', targetYaw: 0, targetPitch: 0 },
+            { pitch: 15, yaw: -60, type: 'info', text: 'Cabina de Grabación', clickHandlerFunc: (e, args) => { openInfoModal('Cabina de Grabación', 'Aislamiento acústico profesional, micrófonos de condensador y preamplificadores de alta gama.'); } }
           ]
         }
       }

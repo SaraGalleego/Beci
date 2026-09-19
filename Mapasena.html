@@ -59,6 +59,20 @@
       box-shadow: 0 12px 30px rgba(27, 43, 27, 0.14);
       font-family: 'Poppins', system-ui, sans-serif;
     }
+    @media (max-width: 480px) {
+      #beci-map-wrap {
+        min-height: 320px;
+        height: calc(100dvh - 10.5rem);
+        border-radius: 16px;
+      }
+    }
+    @media (max-width: 375px) {
+      #beci-map-wrap {
+        min-height: 280px;
+        height: calc(100dvh - 10rem);
+        border-radius: 12px;
+      }
+    }
     #beci-map-wrap .leaflet-container {
       width: 100%;
       height: 100%;
@@ -82,6 +96,18 @@
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+    @media (max-width: 480px) {
+      #beci-map-wrap .leaflet-control-zoom {
+        bottom: 80px; /* Evitar solape con footer fijo */
+        right: 8px;
+      }
+      #beci-map-wrap .leaflet-control-zoom a {
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 16px;
+      }
     }
     #beci-map-wrap .leaflet-control-zoom a {
       width: 36px;
@@ -119,6 +145,21 @@
       justify-content: center;
       cursor: pointer;
       transition: transform 0.15s ease, background 0.15s ease;
+    }
+    @media (max-width: 480px) {
+      #beci-map-wrap .beci-map-controls {
+        right: 8px;
+        top: 8px;
+        gap: 8px;
+      }
+      #beci-map-wrap .beci-map-controls button {
+        width: 40px;
+        height: 40px;
+      }
+      #beci-map-wrap .beci-map-controls button svg {
+        width: 20px;
+        height: 20px;
+      }
     }
     #beci-map-wrap .beci-map-controls button:hover {
       background: #fff;
@@ -162,6 +203,14 @@
       opacity: 0;
       transition: opacity 0.25s ease, transform 0.25s ease;
       pointer-events: none;
+    }
+    @media (max-width: 480px) {
+      #beci-map-wrap .beci-map-status {
+        top: 10px;
+        max-width: 90%;
+        font-size: 11px;
+        padding: 7px 12px;
+      }
     }
     #beci-map-wrap .beci-map-status.show {
       opacity: 1;
@@ -211,8 +260,8 @@
     }
     .holo-beam {
       position: absolute;
-      width: 16px;
-      transform: translateX(-50%);
+      width: 14px;
+      transform-origin: center bottom;
       background: linear-gradient(to top, rgba(255, 122, 20, 0.95), rgba(255, 185, 95, 0.4));
       clip-path: polygon(45% 100%, 55% 100%, 90% 0%, 10% 0%);
       opacity: 0;
@@ -229,11 +278,11 @@
     }
     .holo-scan {
       position: absolute;
-      top: calc(var(--beam-h, 56px) - 4px);
+      bottom: 0;
       left: 50%;
-      width: 16px;
+      width: 14px;
       height: 3px;
-      margin-left: -8px;
+      margin-left: -7px;
       border-radius: 3px;
       background: rgba(255, 205, 130, 0.95);
       box-shadow: 0 0 10px 2px rgba(255, 150, 40, 0.75);
@@ -246,12 +295,13 @@
       0% { opacity: 0; transform: translateY(0); }
       8% { opacity: 0.95; }
       88% { opacity: 0.9; }
-      100% { opacity: 0; transform: translateY(calc(-1 * var(--beam-h, 56px))); }
+      100% { opacity: 0; transform: translateY(-100%); }
     }
 
     /* --- Card holograma --- */
     .ms-card {
-      width: 240px;
+      width: clamp(200px, 85vw, 240px);
+      max-width: 240px;
       border-radius: 18px;
       overflow: hidden;
       background: rgba(22, 31, 26, 0.86);
@@ -264,6 +314,15 @@
       opacity: 0;
       animation: holoIn 0.7s cubic-bezier(0.22, 0.9, 0.3, 1.22) forwards;
       animation-delay: var(--holo-delay);
+    }
+    @media (min-width: 481px) {
+      .ms-card { width: clamp(220px, 40vw, 260px); max-width: 260px; }
+    }
+    @media (min-width: 768px) {
+      .ms-card { width: clamp(230px, 35vw, 280px); max-width: 280px; }
+    }
+    @media (min-width: 1024px) {
+      .ms-card { width: 240px; max-width: 240px; }
     }
     @keyframes holoIn {
       0% { opacity: 0; transform: translateY(18px) scale(0.82); filter: blur(10px); }
@@ -486,6 +545,13 @@
       transition: opacity 0.25s ease, transform 0.25s ease;
       pointer-events: none;
       white-space: nowrap;
+    }
+    @media (max-width: 480px) {
+      #beci-map-wrap #ms-toast {
+        bottom: 80px; /* Evitar solape con footer fijo */
+        font-size: 11px;
+        padding: 7px 14px;
+      }
     }
     #beci-map-wrap #ms-toast.show {
       opacity: 1;
@@ -768,14 +834,19 @@
     return entry;
   }
 
-  /* -------------------- Layout anti-solape (de Ubicate) -------------------- */
+  /* -------------------- Layout anti-solape responsive -------------------- */
 
   function layoutCards() {
     if (!map || !el.layer) return;
 
-    var MARGIN = 10;
     var mapW = el.map.clientWidth;
     var mapH = el.map.clientHeight;
+    var isMobile = mapW < 480;
+    var isTablet = mapW >= 480 && mapW < 768;
+    
+    var MARGIN = isMobile ? 12 : (isTablet ? 10 : 10);
+    var SLOT_GAP_VERTICAL = isMobile ? 8 : 12;
+    var SLOT_GAP_HORIZONTAL = isMobile ? 6 : 10;
 
     var items = wraps.map(function (w) {
       var p = map.latLngToContainerPoint([w.sede.lat, w.sede.lng]);
@@ -793,10 +864,10 @@
       var ch = item.ch;
 
       var slots = [
-        { name: 'top', dir: 'tail-bottom', x: px - cw / 2, y: py - 42 - ch, basePenalty: 0 },
-        { name: 'right', dir: 'tail-left', x: px + 26, y: py - 16 - ch / 2, basePenalty: 15 },
-        { name: 'left', dir: 'tail-right', x: px - 26 - cw, y: py - 16 - ch / 2, basePenalty: 25 },
-        { name: 'bottom', dir: 'tail-top', x: px - cw / 2, y: py + 12, basePenalty: 45 }
+        { name: 'top', dir: 'tail-bottom', x: px - cw / 2, y: py - 42 - ch, basePenalty: isMobile ? 0 : 0 },
+        { name: 'bottom', dir: 'tail-top', x: px - cw / 2, y: py + 12, basePenalty: isMobile ? 10 : 45 },
+        { name: 'right', dir: 'tail-left', x: px + 26, y: py - 16 - ch / 2, basePenalty: isMobile ? 30 : 15 },
+        { name: 'left', dir: 'tail-right', x: px - 26 - cw, y: py - 16 - ch / 2, basePenalty: isMobile ? 40 : 25 }
       ];
 
       var bestSlot = null;
@@ -807,15 +878,15 @@
         var sy = slot.y;
         var score = slot.basePenalty;
 
-        if (sx < MARGIN) score += (MARGIN - sx) * 6 + 300;
-        if (sx + cw > mapW - MARGIN) score += ((sx + cw) - (mapW - MARGIN)) * 6 + 300;
-        if (sy < MARGIN) score += (MARGIN - sy) * 6 + 400;
-        if (sy + ch > mapH - MARGIN) score += ((sy + ch) - (mapH - MARGIN)) * 6 + 400;
+        if (sx < MARGIN) score += (MARGIN - sx) * 8 + 300;
+        if (sx + cw > mapW - MARGIN) score += ((sx + cw) - (mapW - MARGIN)) * 8 + 300;
+        if (sy < MARGIN) score += (MARGIN - sy) * 8 + 400;
+        if (sy + ch > mapH - MARGIN) score += ((sy + ch) - (mapH - MARGIN)) * 8 + 400;
 
         placedBoxes.forEach(function (pb) {
           var ox = Math.min(sx + cw, pb.x + pb.w) - Math.max(sx, pb.x);
           var oy = Math.min(sy + ch, pb.y + pb.h) - Math.max(sy, pb.y);
-          if (ox > 0 && oy > 0) score += (ox * oy) * 3 + 1200;
+          if (ox > 0 && oy > 0) score += (ox * oy) * 5 + 1500;
         });
 
         items.forEach(function (other) {
@@ -826,7 +897,7 @@
           var pinB = other.pinY + 4;
           var ox = Math.min(sx + cw, pinR) - Math.max(sx, pinL);
           var oy = Math.min(sy + ch, pinB) - Math.max(sy, pinT);
-          if (ox > 0 && oy > 0) score += 1000;
+          if (ox > 0 && oy > 0) score += 1500;
         });
 
         if (score < bestScore) {
@@ -841,8 +912,9 @@
       placedBoxes.push({ x: item.x, y: item.y, w: cw, h: ch });
     });
 
-    // Relajación suave entre cards
-    for (var iter = 0; iter < 8; iter++) {
+    // Relajación suave entre cards - más iteraciones en móvil
+    var maxIter = isMobile ? 12 : 8;
+    for (var iter = 0; iter < maxIter; iter++) {
       var moved = false;
       for (var i = 0; i < items.length; i++) {
         for (var j = i + 1; j < items.length; j++) {
@@ -852,12 +924,13 @@
           var oyC = Math.min(a.y + a.ch, b.y + b.ch) - Math.max(a.y, b.y);
           if (oxC > 0 && oyC > 0) {
             moved = true;
+            var pushFactor = isMobile ? 1.5 : 1;
             if (oxC < oyC) {
-              var shiftX = (oxC / 2) + 5;
+              var shiftX = (oxC / 2 + 4) * pushFactor;
               if (a.pinX <= b.pinX) { a.x -= shiftX; b.x += shiftX; }
               else { a.x += shiftX; b.x -= shiftX; }
             } else {
-              var shiftY = (oyC / 2) + 5;
+              var shiftY = (oyC / 2 + 4) * pushFactor;
               if (a.pinY <= b.pinY) { a.y -= shiftY; b.y += shiftY; }
               else { a.y += shiftY; b.y -= shiftY; }
             }
@@ -879,6 +952,7 @@
       ic.classList.remove('tail-bottom', 'tail-top', 'tail-left', 'tail-right');
       ic.classList.add(item.dir);
 
+      // Calcular posición del triángulo (tail) relativa a la card
       if (item.dir === 'tail-bottom' || item.dir === 'tail-top') {
         var tailX = Math.max(16, Math.min(item.cw - 16, item.pinX - item.x));
         ic.style.setProperty('--sc-tail-x', tailX + 'px');
@@ -887,26 +961,53 @@
         ic.style.setProperty('--sc-tail-y', tailY + 'px');
       }
 
-      // Glow en la base del pin
-      w.glow.style.left = item.pinX + 'px';
-      w.glow.style.top = item.pinY + 'px';
+      // ===== HOLOGRAMA ANCLADO A LA CARD (no al pin) =====
+      // El glow va en la base de la card, centrado horizontalmente donde está el tail
+      var tailCenterX = item.x + (item.dir === 'tail-bottom' || item.dir === 'tail-top' 
+        ? Math.max(16, Math.min(item.cw - 16, item.pinX - item.x))
+        : item.cw / 2);
+      var cardBottomY = item.y + item.ch;
+      
+      w.glow.style.left = tailCenterX + 'px';
+      w.glow.style.top = cardBottomY + 'px';
 
-      // Rayo: desde el pin hasta la parte inferior de la card (si está arriba)
-      var cardBottom = item.y + item.ch;
-      var gap = item.pinY - 8 - cardBottom;
-      var beamTop;
-      var beamH;
-      if (gap > 10) {
-        beamTop = cardBottom + 3;
-        beamH = gap - 3;
-      } else {
-        beamTop = item.pinY - 62;
-        beamH = 58;
+      // El beam nace del icono de ubicación (en .ms-card-addr) y apunta al pin del mapa
+      // .ms-card-addr: left: 10px, bottom: 8px | svg: width: 11px
+      // Centro del icono relativo a la card: x=15.5px, y=ch-13.5px
+      var iconOffsetX = 15.5;
+      var iconOffsetY = item.ch - 13.5;
+      
+      // Ajustar según dirección de la card (dónde está el pin relativo a la card)
+      if (item.dir === 'tail-top') {
+        // Card arriba del pin: icono sigue en addr (abajo de card), pero beam va hacia arriba
+        iconOffsetX = 15.5;
+        iconOffsetY = item.ch - 13.5;
+      } else if (item.dir === 'tail-left') {
+        // Card a la izquierda del pin: addr está a la derecha
+        iconOffsetX = item.cw - 15.5;
+        iconOffsetY = item.ch - 13.5;
+      } else if (item.dir === 'tail-right') {
+        // Card a la derecha del pin: addr está a la izquierda
+        iconOffsetX = 15.5;
+        iconOffsetY = item.ch - 13.5;
       }
-      w.beam.style.left = item.pinX + 'px';
-      w.beam.style.top = beamTop + 'px';
-      w.beam.style.height = beamH + 'px';
-      w.wrap.style.setProperty('--beam-h', beamH + 'px');
+      // tail-bottom: default (icono en addr abajo-izquierda)
+
+      var iconX = item.x + iconOffsetX;
+      var iconY = item.y + iconOffsetY;
+
+      // Beam desde icono de la card hacia el pin
+      var dx = item.pinX - iconX;
+      var dy = item.pinY - iconY;
+      var beamLen = Math.sqrt(dx * dx + dy * dy);
+      var beamAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+      w.beam.style.left = iconX + 'px';
+      w.beam.style.top = iconY + 'px';
+      w.beam.style.height = beamLen + 'px';
+      w.beam.style.transform = 'translateX(-50%) rotate(' + beamAngle + 'deg)';
+      w.beam.style.transformOrigin = 'center bottom';
+      w.wrap.style.setProperty('--beam-h', beamLen + 'px');
     });
   }
 

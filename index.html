@@ -54,6 +54,7 @@
         display: flex;
         flex-direction: column;
         height: 100%;
+        justify-content: space-between;
     }
 
     .left-col {
@@ -122,16 +123,16 @@
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        flex: 1;
         opacity: 0;
         pointer-events: none;
         position: relative;
         z-index: 1;
-        margin-bottom: -5vh; /* Drop below button level slightly if needed, or adjust to sit on button */
+        margin-top: auto;
+        padding-bottom: 2vh;
     }
 
     .character-img {
-        height: 55vh;
+        height: 45vh;
         width: auto;
         object-fit: contain;
         transform-origin: bottom center;
@@ -146,7 +147,8 @@
         width: 100%;
         opacity: 0;
         z-index: 20;
-        position: relative;
+        padding-top: 2vh;
+        padding-bottom: 4vh;
     }
 
     .btn-primary {
@@ -356,15 +358,15 @@
 <div class="character-container animate-character-in" id="char-anim">
 <img alt="Beci Character Waving" class="character-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzeImZYzdhl-90q_tr1KYraN2Xv8s_e30XOBpsHKEo2UWVSbDOppZ0YvEIVVAZ9NPLbgprfHmZdp7HMA8gcbsNAXM6nIFDS9zvN1sKxavgZI9tVdDsLjDWjElFIU-W8nTxDYdBFaiXavoY4wIQUx5VIae_p-FY3sXXXXKWvozahLNsLYziat_5jesfniC-wwim2wFNzc75YGQ0tXeSuSAM_KWvE3o_a1hkJr1K7q4ylcwuZBgkw6Hq1Ae7CFLQ5WTOxA">
 </div>
-</div>
-<!-- CTA Button -->
-<div class="cta-container animate-slide-up" id="cta-anim" style="position: relative; bottom: auto; left: auto; width: 100%; justify-content: center; margin-top: -2vh;">
-<button class="btn-primary" type="button" onclick="window.location.href='HomeBeci.html'" style="max-width: 320px; width: 100%; padding: 1rem 3rem; font-family: &quot;DM Sans&quot;, sans-serif; font-weight: 800;">
+        <!-- CTA Button -->
+        <div class="cta-container animate-slide-up" id="cta-anim">
+        <button class="btn-primary" type="button" onclick="window.location.href='HomeBeci.html'">
             Comenzar
             <div class="light-sweep"></div>
-</button>
-</div>
-</main>
+        </button>
+        </div>
+        </div>
+        </main>
 <script>
     // Pure JS Animations Initialization
     document.addEventListener("DOMContentLoaded", () => {
