@@ -3,7 +3,17 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Conocenos - Beci</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700;900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Phosphor Icons for UI elements -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <script>
     tailwind.config = {
@@ -105,12 +115,18 @@
     }
   </script>
 <style data-purpose="custom-utilities">
+    .glass-nav {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
     .glass-panel {
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      transition: opacity 0.5s ease-in-out;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        transition: opacity 0.5s ease-in-out;
     }
     
     .text-shadow-light {
@@ -214,7 +230,7 @@
     }
   </style>
 </head>
-<body class="bg-bgLight text-primary font-sans antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-accent selection:text-white">
+<body class="bg-bgLight text-primary antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-accent selection:text-white">
 <!-- Main Content Wrapper with Background -->
 <div class="relative flex-grow pb-24 overflow-hidden bg-cover bg-center" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAYjjTHu4jN2WbvI4PY1veVvcX9BTBe45983Y4tfCtGMdLA2AM2fT6rgi9Z4jDz2DKp4N4uIwJT3WKp_8xsuEmPZQFgJjBKAXsOiiJI0PLQWy4eSf7EjM1Ay_1sbWT0gakY4eF-EJOFyFb53eLZzl-OZMcI-SC9VVFkKL7uXDm0ajU3aG0iNg3TFKm2dtGEkYx-8oJg-PLOqAuA4sja-DhJMg4bQph2gZpryns9HW0Wm24X4ESvN_EL0Lpv9ZUIrUpMDxGIyWUTtrcfS6M&quot;); background-position: center 0px; background-repeat: no-repeat; background-size: contain; background-attachment: scroll; min-height: 100vh;">
 <!-- Gradient Overlay to blend top image and bottom content -->
@@ -364,34 +380,42 @@
 </div>
 </div>
 <!-- BEGIN: Bottom Navigation -->
-<nav class="fixed bottom-0 left-0 w-full bg-[#F3ECE4]/95 backdrop-blur-md rounded-t-3xl shadow-nav z-50 border-t border-white/40 pb-safe" data-purpose="bottom-tab-bar">
-<div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
-<!-- Tab: Inicio -->
-<a class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors" href="HomeBeci.html">
-<svg class="mb-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-<span class="text-[10px] font-medium">Inicio</span>
+<nav class="fixed bottom-0 left-0 w-full glass-nav rounded-t-[32px] px-2 py-3 z-50 shadow-[0_-10px_40px_rgb(0,0,0,0.05)] lg:hidden" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px) saturate(180%); border-top: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;">
+<ul class="flex justify-around items-center"><!-- Home -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="HomeBeci.html">
+<i class="ph ph-house text-2xl mb-1 text-[#9456E0]"></i>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">Inicio</span>
 </a>
-<!-- Tab: Tus Favoritos -->
-<a class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors" href="Favoritosbeci.html">
-<svg class="mb-1" fill="currentColor" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-<span class="text-[10px] font-medium">Tus Favoritos</span>
+</li>
+<!-- Favorites -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="Favoritosbeci.html">
+<i class="ph-fill ph-heart text-2xl mb-1 text-[#9456E0]"></i>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">Tus Favoritos</span>
 </a>
-<!-- Tab: Beci (Center) -->
-<button class="flex flex-col items-center justify-center w-16 text-brand hover:opacity-80 transition-opacity">
-<div class="mb-1 font-display font-black text-xl tracking-tighter">Beci</div>
-<span class="text-[10px] font-medium text-primary">Sobre Beci</span>
-</button>
-<!-- Tab: Te ayudamos -->
-<a class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors" href="TeAyudamosBeci.html">
-<svg class="mb-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" x2="15" y1="10" y2="10"></line><line x1="12" x2="12" y1="7" y2="13"></line></svg>
-<span class="text-[10px] font-medium leading-tight text-center">¿Te ayudamos?</span>
+</li>
+<!-- Beci Center Info (Active) -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-[#8A56AC] hover:text-[#8A56AC] transition-colors" href="Sobrebeci.html">
+<span class="text-[18px] font-extrabold mb-0 leading-tight text-[#8A56AC]">Beci</span>
+<span class="text-[10px] font-medium text-gray-600 mt-1 whitespace-nowrap" style="transform: translateY(5px);">Sobre Beci</span>
 </a>
-<!-- Tab: Vecino -->
-<a class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors" href="Perfilbeci.html">
-<svg class="mb-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 1 0-16 0"></path></svg>
-<span class="text-[10px] font-medium">Vecino</span>
+</li>
+<!-- Chat/Help -->
+<li class="flex flex-col items-center justify-center w-[72px]">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="TeAyudamosBeci.html">
+<i class="ph ph-chat-circle-dots text-2xl mb-1 text-[#9456E0]"></i>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">¿Te ayudamos?</span>
 </a>
-</div>
+</li>
+<!-- Profile/Neighbor -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="Perfilbeci.html">
+<i class="ph ph-user text-2xl mb-1 text-[#9456E0]"></i>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">Vecino</span>
+</a>
+</li></ul>
 </nav>
 <!-- END: Bottom Navigation -->
 <script>

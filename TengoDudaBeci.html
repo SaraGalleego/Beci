@@ -358,60 +358,13 @@
       80% { transform: translateX(-10px); }
     }
 
-    /* Bottom Navigation (Mobile) */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(77, 178, 26, 0.7); /* institutional-green-light with opacity */
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 16px 16px 0 0;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 8px 16px;
-      z-index: 50;
-    }
-
-    .bottom-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      text-decoration: none;
-      color: rgba(255, 255, 255, 0.8);
-      transition: transform 0.2s ease, background-color 0.2s ease;
-      border-radius: 12px;
-      min-width: 64px;
-    }
-
-    .bottom-nav-item:active {
-      transform: scale(0.95);
-    }
-
-    .bottom-nav-item:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .bottom-nav-item.active {
-      background-color: var(--color-institutional-green-dark);
-      color: var(--color-white);
-    }
-
-    .bottom-nav-icon {
-      font-size: 24px;
-      margin-bottom: 4px;
-    }
-
-    .bottom-nav-label {
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 600;
+    /* Bottom Navigation (Mobile) - HomeBeci style */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border-top: 1.5px solid rgba(255, 255, 255, 0.3);
+      box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;
     }
 
 
@@ -504,26 +457,43 @@
 </main>
 </div>
 <!-- Bottom Navigation (Hidden on Desktop) -->
-<nav class="bottom-nav" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.3);"><a class="bottom-nav-item" href="HomeBeci.html">
-<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(6, 37, 115);">home</span>
-<span class="bottom-nav-label">Inicio</span>
+<nav class="fixed bottom-4 left-1/2 -translate-x-1/2 w-full max-w-[430px] glass-nav rounded-[32px] px-2 py-3 z-50 shadow-[0_-10px_40px_rgb(0,0,0,0.05)] lg:hidden" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px) saturate(180%); border-top: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;">
+<ul class="flex justify-around items-center"><!-- Home (Active) -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-[#8A56AC]" href="HomeBeci.html">
+<i class="ph ph-house text-2xl mb-1 font-bold"></i>
+<span class="text-[10px] font-medium">Inicio</span>
 </a>
-<a class="bottom-nav-item" href="Favoritosbeci.html">
-<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(6, 37, 115);">favorite</span>
-<span class="bottom-nav-label">Tus Favoritos</span>
+</li>
+<!-- Favorites -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="Favoritosbeci.html">
+<i class="ph-fill ph-heart text-2xl mb-1 text-[#2C4196]"></i>
+<span class="text-[10px] font-medium whitespace-nowrap">Tus Favoritos</span>
 </a>
-<a class="bottom-nav-item" href="Sobrebeci.html">
-<span class="bottom-nav-icon" style='color: rgb(168, 85, 247); font-family: "DM Sans", sans-serif; font-weight: 900; font-size: 20px; margin-bottom: 4px;'>Beci</span>
-<span class="bottom-nav-label">Sobre Beci</span>
+</li>
+<!-- Beci Center Info -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-[#8A56AC] hover:text-[#8A56AC] transition-colors" href="Sobrebeci.html">
+<span class="text-[18px] font-extrabold mb-0 leading-tight">Beci</span>
+<span class="text-[10px] font-medium text-gray-600 mt-1" style="transform: translateY(5px);">Sobre Beci</span>
 </a>
-<a class="bottom-nav-item active" href="TeAyudamosBeci.html" style="background-color: rgba(6, 37, 115, 0.1); color: rgb(6, 37, 115);">
-<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(168, 85, 247);">chat_bubble</span>
-<span class="bottom-nav-label">¿Te ayudamos?</span>
+</li>
+<!-- Chat/Help -->
+<li class="flex flex-col items-center justify-center w-[72px]">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="TeAyudamosBeci.html">
+<i class="ph ph-chat-circle-dots text-2xl mb-1 text-[#8A56AC]"></i>
+<span class="text-[10px] font-medium whitespace-nowrap">¿Te ayudamos?</span>
 </a>
-<a class="bottom-nav-item" href="Perfilbeci.html">
-<span class="material-symbols-outlined bottom-nav-icon" style="color: rgb(168, 85, 247);">person</span>
-<span class="bottom-nav-label">Vecino</span>
-</a></nav>
+</li>
+<!-- Profile/Neighbor -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="Perfilbeci.html">
+<i class="ph ph-user text-2xl mb-1 text-[#8A56AC]"></i>
+<span class="text-[10px] font-medium">Vecino</span>
+</a>
+</li></ul>
+</nav>
 <script>
     // Scroll Animation for the line
     document.addEventListener('DOMContentLoaded', () => {

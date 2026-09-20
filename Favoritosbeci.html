@@ -3,19 +3,39 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Tus Favoritos</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Phosphor Icons for UI elements -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,900&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@600&display=swap" rel="stylesheet">
 <style data-purpose="custom-fonts">
-    .font-dmsans { font-family: 'DM Sans', sans-serif; }
-    .font-poppins { font-family: 'Poppins', sans-serif; }
-  </style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+</style>
 <style data-purpose="custom-utilities">
+    .glass-nav {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
     .glassmorphism {
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
     }
     
     @media (max-width: 1023px) {
@@ -55,7 +75,7 @@
 <script src="beci-data.js"></script>
 <script src="beci-auth.js"></script>
 </head>
-<body class="bg-image lg:bg-gradient-to-r lg:from-[#fcf7f2] lg:to-[#f5e8f3] h-screen text-gray-900 overflow-hidden font-poppins antialiased flex flex-col justify-center">
+<body class="bg-image lg:bg-gradient-to-r lg:from-[#fcf7f2] lg:to-[#f5e8f3] h-screen text-gray-900 overflow-hidden antialiased flex flex-col justify-center">
 <div class="w-full max-w-screen-xl mx-auto h-screen relative flex flex-col shadow-2xl overflow-hidden bg-white/10 lg:bg-transparent lg:shadow-none">
 <!-- BEGIN: Header Section -->
 <header class="pt-12 pb-4 px-6 shrink-0 flex-none z-10 flex flex-col items-center md:px-16 md:pt-14 md:pb-8 lg:px-16 lg:pt-0 lg:pb-0 lg:flex-row lg:justify-between lg:items-center lg:h-[110px] lg:bg-[#fefaf9] lg:glassmorphism-none lg:shadow-sm">
@@ -139,52 +159,42 @@
 </main>
 <!-- END: Cards List Section -->
 <!-- BEGIN: Bottom Navigation -->
-<nav class="absolute bottom-0 w-full glassmorphism pb-6 pt-3 px-2 z-20 rounded-t-3xl border-b-0 border-x-0 lg:hidden">
-<ul class="flex justify-between items-center text-xs font-medium text-gray-500 max-w-screen-lg mx-auto">
-<!-- Inicio -->
-<li class="flex-1">
-<a class="nav-item flex flex-col items-center gap-1 group" href="HomeBeci.html">
-<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-<span class="">Inicio</span>
+<nav class="fixed bottom-0 left-0 w-full glass-nav rounded-t-[32px] px-2 py-3 z-50 shadow-[0_-10px_40px_rgb(0,0,0,0.05)] lg:hidden" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px) saturate(180%); border-top: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;">
+<ul class="flex justify-around items-center"><!-- Home -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="HomeBeci.html">
+<i class="ph ph-house text-2xl mb-1 text-[#9456E0]"></i>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">Inicio</span>
 </a>
 </li>
-<!-- Tus Favoritos (Active) -->
-<li class="flex-1">
-<a class="nav-item nav-item--active flex flex-col items-center gap-1" href="#">
-<svg class="w-7 h-7 text-blue-700" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
-</svg>
-<span class="text-blue-700 font-semibold text-center leading-tight">Tus Favoritos</span>
+<!-- Favorites (Active) -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-[#8A56AC] hover:text-[#8A56AC] transition-colors" href="Favoritosbeci.html">
+<i class="ph-fill ph-heart text-2xl mb-1 text-[#062573]"></i>
+<span class="text-[10px] font-medium text-[#8A56AC] whitespace-nowrap">Tus Favoritos</span>
 </a>
 </li>
-<!-- Beci -->
-<li class="flex-1">
-<a class="nav-item flex flex-col items-center gap-1 group" href="Sobrebeci.html">
-<span class="font-bold text-lg text-[#7a48d6]">Beci</span>
-<span class="">Sobre Beci</span>
+<!-- Beci Center Info -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-[#8A56AC] hover:text-[#8A56AC] transition-colors" href="Sobrebeci.html">
+<span class="text-[18px] font-extrabold mb-0 leading-tight text-[#8A56AC]">Beci</span>
+<span class="text-[10px] font-medium text-gray-600 mt-1 whitespace-nowrap" style="transform: translateY(5px);">Sobre Beci</span>
 </a>
 </li>
-<!-- ¿Te ayudamos? -->
-<li class="flex-1">
-<a class="nav-item flex flex-col items-center gap-1 group" href="TeAyudamosBeci.html">
-<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-<span class="text-center leading-tight">¿Te ayudamos?</span>
+<!-- Chat/Help -->
+<li class="flex flex-col items-center justify-center w-[72px]">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="TeAyudamosBeci.html">
+<i class="ph ph-chat-circle-dots text-2xl mb-1 text-[#9456E0]"></i>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">¿Te ayudamos?</span>
 </a>
 </li>
-<!-- Vecino -->
-<li class="flex-1">
-<a class="nav-item flex flex-col items-center gap-1 group" href="Perfilbeci.html">
-<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-<span class="">Vecino</span>
+<!-- Profile/Neighbor -->
+<li class="flex flex-col items-center justify-center w-16">
+<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="Perfilbeci.html">
+<i class="ph ph-user text-2xl mb-1 text-[#9456E0]"></i>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">Vecino</span>
 </a>
-</li>
-</ul>
+</li></ul>
 </nav>
 <!-- END: Bottom Navigation -->
 </div>
