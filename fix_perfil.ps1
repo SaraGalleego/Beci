@@ -1,0 +1,9 @@
+$content = Get-Content 'C:\Users\casa\Downloads\Beci2ver\Perfilbeci.html' -Raw -Encoding UTF8
+$old = '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">'
+$new = '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@600&display=swap" rel="stylesheet">' + "`n" + '<!-- Phosphor Icons for UI elements -->' + "`n" + '<script src="https://unpkg.com/@phosphor-icons/web"></script>' + "`n" + '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">' + "`n" + '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css">' + "`n" + '<link rel="stylesheet" type="text.css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css">' + "`n" + '<link rel="stylesheet" type="text.css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">' + "`n" + '<link rel="stylesheet" type="text.css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">' + "`n" + '<link rel="stylesheet" type="text.css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">'
+
+$content = Get-Content 'C:\Users\casa\Downloads\Beci2ver\Perfilbeci.html' -Raw -Encoding UTF8
+$content = $content -replace [regex]::Escape('<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">'), $new
+$content = $content -replace 'body class="antialiased min-h-screen relative font-body-md text-on-surface"', 'body class="antialiased min-h-screen relative"'
+Set-Content 'C:\Users\casa\Downloads\Beci2ver\Perfilbeci.html' -Value $content -Encoding UTF8
+Write-Host 'Done'
