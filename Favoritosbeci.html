@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="es" style=""><head>
+﻿<!DOCTYPE html><html lang="es" style=""><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Tus Favoritos</title>
@@ -38,7 +38,7 @@
         border: 1px solid rgba(255, 255, 255, 0.5);
     }
     
-    @media (max-width: 1023px) {
+@media (max-width: 1023px) {
       .bg-image {
         background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAyd0p3Nk9V357H_hp5CeBnqGaB6eVCNwHE1vsYXkGPT4PHdq_QLtztkJD7IFgkfRUw4fhwT-hRPlOy51-UwdvYFRjTSZVqW7YJzLKzt1xWL5CNlFHxp3AFQRTPQyd8-_CaAA02AoB1wMicBUis97iKYnRWOTiu_JZrZAoKjobSQtbslQ7uzz7nSLhWhliuWQh9Fkz3RA98iOHbavCLvxTOx0orXdLWRUp2gqNh52B8uE3Ri5S-c40x2tYufxuffX4prfM');
         background-size: cover;
@@ -47,12 +47,33 @@
       }
     }
     
-    .hide-scrollbar::-webkit-scrollbar {
+    @media (min-width: 1024px) {
+      body {
+        background-image: url('img/Fhomeb.png') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+      }
+    }
+    
+.hide-scrollbar::-webkit-scrollbar {
       display: none;
     }
     .hide-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+
+    .desktop-header {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .desktop-header {
+        display: flex;
+      }
+      body {
+        padding-top: 80px;
+      }
     }
 
     @keyframes heart-bounce {
@@ -75,56 +96,20 @@
 <script src="beci-data.js"></script>
 <script src="beci-auth.js"></script>
 </head>
-<body class="bg-image lg:bg-gradient-to-r lg:from-[#fcf7f2] lg:to-[#f5e8f3] h-screen text-gray-900 overflow-hidden antialiased flex flex-col justify-center">
-<div class="w-full max-w-screen-xl mx-auto h-screen relative flex flex-col shadow-2xl overflow-hidden bg-white/10 lg:bg-transparent lg:shadow-none">
+<body class="bg-image lg:bg-gradient-to-r lg:from-[#fcf7f2] lg:to-[#f5e8f3] h-screen text-gray-900 overflow-hidden antialiased flex flex-col justify-center lg:pt-20">
 <!-- BEGIN: Header Section -->
-<header class="pt-12 pb-4 px-6 shrink-0 flex-none z-10 flex flex-col items-center md:px-16 md:pt-14 md:pb-8 lg:px-16 lg:pt-0 lg:pb-0 lg:flex-row lg:justify-between lg:items-center lg:h-[110px] lg:bg-[#fefaf9] lg:glassmorphism-none lg:shadow-sm">
-<div class="flex flex-col md:flex-row md:items-center md:gap-8 self-start w-full md:w-auto md:self-start">
-<img alt="Beci Logo" class="h-28 mb-4 object-contain self-start md:h-20 lg:w-[130px] lg:h-auto md:mb-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-bn1xkuxsMtNQyVPTKPQ99Du6Jd3mgTBMDLq9oLvuGSv5_AaB3fXszz5HLyJo57saIzD8aFoTPZuY0lkAJ4I70zIg4EWI0D9H9e19VdILiiUc_RepAKV6T91F1veT0qgWSz-y9mSgL_iiOJb3SNbieZtOJ1voVK1Hot-n2Zk2t_7lntaHhu4vm_XMu-u08fDwHQVC6lab5g7IQSVjYiENQvIasrAXiLI21dP5k9VEqxJKvJ3nuqvazttKy1owjO1TeVY">
-</div>
-<!-- Title Area -->
-<div class="flex items-center mb-4 gap-1 self-start md:hidden">
-<!-- 3D Heart Icon -->
-<div class="flex items-center justify-center shrink-0 w-14 h-14"><img alt="Favoritos" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5vm5QUhFx6e0Dw1f6e91fd40bCT7ENMGPdjXXUU67zaM3YSg_E8Kbh5yV-zVq75MpD2T7XV9Oae0M3PCWd6UhAgHlkSxagUqowQxrowz1sjwzA6DEOksXb8Gl5WbjZNp1h7bTMQ5V_kBei7z4q2d-qjdmGbWxA2BSX4ApFkoYSdHmak9_VP9FitpcGQQmL9eGC-S6uC8-VnIR6G9KZ6FknacMSnv7dTc0DvDXairYDYhVz4E-lcBt-5BV0Scri8YuJHk"></div>
-<h1 class="text-3xl font-dmsans font-black text-black tracking-tight">Tus Favoritos</h1>
-</div>
-<!-- Subtitle -->
-<p class="text-center text-[17px] font-medium leading-tight text-black max-w-[320px] md:hidden">
-        Aquí encuentras los lugares que has conocido y te han gustado.
-      </p>
-<nav class="hidden lg:flex lg:items-center">
-<ul class="flex items-center gap-6 text-sm font-medium text-gray-500 lg:gap-10">
-<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="HomeBeci.html">Inicio</a></li>
-<li class="hidden md:block lg:hidden"><a class="text-blue-700 font-bold border-b-2 border-blue-700 pb-1" href="#">Tus Favoritos</a></li>
-<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="Sobrebeci.html">Beci</a></li>
-<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="TeAyudamosBeci.html">¿Te ayudamos?</a></li>
-<li class="hidden md:block lg:hidden"><a class="hover:text-blue-700 transition-colors" href="Perfilbeci.html">Vecino</a></li>
-<!-- Desktop Navigation Items -->
-<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="HomeBeci.html">
-<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-<span class="">Inicio</span>
-</a></li>
-<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1" href="#">
-<svg class="w-7 h-7 text-blue-700" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path></svg>
-<span class="text-blue-700 font-bold">Tus Favoritos</span>
-</a></li>
-<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="Sobrebeci.html">
-<span class="font-bold text-lg text-[#7a48d6] leading-7">Beci</span>
-<span class="text-gray-900">Sobre Beci</span>
-</a></li>
-<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="TeAyudamosBeci.html">
-<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-<span class="">¿Te ayudamos?</span>
-</a></li>
-<li class="hidden lg:flex"><a class="flex flex-col items-center gap-1 hover:text-[#7a48d6] transition-colors" href="Perfilbeci.html">
-<svg class="w-7 h-7 text-[#7a48d6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-<span class="">Vecino</span>
-</a></li>
-</ul>
-</nav></header>
+<header class="desktop-header fixed top-0 left-0 w-full h-[80px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] z-[100] items-center justify-between px-8">
+<div class="h-[6.15rem] w-[10.35rem] bg-contain bg-no-repeat bg-center" style="background-image: url('img/Logobeci.png');"></div>
+<nav class="flex items-center gap-12">
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="HomeBeci.html">Inicio</a>
+<a class="font-poppins text-[16px] font-extrabold text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[4px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-100 after:transition-transform after:duration-300" href="Favoritosbeci.html">Tus Favoritos</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Sobrebeci.html">Sobre Beci</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="TeAyudamosBeci.html">¿Te ayudamos?</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Perfilbeci.html">Vecino</a>
+</nav>
+</header>
 <!-- END: Header Section -->
-<!-- BEGIN: Cards List Section -->
-<main class="flex-1 overflow-y-auto hide-scrollbar px-10 pb-28 pt-2 z-0 md:px-10 md:pt-6 md:pb-28 md:my-6 md:mx-8 md:flex md:flex-col md:items-center lg:px-[60px] lg:pt-[65px] lg:pb-28 lg:mt-[45px] lg:mb-12 lg:mx-[60px]">
+<div class="w-full max-w-screen-xl mx-auto h-screen relative flex flex-col shadow-2xl overflow-hidden bg-white/10 lg:bg-transparent lg:shadow-none">
 <!-- Desktop / Tablet Title Area -->
 <div class="hidden md:flex flex-col items-center w-full text-center md:max-lg:mb-2">
 <div class="flex items-center gap-6"><img alt="Corazón Favoritos" class="w-12 h-12 md:h-14 md:w-auto lg:h-14 lg:w-auto shrink-0 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ8L_ymNxeMG1l0-LGlRo8KVb6f7P4zLMtjVUPOKYfwZSwWoYGyEiEsqV-bhgZvvpG9hLjsBeajIgzcUVV_njb6QrG_f4f4Mc9q5-Bp9HGgWzT-i6aOhLsuucMb0hv0gySQwnfGExUztKQnGHV_1636iQXp8JerBivbLBPAnVuoRkUR8c7FosMReQvcGkJX7DcVpVDalSLpN23kK3i2gxEqglTRmPfXw_7OXXbfjt74paBY0bklNcU2KP09X267UPPbX4"><span class="text-3xl md:text-4xl lg:text-5xl font-dmsans font-black text-black tracking-tight leading-none">Tus Favoritos</span></div>

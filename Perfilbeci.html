@@ -136,20 +136,48 @@
             background-color: #8b5cf6;
         }
         
-        .hide-scrollbar::-webkit-scrollbar {
+.hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
-        .hide-scrollbar {
+.hide-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        
+        .desktop-header {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .desktop-header {
+                display: flex;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+          body {
+            background-image: url('img/Fhomeb.png') !important;
+            background-size: cover !important;
+            background-attachment: fixed !important;
+            background-position: center center !important;
+          }
+        }
     </style>
 </head>
-<body class="antialiased min-h-screen relative font-sans" style="min-height: max(884px, 100dvh); background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB6GipjsFna55rCgisbNQr5ntnW-NbqbD0rD3ee1MdhwVqjllsjdD0ZWCqjddur7aJGjgoI95i9NwZzJdLnsuWO8LOev4UKgDsGAZYwkG6ds_TiwGAkpBtdd6tfKYzAZFWAzHJNzI7CI9N2WgboMNT2sWgHk-mPZMLV2O1k-WoHc-o-526JNaAxSP7idPi7FbZ4Ne51rX2aSzNRJ4MjOmh3nA0lqp0QsGR1e60BrSHoLoLt44PpZMu50iKl9x1jfRbji14'); background-size: cover; background-attachment: fixed; background-position: center center;">
-<!-- Top Spacer for safe area -->
-<div class="h-8"></div>
+<body class="antialiased min-h-screen relative font-sans lg:pt-20" style="min-height: max(884px, 100dvh); background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB6GipjsFna55rCgisbNQr5ntnW-NbqbD0rD3ee1MdhwVqjllsjdD0ZWCqjddur7aJGjgoI95i9NwZzJdLnsuWO8LOev4UKgDsGAZYwkG6ds_TiwGAkpBtdd6tfKYzAZFWAzHJNzI7CI9N2WgboMNT2sWgHk-mPZMLV2O1k-WoHc-o-526JNaAxSP7idPi7FbZ4Ne51rX2aSzNRJ4MjOmh3nA0lqp0QsGR1e60BrSHoLoLt44PpZMu50iKl9x1jfRbji14'); background-size: cover; background-attachment: fixed; background-position: center center;">
 <!-- Header Logo -->
-<nav class="hidden md:flex items-center justify-between px-8 lg:px-16 py-3 bg-white/90 backdrop-blur-md shadow-sm border-b border-white/60 sticky top-0 z-50 w-full"><div class="flex items-center"><img alt="Beci Logo" class="h-12 w-auto object-contain hover:scale-105 transition-transform cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3j3OWgecPv27l0dRdtjCWhE1goOHfHs2G8JFewKPn7DsTw5Kd8bKaWPZR_IY3KBaWJQM75wzn12I_K058G5qh3CAWXMhY5-du66E_nnH2hCIDDZMYP9gyyzzsJ2TklKt0SAed_xt3Jy0okpoIIryxjGe5ehrJFeK79ZDGDGImnYFShghVTqw3qZlNr7CWQhai0aOsKrNIVQGZDZtrVMFbMPIZciv46n_g-ZHbHi067IJrmv8ZQXNnm0Rt-L60ITn_6vo"></div><div class="flex items-center gap-8 lg:gap-12 font-bold text-[17px]"><a class="text-primary relative py-1 hover:text-surface-tint transition-colors" href="HomeBeci.html">Inicio<span class="absolute bottom-0 left-0 w-full h-[3px] bg-primary rounded-full"></span></a><a class="text-on-surface-variant hover:text-primary transition-colors" href="Favoritosbeci.html">Tus Favoritos</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="Sobrebeci.html">Sobre Beci</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="TeAyudamosBeci.html">¿Te ayudamos?</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Vecino</a></div></nav><header class="w-full flex justify-start px-margin-mobile mb-2 md:hidden"><img alt="Beci Logo" class="w-32 h-auto object-contain drop-shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEt9KoiviXBul5yej0GjdZNqu2mzVwbrlURA-8GqWtICeFaK37B-xPoEAslcg-d4KsZVQRl6M6Hawyo783IYjtcU7onHdKdD1DdFInuCGtb8dZwV6z7KZffHvD1l7SkkbxEuhErN9a56zOU0D0AoeYjyiSHIGsjHczfkWRv0nPQLksXazGnSFxwErYDGAOhYUK0myGiAaDGXWIjLtdvRBnCS2IvCnjuIOlJKoprF0STSY77UMEEFyYap3EAZ1S3WNRzOE"></header>
+<header class="desktop-header fixed top-0 left-0 w-full h-[80px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] z-[100] items-center justify-between px-8">
+<div class="h-[6.15rem] w-[10.35rem] bg-contain bg-no-repeat bg-center" style="background-image: url('img/Logobeci.png');"></div>
+<nav class="flex items-center gap-12">
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="HomeBeci.html">Inicio</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Favoritosbeci.html">Tus Favoritos</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Sobrebeci.html">Sobre Beci</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="TeAyudamosBeci.html">¿Te ayudamos?</a>
+<a class="font-poppins text-[16px] font-extrabold text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[4px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-100 after:transition-transform after:duration-300" href="Perfilbeci.html">Vecino</a>
+</nav>
+</header>
 <main class="px-margin-mobile pb-32 max-w-container-max-width mx-auto max-w-md max-w-[450px] gap-2 md:max-w-5xl flex flex-col min-h-[calc(100vh-48px)]">
 <!-- Profile Card -->
 <section class="relative pt-8 md:pt-10 md:mb-6"><!-- Mobile Avatar Structure (visible < md) --><div class="md:hidden absolute left-1/2 transform -translate-x-1/2 z-10 -top-2 flex justify-center"><div class="relative"><img alt="Professional headshot" class="rounded-full object-cover border-surface-container-lowest w-20 h-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><button aria-label="Configuración" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-7 h-7 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all z-10 p-0.5" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; overflow: visible;"><img alt="Configuración" class="object-contain w-4 h-4 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ" style="filter: drop-shadow(rgba(0, 18, 73, 0.2) 0px 1px 1.5px); transform: scale(1.03); transform-origin: center center; max-width: none;"></button></div></div><!-- Mobile Content Box --><div class="md:hidden glass-card rounded-[32px] pb-4 px-6 flex flex-col items-center text-center w-full max-w-md mx-auto pt-10"><h1 class="text-headline-lg-mobile font-headline-lg-mobile text-on-background relative inline-block">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-primary-container"></span></h1><div class="flex items-center gap-1 mt-1 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">location_on</span><p class="font-body-md text-body-md">Medellín Antioquia</p></div></div><!-- Desktop Card Structure (visible >= md) matching perfil (2).png --><div class="hidden md:flex items-center bg-white/95 rounded-[40px] px-12 py-8 shadow-sm border border-white max-w-5xl mx-auto gap-8"><div class="relative shrink-0"><img alt="Jacob Montes" class="rounded-full object-cover w-28 h-28 border-2 border-surface-container-low shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><button aria-label="Configuración" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all shadow-md" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.8);"><img alt="Configuración" class="object-contain w-5 h-5 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ"></button></div><div class="flex flex-col justify-center items-start text-left"><h1 class="text-[32px] font-bold text-[#1a1b20] relative inline-block leading-tight tracking-tight">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[3px] bg-[#1a1b20] rounded-full"></span></h1><div class="flex items-center gap-1.5 mt-2 text-[#444651]"><span class="material-symbols-outlined text-[20px] text-gray-500">location_on</span><p class="text-[18px] font-medium">Medellín Antioquia</p></div></div></div></section>

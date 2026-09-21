@@ -58,6 +58,27 @@
       transform: scale(1.05) rotate(-2deg);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     }
+
+    .desktop-header {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .desktop-header {
+        display: flex;
+      }
+      body {
+        padding-top: 80px;
+      }
+    }
+    
+  @media (min-width: 1024px) {
+      body {
+        background-image: url('img/Fhomeb.png') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+      }
+    }
   </style>
 <script>
     tailwind.config = {
@@ -72,54 +93,17 @@
   </script>
 </head>
 <body class="min-h-screen text-brand-text flex flex-col relative pb-24 lg:pt-20" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAltzrtP2LFoawozBHX2J2FJ5oPPEL0kuo7_3Yj8QjIkRHvwMfbYSP1IcazPPB8K7ijVD0O7kdx6qIxgFAmkzDcmjZNrrYp-BbIsRJv2MiAbOgLrWbx63XLtx3gdvda-SZAfc486vNkn0RwzURDM7ga30dDYKggolLIYQQmwUXd9TKsx5vGHmDyY4qNtL7B4N0mrKKNItwAiUqYmJGAtfDSc5d8JCCWsiqG3Eku4BvVtff3B8UABDcjTRgNr5MqcSwtIQ'); background-size: cover; background-attachment: fixed; background-position: center center;">
-<!-- BEGIN: Desktop Navigation -->
-<nav class="hidden md:flex fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-sm items-center justify-around py-3 px-6"><a href="#" class="flex items-center w-28 max-w-full mr-4"><img alt="Beci Logo" class="w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6jTLhAEDQJGlrRPpDnzbGkS70MoOypx_5IRBFDnP5pG287Eyv6nut1IH-XGDoPUD82JHnhwzG5eppSBpOc_-5obu480lULu7im7uxiz3Ja5iLPYmv3ZWrXKxnzq1BG9ELhTwRosQ27US_CWt4K7QSolhE8uSMs7XzLpdGm_hVg71D4XEZi5PUFL_GBSHJEKMR8bz3-Tvkf7ruCc22i5FsKVlC12f_1SKcCKGmWrwUrrWQkzHwxKnj6KOn3lzLYoyNosVhEViS0yQn3A"></a>
-<a class="flex flex-col items-center text-gray-500 hover:text-beci-blue transition-colors" href="HomeBeci.html">
-<svg class="h-6 w-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="text-xs font-medium">Inicio</span>
-</a>
-<a class="flex flex-col items-center text-gray-500 hover:text-beci-blue transition-colors" href="Favoritosbeci.html">
-<svg class="h-6 w-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="text-xs font-medium">Tus Favoritos</span>
-</a>
-<a class="flex flex-col items-center text-gray-500 hover:text-beci-blue transition-colors" href="Sobrebeci.html">
-<span class="text-beci-blue font-dm-sans font-black text-xl leading-none">Beci</span>
-<span class="text-xs font-medium mt-1">Sobre Beci</span>
-</a>
-<a class="flex flex-col items-center text-beci-blue" href="#">
-<svg class="h-6 w-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="text-xs font-medium">¿Te ayudamos?</span>
-</a>
-<a class="flex flex-col items-center text-gray-500 hover:text-beci-blue transition-colors" href="Perfilbeci.html">
-<svg class="h-6 w-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="text-xs font-medium">Vecino</span>
-</a>
+<header class="desktop-header fixed top-0 left-0 w-full h-[80px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] z-[100] items-center justify-between px-8">
+<div class="h-[6.15rem] w-[10.35rem] bg-contain bg-no-repeat bg-center" style="background-image: url('img/Logobeci.png');"></div>
+<nav class="flex items-center gap-12">
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="HomeBeci.html">Inicio</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Favoritosbeci.html">Tus Favoritos</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Sobrebeci.html">Sobre Beci</a>
+<a class="font-poppins text-[16px] font-extrabold text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[4px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-100 after:transition-transform after:duration-300" href="TeAyudamosBeci.html">¿Te ayudamos?</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Perfilbeci.html">Vecino</a>
 </nav>
-<!-- END: Desktop Navigation -->
-<!-- BEGIN: Main Content Area -->
-<main class="flex-grow flex flex-col relative px-6 md:px-12 w-full max-w-2xl mx-auto">
-<!-- Header Section (Mobile) -->
-<header class="pt-8 pb-4 w-full">
-<div class="mb-6 w-48 max-w-full md:hidden">
-<img alt="Beci Logo" class="w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6jTLhAEDQJGlrRPpDnzbGkS70MoOypx_5IRBFDnP5pG287Eyv6nut1IH-XGDoPUD82JHnhwzG5eppSBpOc_-5obu480lULu7im7uxiz3Ja5iLPYmv3ZWrXKxnzq1BG9ELhTwRosQ27US_CWt4K7QSolhE8uSMs7XzLpdGm_hVg71D4XEZi5PUFL_GBSHJEKMR8bz3-Tvkf7ruCc22i5FsKVlC12f_1SKcCKGmWrwUrrWQkzHwxKnj6KOn3lzLYoyNosVhEViS0yQn3A">
-</div>
-<div class="flex items-center justify-start md:justify-center relative mb-2">
-<button class="text-beci-blue p-1 rounded-full hover:bg-white/30 transition-colors md:absolute md:left-0 mr-4 md:mr-0">
-<svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-</button>
-<h1 class="text-3xl text-black font-dm-sans leading-tight text-center">¿Te ayudamos?</h1>
-</div>
 </header>
+<!-- BEGIN: Main Content Area -->
 <!-- Description Text -->
 <section class="mb-6 relative z-10 text-center md:text-center">
 <p class="text-base text-gray-800 max-w-[85%] mx-auto md:mx-auto">

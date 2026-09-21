@@ -228,26 +228,46 @@
     .animate-expand-line { 
         animation: expand-line 1.5s ease-out forwards; 
     }
+
+    .desktop-header {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .desktop-header {
+        display: flex;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      body {
+        background-image: url('img/Fhomeb.png') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center center !important;
+      }
+    }
   </style>
 </head>
-<body class="bg-bgLight text-primary antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-accent selection:text-white">
+<body class="bg-bgLight text-primary antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-accent selection:text-white lg:pt-20">
+<!-- BEGIN: Header Section -->
+<header class="desktop-header fixed top-0 left-0 w-full h-[80px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] z-[100] items-center justify-between px-8">
+<div class="h-[6.15rem] w-[10.35rem] bg-contain bg-no-repeat bg-center" style="background-image: url('img/Logobeci.png');"></div>
+<nav class="flex items-center gap-12">
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="HomeBeci.html">Inicio</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Favoritosbeci.html">Tus Favoritos</a>
+<a class="font-poppins text-[16px] font-extrabold text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[4px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-100 after:transition-transform after:duration-300" href="Sobrebeci.html">Sobre Beci</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="TeAyudamosBeci.html">¿Te ayudamos?</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Perfilbeci.html">Vecino</a>
+</nav>
+</header>
+<!-- END: Header Section -->
 <!-- Main Content Wrapper with Background -->
-<div class="relative flex-grow pb-24 overflow-hidden bg-cover bg-center" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAYjjTHu4jN2WbvI4PY1veVvcX9BTBe45983Y4tfCtGMdLA2AM2fT6rgi9Z4jDz2DKp4N4uIwJT3WKp_8xsuEmPZQFgJjBKAXsOiiJI0PLQWy4eSf7EjM1Ay_1sbWT0gakY4eF-EJOFyFb53eLZzl-OZMcI-SC9VVFkKL7uXDm0ajU3aG0iNg3TFKm2dtGEkYx-8oJg-PLOqAuA4sja-DhJMg4bQph2gZpryns9HW0Wm24X4ESvN_EL0Lpv9ZUIrUpMDxGIyWUTtrcfS6M&quot;); background-position: center 0px; background-repeat: no-repeat; background-size: contain; background-attachment: scroll; min-height: 100vh;">
+<div class="relative flex-grow pb-24 overflow-hidden bg-cover bg-center" style="background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYjjTHu4jN2WbvI4PY1veVvcX9BTBe45983Y4tfCtGMdLA2AM2fT6rgi9Z4jDz2DKp4N4uIwJT3WKp_8xsuEmPZQFgJjBKAXsOiiJI0PLQWy4eSf7EjM1Ay_1sbWT0gakY4eF-EJOFyFb53eLZzl-OZMcI-SC9VVFkKL7uXDm0ajU3aG0iNg3TFKm2dtGEkYx-8oJg-PLOqAuA4sja-DhJMg4bQph2gZpryns9HW0Wm24X4ESvN_EL0Lpv9ZUIrUpMDxGIyWUTtrcfS6M"); background-position: center 0px; background-repeat: no-repeat; background-size: contain; background-attachment: scroll; min-height: 100vh;">
 <!-- Gradient Overlay to blend top image and bottom content -->
 <div class="absolute bg-gradient-to-b from-transparent via-bgLight/80 to-bgLight pointer-events-none z-0 h-full top-[20%] left-0 right-0 bottom-0"></div>
 <div class="absolute inset-0 bg-paper-texture opacity-30 pointer-events-none z-0"></div>
 <!-- Content Container -->
 <div class="relative z-10 w-full max-w-md mx-auto px-6 pb-32"><section class="relative w-[calc(100%+3rem)] -ml-6 mb-8" data-purpose="carousel-section"><div class="relative w-full h-[320px] overflow-hidden" id="carousel-container"><img alt="Beci City" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-100" id="carousel-img-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU4RGODBcvS-h-QPHhiLhmRsrQMtwaImhrK0ijQZNTokIBMrT6a-h9AeeEC_7RLSN72Ch5yl1uUAXjj0i4d7po4sObnH3DzyP2hf1EDpik-Q_q-q-ol4HoYOV3AKFjnH-eXsJ0jNSbcCkaKZXLDb76NPaqG156ViYbWxDn3nf0dDfqjWVIN5xGtwMPYEEjpfMl7KunKa9Dar7g3rFU4BqdZ1zUI5OAbbks2vRODHgF89a4AVFMuGQDp5JkK7yj8SlvTxY"><div class="glass-panel rounded-3xl p-4 absolute top-[35%] left-[10%] -translate-y-1/2 shadow-card text-center w-[80%] pointer-events-none z-10 opacity-100" id="glass-mission-card" style="animation: 3s ease-in-out 0s infinite normal none running float;"><p class="text-base font-medium leading-snug mt-[10%]">Conectamos espacios <br> con personas para que <br> las <span class="text-accent font-bold">oportunidades</span> dejen <br> de pasar desapercibidas.</p></div><img alt="Beci Characters" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-0" id="carousel-img-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPDYR7pDNV6szP7sry66L52HUkohBA6gllcg3Jdf-PrxN6jSvOmJxIpJCyCaSTDAaZ7DAKQMh1LW36cyLqiMao57DiuYiLamfdogHzsFiDe32Mkxxu2zYKchcgEBRcZ4N1aAy18G4kFpF9jC0Pv-RipZgmLqYlq1GZYKAZ-afC84u-5EqbE633_bYchnnmmY0_cASVDIqWI8hb0Ns1MxqSymObKWPPVB0dYYsNI1rF8ke4bqMvn7LUs8Bj-0SZ1E9TBzA"><img alt="Iconografía" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-0" id="carousel-img-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBak4B2BU87aYUSeuldLzjoe-jN3HDrPAOVHyOPWysQQoApR60ZI2tY5NDJOdtM2CAQULMQklPuqJn2rHJB6r2PPab3ggzneK-IEjzsL9fZrh7RgQwSR0YvjAqJ_PKA9NZRHwSkxela3zYa8a_uZliMPDEMgNJfkpSkXFeHMYeZGTG9mw4t4cJFrzfh8Dtw3K2C2JXtPkYJF3veYusbq79-l_ma7yWaKyLKBO3KitXMLcFuxELh-v3CENEbMXIP2s3-MbM"><img alt="Personaje" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-0" id="carousel-img-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiu4B_5ncfPnFuPfDVienxW3RT8PzYFrwvHrF0ud7bdolKGcy86bYgCYWq0mFA_1oIz75U9GbXXFc7SYLYqJWauxUBvJ7CnrA8xWuoBd0wsnOVm8dAFUkJO53c4iOv6IIxtiv4B2oM_fLhJeWTKNcUmks6caiVYPj3bcqImHtKb8qW4hk9HH8uzDixa3DmF0QIFoATzOvEiXEOkt3tfK2F9-dTV6p3sknSWoEceU4EfnSHKR4uNAVxmgET_SByeEbCDg0"><div class="absolute bottom-10 left-0 w-full flex justify-center items-center space-x-2.5 z-10"><div class="carousel-dot w-2.5 h-2.5 rounded-full bg-[#062573]" id="dot-1"></div><div class="carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]" id="dot-2"></div><div class="carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]" id="dot-3"></div><div class="carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]" id="dot-4"></div></div><style>@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }</style><img alt="Beci Mascot" class="absolute bottom-0 right-0 w-auto h-[144px] z-20 pointer-events-none transition-opacity duration-500 opacity-100" id="mascot-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAREA2yOn5_5s08tWvxtm_V0GY_lTnWoMQC0olKynx-YctMAx2huh4pgrwjy3LUaaUMR7ufdGIa8nnoE6sOssD7Vs6Gw4NFawXVKUaucZ_sjCN3yed0B-fDOXP0m3PbkBSa7is9QmRSZ6HF7CpSex2yIkpLWHtpbUDulf_SkDnkhjFGub2X79JmuuXkIN1AQmZ40DEl-lxi9usDwyNi2b7LtUqnKnYoDGBDpDNHZtWiju-qvhmKm4pQjQ2Hq8QP1d69Gwg" style="transform: translate(12%, 11%);"></div></section>
-<!-- BEGIN: Header -->
-<header class="flex items-center justify-between absolute top-0 left-0 w-full z-50 pt-6 bg-transparent" data-purpose="top-navigation">
-<button aria-label="Go back" class="p-2 -ml-2 text-primary hover:opacity-70 transition-opacity" style="transform: translateX(45%);">
-<svg class="lucide lucide-chevron-left" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" style="transform: translate(10%, 16%);" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg>
-</button>
-<h1 class="text-3xl font-display font-black text-center flex-grow text-primary tracking-tight" style="transform: translateY(8%);">Conocenos</h1>
-<div class="w-10"></div> <!-- Spacer for centering -->
-</header>
-<!-- END: Header -->
-<!-- BEGIN: Story Section -->
 <section class="relative mt-12 mb-8" data-purpose="origin-story" id="origin-story-section">
 <h2 class="text-3xl md:text-4xl font-display font-black mb-6 pl-4 leading-tight transform -rotate-3 text-shadow-light">
           ¿Cómo<br>nace <span class="underline-dynamic" id="title-1">Beci</span>?
@@ -377,6 +397,7 @@
 </div>
 </div>
 <!-- END: Team Section -->
+</div>
 </div>
 </div>
 <!-- BEGIN: Bottom Navigation -->
