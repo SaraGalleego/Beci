@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+<html lang="es" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Conocenos - Beci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700;900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            display: ['DM Sans', 'sans-serif'],
+            "body-lg": ["plusJakartaSans"],
+            "label-md": ["plusJakartaSans"],
+            "headline-md": ["plusJakartaSans"],
+            "headline-sm": ["plusJakartaSans"],
+            "label-sm": ["plusJakartaSans"],
+            "body-md": ["plusJakartaSans"],
+            "headline-lg": ["DM Sans"],
+            "headline-xl": ["DM Sans"],
+            "headline-lg-mobile": ["DM Sans"]
+          },
+          colors: {
+            primary: '#062573',
+            accent: '#4714D9',
+            brand: '#B044D9',
+            bgLight: '#FDFBF7',
+            "on-tertiary-fixed-variant": "#53424b",
+            "surface-variant": "#e3e2e0",
+            "surface-container-high": "#e9e8e6",
+            "outline": "#757682",
+            "secondary": "#635a78",
+            "inverse-surface": "#2f3130",
+            "tertiary-container": "#382830",
+            "outline-variant": "#c5c5d3",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#eeeeec",
+            "secondary-container": "#e6dafe",
+            "inverse-on-surface": "#f1f1ef",
+            "tertiary-fixed-dim": "#d8c0cb",
+            "tertiary": "#22141b",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "gradient-end": "#F4DBF0",
+            "on-tertiary-container": "#a48e98",
+            "on-secondary-fixed": "#1e1731",
+            "background": "#faf9f7",
+            "pastel-green": "#eaf7ed",
+            "surface-dim": "#dadad8",
+            "on-secondary-container": "#675e7c",
+            "secondary-fixed": "#e9ddff",
+            "on-tertiary-fixed": "#25171f",
+            "gradient-start": "#FDEAC4",
+            "surface-tint": "#445aa7",
+            "inverse-primary": "#b6c4ff",
+            "surface-container-low": "#f4f3f1",
+            "on-primary-fixed-variant": "#2a418e",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#e3e2e0",
+            "on-primary-fixed": "#001550",
+            "on-error": "#ffffff",
+            "gradient-mid": "#FDF3E6",
+            "on-primary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed-variant": "#4a425f",
+            "primary-container": "#062573",
+            "on-background": "#1a1c1b",
+            "on-primary-container": "#7b90e2",
+            "on-surface-variant": "#444651",
+            "on-surface": "#1a1c1b",
+            "tertiary-fixed": "#f5dce7",
+            "surface": "#faf9f7",
+            "primary-fixed": "#dce1ff",
+            "primary-fixed-dim": "#b6c4ff",
+            "surface-bright": "#faf9f7",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#cdc1e4"
+          },
+          backgroundImage: {
+            'paper-texture': "url('https://www.transparenttextures.com/patterns/rice-paper.png')",
+          },
+          boxShadow: {
+            'card': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
+            'nav': '0 -5px 20px -5px rgba(0, 0, 0, 0.05)',
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "margin-mobile": "20px",
+            "margin-desktop": "64px",
+            "gutter": "24px",
+            "section-gap": "80px",
+            "margin-tablet": "32px",
+            "element-gap": "16px"
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-utilities">
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: opacity 0.5s ease-in-out;
+    }
+    
+    .text-shadow-light {
+      text-shadow: 0 2px 10px rgba(255,255,255,0.8);
+    }
+
+    .tilted-card {
+      transform: rotate(-3deg);
+    }
+
+    /* Dynamic underline */
+    .underline-dynamic {
+      position: relative;
+      display: inline-block;
+    }
+    .underline-dynamic::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 0;
+      height: 4px;
+      background-color: #062573;
+      border-radius: 2px;
+      transition: width 0.5s ease-out, background-color 0.5s ease;
+    }
+    .underline-dynamic.active-underline::after {
+      width: 100%;
+      background-color: #a855f7;
+    }
+    .underline-dynamic.past-underline::after {
+      width: 100%;
+      background-color: #062573;
+    }
+
+    /* Carousel image transitions */
+    .carousel-image {
+      transition: opacity 0.5s ease-in-out;
+    }
+    .carousel-image.opacity-0 {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .carousel-image.opacity-100 {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    /* Carousel dots transition */
+    .carousel-dot {
+      transition: all 0.3s ease;
+    }
+
+    /* Mascot Peeking Animation Initial States */
+    .mascot-hidden {
+      opacity: 0;
+    }
+    
+    .mascot-hidden-left {
+      opacity: 0;
+    }
+
+    /* Marquee Animation */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      animation: marquee 15s linear infinite;
+    }
+
+    /* Team Folder Animation */
+    .team-folder-closed {
+      transform-origin: top;
+      transform: scaleY(0);
+      opacity: 0;
+    }
+
+    /* Frame Animation Settings */
+    .frame-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity 0.35s ease-in-out;
+    }
+    .frame-img.active-frame {
+        opacity: 1;
+    }
+    
+    /* Team Beci Line Animation */
+    @keyframes expand-line { 
+        0% { transform: scaleX(0); opacity: 0.5; } 
+        50% { transform: scaleX(1.2); opacity: 1; } 
+        100% { transform: scaleX(1); opacity: 1; } 
+    }
+    .animate-expand-line { 
+        animation: expand-line 1.5s ease-out forwards; 
+    }
+  </style>
+</head>
+<body class="bg-transparent text-primary font-sans antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-accent selection:text-white">
+<div class="fixed inset-0 z-[-1]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCn3_Kn5QUT70kHVHL3RjcTaw-xc8hHZXZBlRLEfDVp5rLVkl18VY9Vsl0kKIf_o3UXDshL2RYB7R-KyUH75qb1kqNamVv8iGHx7Gm4zX-DIzcwIB5HX_manP7TnK31Q1jSPbGksCp2Ka3xlWOfN4fxb0kfnJotY2Fb9Z0lRaJ6aNp5raqNvA6LjCzwH7zoAXYW2HWvHBDYJfuH9wdgIpN_QS-ZTjg58nMad8Gxs_2627oRpFlEy9g8xw"); background-size: cover; background-position: center top; background-repeat: no-repeat;'></div>
+<!-- Main Content Wrapper with Background -->
+<div class="relative flex-grow pb-24 overflow-hidden" style="min-height: 100vh;">
+<!-- Gradient Overlay to blend top image and bottom content -->
+<div class="absolute bg-gradient-to-b from-transparent via-bgLight/80 to-bgLight pointer-events-none z-0 h-full top-[20%] left-0 right-0 bottom-0"></div>
+<div class="absolute inset-0 bg-paper-texture opacity-30 pointer-events-none z-0"></div>
+<!-- Content Container -->
+<div class="relative z-10 w-full max-w-md lg:max-w-[1100px] mx-auto px-6 pb-32"><section class="relative w-[calc(100%+3rem)] -ml-6 mb-8 lg:w-screen lg:left-1/2 lg:-translate-x-1/2 lg:ml-0 lg:h-[600px]" data-purpose="carousel-section"><div class="relative w-full h-[320px] overflow-hidden lg:h-full" id="carousel-container"><img alt="Beci City" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-100" id="carousel-img-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU4RGODBcvS-h-QPHhiLhmRsrQMtwaImhrK0ijQZNTokIBMrT6a-h9AeeEC_7RLSN72Ch5yl1uUAXjj0i4d7po4sObnH3DzyP2hf1EDpik-Q_q-q-ol4HoYOV3AKFjnH-eXsJ0jNSbcCkaKZXLDb76NPaqG156ViYbWxDn3nf0dDfqjWVIN5xGtwMPYEEjpfMl7KunKa9Dar7g3rFU4BqdZ1zUI5OAbbks2vRODHgF89a4AVFMuGQDp5JkK7yj8SlvTxY"/><div class="glass-panel rounded-3xl p-4 absolute top-[35%] left-[10%] -translate-y-1/2 shadow-card text-center w-[80%] pointer-events-none z-10 opacity-100" id="glass-mission-card" style="animation: 3s ease-in-out 0s infinite normal none running float;"><p class="text-base font-medium leading-snug mt-[10%]">Conectamos espacios <br/> con personas para que <br/> las <span class="text-accent font-bold">oportunidades</span> dejen <br/> de pasar desapercibidas.</p></div><img alt="Beci Characters" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-0" id="carousel-img-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPDYR7pDNV6szP7sry66L52HUkohBA6gllcg3Jdf-PrxN6jSvOmJxIpJCyCaSTDAaZ7DAKQMh1LW36cyLqiMao57DiuYiLamfdogHzsFiDe32Mkxxu2zYKchcgEBRcZ4N1aAy18G4kFpF9jC0Pv-RipZgmLqYlq1GZYKAZ-afC84u-5EqbE633_bYchnnmmY0_cASVDIqWI8hb0Ns1MxqSymObKWPPVB0dYYsNI1rF8ke4bqMvn7LUs8Bj-0SZ1E9TBzA"/><img alt="Iconografía" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-0" id="carousel-img-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBak4B2BU87aYUSeuldLzjoe-jN3HDrPAOVHyOPWysQQoApR60ZI2tY5NDJOdtM2CAQULMQklPuqJn2rHJB6r2PPab3ggzneK-IEjzsL9fZrh7RgQwSR0YvjAqJ_PKA9NZRHwSkxela3zYa8a_uZliMPDEMgNJfkpSkXFeHMYeZGTG9mw4t4cJFrzfh8Dtw3K2C2JXtPkYJF3veYusbq79-l_ma7yWaKyLKBO3KitXMLcFuxELh-v3CENEbMXIP2s3-MbM"/><img alt="Personaje" class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-0" id="carousel-img-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiu4B_5ncfPnFuPfDVienxW3RT8PzYFrwvHrF0ud7bdolKGcy86bYgCYWq0mFA_1oIz75U9GbXXFc7SYLYqJWauxUBvJ7CnrA8xWuoBd0wsnOVm8dAFUkJO53c4iOv6IIxtiv4B2oM_fLhJeWTKNcUmks6caiVYPj3bcqImHtKb8qW4hk9HH8uzDixa3DmF0QIFoATzOvEiXEOkt3tfK2F9-dTV6p3sknSWoEceU4EfnSHKR4uNAVxmgET_SByeEbCDg0"/><div class="absolute bottom-10 left-0 w-full flex justify-center items-center space-x-2.5 z-10"><div class="carousel-dot w-2.5 h-2.5 rounded-full bg-[#062573]" id="dot-1"></div><div class="carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]" id="dot-2"></div><div class="carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]" id="dot-3"></div><div class="carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]" id="dot-4"></div></div><style>@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }</style><img alt="Beci Mascot" class="absolute bottom-0 right-0 w-auto h-[144px] z-20 pointer-events-none transition-opacity duration-500 opacity-100 lg:h-[300px]" id="mascot-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAREA2yOn5_5s08tWvxtm_V0GY_lTnWoMQC0olKynx-YctMAx2huh4pgrwjy3LUaaUMR7ufdGIa8nnoE6sOssD7Vs6Gw4NFawXVKUaucZ_sjCN3yed0B-fDOXP0m3PbkBSa7is9QmRSZ6HF7CpSex2yIkpLWHtpbUDulf_SkDnkhjFGub2X79JmuuXkIN1AQmZ40DEl-lxi9usDwyNi2b7LtUqnKnYoDGBDpDNHZtWiju-qvhmKm4pQjQ2Hq8QP1d69Gwg" style="transform: translate(12%, 11%);"/></div></section>
+<!-- BEGIN: Header -->
+<header class="flex items-center justify-between absolute top-0 left-0 w-full z-50 pt-6 bg-transparent" data-purpose="top-navigation"><div class="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button aria-label="Go back" class="lg:hidden p-2 -ml-2 text-primary hover:opacity-70 transition-opacity">
+<svg class="lucide lucide-chevron-left" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg>
+</button>
+<div class="text-2xl font-display font-black text-primary tracking-tighter">Beci</div>
+</div>
+<h1 class="text-3xl font-display font-black text-center text-primary tracking-tight lg:hidden">Conocenos</h1>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-bold text-primary hover:text-accent transition-colors" href="#">Inicio</a>
+<a class="text-sm font-bold text-primary hover:text-accent transition-colors" href="#">Favoritos</a>
+<a class="text-sm font-bold text-accent transition-colors" href="#">Sobre Beci</a>
+<a class="text-sm font-bold text-primary hover:text-accent transition-colors" href="#">Ayuda</a>
+<a class="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold hover:bg-accent transition-colors" href="#">Vecino</a>
+</nav>
+<div class="w-10 lg:hidden"></div>
+</div></header>
+<!-- END: Header -->
+<!-- BEGIN: Story Section -->
+<section class="relative mt-12 mb-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12 lg:mb-32" data-purpose="origin-story" id="origin-story-section">
+<h2 class="text-3xl md:text-4xl font-display font-black mb-6 pl-4 leading-tight transform -rotate-3 text-shadow-light lg:text-6xl lg:rotate-0 lg:mb-0 lg:pl-0 lg:pr-0 lg:text-left">
+          ¿Cómo<br/>nace <span class="underline-dynamic" id="title-1">Beci</span>?
+        </h2>
+<div class="relative w-full">
+<!-- Peeking Mascot -->
+<img alt="Beci Peeking Mascot" class="absolute right-0 top-[20%] w-32 md:w-40 z-0 origin-bottom-left pointer-events-none drop-shadow-lg lg:relative lg:top-0 lg:right-0 lg:left-0 lg:w-full lg:max-w-sm lg:mx-auto" id="peeking-mascot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrMLVcL4fHp_ma3-2IVX_3lKDmH0kdHEplDYAXILtIj9yl6G9ZKVMAuHW0O5cliqprsZhz7OAYpLBT6C7Bnzb7AqrUvl-BfDYPHsR44Z7nCQTpEeOR2e8xzfkZcDE4DR1Dwf32M5BMcYhbLyugipcKXUdC6bpLCnm5Anmb23OXxD4Po_cByydkIdMucH97yGGcYrNjpDzo8SB1qyGqsso_X9fevlUjF0puL9qcxLZFz5qJedRnphO7xc4LpuyZoclRUD0" style="transform: translateX(10px) rotate(12deg) translateY(-3.1464px); opacity: 1;"/>
+<!-- Tilted Content Card -->
+<div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card tilted-card relative z-10 border border-gray-100/50 max-w-[85%] lg:max-w-full lg:rotate-0 lg:mt-0 lg:translate-y-0">
+<div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
+<p class="">
+                Nace al preguntarnos
+              </p>
+<p class="font-bold text-black">
+                ¿Cuántos lugares vemos a menudo sin saber realmente qué son o qué ocurre dentro de ellos?
+              </p>
+<p class="">
+                Muchos espacios están llenos de oportunidades, pero pasan desapercibidos para quienes viven a su alrededor.
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- BEGIN: Second Story Section -->
+<section class="relative mb-16 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12 lg:mb-32 lg:direction-rtl" data-purpose="second-story" id="second-story-section">
+<h3 class="text-3xl md:text-4xl font-display font-black mb-6 pr-4 leading-tight transform text-right text-shadow-light lg:text-6xl lg:rotate-0 lg:mb-0 lg:pl-0 lg:pr-0 lg:text-left" style="transform: rotate(5deg); margin-bottom: 0.5rem; margin-right: 2rem;">
+            Problema<br/><span class="underline-dynamic" id="title-2">Inicial</span>
+</h3><div class="relative w-full flex justify-end p-4">
+<!-- Peeking Mascot Left -->
+<img alt="Beci Peeking Mascot Left" class="absolute top-[10%] w-32 md:w-40 z-0 origin-bottom-right pointer-events-none drop-shadow-lg left-[10%] lg:relative lg:top-0 lg:right-0 lg:left-0 lg:w-full lg:max-w-sm lg:mx-auto" id="peeking-mascot-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTFKmcNTWuZb_pdf1XUMyJtGEAGqAzoLUSctaNb2QddrJC_PPo76_XeHkDafBtt-RH1w06PvYg4NPzSsXvOng6pIdbUY_Gbi1ftaCv0JQwxj0-R63PMDBqclVpJlPy_XORlSDrM8q21sB5d7UCPLkBq7InNg_HIg9quCDdgVlEQ-0QTgkW95L8Hs_cDUEr6xWCfKeoWKFj5mWaFLr9N5TFv5BxBYyMYM0K2QC2h31Jid2FAU632ggpOkgL2wcNxxkpLX4" style="transform: translateX(-10px) rotate(-12deg) scale(1.12); opacity: 1;"/>
+<!-- Tilted Content Card Right -->
+<div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card transform rotate-3 relative z-10 border border-gray-100/50 max-w-[85%] ml-auto mt-12 -mt-2 lg:max-w-full lg:rotate-0 lg:mt-0 lg:translate-y-0" style="transform: rotate(7deg) translateY(-18px); margin-top: 24px;">
+<div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
+<p class="">
+          Muchas personas desconocen los espacios que tienen cerca, mientras que las instituciones encuentran dificultades para mostrar de forma cercana todo lo que pueden ofrecer.
+        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Second Story Section -->
+<!-- BEGIN: Third Story Section -->
+<section class="relative mb-16 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12 lg:mb-32" data-purpose="third-story" id="third-story-section">
+<h3 class="text-3xl md:text-4xl font-display font-black mb-6 pl-4 leading-tight transform -rotate-3 text-shadow-light lg:text-6xl lg:rotate-0 lg:mb-0 lg:pl-0 lg:pr-0 lg:text-left">
+          Nuestra<br/><span class="underline-dynamic" id="title-3">Solución</span>
+</h3>
+<div class="relative w-full">
+<!-- Peeking Mascot -->
+<img alt="Beci Peeking Mascot" class="absolute right-0 top-[20%] w-32 md:w-40 z-0 origin-bottom-left pointer-events-none drop-shadow-lg lg:relative lg:top-0 lg:right-0 lg:left-0 lg:w-full lg:max-w-sm lg:mx-auto" id="peeking-mascot-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYApWueecPYrd5kbhDN37ZCKJ7Pfzk_qAP1o7zFrBf7WYi2oAowWhf0jOnd0W3PfzJdbtApvuk3x-JFQFYSlVKodk4aNBYf7LoZgpaYgAvVlW6AykbulYG4Qeu82tuCiwPAcEHbWQr1b8caF-gSIxj7AtSiu3-CboyV7ZPUeDSgqYWuEoAo7nnKHTNrfZ3PMD1WRRYmGJvOIMlz6LKrKb9_eLdEL4AwP_PF8_Y3wati4XJh3-GeFWdzXwyk1cQvzFpk8" style="transform: translateX(10px) rotate(12deg); opacity: 1;"/>
+<!-- Tilted Content Card -->
+<div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card tilted-card relative z-10 border border-gray-100/50 max-w-[85%] lg:max-w-full lg:rotate-0 lg:mt-0 lg:translate-y-0">
+<div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
+<p class="">
+                Las personas pueden descubrir qué hay dentro de cada lugar, conocer sus servicios y explorar nuevas oportunidades de forma cercana y divertida.
+              </p>
+<p class="">
+<span class="font-bold text-black">Beci</span> es un proyecto multimedial que conecta instituciones y comunidad a través de una experiencia interactiva. Mediante una plataforma digital, personajes guía y tótems con códigos QR ubicados en los espacios participantes,
+              </p>
+</div>
+</div>
+</div>
+</section><section class="relative mb-16 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12 lg:mb-32 lg:direction-rtl" data-purpose="vision-story" id="vision-story-section">
+<h3 class="text-3xl md:text-4xl font-display font-black mb-6 pr-4 leading-tight transform text-right text-shadow-light lg:text-6xl lg:rotate-0 lg:mb-0 lg:pl-0 lg:pr-0 lg:text-left" style="transform: rotate(5deg); margin-bottom: 0.5rem; margin-right: 2rem;">
+    Nuestra<br/><span class="underline-dynamic" id="title-4">Visión</span>
+</h3>
+<div class="relative w-full flex justify-end p-4">
+<!-- Peeking Mascot Left (IMAGE_3) -->
+<img alt="Beci Vision Mascot" class="absolute top-[10%] w-32 md:w-40 z-0 origin-bottom-right pointer-events-none drop-shadow-lg left-[10%] lg:relative lg:top-0 lg:right-0 lg:left-0 lg:w-full lg:max-w-sm lg:mx-auto" id="peeking-mascot-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAePgvwEVDeTKbTE4lhK3QpABPIvS8U11rJTTFJUce26bmHTmLaanFiHttKG87SoyECnJaJXj7wXtoLs74wArgGQnl5S4Q63L7jsinAokNu0bXR6NRGFqoOswhAAdSp-EzY34N_-XDK4wZGYDRvDMzYcsOHxPiHV4qlMI5UO_ZC1SV8cI6EipnxtSYFYd8hWaoc_MJPyXpP653zzsf_8hGWHBpFtxyhOwJzfFSgMffxkql8OgyzH0CS__5VHeMNb0ODyQ" style="transform: translateX(-10px) rotate(-12deg) scale(1.12); opacity: 1;"/>
+<!-- Tilted Content Card Right -->
+<div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card transform rotate-3 relative z-10 border border-gray-100/50 max-w-[85%] ml-auto mt-12 -mt-2 lg:max-w-full lg:rotate-0 lg:mt-0 lg:translate-y-0" style="transform: rotate(7deg) translateY(-18px); margin-top: 24px;">
+<div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
+<p class="">
+          Convertirnos en un <span class="font-bold text-black">referente</span> para la <span class="font-bold text-black">conexión entre institutions y comunidad</span>, facilitando el acceso a la información sobre los espacios que hacen parte del entorno de las personas y promoviendo una mayor participación en las oportunidades que estos ofrecen.
+        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Third Story Section -->
+<!-- BEGIN: Marquee Section -->
+<div class="w-[120vw] -ml-[10vw] bg-[#8257e5] text-white py-4 overflow-hidden shadow-md transform -rotate-3 mt-12 z-20 relative -mt-2">
+<div class="flex w-[200%] animate-marquee" style="animation-duration: 10s;">
+<div class="flex-1 flex justify-around items-center">
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+</div>
+<div class="flex-1 flex justify-around items-center">
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+<span class="text-3xl font-display font-black whitespace-nowrap px-4 drop-shadow-sm">Nuestro Equipo Beci</span>
+</div>
+</div>
+</div>
+<!-- END: Marquee Section -->
+<!-- BEGIN: Team Section -->
+<div class="relative w-full z-10 mt-8 mb-16 px-4 mt-[10%]">
+<div class="p-8 w-[124%] -ml-[12%]" data-stitch-orig-opacity="1" id="team-folder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBs2ujUJo1ZQpkDWqTdqV_xarMenvq8LRyCqwZIZ535WI28xbJAoSErioaLVadrTNjvHfjeKSpkHzZvr3GYjroDYy0qSQKB04lc902OLCuFLQ_4InDT3j9dK-W2M02qAbL_0R8yGIIyEwdhvFL2wGP_ddpZaPAr00pkSRhD4dE9A-X717Wfg0nzjVMyH6DkCaNWvtpZSOMDJTQoiFHayrzk0Jdo2mma_hQ4mD_UGibrFbn0OiKi4u5YJPXDPyDrI3Q7-CU"); background-size: 100% 100%; background-repeat: no-repeat; background-position: center center; padding: 4rem 2rem 2rem; min-height: 600px; transform: scaleY(1); opacity: 1;'>
+<div class="grid grid-cols-1 gap-8 w-[110%] -ml-[5%] mt-[10%] lg:grid-cols-3 lg:w-full lg:ml-0 lg:mt-0 lg:translate-y-0" style="transform: translateY(-8%);"><div class="col-span-1 mb-4 px-4 -ml-[10%] -ml-[5%] -mt-2.5" style="transform: translateX(-8%) translateY(-12%) translateY(-10px);"><h5 class="font-display font-bold text-primary text-lg mb-1 text-center -mt-[20%] mt-[5%] -mt-[5%] pl-2.5" style="position: relative; left: -40px; transform: translate(calc(2% - 20px), -7%) translateY(-20px); font-size: 23px;">Team Beci</h5><div class="h-1 w-16 bg-accent rounded-full mx-auto origin-center animate-expand-line" id="team-beci-line" style="transform: translateX(calc(-2% - 135.5px)) translateY(-30px);"></div></div>
+<!-- Sara Gallego -->
+<div class="flex items-center space-x-4">
+<div class="w-32 h-32 relative overflow-hidden bg-transparent translate-x-[3%] rounded-xl">
+<img alt="Sara Pensando" class="sara-frame frame-img active-frame rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH5wGGKnzSj-224cwMldZb2MRR0u1E5U5SLA5_CShVIxD_bVX97eldZzpMxoWYmaRNGKlnOX63u5fiTe617ZO_gI2RT0jZ5W_OOA6ha0pRib_m53wSnukgJF_deT9-vwXpWwPNlndbjsS2zaQMt_goDqkxr9W6q3wcjeamge3O7mbBK-vHOSIqVizSRAv_bvPsULfqtcVJEug7EpSif9A_jUNBJsyXWq3zplCvgdPgucEkWsaJHU1n9upRPRTV5MyjTPk"/>
+<img alt="Sara Guiñando" class="sara-frame frame-img rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzSsRe-HK-EdGHsGpqoY7OleUUeP0EOPxpbSj_BTHosmVZQXZYGnhoJEpz7vxvC1LKKn-OfuWGq5N6p1KenGblBhE5QlJOOX_RGFEOVbGZDvLTl_ni3VXWUBos2_O2hSzBLetVWOnT7Wfi6hmcRjjxFKXghqc6jO6n0pwliH4XNZsthbUQSbA4urJ5DQp9kc4KVRTYlTqJnDegd1UhFgTjwzQ2a5DyzXUoFarlfkH_-CxIzd9x7keNzgr6nqjCbbEIC8k"/>
+<img alt="Sara Feliz" class="sara-frame frame-img rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf5fw0iM5G5LEAZp4LryRswVlvf09QLkgzIXHNxhZJxKT1JFpK8q_PqVG2Ec8mvLUb3_OSwb4X3JqrL9hFAOk7Cx30ugL8cFQup2QuQQ6ONArfmnxicfW_bOmPVfW-MzPYQ32-UKc2xvANxIxsSsSl6Qsm62F3XYkKbbgUA1q4YtQUTu5zGxvCFzw7livNnhJ8-mKTmW0qukJAO3K8VAjeij4d7pcEelk4S-pMZlAVIvF9l14lZpN-deN16HNqrdknE5Y"/>
+</div>
+<div>
+<h4 class="text-xl font-display font-bold text-primary">Sara Gallego</h4>
+<p class="text-sm font-medium text-gray-500">Diseñadora de Experiencias</p>
+</div>
+</div>
+<!-- Sharo Barrera -->
+<div class="flex items-center space-x-4">
+<div class="w-32 h-32 relative bg-transparent overflow-hidden translate-x-[3%] rounded-xl">
+<img alt="Sharo Feliz" class="sharo-frame frame-img active-frame rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCde0X4v8DdDQgz-lIVVn-m4ydkM6_4bsIuZDgUyxhUHvZsvMnhy6nlvYjlXGCyqZUwSKZKNNE4-W4-kTWt3gHpxzieaMMIv6AtzTk6TKMpOU-9Xcn8tmvRgbV_5p2EbAss4Q9ukCRyOfpID6_x3znP6B7Golr6JU_hCDrpgXeuP6dq851syGEDyETS7c4zchs25_NMRnISKPeKA8Y3bZDCjY2TPxAfvob8Qo0fnliFfb_c53zM6k-aKV6TkGQg3GY96V4"/>
+<img alt="Sharo Estrellas" class="sharo-frame frame-img rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs_10DI1L4_I4vvO82FqvfGZ-cV_CSZe76UjcOP6RQXw1xyaVFNSVMc-cdd76BtesWPyBUofq9M5yMrMEL-ujlWA0tdsrQDf-iOj1kxiD7rbseA5GdXokwyaWhsChi9pIMDp5OWfxwg9U0ERmFU6aPX9RFt9n6b2tE9-hYSm0fAi3Gb2oAHUaovKXs-sckha0F9ixmowcbtaehAFhEPxCjcgJlJS5MW_1-P-DYjr4y6ioWu9WxKQ400vvR3foSQjBOesw"/>
+</div>
+<div>
+<h4 class="text-xl font-display font-bold text-primary">Sharo Barrera</h4>
+<p class="text-sm font-medium text-gray-500">Desarrolladora Creativa</p>
+</div>
+</div>
+<!-- Valentina Bohorquez -->
+<div class="flex items-center space-x-4">
+<div class="w-32 h-32 relative bg-transparent overflow-hidden translate-x-[3%] rounded-xl">
+<img alt="Valentina Expresión 1" class="valentina-frame frame-img active-frame rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzo-X4lf3yO1URP-zkIPvjwkB0g-h7Q31M1VBamL6WkLnfKa7pVdy_ViWQMF7lx1vCAsndcdYKeM4ZiLVn6zUKNHA5IggSEmzTvb7hoUB4Iso9NIZbPHSgIO6NOsjpDEf-FAvo1rOBcOafMGps40heWHmUX4TrHmje0gW8vrYfoPPIF75M9_zFlAL3bmtJBwHbYk0tOwoZeozoCOVGbJ8Dh7uYck5lqMIC37OZ6e9SImSAi9aupmg7nCVd038JK_wMOEM"/>
+<img alt="Valentina Expresión 2" class="valentina-frame frame-img rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZSvd9yTYR4K_5FXXaR3UD6fyEccGhfjfmZcf8BgVZNcCADiT351GksH33nANP_lwaPaEi4mroBXE7CXsZVEDBUL7ZEWHr4TAv1rbO8Zm4zZTga-IYo2XogQ8c39iZdghUcmZhlvtAzWXL-YbYkdRrpe9euUks-YzAs3o9rMOkG6bob2RyyMPTlPHtmXF2dUsmmvGSuQY1b9XQp3KPhn1B-wfl3ApTU475SWYZsSpmFCEMJ8gGNEgYaClY-VbwjhKD2JU"/>
+<img alt="Valentina Expresión 3" class="valentina-frame frame-img rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDkBJYerCZKBUOGL5vlwtORzuQldMK8kOTu73_wMqUrsPJqEp3qjmf2d-43BvZI2Zsbl3AGmqtvbULDAelpA3Oyor6dZDuia6l-b37Acf8he3womjRzJeFS5wAAQRDmDsr-6xqCRaMW1c4sEcR3PUBztQtOTSMOI9cyHH94l726fbzJMUeXZ83ejhnG7zD13uiRbxpscd5_ti5RDO3x7qSHLoZGJYZBYKIXSCBK195MZ-nz4aMYA3T5MgEbTlxLC-mHew"/>
+</div>
+<div>
+<h4 class="text-xl font-display font-bold text-primary">Valentina Bohorquez</h4>
+<p class="text-sm font-medium text-gray-500">Estratega de Contenido</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Team Section -->
+</div>
+</div>
+<!-- BEGIN: Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full bg-[#F3ECE4]/95 backdrop-blur-md rounded-t-3xl shadow-nav z-50 border-t border-white/40 pb-safe lg:hidden" data-purpose="bottom-tab-bar">
+<div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+<!-- Tab: Inicio -->
+<button class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors">
+<svg class="mb-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+<span class="text-[10px] font-medium">Inicio</span>
+</button>
+<!-- Tab: Tus Favoritos -->
+<button class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors">
+<svg class="mb-1" fill="currentColor" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+<span class="text-[10px] font-medium">Tus Favoritos</span>
+</button>
+<!-- Tab: Beci (Center) -->
+<button class="flex flex-col items-center justify-center w-16 text-brand hover:opacity-80 transition-opacity">
+<div class="mb-1 font-display font-black text-xl tracking-tighter">Beci</div>
+<span class="text-[10px] font-medium text-primary">Sobre Beci</span>
+</button>
+<!-- Tab: Te ayudamos -->
+<button class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors">
+<svg class="mb-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" x2="15" y1="10" y2="10"></line><line x1="12" x2="12" y1="7" y2="13"></line></svg>
+<span class="text-[10px] font-medium leading-tight text-center">¿Te ayudamos?</span>
+</button>
+<!-- Tab: Vecino -->
+<button class="flex flex-col items-center justify-center w-16 text-primary hover:text-accent transition-colors">
+<svg class="mb-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 1 0-16 0"></path></svg>
+<span class="text-[10px] font-medium">Vecino</span>
+</button>
+</div>
+</nav>
+<!-- END: Bottom Navigation -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carouselContainer = document.getElementById('carousel-container');
+        const images = [
+            document.getElementById('carousel-img-1'),
+            document.getElementById('carousel-img-2'),
+            document.getElementById('carousel-img-3'),
+            document.getElementById('carousel-img-4')
+        ];
+        const dots = [
+            document.getElementById('dot-1'),
+            document.getElementById('dot-2'),
+            document.getElementById('dot-3'),
+            document.getElementById('dot-4')
+        ];
+        const glassMissionCard = document.getElementById('glass-mission-card');
+        const mascotImg = document.getElementById('mascot-img');
+        
+        let currentSlide = 0;
+        let isThrottled = false;
+        const totalSlides = images.length;
+        
+        function updateCarousel(slideIndex) {
+            images.forEach((img, index) => {
+                if (index === slideIndex) {
+                    img.classList.remove('opacity-0');
+                    img.classList.add('opacity-100');
+                } else {
+                    img.classList.remove('opacity-100');
+                    img.classList.add('opacity-0');
+                }
+            });
+
+            dots.forEach((dot, index) => {
+                if (index === slideIndex) {
+                    dot.className = 'carousel-dot w-2.5 h-2.5 rounded-full bg-[#062573]';
+                } else {
+                    dot.className = 'carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]';
+                }
+            });
+            
+            if (slideIndex === 0) {
+                glassMissionCard.classList.remove('opacity-0');
+                glassMissionCard.classList.add('opacity-100');
+                if(mascotImg) {
+                    mascotImg.classList.remove('opacity-0');
+                    mascotImg.classList.add('opacity-100');
+                }
+            } else {
+                glassMissionCard.classList.remove('opacity-100');
+                glassMissionCard.classList.add('opacity-0');
+                if(mascotImg) {
+                    mascotImg.classList.remove('opacity-100');
+                    mascotImg.classList.add('opacity-0');
+                }
+            }
+            
+            currentSlide = slideIndex;
+        }
+
+        carouselContainer.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            
+            if (isThrottled) return;
+            
+            isThrottled = true;
+            
+            if (e.deltaY > 0) {
+                // Scroll down -> Next slide
+                let nextSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel(nextSlide);
+            } else {
+                // Scroll up -> Prev slide
+                let prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel(prevSlide);
+            }
+            
+            setTimeout(() => {
+                isThrottled = false;
+            }, 500);
+        }, { passive: false });
+
+        // Touch & Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const minSwipeDistance = 50;
+            const swipeDistance = touchStartX - touchEndX;
+
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) {
+                    // Swipe left -> Next slide
+                    let nextSlide = (currentSlide + 1) % totalSlides;
+                    updateCarousel(nextSlide);
+                } else {
+                    // Swipe right -> Prev slide
+                    let prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    updateCarousel(prevSlide);
+                }
+            }
+        }
+
+        // Keyboard Navigation Support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                let nextSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel(nextSlide);
+            } else if (e.key === 'ArrowLeft') {
+                let prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel(prevSlide);
+            }
+        });
+
+        // Dynamic Titles Underline Observer
+        const storySection = document.getElementById('origin-story-section');
+        const storySection2 = document.getElementById('second-story-section');
+        const storySection3 = document.getElementById('third-story-section');
+        const storySection4 = document.getElementById('vision-story-section');
+        const title1 = document.getElementById('title-1');
+        const title2 = document.getElementById('title-2');
+        const title3 = document.getElementById('title-3');
+        const title4 = document.getElementById('title-4');
+        
+        const sections = [storySection, storySection2, storySection3, storySection4];
+        const titles = [title1, title2, title3, title4];
+
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const index = sections.indexOf(entry.target);
+                const title = titles[index];
+                if (title && entry.isIntersecting) {
+                    title.classList.add('active-underline');
+                    title.classList.remove('past-underline');
+                } else if (title) {
+                    if (entry.boundingClientRect.y < 0) {
+                        title.classList.remove('active-underline');
+                        title.classList.add('past-underline');
+                    } else {
+                        title.classList.remove('active-underline');
+                        title.classList.remove('past-underline');
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        sections.forEach(sec => {
+            if(sec) titleObserver.observe(sec);
+        });
+
+        // Anime.js Mascot Animations
+        let mascot1Animated = false;
+        let mascot2Animated = false;
+        let mascot3Animated = false;
+        let mascot4Animated = false;
+
+        const mascot1 = document.getElementById('peeking-mascot');
+        const mascot2 = document.getElementById('peeking-mascot-2');
+        const mascot3 = document.getElementById('peeking-mascot-3');
+        const mascot4 = document.getElementById('peeking-mascot-4');
+
+        // Initial setup
+        if (mascot1) {
+            anime.set(mascot1, {
+                translateX: -40,
+                rotate: 0,
+                opacity: 0
+            });
+        }
+        
+        if (mascot2) {
+            anime.set(mascot2, {
+                translateX: 40,
+                rotate: 0,
+                scale: 1.12,
+                opacity: 0
+            });
+        }
+
+        if (mascot3) {
+            anime.set(mascot3, {
+                translateX: -40,
+                rotate: 0,
+                opacity: 0
+            });
+        }
+
+        if (mascot4) {
+            anime.set(mascot4, {
+                translateX: 40,
+                rotate: 0,
+                scale: 1.12,
+                opacity: 0
+            });
+        }
+
+        const animateMascot1 = () => {
+            if (mascot1Animated || !mascot1) return;
+            mascot1Animated = true;
+            
+            mascot1.classList.remove('mascot-hidden');
+            
+            anime({
+                targets: mascot1,
+                translateX: 10,
+                rotate: 12,
+                opacity: 1,
+                duration: 700,
+                easing: 'easeOutQuad'
+            });
+        };
+
+        const animateMascot2 = () => {
+            if (mascot2Animated || !mascot2) return;
+            mascot2Animated = true;
+            
+            mascot2.classList.remove('mascot-hidden-left');
+            
+            anime({
+                targets: mascot2,
+                translateX: -10,
+                rotate: -12,
+                opacity: 1,
+                scale: 1.12,
+                duration: 700,
+                easing: 'easeOutQuad'
+            });
+        };
+
+        const animateMascot3 = () => {
+            if (mascot3Animated || !mascot3) return;
+            mascot3Animated = true;
+            
+            mascot3.classList.remove('mascot-hidden');
+            
+            anime({
+                targets: mascot3,
+                translateX: 10,
+                rotate: 12,
+                opacity: 1,
+                duration: 700,
+                easing: 'easeOutQuad'
+            });
+        };
+
+        const animateMascot4 = () => {
+            if (mascot4Animated || !mascot4) return;
+            mascot4Animated = true;
+            
+            mascot4.classList.remove('mascot-hidden-left');
+            
+            anime({
+                targets: mascot4,
+                translateX: -10,
+                rotate: -12,
+                opacity: 1,
+                scale: 1.12,
+                duration: 700,
+                easing: 'easeOutQuad'
+            });
+        };
+
+        // Mascot Intersection Observer Animation
+        if (storySection && mascot1) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateMascot1();
+                    }
+                });
+            }, { threshold: 0.4 });
+            
+            observer.observe(storySection);
+        }
+
+        // Second Mascot Intersection Observer Animation
+        if (storySection2 && mascot2) {
+            const observer2 = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateMascot2();
+                    }
+                });
+            }, { threshold: 0.4 });
+            
+            observer2.observe(storySection2);
+        }
+
+        // Third Mascot Intersection Observer Animation
+        if (storySection3 && mascot3) {
+            const observer3 = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateMascot3();
+                    }
+                });
+            }, { threshold: 0.4 });
+            
+            observer3.observe(storySection3);
+        }
+
+        // Fourth Mascot Intersection Observer Animation
+        if (storySection4 && mascot4) {
+            const observer4 = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateMascot4();
+                    }
+                });
+            }, { threshold: 0.4 });
+            
+            observer4.observe(storySection4);
+        }
+
+        // Team Folder Animation
+        const teamFolder = document.getElementById('team-folder');
+        let folderAnimated = false;
+        
+        if (teamFolder) {
+            const folderObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !folderAnimated) {
+                        folderAnimated = true;
+                        
+                        anime({
+                            targets: teamFolder,
+                            scaleY: [0, 1],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'spring(1, 80, 10, 0)',
+                            begin: function(anim) {
+                                teamFolder.classList.remove('team-folder-closed');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            folderObserver.observe(teamFolder);
+        }
+        
+        // Team Beci Line Animation
+        const teamBeciLine = document.getElementById('team-beci-line');
+        if (teamBeciLine) {
+            const lineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        teamBeciLine.classList.add('animate-expand-line');
+                    } else {
+                        teamBeciLine.classList.remove('animate-expand-line');
+                    }
+                });
+            }, { threshold: 0 });
+            
+            lineObserver.observe(teamBeciLine);
+        }
+
+        // Robust Looping Frame Animation Logic (1.75s intervals)
+        function animateFrames(selector, speed) {
+            const frames = document.querySelectorAll(selector);
+            if (!frames || frames.length <= 1) return;
+            
+            let currentFrame = 0;
+            
+            setInterval(() => {
+                frames[currentFrame].classList.remove('active-frame');
+                currentFrame = (currentFrame + 1) % frames.length;
+                frames[currentFrame].classList.add('active-frame');
+            }, speed);
+        }
+
+        animateFrames('.sara-frame', 1700);
+        animateFrames('.sharo-frame', 1700);
+        animateFrames('.valentina-frame', 1700);
+    });
+</script>
+</body></html>
