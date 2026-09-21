@@ -177,6 +177,12 @@
             background-color: #062573;
         }
 
+        @media (min-width: 1024px) {
+            .underline-dynamic::after {
+                bottom: -6px;
+            }
+        }
+
         /* Carousel image transitions */
         .carousel-image {
             transition: opacity 0.5s ease-in-out;
@@ -583,14 +589,19 @@
                                 Team Beci</h5>
                             <div class="h-1 w-16 bg-accent rounded-full mx-auto origin-center animate-expand-line"
                                 id="team-beci-line"
-                                style="transform: translateX(calc(-2% - 135.5px)) translateY(-30px);"></div>
+                                style="transform: translateX(calc(-2% - 135.5px)) translateY(-22px);"></div>
                         </div>
                         <!-- Sara Gallego -->
                         <div class="flex items-center space-x-4 lg:-translate-x-[24px] lg:-translate-y-[24px]">
                             <div class="w-32 h-32 relative overflow-hidden bg-transparent translate-x-[3%]">
                                 <div class="w-full h-full relative overflow-hidden rounded-xl"><img alt="Sara Gallego"
-                                        class="w-full h-full object-contain rounded-xl"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdIjIsKW6ByaQfpNlVPd_dlrA1NAN8jV7TmEznkLNCh-Ft8BnMKH4y9wAteqzZsjZjhin3vJYtyLyTpesLHS2PpdNyIJ7kbvQoNWQulimpg21IU8o1xJAg1dZHdMG6iHRG0ljD94mz1AlK_Ch6ybGLilmVK4WIIRDkw7TkKcr9LNY-8eBPXefva2iQ0h3zfjMiqoPmVdliRawJ4Py7uSn7ON1EEZ5YvJiZNqdzOkxxfSo3eMPM6VQunNzwc8ga9rK_Qks">
+                                        class="frame-img sara-frame absolute top-0 left-0 w-full h-full rounded-xl object-contain active-frame"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdIjIsKW6ByaQfpNlVPd_dlrA1NAN8jV7TmEznkLNCh-Ft8BnMKH4y9wAteqzZsjZjhin3vJYtyLyTpesLHS2PpdNyIJ7kbvQoNWQulimpg21IU8o1xJAg1dZHdMG6iHRG0ljD94mz1AlK_Ch6ybGLilmVK4WIIRDkw7TkKcr9LNY-8eBPXefva2iQ0h3zfjMiqoPmVdliRawJ4Py7uSn7ON1EEZ5YvJiZNqdzOkxxfSo3eMPM6VQunNzwc8ga9rK_Qks"><img
+                                        alt="SaraFace 1"
+                                        class="frame-img sara-frame absolute top-0 left-0 w-full h-full rounded-xl object-contain"
+                                        src="img/SaraFace_1.png"><img alt="SaraFace 2"
+                                        class="frame-img sara-frame absolute top-0 left-0 w-full h-full rounded-xl object-contain"
+                                        src="img/SaraFace_2.png">
                                 </div>
                             </div>
                             <div>
@@ -1085,7 +1096,7 @@
             }
 
             animateFrames('.sara-frame', 500);
-            animateFrames('.sharo-frame', 750);
+            animateFrames('.sharo-frame', 500);
             animateFrames('.valentina-frame', 500);
         });
     </script>
