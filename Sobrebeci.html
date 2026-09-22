@@ -212,6 +212,20 @@
             opacity: 0;
         }
 
+        /* Beci Mascot Slide-In from Right */
+        @keyframes mascot-slide-in {
+            0% {
+                transform: translateX(110%) scale(1.60);
+            }
+            100% {
+                transform: translateX(0) scale(1.60);
+            }
+        }
+        #mascot-img {
+            animation: mascot-slide-in 0.85s ease-out 0.5ms both;
+            transform-origin: right bottom;
+        }
+
         /* Marquee Animation */
         @keyframes marquee {
             0% {
@@ -253,17 +267,17 @@
         /* Team Beci Line Animation */
         @keyframes expand-line {
             0% {
-                transform: scaleX(0);
+                transform: scaleX(0) translateX(calc(-2% - 75.5px)) translateY(-22px);
                 opacity: 0.5;
             }
 
             50% {
-                transform: scaleX(1.2);
+                transform: scaleX(1.2) translateX(calc(-2% - 75.5px)) translateY(-22px);
                 opacity: 1;
             }
 
             100% {
-                transform: scaleX(1);
+                transform: scaleX(1) translateX(calc(-2% - 75.5px)) translateY(-22px);
                 opacity: 1;
             }
         }
@@ -319,9 +333,8 @@
             }
 
             #mascot-img {
-                right: clamp(20px, 4vw, 80px) !important;
+                right: 0 !important;
                 bottom: clamp(20px, 4vw, 60px) !important;
-                transform: none !important;
                 height: clamp(180px, 22vw, 300px) !important;
             }
 
@@ -347,7 +360,7 @@
     </header>
     <!-- END: Desktop Header -->
     <!-- Main Content Wrapper with Background -->
-    <div class="relative flex-grow pb-24 overflow-hidden bg-cover bg-center"
+    <div class="relative flex-grow pb-12 overflow-hidden bg-cover bg-center"
         style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAYjjTHu4jN2WbvI4PY1veVvcX9BTBe45983Y4tfCtGMdLA2AM2fT6rgi9Z4jDz2DKp4N4uIwJT3WKp_8xsuEmPZQFgJjBKAXsOiiJI0PLQWy4eSf7EjM1Ay_1sbWT0gakY4eF-EJOFyFb53eLZzl-OZMcI-SC9VVFkKL7uXDm0ajU3aG0iNg3TFKm2dtGEkYx-8oJg-PLOqAuA4sja-DhJMg4bQph2gZpryns9HW0Wm24X4ESvN_EL0Lpv9ZUIrUpMDxGIyWUTtrcfS6M&quot;); background-position: center 0px; background-repeat: no-repeat; background-size: contain; background-attachment: scroll; min-height: 100vh;">
         <!-- Gradient Overlay to blend top image and bottom content -->
         <div
@@ -381,12 +394,15 @@
                         class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-100"
                         id="carousel-img-1"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU4RGODBcvS-h-QPHhiLhmRsrQMtwaImhrK0ijQZNTokIBMrT6a-h9AeeEC_7RLSN72Ch5yl1uUAXjj0i4d7po4sObnH3DzyP2hf1EDpik-Q_q-q-ol4HoYOV3AKFjnH-eXsJ0jNSbcCkaKZXLDb76NPaqG156ViYbWxDn3nf0dDfqjWVIN5xGtwMPYEEjpfMl7KunKa9Dar7g3rFU4BqdZ1zUI5OAbbks2vRODHgF89a4AVFMuGQDp5JkK7yj8SlvTxY">
-                    <div class="glass-panel rounded-3xl p-4 absolute top-[35%] left-[10%] -translate-y-1/2 shadow-card text-center w-[80%] pointer-events-none z-10 opacity-100"
+                    <div class="glass-panel rounded-3xl p-4 absolute top-[35%] left-[10%] -translate-y-1/2 shadow-card text-center w-[80%] pointer-events-none z-10 opacity-100 flex items-center justify-center min-h-[159px]"
                         id="glass-mission-card"
-                        style="animation: 3s ease-in-out 0s infinite normal none running float;">
-                        <p class="text-base font-medium leading-snug mt-[10%]">Conectamos espacios <br> con personas
-                            para que <br> las <span class="text-accent font-bold">oportunidades</span> dejen <br> de
-                            pasar desapercibidas.</p>
+                        style="transform: translateY(0);">
+                        <div class="w-full h-full flex items-center justify-center">
+                            <p class="text-base font-medium leading-snug">Conectamos espacios
+                                <br> con personas para que <br> las <span
+                                    class="text-accent font-bold">oportunidades</span> dejen <br> de pasar desapercibidas.
+                            </p>
+                        </div>
                     </div><img alt="Beci Characters"
                         class="carousel-image absolute inset-0 w-full h-full drop-shadow-lg object-cover object-bottom opacity-0"
                         id="carousel-img-2"
@@ -407,28 +423,15 @@
                             id="dot-3"></div>
                         <div class="carousel-dot w-2 h-2 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)]"
                             id="dot-4"></div>
-                    </div>
-                    <style>
-                        @keyframes float {
-
-                            0%,
-                            100% {
-                                transform: translateY(0);
-                            }
-
-                            50% {
-                                transform: translateY(-10px);
-                            }
-                        }
-                    </style><img alt="Beci Mascot"
+                    </div><img alt="Beci Mascot"
                         class="absolute bottom-0 right-0 w-auto h-[144px] z-20 pointer-events-none transition-opacity duration-500 opacity-100"
                         id="mascot-img"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAREA2yOn5_5s08tWvxtm_V0GY_lTnWoMQC0olKynx-YctMAx2huh4pgrwjy3LUaaUMR7ufdGIa8nnoE6sOssD7Vs6Gw4NFawXVKUaucZ_sjCN3yed0B-fDOXP0m3PbkBSa7is9QmRSZ6HF7CpSex2yIkpLWHtpbUDulf_SkDnkhjFGub2X79JmuuXkIN1AQmZ40DEl-lxi9usDwyNi2b7LtUqnKnYoDGBDpDNHZtWiju-qvhmKm4pQjQ2Hq8QP1d69Gwg"
-                        style="transform: translate(12%, 11%);">
+                        style="transform: translateX(0) scale(1.60);">
                 </div>
             </section>
             <!-- Content Container -->
-            <div class="relative z-10 w-full max-w-md lg:max-w-[1080px] mx-auto px-6 pb-32">
+            <div class="relative z-10 w-full max-w-md lg:max-w-[1080px] mx-auto px-6 pb-12">
             <!-- END: Header -->
             <!-- BEGIN: Story Section -->
             <div class="lg:grid lg:grid-cols-1 lg:gap-y-10" data-purpose="story-grid">
@@ -446,7 +449,8 @@
                         style="transform: translateX(10px) rotate(12deg) translateY(-3.1464px); opacity: 1;">
                     <!-- Tilted Content Card -->
                     <div
-                        class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card tilted-card relative z-10 border border-gray-100/50 max-w-[85%]">
+                        class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card tilted-card relative z-10 border border-gray-100/50 max-w-[85%]"
+                        id="story-card-1">
                         <div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
                             <p class="">
                                 Nace al preguntarnos
@@ -478,6 +482,7 @@
                         style="transform: translateX(-10px) rotate(-12deg) scale(1.12); opacity: 1;">
                     <!-- Tilted Content Card Right -->
                     <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card transform rotate-3 relative z-10 border border-gray-100/50 max-w-[85%] ml-auto mt-12 -mt-2"
+                        id="story-card-2"
                         style="transform: rotate(7deg) translateY(-18px); margin-top: 24px;">
                         <div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
                             <p class="">
@@ -504,7 +509,8 @@
                         style="transform: translateX(10px) rotate(12deg); opacity: 1;">
                     <!-- Tilted Content Card -->
                     <div
-                        class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card tilted-card relative z-10 border border-gray-100/50 max-w-[85%]">
+                        class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card tilted-card relative z-10 border border-gray-100/50 max-w-[85%]"
+                        id="story-card-3">
                         <div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
                             <p class="">
                                 Las personas pueden descubrir qué hay dentro de cada lugar, conocer sus servicios y
@@ -534,6 +540,7 @@
                         style="transform: translateX(-10px) rotate(-12deg) scale(1.12); opacity: 1;">
                     <!-- Tilted Content Card Right -->
                     <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-card transform rotate-3 relative z-10 border border-gray-100/50 max-w-[85%] ml-auto mt-12 -mt-2"
+                        id="story-card-4"
                         style="transform: rotate(7deg) translateY(-18px); margin-top: 24px;">
                         <div class="space-y-4 text-base md:text-lg font-medium text-gray-800 leading-relaxed">
                             <p class="">
@@ -577,7 +584,7 @@
             </div>
             <!-- END: Marquee Section -->
             <!-- BEGIN: Team Section -->
-            <div class="relative w-full z-10 mt-8 mb-16 px-4 mt-[10%]">
+            <div class="relative w-full z-10 mt-8 mb-6 px-4 mt-[10%]">
                 <div class="p-8 w-[124%] -ml-[12%] lg:max-w-[65%] lg:mx-auto" data-stitch-orig-opacity="1" id="team-folder"
                     style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBs2ujUJo1ZQpkDWqTdqV_xarMenvq8LRyCqwZIZ535WI28xbJAoSErioaLVadrTNjvHfjeKSpkHzZvr3GYjroDYy0qSQKB04lc902OLCuFLQ_4InDT3j9dK-W2M02qAbL_0R8yGIIyEwdhvFL2wGP_ddpZaPAr00pkSRhD4dE9A-X717Wfg0nzjVMyH6DkCaNWvtpZSOMDJTQoiFHayrzk0Jdo2mma_hQ4mD_UGibrFbn0OiKi4u5YJPXDPyDrI3Q7-CU&quot;); background-size: 100% 100%; background-repeat: no-repeat; background-position: center center; padding: 4rem 2rem 2rem; min-height: 600px; transform: scaleY(1); opacity: 1;">
                     <div class="grid grid-cols-1 gap-8 w-[110%] -ml-[5%] mt-[10%] lg:w-full lg:max-w-[70%] lg:mx-auto"
@@ -585,15 +592,14 @@
                         <div class="col-span-1 mb-4 px-4 -ml-[10%] -ml-[5%] -mt-2.5"
                             style="transform: translateX(-8%) translateY(-12%) translateY(-10px);">
                             <h5 class="font-display font-bold text-primary text-lg mb-1 text-center -mt-[20%] mt-[5%] -mt-[5%] pl-2.5"
-                                style="position: relative; left: -40px; transform: translate(calc(2% - 20px), -7%) translateY(-20px); font-size: 23px;">
-                                Team Beci</h5>
-                            <div class="h-1 w-16 bg-accent rounded-full mx-auto origin-center animate-expand-line"
+                                style="position: relative; left: -53px; transform: translate(calc(2% - 20px), -7%) translateY(-20px); font-size: 28px;">Team Beci</h5>
+                            <div class="h-[6px] w-[56px] bg-accent rounded-full mx-auto origin-center animate-expand-line"
                                 id="team-beci-line"
-                                style="transform: translateX(calc(-2% - 135.5px)) translateY(-22px);"></div>
+                                style="transform: translateX(calc(-2% - 75.5px)) translateY(-22px);"></div>
                         </div>
                         <!-- Sara Gallego -->
                         <div class="flex items-center space-x-4 lg:-translate-x-[24px] lg:-translate-y-[24px]">
-                            <div class="w-32 h-32 relative overflow-hidden bg-transparent translate-x-[3%]">
+                            <div class="w-32 h-32 shrink-0 relative overflow-hidden bg-transparent translate-x-[3%]">
                                 <div class="w-full h-full relative overflow-hidden rounded-xl"><img alt="Sara Gallego"
                                         class="frame-img sara-frame absolute top-0 left-0 w-full h-full rounded-xl object-contain active-frame"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdIjIsKW6ByaQfpNlVPd_dlrA1NAN8jV7TmEznkLNCh-Ft8BnMKH4y9wAteqzZsjZjhin3vJYtyLyTpesLHS2PpdNyIJ7kbvQoNWQulimpg21IU8o1xJAg1dZHdMG6iHRG0ljD94mz1AlK_Ch6ybGLilmVK4WIIRDkw7TkKcr9LNY-8eBPXefva2iQ0h3zfjMiqoPmVdliRawJ4Py7uSn7ON1EEZ5YvJiZNqdzOkxxfSo3eMPM6VQunNzwc8ga9rK_Qks"><img
@@ -606,12 +612,13 @@
                             </div>
                             <div>
                                 <h4 class="text-xl font-display font-bold text-primary">Sara Gallego</h4>
-                                <p class="text-sm font-medium text-gray-500">Diseñadora de Experiencias</p>
+                                <p class="text-sm font-bold text-gray-500">Productora Multimedia</p>
+                                <p class="text-sm font-bold text-gray-500">Rol: <span class="font-medium">Desarolladora, Diseño UI/UX y Diseño Visual</span></p>
                             </div>
                         </div>
                         <!-- Sharo Barrera -->
                         <div class="flex items-center space-x-4 lg:-translate-x-[24px] lg:-translate-y-[24px]">
-                            <div class="w-32 h-32 relative bg-transparent overflow-hidden translate-x-[3%]">
+                            <div class="w-32 h-32 relative overflow-hidden bg-transparent translate-x-[3%]">
                                 <div class="w-full h-full relative overflow-hidden rounded-xl"><img alt="Sharo Frame 1"
                                         class="frame-img sharo-frame absolute top-0 left-0 w-full h-full rounded-xl object-contain active-frame"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqBQnJIa_ZZKfy_vn1q5_Yh1XR0YbgYHf7c2e1ix3MUyD24c-0F8hUMM4kjiVYwaYZJKGnYSN1xUU7kcYwyW-4ms5Lsl1J5aK29JrnXGrNq-UpzPBa1Qe-JOMDBYF1ODAsg64car8j3vlK0TLA-AMnehjzz1cUyMNVrqxiZKQhzhE_w_7jxlR0b5qaXQL60211y0MhkyaU9Pfqy9we0OhupHuc2L8DowsmjCmS5490g9yPO9O8SJYY6KXATE9M32XFXuY"><img
@@ -640,13 +647,15 @@
                                 </style>
                             </div>
                             <div>
-                                <h4 class="text-xl font-display font-bold text-primary">Sharo Barrera</h4>
-                                <p class="text-sm font-medium text-gray-500">Desarrolladora Creativa</p>
+                                <h4 class="text-xl font-display font-bold text-primary">Sharon Barrera</h4>
+                                <p class="text-sm font-bold text-gray-500">Productora Multimedia</p>
+                                <p class="text-sm font-bold text-gray-500">Rol: <span class="font-medium">Diseño Visual, UX y Pruebas.</span></p>
                             </div>
                         </div>
                         <!-- Valentina Bohorquez -->
                         <div class="flex items-center space-x-4 lg:-translate-x-[24px] lg:-translate-y-[24px]">
-                            <div class="w-32 h-32 relative bg-transparent overflow-hidden translate-x-[3%]"><img
+                            <div class="w-32 h-32 shrink-0 relative overflow-hidden bg-transparent translate-x-[3%]">
+                                <div class="w-full h-full relative overflow-hidden rounded-xl"><img
                                     alt="Valentina Frame 1"
                                     class="frame-img valentina-frame absolute top-0 left-0 w-full h-full rounded-xl object-contain"
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2LhgrNP_gnIgATm4J7rzvYBT5tk-LAZk6MfkXYp2KQMjs9G6zpMiDTGbC18jje298R6wFQ74B2CWTM3II5qoZcP3ZA1qLHPgJF8KAl9X0h1eCaDayDZACPEC8AIxNk7nnoCXoO-RnztgJzFFISzd5oG5yyrP9btLkN0V3IIsIqZHx5szZW82aZ4N3JCgf2VFWE_GRoxO-yxFrljwfvqhp78K6-Cp1rdFnltGhas5KUDTKKGsheSltQEYDWXu8R568P9A"><img
@@ -657,9 +666,11 @@
                                     class="frame-img valentina-frame absolute top-0 left-0 w-full h-full rounded-xl object-contain"
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtCiHy0GrWCTHPmBFXvuXGl8NmpbjLNe67-AodoDw8A58V9dTUrlnX8SV7Fyu87bGTWKJXpoJt5befscjuzCGGnWujdCjsz2uD4BJxb0UDk_edsVaSuSi85khiYBijayYEnFNOa6qQk5IobXOq25ilLVtYorotF8QZFMczz7vqjsARpeyOPDnLAbcBwysFpQHjz_NyJJ12MKFDCOPUpdXjRts_tjv2laAptu13fjmkZbQnZxtQFs3cpdZB_H72MesUe5A">
                             </div>
-                            <div>
+                            </div>
+                            <div class="ml-[240px]">
                                 <h4 class="text-xl font-display font-bold text-primary">Valentina Bohorquez</h4>
-                                <p class="text-sm font-medium text-gray-500">Estratega de Contenido</p>
+                                <p class="text-sm font-bold text-gray-500">Productora Multimedia</p>
+                                <p class="text-sm font-bold text-gray-500">Rol: <span class="font-medium">Gestion UX, Diseño Visual y Documentación.</span></p>
                             </div>
                         </div>
                     </div>
@@ -732,6 +743,39 @@
             ];
             const glassMissionCard = document.getElementById('glass-mission-card');
             const mascotImg = document.getElementById('mascot-img');
+
+            if (glassMissionCard) {
+                anime({
+                    targets: glassMissionCard,
+                    translateY: [0, -45, -38, -45, 0],
+                    duration: 3000,
+                    easing: 'easeInOutQuad',
+                    loop: true
+                });
+            }
+
+            const storyCard1 = document.getElementById('story-card-1');
+            const storyCard2 = document.getElementById('story-card-2');
+            const storyCard3 = document.getElementById('story-card-3');
+            const storyCard4 = document.getElementById('story-card-4');
+
+            [
+                { el: storyCard1, rotate: -3, base: 0 },
+                { el: storyCard2, rotate: 7, base: -18 },
+                { el: storyCard3, rotate: -3, base: 0 },
+                { el: storyCard4, rotate: 7, base: -18 }
+            ].forEach(({ el, rotate, base }) => {
+                if (el) {
+                    anime.set(el, { rotate: rotate, translateY: base });
+                    anime({
+                        targets: el,
+                        translateY: [base, base - 10, base - 8, base - 10, base],
+                        duration: 3000,
+                        easing: 'easeInOutQuad',
+                        loop: true
+                    });
+                }
+            });
 
             let currentSlide = 0;
             let isThrottled = false;
