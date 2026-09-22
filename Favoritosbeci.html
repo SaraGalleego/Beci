@@ -85,11 +85,20 @@
       animation: heart-bounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
-    .card-removing {
+.card-removing {
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
       transform: scale(0.9) translateY(-10px);
       margin-bottom: -100%;
+    }
+
+    @media (max-width: 1023px) {
+      #favorites-empty:not(.hidden) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 624px);
+      }
     }
   </style>
 <!-- Datos de lugares (fuente única compartida con HomeBeci.html y Ubicate.html) -->
@@ -111,7 +120,10 @@
 <!-- END: Header Section -->
 <div class="w-full max-w-screen-xl mx-auto h-screen relative flex flex-col shadow-2xl overflow-hidden bg-white/10 lg:bg-transparent lg:shadow-none">
 <!-- Desktop / Tablet Title Area -->
-<div class="hidden md:flex flex-col items-center w-full text-center md:max-lg:mb-2">
+<div class="flex flex-col items-center w-full text-center lg:pt-0 lg:mt-5 md:max-lg:mb-2">
+<div class="self-start w-full pt-8 pl-6 lg:hidden">
+<div class="w-44 h-24 bg-contain bg-no-repeat bg-left mb-8" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuHoVeBvnBQzqQhNbkjL-5GN3goSsmegCr4tVNBTOzWCAvCwnCASozgnrl4IADUenk9jWLH_O1DBHm3s-fgMqyrwa02zTre2fPwhU8u1ZsNEp9IbqyIby06DJYV1UwnxJjque9kQwi_VEzNcZxFjOoGMPGwBnm_15Z3LFplKVlLT9JaUUycRkAHIakmwY1eYo1PwsiI0qkq35AHi-UDGRkQ3xhSjwZWbNXKgjqPEVQKxHkkoRmTEkr1NppSGITSATililiKKMzZFw6kgM'); transform: scale(1.06); transform-origin: left top;"></div>
+</div>
 <div class="flex items-center gap-6"><img alt="Corazón Favoritos" class="w-12 h-12 md:h-14 md:w-auto lg:h-14 lg:w-auto shrink-0 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ8L_ymNxeMG1l0-LGlRo8KVb6f7P4zLMtjVUPOKYfwZSwWoYGyEiEsqV-bhgZvvpG9hLjsBeajIgzcUVV_njb6QrG_f4f4Mc9q5-Bp9HGgWzT-i6aOhLsuucMb0hv0gySQwnfGExUztKQnGHV_1636iQXp8JerBivbLBPAnVuoRkUR8c7FosMReQvcGkJX7DcVpVDalSLpN23kK3i2gxEqglTRmPfXw_7OXXbfjt74paBY0bklNcU2KP09X267UPPbX4"><span class="text-3xl md:text-4xl lg:text-5xl font-dmsans font-black text-black tracking-tight leading-none">Tus Favoritos</span></div>
 <p class="text-lg md:text-xl lg:text-[25px] font-medium text-black mt-4 md:mt-5 lg:mt-[30px] mb-8 lg:mb-[65px] px-4">
     Aquí encuentras los lugares que has conocido y te han gustado.
@@ -133,11 +145,11 @@
 </div>
 <!-- Vacío (sesión iniciada pero sin favoritos) -->
 <div id="favorites-empty" class="hidden">
-<div class="bg-white/80 backdrop-blur-xl rounded-[36px] shadow-md px-6 py-12 md:px-10 md:mx-auto max-w-md text-center">
-<span class="text-5xl">&#128154;</span>
-<h3 class="text-2xl font-dmsans font-black text-black mt-4">Aún no tienes favoritos</h3>
-<p class="text-base md:text-lg font-medium text-gray-600 mt-3 mb-7">No has añadido ningún lugar a favoritos, anímate a explorar lugares y guarda tus favoritos.</p>
-<a href="HomeBeci.html" class="inline-block bg-[#062573] text-white font-semibold text-base md:text-lg py-3.5 px-8 rounded-full hover:shadow-lg transition-all">Explorar lugares</a>
+<div class="bg-white/80 backdrop-blur-xl rounded-[36px] shadow-md mx-auto px-[26px] py-10 md:px-8 md:py-12 md:mx-auto max-w-[408px] text-center">
+<span class="text-[44px]">&#128154;</span>
+<h3 class="text-[21px] font-dmsans font-black text-black mt-3">Aún no tienes favoritos</h3>
+<p class="text-[14px] md:text-[15px] font-medium text-gray-600 mt-3 mb-6">No has añadido ningún lugar a favoritos, anímate a explorar lugares y guarda tus favoritos.</p>
+<a href="HomeBeci.html" class="inline-block bg-[#062573] text-white font-semibold text-[14px] md:text-[15px] py-3 px-6 rounded-full hover:shadow-lg transition-all">Explorar lugares</a>
 </div>
 </div>
 </div>
