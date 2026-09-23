@@ -196,100 +196,106 @@
         });
     </script>
 <script>
-        (function () {
-            const AUTH = window.BeciAuth;
-            if (!AUTH) return;
-            const form = document.querySelector('form');
-            const err = document.getElementById('login-error');
+    (function () {
+        'use strict';
 
-            function showError(msg) {
-                if (err) {
-                    err.textContent = msg;
-                    err.classList.remove('hidden');
+        const AUTH = window.BeciAuth;
+        const form = document.querySelector('form');
+        const err = document.getElementById('login-error');
+
+        function showError(message) {
+            if (!err) return;
+
+            err.textContent = message || 'No se pudo iniciar sesión.';
+            err.classList.remove('hidden');
+        }
+
+        function clearError() {
+            if (!err) return;
+
+            err.textContent = '';
+            err.classList.add('hidden');
+        }
+
+        if (!AUTH || !form) {
+            console.error('BECI: no se encontró el sistema de autenticación o el formulario.');
+            return;
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            clearError();
+
+            const emailInput = document.getElementById('loginEmail');
+            const passwordInput = document.getElementById('password');
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            if (!emailInput || !passwordInput) {
+                showError('No se encontraron los campos de inicio de sesión.');
+                return;
+            }
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!email) {
+                showError('Escribe tu correo.');
+                return;
+            }
+
+            if (!password) {
+                showError('Escribe tu contraseña.');
+                return;
+            }
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Iniciando sesión...';
+            }
+
+            try {
+                await AUTH.ensureReady();
+
+                const result = await AUTH.login(email, password);
+
+                if (!result || !result.ok) {
+                    showError(
+                        (result && result.error) ||
+                        'Correo o contraseña incorrectos.'
+                    );
+
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Iniciar Sesión';
+                    }
+
+                    return;
+                }
+
+                /*
+                 * Login correcto.
+                 * BeciAuth ya guarda y sincroniza la sesión
+                 * del usuario autenticado.
+                 */
+
+                AUTH.redirectAfterAuth('HomeBeci.html');
+
+            } catch (error) {
+                console.error('BECI - Error al iniciar sesión:', error);
+
+                showError(
+                    'No se pudo iniciar sesión en este momento. Intenta nuevamente.'
+                );
+
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Iniciar Sesión';
                 }
             }
-
-            // Modal bonito para rate limit en login
-            function showRateLimitModal(message) {
-                return new Promise(function (resolve) {
-                    var overlay = document.createElement('div');
-                    overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.55);backdrop-filter:blur(4px);padding:20px;';
-                    var card = document.createElement('div');
-                    card.style.cssText = 'background:#fff;max-width:400px;width:100%;border-radius:24px;padding:28px 24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.28);';
-                    card.innerHTML = '<div style="font-size:48px;margin-bottom:16px;">⚠️</div>' +
-                        '<h3 style="margin:0 0 12px;font-size:22px;font-weight:800;color:#062573;">Supabase saturado</h3>' +
-                        '<p style="margin:0 0 24px;font-size:15px;line-height:1.55;color:#475569;">' + message + '</p>' +
-                        '<div style="display:flex;gap:12px;justify-content:center;">' +
-                        '<button id="modal-local" style="background:#062573;color:#fff;border:none;padding:14px 28px;border-radius:9999px;font-weight:700;font-size:15px;cursor:pointer;">Entrar en modo local (offline)</button>' +
-                        '<button id="modal-cancel" style="background:transparent;color:#475569;border:1px solid #cbd5e1;padding:14px 28px;border-radius:9999px;font-weight:600;font-size:15px;cursor:pointer;">Cancelar</button>' +
-                        '</div>';
-                    overlay.appendChild(card);
-                    document.body.appendChild(overlay);
-                    overlay.style.opacity = '0';
-                    card.style.transform = 'scale(0.9)';
-                    requestAnimationFrame(function() {
-                        overlay.style.transition = 'opacity 0.2s';
-                        card.style.transition = 'transform 0.2s';
-                        overlay.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    });
-                    function close(result) {
-                        overlay.style.opacity = '0';
-                        card.style.transform = 'scale(0.9)';
-                        setTimeout(function() {
-                            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                            resolve(result);
-                        }, 200);
-                    }
-                    card.querySelector('#modal-local').addEventListener('click', function() { resolve(true); });
-                    card.querySelector('#modal-cancel').addEventListener('click', function() { resolve(false); });
-                    overlay.addEventListener('click', function(e) { if (e.target === overlay) resolve(false); });
-                });
-            }
-
-            if (form) {
-                form.addEventListener('submit', async function (e) {
-                    e.preventDefault();
-                    const email = document.getElementById('loginEmail');
-                    const pass = document.getElementById('password');
-                    if (!email || !pass) return;
-                    if (!email.value.trim()) return showError('Escribe tu correo.');
-                    if (!pass.value) return showError('Escribe tu contraseña.');
-                    const res = await AUTH.login(email.value, pass.value);
-                    
-                    if (res.isRateLimit) {
-                        // Rate limit: mostrar modal para elegir modo local
-                        if (await showRateLimitModal(res.error)) {
-                            // Usuario eligió modo local
-                            const submitBtn = form.querySelector('button[type="submit"]');
-                            if (submitBtn) {
-                                submitBtn.disabled = true;
-                                submitBtn.textContent = 'Entrando en modo local...';
-                            }
-                            const localRes = await AUTH.legacyLogin(email.value, pass.value);
-                            if (!localRes.ok) return showError(localRes.error);
-                            // Éxito en modo local
-                            AUTH.redirectAfterAuth('HomeBeci.html');
-                        } else {
-                            // Usuario canceló
-                            showError(res.error);
-                        }
-                        return;
-                    }
-                    
-                    if (!res.ok) {
-                        if (res.needsConfirmation) {
-                            showError('Tu correo no está confirmado. Revisa tu email y haz clic en el enlace de confirmación.');
-                            return;
-                        }
-                        return showError(res.error);
-                    }
-                    AUTH.redirectAfterAuth('HomeBeci.html');
-                });
-            }
         });
-    </script>
-
+    })();
+</script>
 
 
 </body></html>
