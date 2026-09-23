@@ -5,6 +5,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Phosphor Icons for UI elements -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src="supabase-config.js"></script><script src="beci-auth.js"></script><script src="beci-badges.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css">
@@ -151,12 +152,22 @@
 <span class="text-sm text-gray-600">Siguenos y Escribenos</span>
 </div>
 </a>
+<!-- Card 4: Comparte tu recomendación -->
+<div class="hover-card flex items-center gap-3 bg-white rounded-[28px] p-4 shadow-md w-full">
+<div class="w-full flex flex-col gap-2">
+<span class="font-semibold text-lg text-black leading-tight">Comparte tu recomendación</span>
+<span class="text-sm text-gray-600">Cuéntanos qué institución o lugar te gustó para conectar a la comunidad</span>
+<input type="text" id="recomendacion-input" class="w-full rounded-full border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-800 outline-none focus:border-[#5329C3] focus:ring-1 focus:ring-[#5329C3] transition-all" placeholder="Nombre de la institución o lugar...">
+<button type="button" id="btn-compartir-recomendacion" class="rounded-full bg-[#5329C3] text-white font-semibold text-sm px-5 py-2.5 hover:opacity-90 active:scale-95 transition-all">Compartir recomendación</button>
+<p id="recomendacion-estado" class="hidden text-sm font-medium text-[#336926]"></p>
+</div>
+</div>
 </div>
 </section>
 </main>
 <!-- END: Main Content Area -->
-<!-- BEGIN: Mobile Bottom Navigation -->
-<nav class="fixed bottom-0 left-0 w-full glass-nav rounded-t-[32px] px-2 py-3 z-50 shadow-[0_-10px_40px_rgb(0,0,0,0.05)] lg:hidden" style="position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; z-index: 9999 !important; visibility: visible !important; opacity: 1 !important; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px) saturate(180%); border-top: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;">
+<!-- BEGIN: BottomNavigation -->
+<nav class="fixed bottom-0 left-0 w-full glass-nav rounded-t-[32px] px-2 py-3 z-50 shadow-[0_-10px_40px_rgb(0,0,0,0.05)] lg:hidden" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px) saturate(180%); border-top: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;">
 <ul class="flex justify-around items-center"><!-- Home -->
 <li class="flex flex-col items-center justify-center w-16">
 <a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="HomeBeci.html">
@@ -173,7 +184,7 @@
 </li>
 <!-- Beci Center Info -->
 <li class="flex flex-col items-center justify-center w-16">
-<a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="Sobrebeci.html">
+<a class="flex flex-col items-center text-[#8A56AC] hover:text-[#8A56AC] transition-colors" href="Sobrebeci.html">
 <span class="text-[18px] font-extrabold mb-0 leading-tight text-[#8A56AC]">Beci</span>
 <span class="text-[10px] font-medium text-gray-600 mt-1 whitespace-nowrap" style="transform: translateY(5px);">Sobre Beci</span>
 </a>
@@ -193,7 +204,7 @@
 </a>
 </li></ul>
 </nav>
-<!-- END: Mobile Bottom Navigation -->
+<!-- END: BottomNavigation -->
 
 
 
@@ -206,4 +217,35 @@
 
 
 
+<script>
+(function () {
+  'use strict';
+  var btn = document.getElementById('btn-compartir-recomendacion');
+  var input = document.getElementById('recomendacion-input');
+  var estado = document.getElementById('recomendacion-estado');
+  if (!btn) return;
+
+  btn.addEventListener('click', function () {
+    var AUTH = window.BeciAuth;
+    function compartir() {
+      if (!AUTH || !AUTH.isLoggedIn || !AUTH.isLoggedIn()) {
+        if (AUTH && AUTH.showLoginGate) AUTH.showLoginGate('TeAyudamosBeci.html');
+        return;
+      }
+      var prev = window.BeciBadges.unlockedKeys();
+      window.BeciBadges.markRecomendacion();
+      window.BeciBadges.celebrate(prev);
+      if (input) {
+        var nombre = input.value.trim();
+        if (nombre) estado.textContent = '¡Gracias por recomendar ' + nombre + ' para la comunidad!';
+        else estado.textContent = '¡Gracias por ayudar a la comunidad!';
+      }
+      estado.classList.remove('hidden');
+      btn.disabled = true;
+      btn.classList.add('opacity-60', 'cursor-not-allowed');
+    }
+    (AUTH && AUTH.ensureReady ? AUTH.ensureReady() : Promise.resolve()).then(compartir);
+  });
+})();
+</script>
 </body></html>

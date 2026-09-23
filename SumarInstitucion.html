@@ -447,6 +447,7 @@
             }
         }
     </style>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
 <style>@media (min-width: 1024px){.beci-home-logo{display:none!important}}</style>
@@ -525,28 +526,45 @@
 </div>
 </form>
 </main>
-<!-- Mobile Bottom Navigation -->
-<nav class="mobile-nav">
-<a class="nav-item" href="HomeBeci.html">
-<span class="material-symbols-outlined">home</span>
-<span class="">Inicio</span>
-</a>
-<a class="nav-item" href="Favoritosbeci.html">
-<span class="material-symbols-outlined">favorite</span>
-<span class="">Tus Favoritos</span>
-</a>
-<a class="nav-item active" href="Sobrebeci.html">
-<span class="material-symbols-outlined fill">info</span>
-<span class="">Sobre Beci</span>
-</a>
-<a class="nav-item" href="TeAyudamosBeci.html">
-<span class="material-symbols-outlined">help_center</span>
-<span class="">¿Te ayudamos?</span>
-</a>
-<a class="nav-item" href="Perfilbeci.html">
-<span class="material-symbols-outlined">person</span>
-<span class="">Vecino</span>
-</a>
+<!-- Mobile Bottom Navigation (HomeBeci style) -->
+<style data-purpose="home-bottom-nav">
+  @media (min-width: 1024px) { .hm-nav { display: none !important; } }
+  .hm-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.4);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    backdrop-filter: blur(12px) saturate(180%);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px -4px 20px;
+    border-radius: 32px 32px 0 0;
+    padding: 12px 8px;
+  }
+  .hm-nav ul { display: flex; justify-content: space-around; align-items: center; margin: 0; padding: 0; list-style: none; }
+  .hm-nav li { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 64px; }
+  .hm-nav li.hm-w { width: 72px; }
+  .hm-nav a { display: flex; flex-direction: column; align-items: center; color: #6b7280; text-decoration: none; transition: color 0.15s ease; }
+  .hm-nav a:hover { color: #8a56ac; }
+  .hm-nav a.hm-active { color: #8a56ac; }
+  .hm-nav .hm-ic { font-size: 24px; line-height: 1; margin-bottom: 4px; color: #9456e0; }
+  .hm-nav a.hm-active .hm-ic { color: #062573; font-weight: 700; }
+  .hm-nav .hm-lbl { font-size: 10px; font-weight: 500; white-space: nowrap; color: #6b7280; }
+  .hm-nav a.hm-active .hm-lbl { color: #8a56ac; }
+  .hm-nav .hm-beci { font-size: 18px; font-weight: 800; line-height: 1.25; color: #8a56ac; }
+  .hm-nav .hm-sb { font-size: 10px; font-weight: 500; margin-top: 4px; transform: translateY(5px); color: #4b5563; white-space: nowrap; }
+</style>
+<nav class="hm-nav">
+<ul>
+<li><a href="HomeBeci.html"><i class="hm-ic ph-fill ph-house"></i><span class="hm-lbl">Inicio</span></a></li>
+<li><a href="Favoritosbeci.html"><i class="hm-ic ph-fill ph-heart"></i><span class="hm-lbl">Tus Favoritos</span></a></li>
+<li><a href="Sobrebeci.html"><span class="hm-beci">Beci</span><span class="hm-sb">Sobre Beci</span></a></li>
+<li class="hm-w"><a class="hm-active" href="TeAyudamosBeci.html"><i class="hm-ic ph-fill ph-chat-circle-dots"></i><span class="hm-lbl">¿Te ayudamos?</span></a></li>
+<li><a href="Perfilbeci.html"><i class="hm-ic ph ph-user"></i><span class="hm-lbl">Vecino</span></a></li>
+</ul>
 </nav>
 <!-- Scripts -->
 <script>

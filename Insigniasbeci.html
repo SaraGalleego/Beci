@@ -4,6 +4,8 @@
 <title>Beci - Tus Insignias Obtenidas</title>
 <!-- Tailwind CSS CDN with forms and container queries -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src="supabase-config.js"></script><script src="beci-auth.js"></script><script src="beci-badges.js"></script>
 <!-- Google Fonts: DM Sans & Poppins -->
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
@@ -123,8 +125,8 @@
 </div>
 <div class="text-center sm:text-left flex flex-col items-center sm:items-start">
 <div class="flex items-center gap-2">
-<span class="text-base md:text-lg font-bold text-slate-800 tracking-tight">Jacob Montes</span>
-<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-[#6D44C8]">Nivel 1</span>
+<span class="text-base md:text-lg font-bold text-slate-800 tracking-tight" id="badge-user-name">Jacob Montes</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-[#6D44C8]" id="badge-user-level">Nivel 1</span>
 </div>
 <p class="text-[12px] md:text-[13px] text-slate-500 font-medium">Vecino activo en la comunidad</p>
 </div>
@@ -336,6 +338,37 @@
 </li></ul>
 </nav>
 <!-- END: Mobile Floating Bottom Navigation Bar -->
+<script>
+(function () {
+  function render() {
+    if (!window.BeciBadges) return;
+    var states = window.BeciBadges.applyBadgeStates();
+    var count = 0;
+    states.forEach(function (s) { if (s.unlocked) count++; });
+    var nivelEl = document.getElementById('badge-user-level');
+    if (nivelEl) nivelEl.textContent = 'Nivel ' + (count || 1);
+    var nombreEl = document.getElementById('badge-user-name');
+    var AUTH = window.BeciAuth;
+    var user = (AUTH && AUTH.currentUser) ? AUTH.currentUser() : null;
+    if (nombreEl && user) {
+      var nombre = ((user.nombre || '') + ' ' + (user.apellido || '')).trim();
+      if (nombre) nombreEl.textContent = nombre;
+    }
+  }
+
+  function start() {
+    var AUTH = window.BeciAuth;
+    if (AUTH && AUTH.ensureReady) AUTH.ensureReady().then(render);
+    else render();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
 
 
 </body></html>

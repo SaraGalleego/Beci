@@ -37,7 +37,7 @@
 <script src="https://unpkg.com/@phosphor-icons/web"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet" type="text/css">
 <!-- Datos de lugares (fuente única compartida con Ubicate.html y TrabajaconBeci.html) -->
 <script src="beci-data.js"></script>
-<script src="beci-auth.js"></script>
+<script src="supabase-config.js"></script><script src="beci-auth.js"></script><script src="beci-badges.js"></script>
 <style data-purpose="custom-utilities">
     /* Hide scrollbar for horizontal scrolling lists */
     .hide-scrollbar::-webkit-scrollbar {
@@ -652,9 +652,13 @@ comunidad</h1>
       BeciAuth.showLoginGate();
       return;
     }
-    var id = btn.getAttribute('data-place-id');
+var id = btn.getAttribute('data-place-id');
     var fav = !isFav(id);
+    var prevKeys = (fav && window.BeciBadges) ? window.BeciBadges.unlockedKeys() : null;
     setFav(id, fav);
+    if (fav && window.BeciBadges) {
+      window.BeciBadges.celebrate(prevKeys);
+    }
     btn.classList.toggle('text-[#062573]', fav);
     btn.classList.toggle('text-gray-400', !fav);
     var icon = btn.querySelector('i');
@@ -808,7 +812,7 @@ comunidad</h1>
     });
   }
 
-  function init() {
+function init() {
     if (!DATA.length) return;
     DATA.forEach(function (p) {
       p.detailUrl = resolveDetailUrl(p.nombre, !!p.isSena);

@@ -173,7 +173,7 @@
   transition: left 0.6s ease;
 }
 </style>
-<script src="beci-auth.js"></script>
+<script src="supabase-config.js"></script><script src="beci-auth.js"></script>
 </head>
 <body class="bg-gradient-animated relative min-h-screen text-on-surface font-body-md overflow-x-hidden flex flex-col items-center antialiased">
 <div class="grain-overlay"></div>
@@ -200,14 +200,8 @@
 <div class="text-center mb-8 fade-in-up z-20 relative" style="animation-delay: 0.2s;"><h1 class="font-headline-md md:text-display-lg text-primary-container mb-4 font-black antialiased">¡Regístrate!</h1><p class="font-body-md md:text-headline-sm text-on-surface max-w-xs md:max-w-md mx-auto leading-relaxed font-normal antialiased">¡Veci haz parte de la<br>comunidad!</p></div>
 <img class="absolute right-[-40px] md:-right-[150px] lg:-right-[200px] -top-12 md:top-1/2 md:-translate-y-1/2 w-48 md:w-[400px] lg:w-[500px] z-30 pointer-events-none" data-alt="Beci Character" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqPlYRFQqTYTTAYin-TgSryM00_ZX4d1pCRLv-CNsarMuzRlMvzvK-0sHs4mB-7biDX31-0Qej1XwGEbsz2cgONz9yHTmpRT0MGtm2dGCZ7rNJhZ1eZydOBLJgvoPGEo3PQpK0j4KGSx9MjKQ41pn2Q-NK39R7ob_FE9ZcOpnn1BpUIrZVA1yw8trZB4Ib6Hyhki4eInrZKxjIO7x4DY6WENAxkGpCa76-4bTo7ONGGY6udQFeIktZOxNrpmjF4jyrH-A" style="image-rendering: auto; transform: rotate(15deg); animation-duration: 6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: normal; animation-fill-mode: none; animation-play-state: running; animation-name: mascot-loop; animation-timeline: auto; animation-range: normal;">
 <div class="bg-surface-bright w-full md:rounded-3xl p-gutter md:p-xl shadow-[0_-10px_40px_rgba(6,37,115,0.05)] relative z-20 flex flex-col gap-6 fade-in-up rounded-t-[40px]" style="animation-delay: 0.3s;">
-<button class="w-full bg-white rounded-full py-4 px-6 flex items-center justify-center gap-3 shadow-[0_2px_10px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)] transition-shadow">
-<img alt="Google" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNn19mlxZdqnGwe5IDP6l0I7xOzKePxuq50MRE_lrCDdEJUZX9GGxvKx3CPfew3SR_dLGcMkZxme5-U6MXCJywLiw9xHm5J4-SRoSui65itGfFCcPUt4kmtkwuc64tvSDcfd0oYjBJRvn5nImRbu5UUhUu0ROR_1qV2NGFtQVngllstj2PXh2FhA64H4__4QJX62sFGdQKV_2G5SwG1zSLj9--4XC0k7lskpWJHZ5XGkuZB-b0keqYW_Rl_y5jismWDEY" style="image-rendering: auto;">
-<span class="font-label-bold text-on-surface">Continuar con Google</span>
-</button>
-<div class="flex flex-col md:flex-row gap-6 w-full">
 <input id="regNombre" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Nombre" type="text">
 <input id="regApellido" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Apellido" type="text">
-</div>
 <input id="regCorreo" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Correo" type="email">
 <div class="relative w-full">
 <input class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all pr-12" id="password" placeholder="Contraseña" type="password">
@@ -244,48 +238,104 @@
             }
         }
     </script>
+
 <script>
-        (function () {
-            const AUTH = window.BeciAuth;
-            if (!AUTH) return;
+    document.addEventListener('DOMContentLoaded', function () {
 
-            const btn = document.getElementById('btn-register-main');
-            const err = document.getElementById('register-error');
-            const link = document.getElementById('login-link');
-            const current = window.location.pathname.split('/').pop() + (window.location.search || '');
-            if (link) link.href = 'InicioBeci.html?redirect=' + encodeURIComponent(current);
+        // Elementos del formulario
+        const nombre = document.getElementById('regNombre');
+        const apellido = document.getElementById('regApellido');
+        const correo = document.getElementById('regCorreo');
+        const password = document.getElementById('password');
+        const terminos = document.getElementById('regTerminos');
 
-            function showError(msg) {
-                if (err) {
-                    err.textContent = msg;
-                    err.classList.remove('hidden');
-                }
+        const boton = document.getElementById('btn-register-main');
+        const error = document.getElementById('register-error');
+        const loginLink = document.getElementById('login-link');
+
+        // Enlace hacia la página de inicio de sesión
+        const paginaActual =
+            window.location.pathname.split('/').pop() +
+            (window.location.search || '');
+
+        loginLink.href =
+            'InicioBeci.html?redirect=' +
+            encodeURIComponent(paginaActual);
+
+        // Mostrar mensaje de error
+        function mostrarError(mensaje) {
+            error.textContent = mensaje;
+            error.classList.remove('hidden');
+        }
+
+        // Registrar usuario
+        async function registrarUsuario() {
+
+            // Ocultar mensaje anterior
+            error.classList.add('hidden');
+
+            // Validar nombre y apellido
+            if (!nombre.value.trim() || !apellido.value.trim()) {
+                mostrarError('Completa tu nombre y apellido.');
+                return;
             }
 
-            function onRegister() {
-                const nombre = document.getElementById('regNombre');
-                const apellido = document.getElementById('regApellido');
-                const correo = document.getElementById('regCorreo');
-                const password = document.getElementById('password');
-                const terminos = document.getElementById('regTerminos');
-                if (!nombre || !apellido || !correo || !password || !terminos) return;
+            // Validar contraseña
+            if (password.value.length < 6) {
+                mostrarError('La contraseña debe tener al menos 6 caracteres.');
+                return;
+            }
 
-                if (!nombre.value.trim() || !apellido.value.trim()) return showError('Completa tu nombre y apellido.');
-                if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo.value.trim())) return showError('Escribe un correo válido.');
-                if (password.value.length < 6) return showError('La contraseña debe tener al menos 6 caracteres.');
-                if (!terminos.checked) return showError('Debes aceptar los términos y condiciones.');
+            // Validar términos y condiciones
+            if (!terminos.checked) {
+                mostrarError('Debes aceptar los términos y condiciones.');
+                return;
+            }
 
-                const res = AUTH.register({
-                    nombre: nombre.value,
-                    apellido: apellido.value,
-                    correo: correo.value,
+            // Desactivar botón mientras se realiza el registro
+            boton.disabled = true;
+            boton.textContent = 'Registrando...';
+
+            try {
+
+                // Esperar a que Supabase esté listo
+                await window.BeciAuth.ensureReady();
+
+                // Registrar realmente el usuario en Supabase
+                const resultado = await window.BeciAuth.register({
+                    nombre: nombre.value.trim(),
+                    apellido: apellido.value.trim(),
+                    correo: correo.value.trim(),
                     password: password.value
                 });
-                if (!res.ok) return showError(res.error);
-                AUTH.redirectAfterAuth('HomeBeci.html');
-            }
 
-            if (btn) btn.addEventListener('click', onRegister);
-        })();
-    </script>
+                // Si Supabase devuelve un error
+                if (!resultado.ok) {
+                    mostrarError(resultado.error || 'No se pudo completar el registro.');
+                    return;
+                }
+
+                // Registro exitoso
+                window.location.href =
+                    'InicioBeci.html?redirect=' +
+                    encodeURIComponent('HomeBeci.html');
+
+            } catch (e) {
+
+                console.error('Error al registrar:', e);
+                mostrarError('No se pudo completar el registro.');
+
+            } finally {
+
+                // Volver a activar el botón
+                boton.disabled = false;
+                boton.textContent = 'Registrarme';
+            }
+        }
+
+        // Registrar al hacer clic en el botón
+        boton.addEventListener('click', registrarUsuario);
+
+    });
+</script>
 </body></html>

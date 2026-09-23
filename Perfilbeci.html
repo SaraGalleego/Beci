@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html><html lang="es" style=""><head>
+<!DOCTYPE html><html lang="es" style=""><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Beci - Tus Favoritos</title>
@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text.css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">
 <link rel="stylesheet" type="text.css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">
 <link rel="stylesheet" type="text.css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+<script src="supabase-config.js"></script><script src="beci-auth.js"></script><script src="beci-badges.js"></script><script src="beci-data.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -174,7 +175,7 @@
 <a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="HomeBeci.html">Inicio</a>
 <a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Favoritosbeci.html">Tus Favoritos</a>
 <a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="Sobrebeci.html">Sobre Beci</a>
-<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="TeAyudamosBeci.html">¿Te ayudamos?</a>
+<a class="font-poppins text-[16px] font-semibold text-[#4b5563] hover:text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[3px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100" href="TeAyudamosBeci.html">�Te ayudamos?</a>
 <a class="font-poppins text-[16px] font-extrabold text-[#5329C3] relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[4px] after:bg-[#5329C3] after:rounded-full after:origin-left after:scale-x-100 after:transition-transform after:duration-300" href="Perfilbeci.html">Vecino</a>
 </nav>
 </header>
@@ -183,7 +184,7 @@
 </div>
 <main class="px-margin-mobile pb-32 max-w-container-max-width mx-auto max-w-md max-w-[450px] gap-2 md:max-w-5xl flex flex-col min-h-[calc(100vh-48px)]">
 <!-- Profile Card -->
-<section class="relative pt-8 md:pt-10 md:mb-6"><!-- Mobile Avatar Structure (visible < md) --><div class="md:hidden absolute left-1/2 transform -translate-x-1/2 z-10 -top-2 flex justify-center"><div class="relative"><img alt="Professional headshot" class="rounded-full object-cover border-surface-container-lowest w-20 h-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><button aria-label="Configuración" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-7 h-7 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all z-10 p-0.5" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; overflow: visible;"><img alt="Configuración" class="object-contain w-4 h-4 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ" style="filter: drop-shadow(rgba(0, 18, 73, 0.2) 0px 1px 1.5px); transform: scale(1.03); transform-origin: center center; max-width: none;"></button></div></div><!-- Mobile Content Box --><div class="md:hidden glass-card rounded-[32px] pb-4 px-6 flex flex-col items-center text-center w-full max-w-md mx-auto pt-10"><h1 class="text-headline-lg-mobile font-headline-lg-mobile text-on-background relative inline-block">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-primary-container"></span></h1><div class="flex items-center gap-1 mt-1 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">location_on</span><p class="font-body-md text-body-md">Medellín Antioquia</p></div></div><!-- Desktop Card Structure (visible >= md) matching perfil (2).png --><div class="hidden md:flex items-center bg-white/95 rounded-[40px] px-12 py-8 shadow-sm border border-white max-w-5xl mx-auto gap-8"><div class="relative shrink-0"><img alt="Jacob Montes" class="rounded-full object-cover w-28 h-28 border-2 border-surface-container-low shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><button aria-label="Configuración" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all shadow-md" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.8);"><img alt="Configuración" class="object-contain w-5 h-5 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ"></button></div><div class="flex flex-col justify-center items-start text-left"><h1 class="text-[32px] font-bold text-[#1a1b20] relative inline-block leading-tight tracking-tight">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[3px] bg-[#1a1b20] rounded-full"></span></h1><div class="flex items-center gap-1.5 mt-2 text-[#444651]"><span class="material-symbols-outlined text-[20px] text-gray-500">location_on</span><p class="text-[18px] font-medium">Medellín Antioquia</p></div></div></div></section>
+<section class="relative pt-8 md:pt-10 md:mb-6"><!-- Mobile Avatar Structure (visible < md) --><div class="md:hidden absolute left-1/2 transform -translate-x-1/2 z-10 -top-2 flex justify-center"><div class="relative"><img alt="Professional headshot" class="perfil-foto rounded-full object-cover border-surface-container-lowest w-20 h-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><a href="confiveci.html" aria-label="Configuraci�n" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-7 h-7 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all z-10 p-0.5" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; overflow: visible;"><img alt="Configuraci�n" class="object-contain w-4 h-4 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ" style="filter: drop-shadow(rgba(0, 18, 73, 0.2) 0px 1px 1.5px); transform: scale(1.03); transform-origin: center center; max-width: none;"></a></div></div><!-- Mobile Content Box --><div class="md:hidden glass-card rounded-[32px] pb-4 px-6 flex flex-col items-center text-center w-full max-w-md mx-auto pt-10"><h1 class="perfil-nombre text-headline-lg-mobile font-headline-lg-mobile text-on-background relative inline-block">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-primary-container"></span></h1><div class="flex items-center gap-1 mt-1 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">location_on</span><p class="font-body-md text-body-md perfil-ubicacion">Medell�n Antioquia</p></div></div><!-- Desktop Card Structure (visible >= md) matching perfil (2).png --><div class="hidden md:flex items-center bg-white/95 rounded-[40px] px-12 py-8 shadow-sm border border-white max-w-5xl mx-auto gap-8"><div class="relative shrink-0"><img alt="Jacob Montes" class="perfil-foto rounded-full object-cover w-28 h-28 border-2 border-surface-container-low shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCPObIx51AjlBIFGfvxlV0OB2b5nPRzeivsHep83T8BCnFdl-aC8DXhCic7U2Di7X5geB-TVLWnWttfngoA1dmMEQmEYbehv166Shg9SslrgibrsoPHzBBVh9JEUX9NDD7fmr75C4NFAxh_-r_AijADln-6tMLX3frA9OLH6xYtqoU0IOlzkCjiYAZ0eGqQkNjmGrfVP8KjDzBndXuUjzVcBTbME7pSdi2l4Nk994GAfBoKqDyGYCIgAM_XxgZCMQiT0"><a href="confiveci.html" aria-label="Configuraci�n" class="absolute bottom-0 right-0 translate-x-1 translate-y-1 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all shadow-md" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.8);"><img alt="Configuraci�n" class="object-contain w-5 h-5 drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVaymwElQ-a49NT7i2lZeZOTWr1_Yo-_iiXkeeXnT5q5eZBvkkmxKLXHj4oPs4nQ2A5UAEIuX9c7ErAAV8B9o2FXJUfwyOK8hM4zIrZ013AfBFBDi5YIMiPMCL-R-TsUQJ6cydqPXzaibQtrdK9p2IcE6PVXrxeWZaII3dIBWD1wHBtuMtPvsWUS_6LUkaOFk08xpYC5xYXkOPCoASyybhO7TZaoMNVxob1NY8Sg7R7MoMCI2Djyu50kSC37d6OVTb1iQ"></a></div><div class="flex flex-col justify-center items-start text-left"><h1 class="perfil-nombre text-[32px] font-bold text-[#1a1b20] relative inline-block leading-tight tracking-tight">Jacob Montes<span class="absolute -bottom-1 left-0 w-full h-[3px] bg-[#1a1b20] rounded-full"></span></h1><div class="flex items-center gap-1.5 mt-2 text-[#444651]"><span class="material-symbols-outlined text-[20px] text-gray-500">location_on</span><p class="text-[18px] font-medium perfil-ubicacion">Medell�n Antioquia</p></div></div></div></section>
 <!-- Unified Badges Section (Mobile, Tablet, Desktop) -->
 <section class="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto mt-6 md:mt-4">
 <div class="glass-card bg-white/80 backdrop-blur-md border border-white/60 rounded-full flex items-center shadow-sm p-1.5 md:p-2">
@@ -232,124 +233,36 @@
 </div>
 </div>
 <!-- Right Navigation Arrow -->
-<button aria-label="Ver más insignias" class="text-primary font-bold cursor-pointer shrink-0 z-10 focus:outline-none flex items-center justify-center p-1 pr-1.5 hover:scale-110 active:scale-95 transition-transform" id="next-badges-btn">
+<button aria-label="Ver m�s insignias" class="text-primary font-bold cursor-pointer shrink-0 z-10 focus:outline-none flex items-center justify-center p-1 pr-1.5 hover:scale-110 active:scale-95 transition-transform" id="next-badges-btn">
 <span class="material-symbols-outlined text-[20px] md:text-[22px]">chevron_right</span>
 </button>
 </div>
 </section>
 <!-- Visited Places -->
-<section class="w-full max-w-md md:max-w-5xl mx-auto mt-6 md:mt-8 space-y-3.5 md:space-y-6" style="overflow: hidden auto; flex: 1 1 0%; min-height: 0px; padding-bottom: 110px;"><div class="flex flex-col items-center w-full mb-3 md:mb-6"><h2 class="font-bold text-black text-center relative inline-block pb-1.5 text-[16px] md:text-[24px]">Lugares Visitados<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-14 md:w-20 h-[3px] md:h-[4px] bg-[#001249] rounded-full"></span></h2></div><!-- Mobile Places List (< md) --><div class="flex flex-col space-y-3.5 md:hidden"><!-- Card 1: Parque Explora --><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Parque Explora" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Parque Explora</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5">Aranjuez, Medellín</p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crear</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crecer</span></div></div></div><!-- Card 2: Biblioteca Piloto --><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Biblioteca Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCko6I3POeJOzZRmJb03LNzTjJWIIG9SAwTcr-Q39T7ORWlnjSahJ69ghQuLyOXQ4cojG-r0GzT3o-rXWYcOA_CyrroZUO0voeSlGtayzam4PxLZoD1N27EMWS7wLidEEfjry0q6xueOxJkddgtJx7MUn7H2IkQ8NJ3e2rc82HNc9H0pVgPLxtIusr2nPnbXe1OiozM5YWhvFihZ1LUi4fMvIZtTa57D67VFjf7fBqIvLRx7TBMigxpBA"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Biblioteca Piloto</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5 flex items-center gap-0.5"><span class="material-symbols-outlined text-[13px] leading-none text-gray-500">location_on</span><span class="">Carlos E. Restrepo, Medellín</span></p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crear</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crecer</span></div></div></div><!-- Card 3: Jardín Botánico --><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Jardín Botánico" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPXeA2HnrrHYESGQogZmAoe-ATMzou_YeRO_BJMF09WlAQidjou85S7HBjHI2SpMspITVZrJSv8q7s19AjUGecg98rECMSutImb11pk9SGX9JlJduC6ejhHKFvMaUBGEd7akCJwYOQz2fg2fAcPO0ycUibYX6Q6lQwN3-u0sTMXZsG6ykhs2rfiNhxPRkpdGG3r19QuMIPOyBSLZko6Tv2lLTMkZ4JAIOmiUgmbxMvWLMFHcxgdSGNxok9NUQFmIECLMaFMoypNtmnIY"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Jardín Botánico</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5 flex items-center gap-0.5"><span class="material-symbols-outlined text-[13px] leading-none text-gray-500">location_on</span><span class="">Bosque, Medellín</span></p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crear</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Crecer</span></div></div></div><div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]"><div class="w-[38%] h-full shrink-0 relative overflow-hidden"><img alt="Planetario Medellín" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c"></div><div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white"><div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">Planetario Medellín</h3><p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5 flex items-center gap-0.5"><span class="material-symbols-outlined text-[13px] leading-none text-gray-500">location_on</span><span class="">Aranjuez, Medellín</span></p></div><div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1"><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Cultura</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span></div></div></div></div><!-- Desktop Places Grid (>= md) matching perfil (2).png 2-column layout --><!-- Tablet Places List (md:flex lg:hidden) con exactamente 4 tarjetas verticales -->
-<div class="hidden md:flex lg:hidden flex-col gap-5 w-full max-2xl mx-auto">
-<!-- Tarjeta 1: Parque Explora -->
-<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
-<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
-<img alt="Parque Explora" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c">
-</div>
-<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
-<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
-<div>
-<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Parque Explora</h3>
-<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p>
-</div>
-<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
-</div>
-</div>
-</div>
-<!-- Tarjeta 2: Biblioteca Piloto -->
-<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
-<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
-<img alt="Biblioteca Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCko6I3POeJOzZRmJb03LNzTjJWIIG9SAwTcr-Q39T7ORWlnjSahJ69ghQuLyOXQ4cojG-r0GzT3o-rXWYcOA_CyrroZUO0voeSlGtayzam4PxLZoD1N27EMWS7wLidEEfjry0q6xueOxJkddgtJx7MUn7H2IkQ8NJ3e2rc82HNc9H0pVgPLxtIusr2nPnbXe1OiozM5YWhvFihZ1LUi4fMvIZtTa57D67VFjf7fBqIvLRx7TBMigxpBA">
-</div>
-<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
-<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
-<div>
-<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Biblioteca Piloto</h3>
-<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Carlos E. Restrepo, Medellín</p>
-</div>
-<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
-</div>
-</div>
-</div>
-<!-- Tarjeta 3: Jardín Botánico -->
-<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
-<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
-<img alt="Jardín Botánico" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPXeA2HnrrHYESGQogZmAoe-ATMzou_YeRO_BJMF09WlAQidjou85S7HBjHI2SpMspITVZrJSv8q7s19AjUGecg98rECMSutImb11pk9SGX9JlJduC6ejhHKFvMaUBGEd7akCJwYOQz2fg2fAcPO0ycUibYX6Q6lQwN3-u0sTMXZsG6ykhs2rfiNhxPRkpdGG3r19QuMIPOyBSLZko6Tv2lLTMkZ4JAIOmiUgmbxMvWLMFHcxgdSGNxok9NUQFmIECLMaFMoypNtmnIY">
-</div>
-<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
-<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
-<div>
-<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Jardín Botánico</h3>
-<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Bosque, Medellín</p>
-</div>
-<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
-</div>
-</div>
-</div>
-<!-- Tarjeta 4: Planetario Medellín -->
-<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
-<div class="w-[38%] h-full shrink-0 relative overflow-hidden">
-<img alt="Planetario de Medellín" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c">
-</div>
-<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">
-<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
-<div>
-<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Planetario Medellín</h3>
-<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p>
-</div>
-<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Cultura</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Desktop Places Grid (>= lg) intacta con su diseño original de 2 columnas -->
-<div class="hidden lg:grid lg:grid-cols-2 gap-6 w-full">
-<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
-<div class="w-[42%] h-full shrink-0 relative overflow-hidden">
-<img alt="Parque Explora" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c">
-</div>
-<div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative">
-<button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
-<div>
-<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Parque Explora</h3>
-<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p>
-</div>
-<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
-</div>
-</div>
-</div>
-<div class="flex bg-white rounded-[24px] overflow-hidden flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">
-<div class="w-[42%] h-full shrink-0 relative overflow-hidden">
-<img alt="Biblioteca Piloto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCko6I3POeJOzZRmJb03LNzTjJWIIG9SAwTcr-Q39T7ORWlnjSahJ69ghQuLyOXQ4cojG-r0GzT3o-rXWYcOA_CyrroZUO0voeSlGtayzam4PxLZoD1N27EMWS7wLidEEfjry0q6xueOxJkddgtJx7MUn7H2IkQ8NJ3e2rc82HNc9H0pVgPLxtIusr2nPnbXe1OiozM5YWhvFihZ1LUi4fMvIZtTa57D67VFjf7fBqIvLRx7TBMigxpBA">
-</div>
-<div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative">
-<button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>
-<div>
-<h3 class="text-[18px] font-bold text-gray-900 leading-snug">Biblioteca Piloto</h3>
-<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Carlos E. Restrepo, Medellín</p>
-</div>
-<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span>
-<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span>
-</div>
-</div>
-</div>
-<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white"><div class="w-[42%] h-full shrink-0 relative overflow-hidden"><img alt="Jardín Botánico" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPXeA2HnrrHYESGQogZmAoe-ATMzou_YeRO_BJMF09WlAQidjou85S7HBjHI2SpMspITVZrJSv8q7s19AjUGecg98rECMSutImb11pk9SGX9JlJduC6ejhHKFvMaUBGEd7akCJwYOQz2fg2fAcPO0ycUibYX6Q6lQwN3-u0sTMXZsG6ykhs2rfiNhxPRkpdGG3r19QuMIPOyBSLZko6Tv2lLTMkZ4JAIOmiUgmbxMvWLMFHcxgdSGNxok9NUQFmIECLMaFMoypNtmnIY"></div><div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative"><button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button><div><h3 class="text-[18px] font-bold text-gray-900 leading-snug">Jardín Botánico</h3><p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Bosque, Medellín</p></div><div class="flex flex-wrap items-center gap-2 mt-auto pt-2"><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Ciencia</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span></div></div></div><div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white"><div class="w-[42%] h-full shrink-0 relative overflow-hidden"><img alt="Planetario Medellín" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUcygEh34eU3lMl6MD7wU02CTdZl5c7roFACajLM4ewp7PjOfegQFlN-XvYqXIlBLq3kSi_yWc_77HeoiENQkdUbMPkwHGb7p1SgR8acITJE-hNuDs0cdGEp0NhzyNXus3TbQA0sZ1xiJecPz4GSC2ci5rKkcRmNITzYnB8JlCno5gTNRS7Jnhtnu5PJibavjwVFkp71hJ6Tc4dlU1aaLt3okU4rr05oaEAZgOWLs6oxDVtD1pjuhTeCu1rJJvt_UJTl8BfJEHzDkbk7c"></div><div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative"><button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button><div><h3 class="text-[18px] font-bold text-gray-900 leading-snug">Planetario Medellín</h3><p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>Aranjuez, Medellín</p></div><div class="flex flex-wrap items-center gap-2 mt-auto pt-2"><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Cultura</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Aprender</span><span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">Explora</span></div></div></div></div><!-- Bottom spacer for navigation bar --><div class="h-6"></div></section>
+<section class="w-full max-w-md md:max-w-5xl mx-auto mt-6 md:mt-8 space-y-3.5 md:space-y-6" style="overflow: hidden auto; flex: 1 1 0%; min-height: 0px; padding-bottom: 110px;">
+    <div class="flex flex-col items-center w-full mb-3 md:mb-6">
+        <h2 class="font-bold text-black text-center relative inline-block pb-1.5 text-[16px] md:text-[24px]">Lugares Visitados<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-14 md:w-20 h-[3px] md:h-[4px] bg-[#001249] rounded-full"></span></h2>
+    </div>
+    <!-- Empty State (se muestra cuando no hay favoritos) -->
+    <div id="places-empty-state" class="hidden flex flex-col items-center justify-center py-12 px-4 text-center">
+        <div class="text-6xl mb-4">???</div>
+        <h3 class="font-bold text-lg text-gray-700 mb-2">No has visitado ning�n lugar a�n</h3>
+        <p class="text-gray-500 text-sm mb-6 max-w-xs mx-auto">�An�mate a chismear un rato y explora!</p>
+        <a href="HomeBeci.html" class="inline-flex items-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-full text-sm hover:opacity-90 transition-all">
+            <span class="material-symbols-outlined text-lg">explore</span>
+            Explorar lugares
+        </a>
+    </div>
+    <!-- Places Container (se llena din�micamente si hay favoritos) -->
+    <div id="places-container" class="hidden">
+        <!-- Mobile Places List (< md) -->
+        <div id="places-mobile" class="flex flex-col space-y-3.5 md:hidden"></div>
+        <!-- Tablet Places Grid (md < lg) -->
+        <div id="places-tablet" class="hidden md:flex lg:hidden flex-col gap-5 w-full max-2xl mx-auto"></div>
+        <!-- Desktop Places Grid (>= lg) -->
+        <div id="places-desktop" class="hidden lg:grid lg:grid-cols-2 gap-6 w-full"></div>
+    </div>
+</section>
 </main>
 <!-- Phosphor Icons for UI elements -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -386,7 +299,7 @@
 <li class="flex flex-col items-center justify-center w-[72px]">
 <a class="flex flex-col items-center text-gray-500 hover:text-[#8A56AC] transition-colors" href="TeAyudamosBeci.html">
 <i class="ph ph-chat-circle-dots text-2xl mb-1 text-[#9456E0]"></i>
-<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">¿Te ayudamos?</span>
+<span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">�Te ayudamos?</span>
 </a>
 </li>
 <!-- Profile/Neighbor (Active) -->
@@ -450,7 +363,256 @@
 </script>
 
 
-</body></html>
+<script src="supabase-config.js"></script><script src="beci-auth.js"></script>
+
+<script>
+    (function () {
+        var PROFILE_KEY = 'beci_profile';
+
+        function readProfile() {
+            try {
+                var raw = localStorage.getItem(PROFILE_KEY);
+                var data = raw ? JSON.parse(raw) : null;
+                return data && typeof data === 'object' ? data : null;
+            } catch (e) { return null; }
+        }
+
+        function applyProfile(perfil) {
+            if (!perfil) return;
+            if (perfil.foto) {
+                document.querySelectorAll('img.perfil-foto').forEach(function (img) { img.src = perfil.foto; });
+            }
+            var nombre = ((perfil.nombre || '') + ' ' + (perfil.apellido || '')).trim();
+            if (nombre) {
+                document.querySelectorAll('h1.perfil-nombre').forEach(function (h1) {
+                    if (h1.firstChild && h1.firstChild.nodeType === 3) h1.firstChild.nodeValue = nombre;
+                });
+            }
+            if (perfil.ubicacion) {
+                document.querySelectorAll('.perfil-ubicacion').forEach(function (el) { el.textContent = perfil.ubicacion; });
+            }
+        }
+
+        // Detecci�n de ubicaci�n
+        function detectarUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (pos) {
+                    var lat = pos.coords.latitude;
+                    var lon = pos.coords.longitude;
+                    reverseGeocode(lat, lon);
+                }, function () {
+                    detectarPorIP();
+                }, { timeout: 10000, enableHighAccuracy: false });
+            } else {
+                detectarPorIP();
+            }
+        }
+
+        function reverseGeocode(lat, lon) {
+            fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon + '&addressdetails=1')
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    var addr = data.address || {};
+                    var ciudad = addr.city || addr.town || addr.village || addr.municipality || '';
+                    var depto = addr.state || addr.region || '';
+                    var pais = addr.country || '';
+                    var ubicacion = [ciudad, depto, pais].filter(Boolean).join(', ');
+                    if (ubicacion) {
+                        var perfil = readProfile() || {};
+                        perfil.ubicacion = ubicacion;
+                        localStorage.setItem('beci_profile', JSON.stringify(perfil));
+                        document.querySelectorAll('.perfil-ubicacion').forEach(function (el) { el.textContent = ubicacion; });
+                    }
+                }).catch(function () { detectarPorIP(); });
+        }
+
+        function detectarPorIP() {
+            fetch('https://ipapi.co/json/')
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    var ciudad = data.city || '';
+                    var depto = data.region || '';
+                    var pais = data.country_name || '';
+                    var ubicacion = [ciudad, depto, pais].filter(Boolean).join(', ');
+                    if (ubicacion) {
+                        var perfil = readProfile() || {};
+                        perfil.ubicacion = ubicacion;
+                        localStorage.setItem('beci_profile', JSON.stringify(perfil));
+                        document.querySelectorAll('.perfil-ubicacion').forEach(function (el) { el.textContent = ubicacion; });
+                    }
+                }).catch(function () {});
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+        });
+
+        var AUTH = window.BeciAuth;
+
+        Promise.resolve()
+            .then(function () { return AUTH ? AUTH.ensureReady() : null; })
+            .then(function () {
+                if (AUTH && !AUTH.isLoggedIn()) {
+                    AUTH.showLoginGate('Perfilbeci.html');
+                    return;
+                }
+                var perfil = readProfile() || {};
+                var user = AUTH ? AUTH.currentUser() : null;
+                if (user) {
+                    if (user.nombre) perfil.nombre = user.nombre;
+                    if (user.apellido) perfil.apellido = user.apellido;
+                    if (user.correo) perfil.correo = user.correo;
+                }
+                applyProfile(perfil);
+
+                // Cargar favoritos y mostrar/ocultar estado vacío
+                cargarLugaresVisitados();
+
+                // Detectar ubicación si no hay una guardada
+                if (!perfil.ubicacion) {
+                    detectarUbicacion();
+                }
+            });
+        });
+    })();
+
+    // Cargar lugares visitados desde favoritos
+    function cargarLugaresVisitados() {
+        var favoritos = [];
+        try {
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (key && key.indexOf('fav_') === 0 && localStorage.getItem(key) === 'true') {
+                    var placeId = key.substring(4);
+                    favoritos.push(placeId);
+                }
+            }
+        } catch (e) {}
+
+        var emptyState = document.getElementById('places-empty-state');
+        var container = document.getElementById('places-container');
+
+        if (favoritos.length === 0) {
+            if (emptyState) emptyState.classList.remove('hidden');
+            var container = document.getElementById('places-container');
+            if (container) container.classList.add('hidden');
+            return;
+        }
+
+        // Hay favoritos - ocultar estado vacío y mostrar contenedor
+        if (emptyState) emptyState.classList.add('hidden');
+        var container = document.getElementById('places-container');
+        if (container) container.classList.remove('hidden');
+
+        // Cargar datos de lugares desde beci-data.js
+        var lugaresData = {};
+        if (typeof LUGARES_BECI !== 'undefined') {
+            LUGARES_BECI.forEach(function(l) { lugaresData[l.id] = l; });
+        }
+        if (typeof LUGARES_BUSCADOR !== 'undefined') {
+            LUGARES_BUSCADOR.forEach(function(l) { lugaresData[l.id] = l; });
+        }
+        if (typeof SENA_SEDES !== 'undefined') {
+            SENA_SEDES.forEach(function(l) { lugaresData[l.id] = l; });
+        }
+
+        var mobileContainer = document.getElementById('places-mobile');
+        var tabletContainer = document.getElementById('places-tablet');
+        var desktopContainer = document.getElementById('places-desktop');
+
+        favoritos.forEach(function(placeId) {
+            var lugar = lugaresData[placeId];
+            if (!lugar) return;
+
+            var cardHtml = crearTarjetaLugar(lugar);
+
+            // Mobile
+            if (document.getElementById('places-mobile')) {
+                var div = document.createElement('div');
+                div.innerHTML = cardHtml.mobile;
+                document.getElementById('places-mobile').appendChild(div.firstElementChild);
+            }
+
+            // Tablet
+            if (document.getElementById('places-tablet')) {
+                var div = document.createElement('div');
+                div.innerHTML = cardHtml.tablet;
+                document.getElementById('places-tablet').appendChild(div.firstElementChild);
+            }
+
+            // Desktop
+            if (document.getElementById('places-desktop')) {
+                var div = document.createElement('div');
+                div.innerHTML = cardHtml.desktop;
+                document.getElementById('places-desktop').appendChild(div.firstElementChild);
+            }
+        });
+
+        // Mostrar contenedores que tengan contenido
+        var mobileContainer = document.getElementById('places-mobile');
+        var tabletContainer = document.getElementById('places-tablet');
+        var desktopContainer = document.getElementById('places-desktop');
+        var container = document.getElementById('places-container');
+
+        if (mobileContainer && mobileContainer.children.length > 0) mobileContainer.style.display = 'flex';
+        if (tabletContainer && tabletContainer.children.length > 0) tabletContainer.style.display = 'flex';
+        if (desktopContainer && desktopContainer.children.length > 0) desktopContainer.style.display = 'grid';
+        if (container) container.classList.remove('hidden');
+    }
+
+    function crearTarjetaLugar(lugar) {
+        var pills = (lugar.pills || []).slice(0, 3).map(function(t) {
+            return '<span class="pill-btn text-[#831843] text-[10px] font-semibold px-2 py-0.5 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">' + t + '</span>';
+        }).join('');
+
+        var pillsTablet = (lugar.pills || []).slice(0, 3).map(function(t) {
+            return '<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">' + t + '</span>';
+        }).join('');
+
+        var pillsDesktop = (lugar.pills || []).slice(0, 3).map(function(t) {
+            return '<span class="pill-btn text-[#831843] text-[11px] font-semibold px-3 py-1 rounded-full leading-normal" style="background-color: rgb(253, 152, 196);">' + t + '</span>';
+        }).join('');
+
+        var ubicacion = lugar.sector || '';
+
+        return {
+            mobile: '<div class="bg-white rounded-[20px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[108px]">' +
+                '<div class="w-[38%] h-full shrink-0 relative overflow-hidden">' +
+                '<img alt="' + lugar.nombre + '" class="w-full h-full object-cover" src="' + (lugar.img || '') + '">' +
+                '</div>' +
+                '<div class="w-[62%] px-3.5 py-2.5 flex flex-col justify-between bg-white">' +
+                '<div><h3 class="text-[16px] font-bold text-gray-900 leading-snug">' + lugar.nombre + '</h3>' +
+                '<p class="text-[12px] text-gray-500 font-medium leading-tight mt-0.5 flex items-center gap-0.5">' +
+                '<span class="material-symbols-outlined text-[13px] leading-none text-gray-500">location_on</span><span>' + ubicacion + '</span></p></div>' +
+                '<div class="flex flex-wrap items-center gap-1.5 mt-auto pt-1">' + pills + '</div>' +
+                '</div></div>',
+
+            tablet: '<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">' +
+                '<div class="w-[38%] h-full shrink-0 relative overflow-hidden">' +
+                '<img alt="' + lugar.nombre + '" class="w-full h-full object-cover" src="' + (lugar.img || '') + '">' +
+                '</div>' +
+                '<div class="w-[62%] px-6 py-4 flex flex-col justify-between bg-white relative">' +
+                '<button aria-label="Favorito" class="absolute top-4 right-5 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>' +
+                '<div><h3 class="text-[18px] font-bold text-gray-900 leading-snug">' + lugar.nombre + '</h3>' +
+                '<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1">' +
+                '<span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>' + ubicacion + '</p></div>' +
+                '<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">' + pillsTablet + '</div>' +
+                '</div></div>',
+
+            desktop: '<div class="bg-white rounded-[24px] overflow-hidden flex flex-row w-full shadow-sm hover:shadow-md transition-all duration-300 h-[140px] border border-white">' +
+                '<div class="w-[42%] h-full shrink-0 relative overflow-hidden">' +
+                '<img alt="' + lugar.nombre + '" class="w-full h-full object-cover" src="' + (lugar.img || '') + '">' +
+                '</div>' +
+                '<div class="w-[58%] px-5 py-3.5 flex flex-col justify-between bg-white relative">' +
+                '<button aria-label="Favorito" class="absolute top-3.5 right-4 text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[22px]">favorite</span></button>' +
+                '<div><h3 class="text-[18px] font-bold text-gray-900 leading-snug">' + lugar.nombre + '</h3>' +
+                '<p class="text-[13px] text-gray-500 font-medium leading-tight mt-1 flex items-center gap-1">' +
+                '<span class="material-symbols-outlined text-[15px] leading-none text-gray-500">location_on</span>' + ubicacion + '</p></div>' +
+                '<div class="flex flex-wrap items-center gap-2 mt-auto pt-2">' + pillsDesktop + '</div>' +
+                '</div></div>'
+        };
+    }
+
 
 
 
