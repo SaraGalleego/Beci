@@ -115,6 +115,49 @@
           return 'complejo-norte';
         } catch (e) { return 'complejo-norte'; }
       }
+      // Registrar lugar visitado por el usuario
+      function registrarLugarVisitado(id) {
+        if (!window.BeciAuth || !BeciAuth.isLoggedIn()) return;
+
+        try {
+          var usuario = BeciAuth.currentUser();
+          if (!usuario || !usuario.correo) return;
+
+          var clave = 'beci_visitas_' + usuario.correo.toLowerCase().trim();
+          var visitas = [];
+
+          try {
+            visitas = JSON.parse(localStorage.getItem(clave) || '[]');
+          } catch (e) {
+            visitas = [];
+          }
+
+          if (visitas.indexOf(id) === -1) {
+            visitas.push(id);
+            localStorage.setItem(clave, JSON.stringify(visitas));
+          }
+        } catch (e) {
+          console.error('BECI - Error al registrar lugar visitado:', e);
+        }
+      }
+
+      // Registrar la visita únicamente cuando el usuario pulsa uno de los
+      // botones de navegación ("Explora este espacio" / "Ver mas sedes"),
+      // NO al cargar la página.
+      function registrarVisitaAlNavegar() {
+        registrarLugarVisitado(getInstitutionId());
+      }
+
+      var btnExploraEspacio = document.querySelector('button[onclick*="introsena.html"]');
+      var btnVerMasSedes = document.querySelector('button[onclick*="Mapasena.html"]');
+
+      if (btnExploraEspacio) {
+        btnExploraEspacio.addEventListener('click', registrarVisitaAlNavegar);
+      }
+
+      if (btnVerMasSedes) {
+        btnVerMasSedes.addEventListener('click', registrarVisitaAlNavegar);
+      }
 
       function storeFav(id, fav) {
         try { localStorage.setItem('fav_' + id, fav ? 'true' : 'false'); } catch (e) {}

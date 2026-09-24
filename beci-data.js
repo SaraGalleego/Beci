@@ -28,7 +28,7 @@ var SENA_SEDES = {
     pills: ['Aprender', 'Crear', 'Crecer'],
     lat: 6.3022365,
     lng: -75.5682972,
-    img: INSTITUCIONES_BECI.imgPlaceholder,
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBZ8rJE2qPwZrVrfhWplDX7GwWjBZyVESXIbLJZxX5z_ITcZpgIHX8P6FWXSq106KCjSEc0MseJGJ0PKrejHTNZ2Da5Tf8lc9u2u4m6eQDz4vEgnwXFM7HfXZp-I68veNrx-oz1vr_zx84JOKd9cyV9TxAkxr_qTjIchGAN9Tm7uJB-wv0qVQ0mqqMzYr0PX9e_HnPVjLNx6I37qK-2PyOkMHFZGV0bvT_jXeP8MrsDQMxB6tg9CM8aIxY4B9G4wwxpzF6jCeMPtC6iASE',
     alt: 'Complejo Sena Norte'
   },
   'ctma': {
@@ -134,7 +134,7 @@ var LUGARES_BECI = [
     pills: ['Aprender', 'Crear', 'Crecer'],
     lat: 6.302511,
     lng: -75.568047,
-    img: INSTITUCIONES_BECI.imgPlaceholder,
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBZ8rJE2qPwZrVrfhWplDX7GwWjBZyVESXIbLJZxX5z_ITcZpgIHX8P6FWXSq106KCjSEc0MseJGJ0PKrejHTNZ2Da5Tf8lc9u2u4m6eQDz4vEgnwXFM7HfXZp-I68veNrx-oz1vr_zx84JOKd9cyV9TxAkxr_qTjIchGAN9Tm7uJB-wv0qVQ0mqqMzYr0PX9e_HnPVjLNx6I37qK-2PyOkMHFZGV0bvT_jXeP8MrsDQMxB6tg9CM8aIxY4B9G4wwxpzF6jCeMPtC6iASE',
     alt: 'Complejo Sena Norte',
     destacado: true
   },

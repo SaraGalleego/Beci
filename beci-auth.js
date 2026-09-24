@@ -188,6 +188,20 @@
 
       setSession(sbUser.correo);
 
+      // Espejo del perfil real en beci_profile para que el nombre, el apellido
+      // y el correo estén disponibles de forma inmediata (Perfilbeci, confiveci,
+      // insignias), incluso si Supabase tarda o falla en una carga posterior.
+      try {
+        var _perfil = {};
+        try {
+          _perfil = JSON.parse(localStorage.getItem('beci_profile')) || {};
+        } catch (e) {}
+        if (sbUser.nombre) _perfil.nombre = sbUser.nombre;
+        if (sbUser.apellido) _perfil.apellido = sbUser.apellido;
+        if (sbUser.correo) _perfil.correo = sbUser.correo;
+        localStorage.setItem('beci_profile', JSON.stringify(_perfil));
+      } catch (e) {}
+
     } else {
 
       setSession('');
