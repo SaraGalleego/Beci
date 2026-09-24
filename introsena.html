@@ -123,7 +123,7 @@
         justify-content: center;
         align-items: flex-end;
         flex: 1;
-        opacity: 0;
+        opacity: 1;
         pointer-events: none;
         position: relative;
         z-index: 1;
@@ -131,7 +131,8 @@
     }
 
     .character-img {
-        height: 55vh;
+        height: 40vh;
+        max-height: 320px;
         width: auto;
         object-fit: contain;
         transform-origin: bottom center;
@@ -225,9 +226,36 @@
         to { opacity: 1; transform: translateY(0); }
     }
     
-    @keyframes slideInCharacter {
-        from { opacity: 0; transform: translateY(50px); }
-        to { opacity: 1; transform: translateY(0); }
+    @keyframes characterEntrance {
+        0% {
+            opacity: 0;
+            transform: translateX(120%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes characterEntranceDesktop {
+        0% {
+            opacity: 1;
+            transform: translateX(42%) rotate(0deg) scale(1.02);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(42%) rotate(-8deg) scale(1.02);
+        }
+    }
+
+    @keyframes characterWave {
+        0% { transform: translateY(0) rotate(0deg); }
+        15% { transform: translateY(-3px) rotate(-15deg); }
+        30% { transform: translateY(-5px) rotate(12deg); }
+        45% { transform: translateY(-3px) rotate(-10deg); }
+        60% { transform: translateY(-2px) rotate(6deg); }
+        75% { transform: translateY(-1px) rotate(-3deg); }
+        100% { transform: translateY(0) rotate(0deg); }
     }
 
     @keyframes characterLife {
@@ -251,8 +279,65 @@
         animation: slideUpIn 0.8s ease-out forwards;
     }
 
-    .animate-character-in {
-        animation: slideInCharacter 1s ease-out forwards, characterLife 6s ease-in-out infinite 1s;
+    .animate-character-entrance {
+        animation: characterEntrance 1s ease-out forwards;
+    }
+
+    .animate-character-entrance-desktop {
+        animation: characterEntranceDesktop 1s ease-out forwards;
+    }
+
+    /* Entrada con el mismo rebote elástico de index.html:
+       sale desde la derecha, sobrepasa un poquito la posición y rebota hasta quedar en su lugar. */
+    .animate-character-wave .character-img {
+        animation: characterPeekPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0s 1 both,
+                   characterWavePeek 2.5s ease-in-out 0.6s 1 both;
+        transform-origin: 100% 52%;
+    }
+
+    @keyframes characterPeekPop {
+        0% {
+            opacity: 1;
+            transform: translateX(115%) rotate(-8deg) scale(1.02);
+        }
+        58% {
+            opacity: 1;
+            transform: translateX(30%) rotate(-8deg) scale(1.05);
+        }
+        76% {
+            opacity: 1;
+            transform: translateX(48%) rotate(-8deg) scale(1.00);
+        }
+        88% {
+            opacity: 1;
+            transform: translateX(38%) rotate(-8deg) scale(1.035);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(42%) rotate(-8deg) scale(1.02);
+        }
+    }
+
+    @keyframes characterWavePeek {
+        0% { transform: translateX(42%) rotate(-8deg) scale(1.02); }
+        15% { transform: translateX(42%) rotate(-13deg) scale(1.02); }
+        30% { transform: translateX(42%) rotate(-4deg) scale(1.02); }
+        45% { transform: translateX(42%) rotate(-11deg) scale(1.02); }
+        60% { transform: translateX(42%) rotate(-6deg) scale(1.02); }
+        75% { transform: translateX(42%) rotate(-9deg) scale(1.02); }
+        100% { transform: translateX(42%) rotate(-8deg) scale(1.02); }
+    }
+
+    @keyframes characterIdlePeek {
+        0%, 100% { transform: translateX(42%) rotate(-8deg) scale(1.02); }
+        25% { transform: translateX(42%) translateY(-3px) rotate(-7deg) scale(1.02); }
+        50% { transform: translateX(42%) translateY(-5px) rotate(-8deg) scale(1.02); }
+        75% { transform: translateX(42%) translateY(-3px) rotate(-9deg) scale(1.02); }
+    }
+
+    .character-float-after-wave .character-img {
+        animation: characterIdlePeek 4s ease-in-out infinite;
+        transform-origin: 100% 52%;
     }
 
     .anim-float { animation: floatDeco 6s infinite ease-in-out; }
@@ -301,10 +386,12 @@
             flex: 1;
             justify-content: flex-end;
             margin-bottom: -15vh;
+            overflow: visible;
         }
 
         .character-img {
-            height: 85vh;
+            height: 100vh;
+            transform-origin: bottom right;
         }
 
         .cta-container {
@@ -322,8 +409,36 @@
         }
     }
 
+
+    /* Misma jerarquía de distribución de index.html: solo posición y tamaños. */
+    @media (max-width: 1023px) {
+        .content-area { justify-content: space-between; }
+        .left-col { flex-shrink: 0; }
+        .character-container { margin-top: auto; padding-bottom: 2vh; flex-shrink: 0; overflow: visible; }
+        .character-img { height: 40vh; max-height: 320px; transform-origin: bottom right; transform: rotate(5deg) scale(1.02); margin-right: -12%; margin-bottom: -12%; }
+        .cta-container {
+            position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
+            width: 100% !important; justify-content: center !important;
+            padding: 2vh 1rem max(env(safe-area-inset-bottom), 4vh) !important;
+            margin-top: 0 !important; background: transparent !important; z-index: 20;
+        }
+        .btn-primary { max-width: 320px !important; width: 100% !important; padding: 1rem 3rem !important; font-size: 1.25rem !important; }
+    }
+    @media (min-width: 1024px) {
+        .main-container { padding: 8vh 4rem; }
+        .content-area { flex-direction: row; align-items: center; justify-content: space-between; }
+        .left-col { flex: 1; max-width: 60%; justify-content: flex-start; align-items: flex-start; padding-top: 1vh; gap: 1.25rem; }
+        .logo { width: 250px; margin-bottom: 0.5rem; }
+        h1 { font-size: clamp(4.5rem, 9vw, 6rem) !important; line-height: 1.05; }
+        .text-content p { font-size: clamp(1.6rem, 2.5vw, 2rem) !important; max-width: 600px; line-height: 1.3; }
+        .character-container { flex: 0 0 50%; justify-content: flex-end; align-items: flex-end; height: 100%; min-height: 100vh; margin-bottom: 0; overflow: visible; position: relative; }
+        .character-img { height: 100vh; max-height: 100vh; width: auto; transform-origin: 100% 52%; transform: translateX(42%) rotate(-8deg) scale(1.02); margin-right: 0; margin-bottom: -20%; }
+        .cta-container { position: static !important; width: 100% !important; margin-top: 0.5rem !important; justify-content: flex-start !important; padding: 0 !important; transform: translateY(-3.5vh); }
+        .btn-primary { max-width: 400px !important; padding: 1.25rem 4rem !important; font-size: 1.5rem !important; }
+    }
+
 </style>
-<style>@media (min-width: 1024px) { .character-img { height: 70vh !important; } }</style><style>@media (min-width: 768px) { body { background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkzXzfdC_8j2xR9ocki8R3qmxIS-SdbvhncH7ow838AmxeNtdWGThTieK6AxgeO2n2MaPmPDweH-axwcVer0VBhE7JACq6YZ7fma4noXWf62LZtTQUZLkoz7uAeUD70rikDvsFGaxq4uhIws0e2r5PovXztgQopqphinmcmPaqQw9VlytFzhh5TFTDK7KnHYyypx8LX9LOeys5maE9Rcta50n74YL-hhuEc1om-ozvyRGPu-KncShHLByOsa42IxYwMQ') !important; background-size: cover !important; background-position: center bottom !important; background-repeat: no-repeat !important; } }</style></head>
+<style>@media (min-width: 1024px) { .character-img { height: 100vh !important; max-height: 100vh !important; } }</style><style>@media (min-width: 768px) { body { background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkzXzfdC_8j2xR9ocki8R3qmxIS-SdbvhncH7ow838AmxeNtdWGThTieK6AxgeO2n2MaPmPDweH-axwcVer0VBhE7JACq6YZ7fma4noXWf62LZtTQUZLkoz7uAeUD70rikDvsFGaxq4uhIws0e2r5PovXztgQopqphinmcmPaqQw9VlytFzhh5TFTDK7KnHYyypx8LX9LOeys5maE9Rcta50n74YL-hhuEc1om-ozvyRGPu-KncShHLByOsa42IxYwMQ') !important; background-size: cover !important; background-position: center bottom !important; background-repeat: no-repeat !important; } }</style></head>
 <body style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOKVGbytVtTkY-09XEaQkJ-boILrb6JD9ZRmcRzzeglhI8Bu9H2lCfC1awc7GYhvw-DSNVGDC8yvh7GXTsAvqqm5p6La5_l5-RIlGma554NFx8NQbWr4PQjF5ipDnt_aAUVHTGMFJfmK7I0Gr0f2oPGfslJMmgtQOK7R0SbuNTkgLq2Iy_9ru085fCS7afZ9JUYIiK6h7AQ0lZDj10iRKj2W7gy9-hwkF-611CIdEM-szd5UdZlPZtAoo-V21Y-lvcYA'); background-size: cover; background-position: center center; background-repeat: no-repeat;">
 <!-- Particles (Simulated from reference) -->
 <div class="particle anim-float" style="width: 10px; height: 10px; top: 15%; right: 15%; background-color: #F472B6; animation-delay: 0s;"></div>
@@ -336,22 +451,22 @@
 <div class="left-col">
 <!-- Header -->
 <header class="animate-slide-left" id="header-anim">
-<img alt="Beci Logo" class="logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ4JtLqeHg_kMHqUHtmSfnYlWSt8ed5Z25Jw9g_Ybo56UJbo-j9j8jYlsZ8IfEdkMs1M7ncbjwAhBz0Wf3rh8D-x9FzxmFXyny4BlXABSL2XCLViY0knV_UhsG5tEPRdIGk6dB_3YtHWdJNZwZyRJQq2MkHArI1ImoM6RbanCw-pHUSkrTigrAhkVCGXipACMjZagCeO0zIBi4T4XYq1_pIx5pddRH8VttlsGFoGHoCKCQIWrpF9Gq8ewDXBRJC72FPA">
+<img alt="Beci Logo" class="logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZDfrFrZMot1pPMPF3aNtNuUKLQczIr69KuMAcMrpI9mWiSEO2asSTW6CA1pah59JtsYjQNEf_voXknJXi841IFArnlFhtk002-j3AJfTmxC9DxO7ld7f5tYhamjRRR-qcSIuia5DzuUx0WdmeWwfCFEuZW_DNKzU0YKMQ_lXz51nwJo6RGlJwyh-jeiNOjriGZFR6u10gOZILWpMXbZl4WbHazFBZXzqX0AEontJrll0l1igDYyLOtlqPVdSQ3Szqw">
 </header>
 <!-- Text Content -->
-<section class="text-content animate-slide-left" id="text-anim"><h1 style="font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.1; color: #1a1b20; letter-spacing: -0.02em;" class="">¡Hola!<br>¡Bienvenido<br><span style="color: #336926;" class="">Veci!</span></h1><p style="font-family: 'Poppins', sans-serif; font-size: clamp(0.95rem, 1.6vw, 1.25rem); color: #1a1b20; font-weight: 500; margin-top: 1rem; max-width: 320px; line-height: 1.35;" class="">Exploremos juntos los Centros <strong style="color: #336926; font-weight: 700;">SENA</strong> de Antioquia y enterate de todo lo que hay.</p><svg fill="none" height="16" style="margin-top: 0.5rem; display: block;" viewBox="0 0 120 16" width="120"><path d="M2 8C20 14 40 2 60 8C80 14 100 2 118 8" stroke="#4DB21A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg></section>
-</div>
-<!-- Character -->
-<div class="character-container animate-character-in" id="char-anim">
-<img alt="Beci Character Waving" class="character-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkPpJhuUEgP4gIMyHn7jKqmUduc4m-UzgOPL39jl7pK-OaScth3_qQ5P9uRL4fp3uaaWNrfqGyfnoPkH_lN61HAWtL_higDNben14BZPd1yj6j0ycDQq1t1-0kkws3u_2srpJfOFOGFxWxJGgUS2ixakzwjTOZK14oGtTJahrax67Pue7QHmztxpXUn2Vgfccz8ytMl1JH9aH2YJR8JfnIt96uXbfYq58wl1Hsisy2s63r6TmaULsve9ZS3Qa-rWVsqg">
-</div>
-</div>
+<section class="text-content animate-slide-left" id="text-anim"><h1 style="font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.1; color: #1a1b20; letter-spacing: -0.02em;" class="">¡Hola!<br>¡Bienvenido<br><span style="color: #336926;" class="">Veci!</span></h1><p style="font-family: 'Poppins', sans-serif; font-size: clamp(1.2rem, 2vw, 1.75rem); color: #1a1b20; font-weight: 500; margin-top: 1rem; max-width: 520px; line-height: 1.3;" class="">Exploremos juntos los Centros <strong style="color: #336926; font-weight: 700;">SENA</strong> de Antioquia<br>y enterate de todo lo que hay.</p><svg fill="none" height="16" style="margin-top: 0.5rem; display: block;" viewBox="0 0 120 16" width="120"><path d="M2 8C20 14 40 2 60 8C80 14 100 2 118 8" stroke="#4DB21A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg></section>
 <!-- CTA Button -->
-<div class="cta-container animate-slide-up" id="cta-anim" style="position: relative; bottom: auto; left: auto; width: 100%; justify-content: center; margin-top: -2vh;">
+<div class="cta-container" id="cta-anim">
 <button class="btn-primary" onclick="window.location.href='InicioSena.html'" style="max-width: 340px; width: 100%; padding: 1rem 3rem; font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 1.35rem; background: linear-gradient(135deg, #FF6C01 0%, #FF5000 100%); border-radius: 9999px; color: #ffffff; box-shadow: 0 8px 24px rgba(255, 108, 1, 0.4); border: none; cursor: pointer; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
             Comenzar
             <div class="light-sweep"></div>
 </button>
+</div>
+</div>
+<!-- Character -->
+<div class="character-container" id="char-anim">
+<img alt="Beci Character Waving" class="character-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkPpJhuUEgP4gIMyHn7jKqmUduc4m-UzgOPL39jl7pK-OaScth3_qQ5P9uRL4fp3uaaWNrfqGyfnoPkH_lN61HAWtL_higDNben14BZPd1yj6j0ycDQq1t1-0kkws3u_2srpJfOFOGFxWxJGgUS2ixakzwjTOZK14oGtTJahrax67Pue7QHmztxpXUn2Vgfccz8ytMl1JH9aH2YJR8JfnIt96uXbfYq58wl1Hsisy2s63r6TmaULsve9ZS3Qa-rWVsqg">
+</div>
 </div>
 </main>
 <script>
@@ -367,8 +482,24 @@
         // Delay cascade for entry
         if(header) setTimeout(() => header.classList.add('animate-slide-left'), 100);
         if(textContent) setTimeout(() => textContent.classList.add('animate-slide-left'), 300);
-        if(ctaBtn) setTimeout(() => ctaBtn.classList.add('animate-slide-up'), 600);
-        if(character) setTimeout(() => character.classList.add('animate-character-in'), 800);
+
+        if(character) setTimeout(() => {
+          // La mascota entra desde la derecha con rebote elástico y después saluda.
+          character.classList.add('animate-character-wave');
+
+          // Al terminar el saludo, queda flotando suavemente.
+          setTimeout(() => {
+            character.classList.add('character-float-after-wave');
+          }, 2980);
+        }, 400);
+
+        if(ctaBtn) setTimeout(() => {
+          // El botón aparece después de que la mascota ya entró y saludó.
+          ctaBtn.classList.add('animate-slide-up');
+
+          // Brillo del botón después de su entrada.
+          setTimeout(() => ctaBtn.classList.add('sweep-once'), 1400);
+        }, 2000);
 
     });
 </script>

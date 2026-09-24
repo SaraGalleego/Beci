@@ -135,12 +135,34 @@
 </div>
 <!-- Registro / Inicio de sesión (cuando no hay cuenta) -->
 <div id="favorites-gate" class="hidden">
-<div class="bg-white/80 backdrop-blur-xl rounded-[36px] shadow-md px-6 py-10 md:px-10 md:py-12 mx-4 md:mx-auto max-w-md text-center">
-<div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#062573] flex items-center justify-center"><span class="text-3xl">&#128154;</span></div>
-<h2 class="text-3xl md:text-4xl font-dmsans font-black text-black tracking-tight">¡Regístrate!</h2>
-<p class="text-base md:text-lg font-medium text-gray-600 mt-3 mb-7">¡Veci, haz parte de la comunidad! Regístrate para guardar tus lugares favoritos.</p>
-<a href="RegistrateBeci.html?redirect=Favoritosbeci.html" class="block bg-[#062573] text-white font-semibold text-base md:text-lg py-3.5 px-8 rounded-full hover:shadow-lg transition-all">Registrarme</a>
-<p class="text-sm md:text-base text-gray-600 mt-4">¿Ya tienes una cuenta? <a href="InicioBeci.html?redirect=Favoritosbeci.html" class="text-[#062573] font-semibold hover:underline underline-offset-4">Inicia sesión</a></p>
+<div class="relative overflow-hidden bg-white/90 backdrop-blur-xl rounded-[32px] border border-white/80 shadow-[0_18px_50px_rgba(83,41,195,0.12)] px-6 py-9 md:px-10 md:py-10 mx-4 md:mx-auto max-w-md text-center">
+<div class="absolute -top-16 -right-16 w-36 h-36 rounded-full bg-[#F4DBF0]/70"></div>
+<div class="absolute -bottom-20 -left-16 w-40 h-40 rounded-full bg-[#EAF0FF]/80"></div>
+
+<div class="relative z-10">
+<div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#FDF3E6] border border-[#F4DBF0] mb-5">
+  <img src="img/Logobeci.png" alt="BECI" class="w-7 h-7 object-contain">
+  <span class="text-[11px] md:text-xs font-bold text-[#062573]">Tu espacio de vecino</span>
+</div>
+
+<div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#FDF3E6] border border-[#F4DBF0] flex items-center justify-center text-[#062573]">
+  <i class="ph ph-heart text-[28px]"></i>
+</div>
+
+<h2 class="text-3xl md:text-4xl font-dmsans font-black text-[#062573] tracking-tight">¡Regístrate!</h2>
+<p class="text-base md:text-lg font-medium text-gray-600 mt-3 mb-7">
+  Únete a la comunidad y guarda los lugares que más te gustan para tenerlos siempre a la mano.
+</p>
+
+<a href="RegistrateBeci.html?redirect=Favoritosbeci.html" class="block bg-[#062573] text-white font-semibold text-base md:text-lg py-3.5 px-8 rounded-full hover:shadow-lg transition-all">
+  Únete a la comunidad
+</a>
+
+<p class="text-sm md:text-base text-gray-600 mt-4">
+  ¿Ya tienes una cuenta?
+  <a href="InicioBeci.html?redirect=Favoritosbeci.html" class="text-[#5329C3] font-semibold hover:underline underline-offset-4">Inicia sesión</a>
+</p>
+</div>
 </div>
 </div>
 <!-- Vacío (sesión iniciada pero sin favoritos) -->
