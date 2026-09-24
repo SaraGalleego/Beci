@@ -73,8 +73,36 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-  
-    /* BECI 360 — organización específica para móvil */
+      /* Interfaz móvil limpia: mini mapa arriba de las miniaturas */
+    @media (max-width: 767px) {
+      #mobile-scene-selector {
+        bottom: 0 !important;
+        max-height: 78px !important;
+        padding: 8px !important;
+        scrollbar-width: none !important;
+      }
+
+      #mobile-scene-selector::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      #mobile-scene-selector .thumb-item {
+        width: 82px !important;
+        height: 58px !important;
+        flex: 0 0 82px !important;
+      }
+
+      #beci-360-minimap {
+        position: absolute !important;
+        right: auto !important;
+        left: 0 !important;
+        bottom: 86px !important;
+        width: 152px !important;
+        height: 116px !important;
+      }
+    }
+  </style>
+<style data-purpose="beci-360-identity">
     @media (max-width: 767px) {
       #beci-360-header {
         top: 10px !important;
@@ -87,7 +115,7 @@
       #beci-360-header .beci-brand {
         min-width: 0 !important;
         flex: 1 1 auto !important;
-        max-width: calc(100vw - 118px) !important;
+        max-width: calc(100vw - 62px) !important;
         padding: 8px 11px !important;
         border-radius: 16px !important;
         gap: 8px !important;
@@ -120,30 +148,70 @@
         margin-top: 3px !important;
       }
 
-      #beci-360-header #btn-nav-areas {
-        width: 40px !important;
-        height: 40px !important;
-        padding: 0 !important;
-        flex: 0 0 40px !important;
-        justify-content: center !important;
-        border-radius: 14px !important;
-        margin-top: 3px !important;
-      }
-
-      #beci-360-header #btn-nav-areas > span,
-      #beci-360-header #btn-nav-areas > i:last-child {
-        display: none !important;
-      }
-
-      #beci-360-header #btn-nav-areas > i:first-child {
-        width: 18px !important;
-        height: 18px !important;
-      }
-
+      /* En móvil también mostramos el nombre del lugar activo, igual que en desktop. */
       #beci-360-header .beci-scene-pill {
-        display: none !important;
+        display: inline-block !important;
+        font-size: 8px !important;
+        line-height: 1 !important;
+        letter-spacing: 0.04em !important;
+        padding: 5px 7px !important;
+        max-width: 92px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        flex: 0 1 auto !important;
+      }
+
+      /* Identidad móvil: un poco más larga y cómoda */
+      #beci-360-header .beci-brand {
+        width: calc(100vw - 58px) !important;
+        max-width: none !important;
+        min-height: 54px !important;
+      }
+
+      /* Mini ficha del lugar actual: visible y separada del carrusel */
+      #info-card {
+        top: auto !important;
+        right: 10px !important;
+        bottom: 96px !important;
+        left: auto !important;
+        width: min(230px, calc(100vw - 178px)) !important;
+        max-width: 230px !important;
+        padding: 10px !important;
+        border-radius: 14px !important;
+        z-index: 25 !important;
+      }
+
+      #info-card .w-11.h-11 {
+        width: 34px !important;
+        height: 34px !important;
+        border-radius: 10px !important;
+      }
+
+      #info-card .w-11.h-11 i {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      #info-card h2 {
+        font-size: 14px !important;
+        line-height: 1.15 !important;
+      }
+
+      #info-card p {
+        font-size: 10px !important;
+        line-height: 1.35 !important;
+        margin-top: 4px !important;
       }
     }
+  </style>
+
+<style data-purpose="desktop-layout-adjustment">
+  @media (min-width: 768px) {
+    #beci-360-minimap {
+      transform: translateX(22px);
+    }
+  }
 </style>
 <style data-purpose="panorama-viewer">
     #viewer-viewport {
@@ -207,15 +275,14 @@
 </main>
 <!-- END: 360 Viewport Container -->
 <!-- BEGIN: Top Navigation Bar -->
-<header class="absolute top-3 left-3 right-3 md:top-4 md:left-6 md:right-6 z-30 flex items-center justify-between gap-2 pointer-events-none">
-  <!-- BECI + navegación del tour -->
+<header id="beci-360-header" class="absolute top-3 left-3 right-3 md:top-4 md:left-6 md:right-6 z-30 flex items-center justify-between gap-2 pointer-events-none">
+  <!-- BECI + identidad CTMA -->
   <div class="pointer-events-auto flex items-center gap-2 min-w-0">
     <button aria-label="Volver" class="w-10 h-10 md:w-11 md:h-11 shrink-0 rounded-full glass-panel flex items-center justify-center hover:bg-neutral-800/90 text-white transition-colors shadow-lg" id="btn-back">
       <i class="w-5 h-5" data-lucide="arrow-left"></i>
     </button>
 
-    <!-- Identidad BECI integrada con la identidad SENA del 360 -->
-    <div class="flex items-center gap-2.5 rounded-2xl px-2.5 py-2 md:px-3.5 md:py-2.5 bg-white/95 backdrop-blur-md border border-white/80 shadow-xl min-w-0">
+    <div class="beci-brand flex items-center gap-2.5 rounded-2xl px-2.5 py-2 md:px-3.5 md:py-2.5 bg-white/95 backdrop-blur-md border border-white/80 shadow-xl min-w-0">
       <img
         src="img/Logobeci.png"
         alt="BECI"
@@ -225,10 +292,10 @@
       <div class="h-7 md:h-8 w-px bg-slate-200 shrink-0"></div>
 
       <div class="flex flex-col leading-none min-w-0">
-        <span class="text-[10px] md:text-xs font-bold tracking-wide text-slate-700 whitespace-nowrap">
+        <span class="beci-brand-title text-[10px] md:text-xs font-bold tracking-wide text-slate-700 whitespace-nowrap">
           Tour 360
         </span>
-        <span class="text-[10px] md:text-xs font-extrabold tracking-wide text-[#336926] whitespace-nowrap">
+        <span class="beci-brand-subtitle text-[10px] md:text-xs font-extrabold tracking-wide text-[#336926] whitespace-nowrap">
           CTMA · SENA
         </span>
       </div>
@@ -236,21 +303,12 @@
       <span class="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#4DB21A] shrink-0"></span>
 
       <span
-        class="hidden sm:inline-block text-[10px] md:text-xs font-medium text-slate-600 uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-full whitespace-nowrap"
+        class="beci-scene-pill hidden sm:inline-block text-[10px] md:text-xs font-medium text-slate-600 uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-full whitespace-nowrap"
         id="active-scene-pill"
       >
         Entrada Principal
       </span>
     </div>
-  </div>
-
-  <!-- Acceso a las áreas del recorrido -->
-  <div class="pointer-events-auto flex items-center gap-2 shrink-0">
-    <button class="bg-white/95 backdrop-blur-md border border-white/80 px-3 py-2.5 md:px-4 md:py-2.5 rounded-2xl text-xs md:text-sm font-medium hover:border-[#4DB21A]/50 text-slate-700 flex items-center gap-2 transition-colors shadow-xl" id="btn-nav-areas">
-      <i class="w-4 h-4 text-[#4DB21A]" data-lucide="layout-grid"></i>
-      <span class="hidden sm:inline">Explorar nuestras áreas</span>
-      <i class="w-4 h-4 text-slate-400" data-lucide="chevron-down"></i>
-    </button>
   </div>
 </header>
 <!-- END: Top Navigation Bar -->
@@ -274,12 +332,7 @@
         </p>
 </div>
 </div>
-<div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-3">
-<button class="w-full py-2 px-4 rounded-xl bg-sena hover:bg-sena-dark active:scale-[0.98] text-white text-xs md:text-sm font-semibold tracking-wide transition-all shadow-lg flex items-center justify-center gap-2" id="btn-more-info">
-<span>Ver más información</span>
-<i class="w-4 h-4" data-lucide="arrow-up-right"></i>
-</button>
-</div>
+
 </aside>
 <!-- END: Top-Right Information Floating Card -->
 <!-- BEGIN: Vertical Sidebar / Area Selector Strip (Left) -->
@@ -341,53 +394,38 @@
 <!-- END: Vertical Sidebar -->
 <!-- BEGIN: Bottom Navigation Controls & Minimap -->
 <section class="absolute bottom-5 inset-x-4 md:inset-x-8 z-20 flex items-end justify-between pointer-events-none">
-<!-- Bottom Left: Direction & Zoom Controls -->
-<div class="pointer-events-auto flex items-center gap-3 beci-brand">
-<!-- Directional D-Pad buttons -->
-<div class="glass-panel p-1.5 rounded-2xl flex items-center gap-1 shadow-2xl">
-<button class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-white" id="ctrl-pan-left" title="Girar a la izquierda">
-<i class="w-4 h-4" data-lucide="chevron-left"></i>
-</button>
-<div class="flex flex-col gap-1">
-<button class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-white" id="ctrl-pan-up" title="Mirar arriba">
-<i class="w-4 h-4" data-lucide="chevron-up"></i>
-</button>
-<button class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-white" id="ctrl-pan-down" title="Mirar abajo">
-<i class="w-4 h-4" data-lucide="chevron-down"></i>
-</button>
+<!-- Mobile: horizontal scene carousel with image thumbnails -->
+<div id="mobile-scene-selector" class="md:hidden pointer-events-auto absolute bottom-0 left-1/2 -translate-x-1/2 w-[calc(100vw-32px)] max-w-[390px] glass-panel px-2.5 py-2 rounded-2xl flex items-center gap-2 shadow-2xl overflow-x-auto no-scrollbar">
+  <button class="thumb-item group relative w-20 h-14 rounded-xl overflow-hidden border-2 border-sena scale-105 shadow-md shadow-sena/20 shrink-0" data-scene="scene-entrada">
+    <img alt="Entrada Principal" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeqjnqghdXrDhJ1F7358i9zXAlQq6Hio75vtRM7kpJ_M17F7c04tetKYhFBdYvCaRYiNDUFjjo2mW2WW_q4utGWa1ACSNawFFFSVhP5l2LbKnd5YIYmBcpGizzrC5dY9b7rMtQcIkIfUQf60UorrIYfPwNMVomaaaIyG4HsJsj1uM4jSCMfbMBFlyYkLO2nEjIakHthaM7RY6l-O4RJLmzRwO5q-1AiXcaHL42aNFO3p7WeZCbyk9U"/>
+    <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">Entrada</span>
+  </button>
+  <button class="thumb-item group relative w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent shrink-0" data-scene="scene-hall">
+    <img alt="Hall Central Automotriz" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA4JRwhRkrsyhdJMGmw101CANCwGEqKX-0TZp2Oya_tUxhozP8NGPFrRshDTN9KcSNxiddtbHaA4JqFWqKuJtSf61KF5S9JcC64M7FLlUSOpV8DIhCSSNek2ELC63UHui5-CtI21CCOzjx5HaI8C9S5I4o-jvAGgPcpNKXdvN2Zk7sObJwKQt14PSYRflqtMVAG1RR4WCCccs8Ymo6LBXveESnoplKPW3X1nNacWd9oxWucwM1WF89"/>
+    <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">Hall</span>
+  </button>
+  <button class="thumb-item group relative w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent shrink-0" data-scene="scene-digital">
+    <img alt="Área Digital" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeMV21loQ3HOZZh4213931XabxBfNcJqBWtTNVylrPmfAtu94wicQUc2CqqKbXDEYyiZNPPrdEWB5X1lBCamQi5joGT2l9c3fZj9ucxmiHU7EMqHD2JLlbDXAEUCQOzoTaEbBTVPQzaAO1L52sbJX1XKBXuBXRiQtyTBeOfS_uvbHSsX5B2t2ZEUR-_FDASm6tJ2IalLkryiDhtLG9cH5_d_0KkEndOGyHuwmP8BFkchXcBMEsMfVF"/>
+    <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">Digital</span>
+  </button>
+  <button class="thumb-item group relative w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent shrink-0" data-scene="scene-3d">
+    <img alt="Modelado 3D" class="w-full h-full object-cover" src="img/3d360.jpg"/>
+    <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">3D</span>
+  </button>
+  <button class="thumb-item group relative w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent shrink-0" data-scene="scene-multimedia">
+    <img alt="Multimedia" class="w-full h-full object-cover" src="img/multi360.jpg"/>
+    <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">Multimedia</span>
+  </button>
+  <button class="thumb-item group relative w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent shrink-0" data-scene="scene-audiovisuales">
+    <img alt="Audiovisuales" class="w-full h-full object-cover" src="img/Audio360.jpg"/>
+    <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] font-medium text-center py-0.5 text-neutral-200 truncate px-1">Audiovisuales</span>
+  </button>
 </div>
-<button class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-white" id="ctrl-pan-right" title="Girar a la derecha">
-<i class="w-4 h-4" data-lucide="chevron-right"></i>
-</button>
-</div>
-<!-- Zoom & VR Controls -->
-<div class="glass-panel p-1.5 rounded-2xl flex flex-col gap-1.5 shadow-2xl">
-<button class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-white" id="ctrl-zoom-in" title="Acercar (+)">
-<i class="w-4 h-4" data-lucide="plus"></i>
-</button>
-<button class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-white" id="ctrl-zoom-out" title="Alejar (-)">
-<i class="w-4 h-4" data-lucide="minus"></i>
-</button>
-</div>
-<!-- VR Mode Button -->
-<button class="glass-panel hover:border-sena/70 px-3.5 h-11 rounded-2xl flex items-center gap-2 text-xs font-semibold text-white tracking-wide transition shadow-2xl" id="ctrl-vr-mode">
-<i class="w-4 h-4 text-sena" data-lucide="glasses"></i>
-<span class="hidden sm:inline">Modo VR</span>
-</button>
-</div>
-<!-- Bottom Center: Horizontal Quick Drawer on Mobile -->
-        <div class="md:hidden pointer-events-auto glass-panel px-3 py-1.5 rounded-full flex items-center gap-2 shadow-2xl overflow-x-auto max-w-[50vw]">
-        <button class="text-xs px-2.5 py-1 rounded-full bg-sena font-semibold whitespace-nowrap" data-scene="scene-entrada">Entrada</button>
-        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-hall">Hall</button>
-        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-digital">Digital</button>
-        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-3d">3D</button>
-        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-multimedia">Multimedia</button>
-        <button class="text-xs px-2.5 py-1 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-scene="scene-audiovisuales">Audiovisuales</button>
-        </div>
+
 <!-- Bottom Right: Minimap Radar & Fullscreen -->
 <div class="pointer-events-auto flex items-end gap-3">
 <!-- Interactive Minimap Box -->
-<div class="glass-panel rounded-2xl p-2.5 shadow-2xl relative w-44 h-36 sm:w-52 sm:h-40 border border-white/15 overflow-hidden flex flex-col">
+<div class="glass-panel rounded-2xl p-2.5 shadow-2xl relative w-44 h-36 sm:w-52 sm:h-40 border border-white/15 overflow-hidden flex flex-col" id="beci-360-minimap">
 <!-- Minimap Header -->
 <div class="flex items-center justify-between text-[11px] font-semibold text-neutral-300 pb-1.5 border-b border-white/10 px-1">
 <span class="flex items-center gap-1.5">
@@ -396,9 +434,7 @@
           </span>
 <span class="text-[9px] font-mono text-neutral-400" id="minimap-coords">PISO 1</span>
 </div>
-<!-- Radar / Floor Schematic Area -->
 <div class="relative flex-1 w-full bg-neutral-900/90 rounded-xl mt-1.5 overflow-hidden border border-white/5" id="radar-area">
-<!-- Floor SVG grid layout -->
 <svg class="absolute inset-0 w-full h-full stroke-white/10" height="100%" width="100%">
 <defs>
 <pattern height="16" id="radar-grid" patternunits="userSpaceOnUse" width="16">
@@ -406,31 +442,25 @@
 </pattern>
 </defs>
 <rect fill="url(#radar-grid)" height="100%" width="100%"></rect>
-<!-- Simplified CTMA Floor Architecture -->
 <rect fill="none" height="70%" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" width="70%" x="15%" y="15%"></rect>
 <line stroke="rgba(255,255,255,0.15)" stroke-width="1" x1="45%" x2="45%" y1="15%" y2="85%"></line>
 <line stroke="rgba(255,255,255,0.15)" stroke-width="1" x1="15%" x2="85%" y1="50%" y2="50%"></line>
 <circle cx="50%" cy="50%" fill="rgba(67,185,31,0.05)" r="14" stroke="rgba(67,185,31,0.3)"></circle>
 </svg>
-<!-- Waypoints / POIs on Minimap -->
-        <button class="absolute top-[68%] left-[28%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-entrada" title="Ir a Entrada"></button>
-        <button class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-hall" title="Ir al Hall"></button>
-        <button class="absolute top-[30%] left-[72%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-digital" title="Ir a Digital"></button>
-        <button class="absolute top-[22%] left-[85%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-3d" title="Ir a 3D"></button>
-        <button class="absolute top-[15%] left-[80%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-multimedia" title="Ir a Multimedia"></button>
-        <button class="absolute top-[10%] left-[75%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-audiovisuales" title="Ir a Audiovisuales"></button>
-<!-- Current Position & Direction Indicator (Radar Cone) -->
+<button class="absolute top-[68%] left-[28%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-entrada" title="Ir a Entrada"></button>
+<button class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-hall" title="Ir al Hall"></button>
+<button class="absolute top-[30%] left-[72%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-digital" title="Ir a Digital"></button>
+<button class="absolute top-[22%] left-[85%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-3d" title="Ir a 3D"></button>
+<button class="absolute top-[15%] left-[80%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-multimedia" title="Ir a Multimedia"></button>
+<button class="absolute top-[10%] left-[75%] -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-400 hover:scale-125 transition-transform" data-scene="scene-audiovisuales" title="Ir a Audiovisuales"></button>
 <div class="absolute top-[68%] left-[28%] -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300" id="radar-player">
-<!-- Cone Field of View -->
 <div class="w-16 h-16 -ml-8 -mt-8 pointer-events-none transition-transform origin-center" id="radar-cone">
 <div class="w-full h-full bg-gradient-to-t from-transparent via-sena/20 to-sena/40 clip-path-cone rounded-full opacity-60"></div>
 </div>
-<!-- Center Dot -->
 <div class="absolute inset-0 m-auto w-3 h-3 rounded-full bg-sena ring-4 ring-sena/30 shadow-[0_0_8px_#43B91F]"></div>
 </div>
 </div>
 </div>
-<!-- Fullscreen Toggle Button -->
 <button class="glass-panel glass-button w-11 h-11 rounded-2xl flex items-center justify-center text-white shadow-2xl" id="ctrl-fullscreen" title="Pantalla Completa">
 <i class="w-5 h-5" data-lucide="maximize"></i>
 </button>
@@ -683,57 +713,8 @@
       });
     });
 
-    // Directional D-Pad: Yaw (izquierda/derecha) y Pitch (arriba/abajo)
-    document.getElementById('ctrl-pan-left')?.addEventListener('click', () => { viewer.setYaw(viewer.getYaw() + 25); });
-    document.getElementById('ctrl-pan-right')?.addEventListener('click', () => { viewer.setYaw(viewer.getYaw() - 25); });
-    document.getElementById('ctrl-pan-up')?.addEventListener('click', () => { viewer.setPitch(viewer.getPitch() + 12); });
-    document.getElementById('ctrl-pan-down')?.addEventListener('click', () => { viewer.setPitch(viewer.getPitch() - 12); });
-
-    // Zoom Buttons
-    document.getElementById('ctrl-zoom-in')?.addEventListener('click', () => { viewer.setHfov(viewer.getHfov() - 8); });
-    document.getElementById('ctrl-zoom-out')?.addEventListener('click', () => { viewer.setHfov(viewer.getHfov() + 8); });
-
     // Fullscreen Toggle
     document.getElementById('ctrl-fullscreen')?.addEventListener('click', () => { viewer.toggleFullscreen(); });
-
-    // VR / Gyroscope Mode
-    document.getElementById('ctrl-vr-mode')?.addEventListener('click', async () => {
-      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-        try {
-          const permission = await DeviceOrientationEvent.requestPermission();
-          if (permission === 'granted') {
-            alert('Giroscopio habilitado: mueve tu dispositivo para explorar el tour 360.');
-          } else {
-            alert('Permiso denegado: usa el arrastre táctil para explorar.');
-          }
-        } catch (err) {
-          alert('Usa el arrastre táctil para explorar el tour 360.');
-        }
-      } else {
-        alert('En móvil puedes girar la vista con el dedo; en desktop usa arrastre, rueda del mouse y los botones de zoom.');
-      }
-    });
-
-    // Detail Modal
-    document.getElementById('btn-more-info')?.addEventListener('click', () => {
-      const sceneId = typeof viewer.getScene === 'function' ? viewer.getScene() : 'scene-entrada';
-      const scene = SCENES_META[sceneId] || SCENES_META['scene-entrada'];
-      document.getElementById('modal-title').textContent = scene.title;
-      document.getElementById('modal-body').innerHTML = `
-        <p class="text-neutral-200">${scene.description}</p>
-        <div class="mt-4 p-3 bg-neutral-900/80 rounded-xl border border-white/10 flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-sena/20 flex items-center justify-center text-sena">
-            <i data-lucide="shield-check" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <div class="text-xs font-semibold text-white">Ambiente Certificado SENA</div>
-            <div class="text-[11px] text-neutral-400">Cumple normas de seguridad ocupacional y tecnología industrial.</div>
-          </div>
-        </div>
-      `;
-      detailModal.showModal();
-      lucide.createIcons();
-    });
 
     document.getElementById('modal-close')?.addEventListener('click', () => detailModal.close());
     document.getElementById('modal-btn-close')?.addEventListener('click', () => detailModal.close());
