@@ -73,7 +73,78 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-  </style>
+  
+    /* BECI 360 — organización específica para móvil */
+    @media (max-width: 767px) {
+      #beci-360-header {
+        top: 10px !important;
+        left: 10px !important;
+        right: 10px !important;
+        gap: 8px !important;
+        align-items: flex-start !important;
+      }
+
+      #beci-360-header .beci-brand {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        max-width: calc(100vw - 118px) !important;
+        padding: 8px 11px !important;
+        border-radius: 16px !important;
+        gap: 8px !important;
+      }
+
+      #beci-360-header .beci-brand img {
+        width: 46px !important;
+        height: 46px !important;
+        flex: 0 0 46px !important;
+        object-fit: contain !important;
+      }
+
+      #beci-360-header .beci-brand-title {
+        font-size: 12px !important;
+        line-height: 1.05 !important;
+        white-space: nowrap !important;
+      }
+
+      #beci-360-header .beci-brand-subtitle {
+        font-size: 9px !important;
+        line-height: 1.1 !important;
+        margin-top: 2px !important;
+        white-space: nowrap !important;
+      }
+
+      #beci-360-header #btn-back {
+        width: 40px !important;
+        height: 40px !important;
+        flex: 0 0 40px !important;
+        margin-top: 3px !important;
+      }
+
+      #beci-360-header #btn-nav-areas {
+        width: 40px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        flex: 0 0 40px !important;
+        justify-content: center !important;
+        border-radius: 14px !important;
+        margin-top: 3px !important;
+      }
+
+      #beci-360-header #btn-nav-areas > span,
+      #beci-360-header #btn-nav-areas > i:last-child {
+        display: none !important;
+      }
+
+      #beci-360-header #btn-nav-areas > i:first-child {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      #beci-360-header .beci-scene-pill {
+        display: none !important;
+      }
+    }
+</style>
 <style data-purpose="panorama-viewer">
     #viewer-viewport {
       cursor: grab;
@@ -136,31 +207,51 @@
 </main>
 <!-- END: 360 Viewport Container -->
 <!-- BEGIN: Top Navigation Bar -->
-<header class="absolute top-4 left-4 right-4 md:left-6 md:right-6 z-30 flex items-center justify-between pointer-events-none">
-<!-- Top Left: Back & Title Bar -->
-<div class="pointer-events-auto flex items-center gap-3">
-<button aria-label="Volver" class="w-11 h-11 rounded-full glass-panel flex items-center justify-center hover:bg-neutral-800/90 text-white transition-colors shadow-lg" id="btn-back">
-<i class="w-5 h-5" data-lucide="arrow-left"></i>
-</button>
-<div class="glass-panel px-5 py-2.5 rounded-full flex items-center gap-3 shadow-xl">
-<span class="text-sm md:text-base font-semibold tracking-wide text-gray-200 flex items-center gap-2">
-          Tour Virtual <span class="text-neutral-500 font-light">•</span>
-<span class="text-sena font-bold tracking-wider">CTMA</span>
-</span>
-<span class="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-neutral-500"></span>
-<span class="hidden sm:inline-block text-xs font-medium text-neutral-300 uppercase tracking-widest bg-white/10 px-2.5 py-0.5 rounded-full" id="active-scene-pill">
-          Entrada Principal
+<header class="absolute top-3 left-3 right-3 md:top-4 md:left-6 md:right-6 z-30 flex items-center justify-between gap-2 pointer-events-none">
+  <!-- BECI + navegación del tour -->
+  <div class="pointer-events-auto flex items-center gap-2 min-w-0">
+    <button aria-label="Volver" class="w-10 h-10 md:w-11 md:h-11 shrink-0 rounded-full glass-panel flex items-center justify-center hover:bg-neutral-800/90 text-white transition-colors shadow-lg" id="btn-back">
+      <i class="w-5 h-5" data-lucide="arrow-left"></i>
+    </button>
+
+    <!-- Identidad BECI integrada con la identidad SENA del 360 -->
+    <div class="flex items-center gap-2.5 rounded-2xl px-2.5 py-2 md:px-3.5 md:py-2.5 bg-white/95 backdrop-blur-md border border-white/80 shadow-xl min-w-0">
+      <img
+        src="img/Logobeci.png"
+        alt="BECI"
+        class="h-8 md:h-9 w-auto max-w-[82px] md:max-w-[100px] object-contain shrink-0"
+      />
+
+      <div class="h-7 md:h-8 w-px bg-slate-200 shrink-0"></div>
+
+      <div class="flex flex-col leading-none min-w-0">
+        <span class="text-[10px] md:text-xs font-bold tracking-wide text-slate-700 whitespace-nowrap">
+          Tour 360
         </span>
-</div>
-</div>
-<!-- Top Right: Info Modal / Quick Toggle -->
-<div class="pointer-events-auto flex items-center gap-2">
-<button class="glass-panel px-4 py-2.5 rounded-full text-xs md:text-sm font-medium hover:border-sena/50 text-gray-200 flex items-center gap-2 transition-colors shadow-lg" id="btn-nav-areas">
-<i class="w-4 h-4 text-sena" data-lucide="layout-grid"></i>
-<span class="hidden sm:inline">Explorar nuestras áreas</span>
-<i class="w-4 h-4 text-neutral-400" data-lucide="chevron-down"></i>
-</button>
-</div>
+        <span class="text-[10px] md:text-xs font-extrabold tracking-wide text-[#336926] whitespace-nowrap">
+          CTMA · SENA
+        </span>
+      </div>
+
+      <span class="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#4DB21A] shrink-0"></span>
+
+      <span
+        class="hidden sm:inline-block text-[10px] md:text-xs font-medium text-slate-600 uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-full whitespace-nowrap"
+        id="active-scene-pill"
+      >
+        Entrada Principal
+      </span>
+    </div>
+  </div>
+
+  <!-- Acceso a las áreas del recorrido -->
+  <div class="pointer-events-auto flex items-center gap-2 shrink-0">
+    <button class="bg-white/95 backdrop-blur-md border border-white/80 px-3 py-2.5 md:px-4 md:py-2.5 rounded-2xl text-xs md:text-sm font-medium hover:border-[#4DB21A]/50 text-slate-700 flex items-center gap-2 transition-colors shadow-xl" id="btn-nav-areas">
+      <i class="w-4 h-4 text-[#4DB21A]" data-lucide="layout-grid"></i>
+      <span class="hidden sm:inline">Explorar nuestras áreas</span>
+      <i class="w-4 h-4 text-slate-400" data-lucide="chevron-down"></i>
+    </button>
+  </div>
 </header>
 <!-- END: Top Navigation Bar -->
 <!-- BEGIN: Top-Right Information Floating Card -->
@@ -251,7 +342,7 @@
 <!-- BEGIN: Bottom Navigation Controls & Minimap -->
 <section class="absolute bottom-5 inset-x-4 md:inset-x-8 z-20 flex items-end justify-between pointer-events-none">
 <!-- Bottom Left: Direction & Zoom Controls -->
-<div class="pointer-events-auto flex items-center gap-3">
+<div class="pointer-events-auto flex items-center gap-3 beci-brand">
 <!-- Directional D-Pad buttons -->
 <div class="glass-panel p-1.5 rounded-2xl flex items-center gap-1 shadow-2xl">
 <button class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-white" id="ctrl-pan-left" title="Girar a la izquierda">
