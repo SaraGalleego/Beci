@@ -649,7 +649,15 @@
       top: 12px;
       pointer-events: none;
     }
-  </style>
+  
+    /* Ajuste móvil: controles + / − de Leaflet debajo de la búsqueda */
+    @media (max-width: 767px) {
+      #beci-map-component .leaflet-top.leaflet-left {
+        top: 58px !important;
+        left: 10px !important;
+      }
+    }
+</style>
 </head>
 <body class="h-screen w-full bg-background text-beciNavy antialiased select-none flex flex-col items-center justify-start overflow-hidden">
 <!-- BEGIN: Desktop Header -->
@@ -686,7 +694,7 @@
 <!-- BEGIN: Search Bar & Content Area -->
 <main class="flex-1 min-h-0 w-full max-w-7xl mx-auto px-4 md:px-10 lg:px-16 flex flex-col items-center relative z-10" data-purpose="interactive-map-area">
 <!-- Desktop Main Section Title and Subtitle -->
-<div class="flex flex-col items-center text-center mt-6 mb-2">
+<div class="flex flex-col items-center text-center mt-[7.5rem] md:mt-6 mb-2">
 <h1 class="text-3xl sm:text-4xl xl:text-5xl font-extrabold tracking-tight text-beciNavy">
       Ubícate
     </h1>
@@ -695,7 +703,7 @@
     </p>
 </div>
 <!-- BEGIN: Filter Pills -->
-<div class="relative group w-full max-w-xl lg:max-w-none mt-5 mb-2 px-1 overflow-hidden">
+<div class="relative group w-full max-w-xl lg:max-w-none mt-2 md:mt-5 mb-2 px-1 overflow-hidden">
 <div class="flex items-center gap-2">
 <div class="flex-1 relative overflow-hidden">
 <div class="flex overflow-x-auto hide-scrollbar gap-3 pb-2 flex-nowrap scroll-smooth min-h-[48px] pr-2" id="category-scroll-container" style="mask-image: linear-gradient(to right, black 95%, transparent 100%); transition: mask-image 0.3s ease;">
