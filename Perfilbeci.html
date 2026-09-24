@@ -166,7 +166,246 @@
           }
         }
     </style>
+
+<style id="beci-guest-profile-styles">
+    /* Estado visitante: la página sigue visible, pero queda sutilmente desenfocada */
+    #beci-guest-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9998;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(20, 24, 55, 0.16);
+        backdrop-filter: blur(9px);
+        -webkit-backdrop-filter: blur(9px);
+    }
+
+    #beci-guest-overlay.is-visible {
+        display: flex;
+    }
+
+    #beci-guest-card {
+        position: relative;
+        overflow: hidden;
+        width: min(430px, calc(100vw - 40px));
+        background: rgba(255,255,255,.97);
+        border: 1px solid rgba(6,37,115,.08);
+        border-radius: 32px;
+        padding: 28px 28px 25px;
+        text-align: center;
+        box-shadow: 0 24px 65px rgba(6,37,115,.14), 0 6px 20px rgba(0,18,73,.06);
+    }
+
+    #beci-guest-card::before,
+    #beci-guest-card::after {
+        content: '';
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+    }
+
+    #beci-guest-card::before {
+        width: 150px;
+        height: 150px;
+        right: -72px;
+        top: -72px;
+        background: rgba(242,133,194,.22);
+        filter: blur(2px);
+    }
+
+    #beci-guest-card::after {
+        width: 125px;
+        height: 125px;
+        left: -72px;
+        bottom: -72px;
+        background: rgba(26,67,191,.13);
+    }
+
+    #beci-guest-brand {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 17px;
+        padding: 6px 12px 6px 7px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.62);
+        border: 1px solid rgba(255,255,255,.85);
+        box-shadow: 0 5px 18px rgba(6,37,115,.07);
+    }
+
+    #beci-guest-brand img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+    }
+
+    #beci-guest-brand span {
+        color: #062573;
+        font-family: Montserrat, sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .02em;
+    }
+
+    #beci-guest-avatar {
+        position: relative;
+        z-index: 1;
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 14px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #F7F8FC;
+        border: 2px solid rgba(26,67,191,.16);
+        color: #1A43BF;
+        box-shadow: 0 7px 18px rgba(6,37,115,.08);
+        transform: none;
+    }
+
+    #beci-guest-card h2 {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: #062573;
+        font-family: Montserrat, sans-serif;
+        font-size: 24px;
+        line-height: 1.2;
+        font-weight: 800;
+    }
+
+    #beci-guest-card p {
+        position: relative;
+        z-index: 1;
+        margin: 11px auto 16px;
+        max-width: 350px;
+        color: #444651;
+        font-family: Montserrat, sans-serif;
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    #beci-guest-tags {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin: 0 auto 19px;
+    }
+
+    #beci-guest-tags span {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-family: Montserrat, sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        color: #062573;
+        background: rgba(255,255,255,.66);
+        border: 1px solid rgba(6,37,115,.07);
+    }
+
+    #beci-guest-register {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 46px;
+        border-radius: 9999px;
+        background: #062573;
+        color: #fff;
+        text-decoration: none;
+        font-family: Montserrat, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        box-shadow: 0 7px 18px rgba(6,37,115,.18);
+        transition: transform .2s ease, opacity .2s ease;
+    }
+
+    #beci-guest-register:hover {
+        opacity: .94;
+        transform: translateY(-1px);
+    }
+
+    #beci-guest-login {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 9px;
+        min-height: 36px;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        color: #5329C3;
+        text-decoration: none;
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        transition: background .2s ease;
+    }
+
+    #beci-guest-login:hover {
+        background: rgba(83, 41, 195, 0.08);
+    }
+
+    @media (max-width: 767px) {
+        #beci-guest-overlay { padding: 18px; }
+        #beci-guest-card {
+            width: min(390px, calc(100vw - 32px));
+            padding: 23px 20px 20px;
+            border-radius: 29px;
+        }
+        #beci-guest-brand { margin-bottom: 14px; }
+        #beci-guest-avatar {
+            width: 62px;
+            height: 62px;
+            border-radius: 21px;
+            margin-bottom: 12px;
+        }
+        #beci-guest-card h2 { font-size: 21px; }
+        #beci-guest-card p { font-size: 13px; margin-top: 9px; margin-bottom: 14px; }
+        #beci-guest-tags { margin-bottom: 17px; }
+    }
+</style>
+
 </head>
+
+<!-- Estado de vecino visitante: aparece solo cuando no hay sesión -->
+<div id="beci-guest-overlay" role="dialog" aria-modal="true" aria-labelledby="beci-guest-title">
+    <div id="beci-guest-card">
+        <div id="beci-guest-brand" aria-hidden="true">
+            <img src="img/Logobeci.png" alt="BECI">
+            <span>Tu espacio de vecino</span>
+        </div>
+        <div id="beci-guest-avatar" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="3.25" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M5.5 19c.65-3.25 2.75-5 6.5-5s5.85 1.75 6.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <h2 id="beci-guest-title">¡Hey vecino!</h2>
+        <p>
+            Únete a la comunidad y chismosea un rato. Descubre lo que hay cerca de ti, guarda tus lugares favoritos y conecta con los espacios de tu ciudad.
+        </p>
+        <div id="beci-guest-tags" aria-hidden="true">
+            <span>Explora</span>
+            <span>Chismosea</span>
+            <span>Conecta</span>
+        </div>
+        <a id="beci-guest-register" href="RegistrateBeci.html?redirect=Perfilbeci.html">Únete a la comunidad</a>
+        <a id="beci-guest-login" href="InicioBeci.html?redirect=Perfilbeci.html">¿Ya tienes una cuenta? Inicia sesión</a>
+    </div>
+</div>
+
 <body class="antialiased min-h-screen relative font-sans lg:pt-20" style="min-height: max(884px, 100dvh); background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB6GipjsFna55rCgisbNQr5ntnW-NbqbD0rD3ee1MdhwVqjllsjdD0ZWCqjddur7aJGjgoI95i9NwZzJdLnsuWO8LOev4UKgDsGAZYwkG6ds_TiwGAkpBtdd6tfKYzAZFWAzHJNzI7CI9N2WgboMNT2sWgHk-mPZMLV2O1k-WoHc-o-526JNaAxSP7idPi7FbZ4Ne51rX2aSzNRJ4MjOmh3nA0lqp0QsGR1e60BrSHoLoLt44PpZMu50iKl9x1jfRbji14'); background-size: cover; background-attachment: fixed; background-position: center center;">
 <!-- Header Logo -->
 <header class="desktop-header fixed top-0 left-0 w-full h-[80px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] z-[100] items-center justify-between px-8">
@@ -387,7 +626,7 @@
 
         function applyProfile(perfil) {
             perfil = perfil || {};
-            var avatarSrc = perfil.foto || 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%22100%22%20fill%3D%22%23e8e8e8%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2270%22%20r%3D%2235%22%20fill%3D%22%23999%22%2F%3E%3Cellipse%20cx%3D%22100%22%20cy%3D%22170%22%20rx%3D%2260%22%20ry%3D%2250%22%20fill%3D%22%23999%22%2F%3E%3C%2Fsvg%3E';
+            var avatarSrc = perfil.foto || 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20rx%3D%22100%22%20fill%3D%22%23F1F3FF%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2275%22%20r%3D%2230%22%20fill%3D%22%23062573%22%20opacity%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M48%20168c5-32%2023-48%2052-48s47%2016%2052%2048%22%20fill%3D%22%23062573%22%20opacity%3D%22.7%22%2F%3E%3C/svg%3E';
             document.querySelectorAll('img.perfil-foto').forEach(function (img) { img.src = avatarSrc; });
             var nombre = ((perfil.nombre || '') + ' ' + (perfil.apellido || '')).trim();
             document.querySelectorAll('.perfil-nombre-texto').forEach(function (el) { el.textContent = nombre; });
@@ -548,6 +787,34 @@
                 .catch(function () {});
         }
 
+        function mostrarEstadoVisitante() {
+            var overlay = document.getElementById('beci-guest-overlay');
+
+            // Dejamos un perfil neutro detrás del cristal: sin foto real,
+            // sin nombre, correo o ubicación de ejemplo.
+            var guestProfile = {
+                nombre: 'Vecino',
+                apellido: '',
+                correo: '',
+                ubicacion: 'Explora tu comunidad',
+                foto: ''
+            };
+
+            applyProfile(guestProfile);
+
+            if (overlay) {
+                overlay.classList.add('is-visible');
+            }
+        }
+
+        function ocultarEstadoVisitante() {
+            var overlay = document.getElementById('beci-guest-overlay');
+
+            if (overlay) {
+                overlay.classList.remove('is-visible');
+            }
+        }
+
         var AUTH = window.BeciAuth;
 
         if (AUTH) {
@@ -557,9 +824,11 @@
                 })
                 .then(function () {
                     if (!AUTH.isLoggedIn()) {
-                        AUTH.showLoginGate('Perfilbeci.html');
+                        mostrarEstadoVisitante();
                         return;
                     }
+
+                    ocultarEstadoVisitante();
 
                     var perfil = obtenerPerfil();
 
@@ -581,12 +850,7 @@
                     }
                 });
         } else {
-            var perfil = obtenerPerfil();
-            applyProfile(perfil);
-
-            if (!perfil.ubicacion) {
-                detectarUbicacion();
-            }
+            mostrarEstadoVisitante();
         }
     })();
 </script>
