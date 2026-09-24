@@ -1,301 +1,1085 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html class="scroll-smooth" lang="es" style=""><head>
+<style id="header-charlemos-typography">
+  #mainHeader nav a,
+  #mobilePillsTrack a,
+  #mobile-nav-modal a {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  #mainHeader nav a {
+    letter-spacing: normal;
+  }
+
+  #mainHeader nav a[href="InicioSena.html"] {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+  }
+</style>
+</head><body class="relative min-h-screen pb-10"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Beci - Login</title>
+<title>Beci - SENA Portal Institucional</title>
+<!-- Google Fonts: DM Sans & Poppins -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&amp;family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..900&amp;family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<style>
-        .gradient-bg {
-            background: radial-gradient(circle at top left, #FFDAC4 0%, #FDF3E6 50%, #F4DBF0 100%);
-        }
-        .shine-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        .shine-effect::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-20deg);
-            animation: shine 3s infinite;
-        }
-        @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 200%; }
-            100% { left: 200%; }
-        }
-        @keyframes peek-a-boo {
-            0% { transform: translateX(100%); }
-            15% { transform: translateX(0); }
-            85% { transform: translateX(0); }
-            100% { transform: translateX(100%); }
-        }
-        .peek-a-boo-anim {
-            animation: peek-a-boo 8s ease-in-out infinite;
-        }
-    </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-container": "#f6ece0",
-                        "primary-fixed-dim": "#b6c4ff",
-                        "on-secondary-container": "#6f4300",
-                        "on-surface": "#1f1b13",
-                        "inverse-surface": "#353027",
-                        "secondary-container": "#fead45",
-                        "surface-bright": "#fff8f2",
-                        "background": "#fff8f2",
-                        "tertiary-container": "#372837",
-                        "tertiary-fixed-dim": "#d7bfd4",
-                        "on-secondary": "#ffffff",
-                        "outline": "#757682",
-                        "surface-container-highest": "#ebe1d4",
-                        "on-primary-container": "#7b90e2",
-                        "on-tertiary-fixed-variant": "#534152",
-                        "primary-container": "#062573",
-                        "surface-tint": "#445aa7",
-                        "on-primary-fixed-variant": "#2a418e",
-                        "primary-fixed": "#dce1ff",
-                        "on-primary": "#ffffff",
-                        "inverse-on-surface": "#f9efe2",
-                        "secondary-fixed-dim": "#ffb964",
-                        "secondary-fixed": "#ffddba",
-                        "primary": "#001249",
-                        "outline-variant": "#c5c5d3",
-                        "on-secondary-fixed": "#2b1700",
-                        "on-tertiary": "#ffffff",
-                        "inverse-primary": "#b6c4ff",
-                        "tertiary": "#221322",
-                        "secondary": "#875300",
-                        "error": "#ba1a1a",
-                        "on-error": "#ffffff",
-                        "error-container": "#ffdad6",
-                        "surface-container-low": "#fcf2e5",
-                        "surface-dim": "#e2d9cc",
-                        "on-tertiary-container": "#a38ea1",
-                        "on-primary-fixed": "#001550",
-                        "on-surface-variant": "#444651",
-                        "on-error-container": "#93000a",
-                        "tertiary-fixed": "#f4dbf0",
-                        "on-secondary-fixed-variant": "#663e00",
-                        "surface": "#fff8f2",
-                        "surface-container-high": "#f0e7da",
-                        "on-tertiary-fixed": "#251725",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-variant": "#ebe1d4",
-                        "on-background": "#1f1b13"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "xs": "4px",
-                        "md": "24px",
-                        "sm": "12px",
-                        "container-max": "1200px",
-                        "gutter": "20px",
-                        "lg": "48px",
-                        "xl": "80px",
-                        "base": "8px"
-                    },
-                    "fontFamily": {
-                        "title-lg": ["Poppins"],
-                        "display-lg-mobile": ["DM Sans"],
-                        "headline-sm": ["DM Sans"],
-                        "headline-md": ["DM Sans"],
-                        "counter": ["Poppins"],
-                        "label-bold": ["Poppins"],
-                        "display-lg": ["DM Sans"],
-                        "body-md": ["Poppins"],
-                        "body-sm": ["Poppins"]
-                    },
-                    "fontSize": {
-                        "title-lg": ["20px", { "lineHeight": "1.5", "fontWeight": "600" }],
-                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "900" }],
-                        "headline-sm": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
-                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "900" }],
-                        "counter": ["12px", { "lineHeight": "1.0", "fontWeight": "700" }],
-                        "label-bold": ["14px", { "lineHeight": "1.2", "fontWeight": "600" }],
-                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "900" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "body-sm": ["14px", { "lineHeight": "1.6", "fontWeight": "400" }]
-                    }
-                }
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              green: '#4DB21A',
+              darkgreen: '#336926',
+              forest: '#1E5213',
+              mint: '#EBF8EE',
+              bgLight: '#F7FCF8',
+              softLilac: '#D9D9F2',
+              senaText: '#236315'
             }
+          },
+          fontFamily: {
+            title: ['DM Sans', 'sans-serif'],
+            body: ['Poppins', 'sans-serif']
+          },
+          boxShadow: {
+            'soft': '0 8px 30px rgba(0,0,0,0.06)',
+            'card': '0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+            'pill': '0 2px 8px rgba(0,0,0,0.08)'
+          }
         }
-    </script>
-</head>
-<body class="gradient-bg min-h-screen flex flex-col items-center justify-center font-body-md text-on-surface relative overflow-x-hidden">
-<!-- Header Section -->
-<div class="self-start w-full pt-8 pl-6 lg:hidden">
-<div class="w-44 h-24 bg-contain bg-no-repeat bg-left mb-8" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuHoVeBvnBQzqQhNbkjL-5GN3goSsmegCr4tVNBTOzWCAvCwnCASozgnrl4IADUenk9jWLH_O1DBHm3s-fgMqyrwa02zTre2fPwhU8u1ZsNEp9IbqyIby06DJYV1UwnxJjque9kQwi_VEzNcZxFjOoGMPGwBnm_15Z3LFplKVlLT9JaUUycRkAHIakmwY1eYo1PwsiI0qkq35AHi-UDGRkQ3xhSjwZWbNXKgjqPEVQKxHkkoRmTEkr1NppSGITSATililiKKMzZFw6kgM'); transform: scale(1.06); transform-origin: left top;"></div>
-</div>
-<div class="w-full max-w-md px-gutter pt-lg pb-md flex justify-between items-start z-10">
-<div class="flex flex-col gap-sm items-center">
-<button class="text-primary hover:opacity-80 transition-opacity">
-<span class="material-symbols-outlined text-3xl font-bold">arrow_back_ios_new</span>
+      }
+    }
+  </script>
+<style data-purpose="custom-styles">
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F9FFFA;
+      color: #1a202c;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .font-title {
+      font-family: 'DM Sans', sans-serif;
+    }
+    .arch-card {
+      border-radius: 42px 42px 24px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .light-sweep-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .light-sweep-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      transform: rotate(30deg);
+      transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .light-sweep-btn:hover::after {
+      left: 130%;
+    }
+    .hero-slide {
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .hero-slide-bg {
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+      will-change: transform;
+    }
+    .hero-slide-content {
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
+      will-change: transform, opacity;
+    }
+    /* Smooth edge fade mask for mobile navigation carousel */
+    .nav-scroll-mask {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 16px, black calc(100% - 16px), transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 16px, black calc(100% - 16px), transparent 100%);
+    }
+    /* Drag-to-scroll cursor styles */
+    .drag-scroll-container {
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .drag-scroll-container.is-dragging {
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+    }
+    .drag-scroll-container.is-dragging a,
+    .drag-scroll-container.is-dragging button {
+      pointer-events: none;
+    }
+    /* Events carousel interactive drag styling */
+    .events-scroll-container {
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    .events-scroll-container.is-dragging {
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+    }
+    .events-scroll-container.is-dragging * {
+      cursor: grabbing !important;
+      user-select: none !important;
+    }
+  </style>
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-50/80 shadow-xs transition-all duration-300" id="mainHeader">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<!-- Left: Official BECI 3D Logo from Datastore -->
+<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="#">
+<img alt="Beci Mascota SENA 3D" class="h-12 sm:h-14 md:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjShFTCs-PnE_E_ZfB9xd46lmXxET0S59qbcUf3HsXs_dovvSF-z30BpiCaN0-1TfAtXizSqwi32i-NXawVYs_ODMtk8fJPzCXSauaw8qYTWnvjK9zG0n_-PoedEW33lzTrmNUVL445rq17Y9uxwM_dNRMelQQALaqCZ6XTAvB2VedcHKlYLNL4-TmHYS8FqnEKpCzPOiLGRuQ2osGgy3ihHF27Ww4cMw8f4SYx0eaqxAYwoqpbT7LbZlEpVyNhPf_tg">
+</a>
+<!-- Desktop Navigation Pills (Faithful to reference: Inicio, Charlemos, Explorar Sedes, Eventos, Explorar Programas) -->
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="InicioSena.html">
+  <span class="font-bold text-sm lg:text-base text-stone-800">Inicio</span>
+  <span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span>
+</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Charlemos.html">Charlemos</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Mapasena.html">Explorar Sedes</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="registratucorreosena.html">Estar al Tanto</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#programas">Explorar programas</a>
+</nav>
+<!-- Right: Official SENA Identification & Mobile Menu Toggle -->
+<div class="flex items-center gap-3">
+<!-- Desktop SENA Wordmark -->
+<div class="flex flex-col items-end leading-none pr-1"><span class="font-title font-black tracking-widest text-xl sm:text-2xl text-[#336926]">SENA</span><span class="text-[9px] sm:text-[10px] font-semibold text-gray-500 tracking-wider">Medellín</span></div>
+<!-- Mobile / Tablet Hamburger Toggle Button -->
+<button aria-label="Abrir Menú Móvil" class="lg:hidden p-1 focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg transition-transform active:scale-95" id="mobileMenuBtn" onclick="toggleHeaderMobileNav()">
+<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArciEck3dnb-Fg2UuGEXw_zcNhOEWFE1F8QWORqCjsJoB1gH0pFTDGC_vTUOP-8J113bWwvFgnfGLPSpQWfOKls6Mlp9l9TCI7xXvs0PH3YDFsb6jECbgGBUmiWPrhHXaO9rGUvyU8BIFOpGgDAP3S4TdVUxyHcDqAHMOcaDgyfOwPPv8xTWNSyZmPjiuXaMTCuVdxQeW0hFh__yvFQj6ZQ2rz5-3Z3iI4PjhYKQf8O51s7Yn0ceoTICvt6cRm34hE5g">
 </button>
-<img alt="Beci Logo" class="w-32 h-auto mt-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4L2CwzKWwF-YEN9xIrI2FFmQndjSeHr8HBtHDGv6DpNm3MAqKagQlOZI4wBIin4yIAhAxLpmZofKKlcL-DzLo1W2vF7h4HhuNnaM7_wH2jZZTQDGoPnUw8Irg8SfiqHQGtf49tVscS4Flt6SGLRIkquW2HmTAxCyPRQ9HtH5fy3ax1PBUSvuoeVHxX5scCdjC-ESGR0BvCC63pYUIxw1FMepgQCb8N-ZRo9w88HUyB10GWDXsgEDCoKJParFnbYNEfoE">
-<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary mt-sm text-center">¡Inicia Sesión!</h1>
-<h2 class="font-headline-sm text-headline-sm text-on-surface-variant font-medium text-center">¡Continua explorando<br>Veci!</h2>
-</div>
-<div class="w-32 -mr-8 -mt-4 md:fixed md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[30vw] md:max-w-[400px] md:z-0 md:mr-0 md:mt-0"><img alt="Beci Mascot" class="w-full h-auto object-contain drop-shadow-2xl peek-a-boo-anim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCYpTOgr_RMPLDMGl2z6QsLokVB8ABOG223cy9krwTX8DhHCRb48EPyhmPib_F4l79JqvKylfrHcnGLjjGcRy9W2yfqHtK78vrib69UlbKVWjdLfIeog-RUn2ila_CyyYoXWSSNxE2x85kJW_Rz3lWOCEw9jiMCu_L2IbiAgs8X_QX-GCMCN2Y_43nPaQexQBDjGmBqgwnh2TdmxwFgkgxLBRW8xkRwbgsNAMVRdFN9oZeD_r1tXzYVRDDcBOHFJJZEljEHoLJDeiBkqQ"></div>
-</div>
-<!-- Login Card -->
-<div class="w-full max-w-md px-gutter pb-xl z-20 flex-grow flex flex-col justify-end mb-20 md:mb-0">
-<div class="bg-surface/80 backdrop-blur-xl border border-white/40 rounded-t-[40px] md:rounded-b-xl shadow-[0_10px_40px_rgba(6,37,115,0.08)] p-md pt-lg flex flex-col gap-md relative overflow-hidden">
-<p class="font-title-lg text-title-lg text-center text-primary mb-sm">¡Que bueno verte por aca<br>Vecino!</p>
-<!-- Form -->
-<form class="flex flex-col gap-sm">
-<!-- Email Input -->
-<div class="relative">
-<input id="loginEmail" class="w-full bg-surface-container-lowest border-outline-variant rounded-full py-3 px-6 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="Correo" required="" type="email">
-</div>
-<!-- Password Input -->
-<div class="relative">
-<input class="w-full bg-surface-container-lowest border-outline-variant rounded-full py-3 px-6 pr-12 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" id="password" placeholder="Contraseña" required="" type="password">
-<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" id="togglePassword" type="button">
-<span class="material-symbols-outlined" id="eyeIcon">visibility</span>
-</button>
-</div>
-<div class="flex justify-start px-4">
-<p class="hidden text-error text-sm font-medium text-center mt-1" id="login-error"></p>
-<!-- Action Buttons -->
-<div class="flex flex-col gap-3 mt-4">
-<button class="w-full bg-primary-container text-on-primary font-title-lg text-title-lg py-3 px-6 rounded-full active:scale-95 transition-transform shadow-[0_4px_14px_rgba(6,37,115,0.25)] flex items-center justify-center transition-all" type="submit">
-                        Iniciar Sesión
-                    </button>
-</div>
-</form>
 </div>
 </div>
-<!-- Scripts -->
-<script src="supabase-config.js"></script><script src="beci-auth.js"></script>
-<!-- Script for Password Toggle -->
-<script>
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-        const eyeIcon = document.querySelector('#eyeIcon');
+<!-- Mobile Pills Carousel Wrapper with Soft Edge Fade Gradient and Drag-to-Scroll Support -->
+<div class="relative w-full lg:hidden border-t border-slate-100 nav-scroll-mask">
+<!-- Left and right gradient blur accents -->
+<div class="pointer-events-none absolute left-0 top-0 bottom-0 w-5 bg-gradient-to-r from-white/95 to-transparent z-10"></div>
+<div class="pointer-events-none absolute right-0 top-0 bottom-0 w-5 bg-gradient-to-l from-white/95 to-transparent z-10"></div>
+<div class="drag-scroll-container flex items-center gap-2 overflow-x-auto py-3 px-3 hide-scrollbar w-full" id="mobilePillsTrack">
+<a class="whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full bg-brand-green text-white shadow-xs text-center flex-shrink-0 transition-all select-none" href="InicioSena.html">Inicio</a>
+<a class="whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full bg-white text-stone-600 border border-purple-200/80 shadow-xs text-center flex-shrink-0 hover:text-brand-darkgreen transition-all select-none" href="Charlemos.html">Charlemos</a>
+<a class="whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full bg-white text-stone-600 border border-purple-200/80 shadow-xs text-center flex-shrink-0 hover:text-brand-darkgreen transition-all select-none" href="Mapasena.html">Explorar Sedes</a>
+<a class="whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full bg-white text-stone-600 border border-purple-200/80 shadow-xs text-center flex-shrink-0 hover:text-brand-darkgreen transition-all select-none" href="registratucorreosena.html">Estar al tanto</a>
+<a class="whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full bg-white text-stone-600 border border-purple-200/80 shadow-xs text-center flex-shrink-0 hover:text-brand-darkgreen transition-all select-none" href="#programas">Explorar Programas</a>
+</div>
+</div>
+</div>
+<!-- Mobile Drawer Menu -->
+</header><!-- MODAL MENÚ HAMBURGUESA GLASSMORFISM MÓVIL Y TABLET (FRAME 28) -->
+<div id="mobile-nav-overlay" class="fixed inset-0 z-50 bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" onclick="handleMobileOverlayClick(event)">
+  <div id="mobile-nav-modal" class="relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" style="background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(24px) saturate(180%) brightness(1.1); border: 1.5px solid rgba(255, 255, 255, 0.7); box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 40px, rgba(255, 255, 255, 0.4) 0px 0px 20px, rgba(255, 255, 255, 0.9) 0px 1px 2px inset;">
+    <!-- Botón Cerrar 'X' verde cómodo y accesible -->
+    <button type="button" onclick="closeHeaderMobileNav()" aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer">
+      <svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <!-- Opciones de Navegación con tipografía amplia, cómoda y espaciado generoso -->
+    <div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4"><a href="InicioSena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Inicio
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="Charlemos.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Charlemos
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="Mapasena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Explorar Sedes
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="registratucorreosena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Estar al Tanto
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="#programas" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Explorar Programas
+      </a>
+    </div>
+  </div>
+</div>
+<!-- END: MainHeader -->
+<!-- BEGIN: Hero Section with Strict Scroll-Lock Carousel Interactivity (100% full viewport height without peeking bottom content) -->
+<section class="relative w-full h-[calc(100vh-80px)] max-md:h-[calc(100dvh-125px)] min-h-[580px] overflow-hidden bg-slate-950 select-none" id="hero-scroll-track" style="height: 11682px;">
+<div class="relative w-full h-full" id="hero-viewport">
+<!-- SLIDE 1 (Matches reference: Modern SENA Center at Sunset with glowing logo) -->
+<div class="hero-slide absolute inset-0 w-full h-full opacity-100 z-20 pointer-events-auto translate-y-0" id="slide-0">
+<!-- Background Image with Sunset & SENA Illuminated Facade -->
+<div class="hero-slide-bg absolute inset-0 w-full h-full scale-100 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(10, 15, 12, 0.88) 10%, rgba(10, 15, 12, 0.45) 55%, rgba(10, 15, 12, 0.25) 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAedl1D8gPb0hyLTbvXzFVp4nzUzTHX0NV_uc0-IN9q07BmYmrEFcw4a0RkyQ9jCDEHyHGLumZwr98IX1ZYvIis56gPJcUQyeKNMjx2cAK4bGo7aylPnvl_FDPtbc7ZlBrm8icA_rehikH-ST6hpb-dpEdehHXGkb5a-nc9H6lDngzT4wDVRTRkemtzmvglMSvn0l2OvFTyoIlllLDYSfKHOa3Lkr61Es5_2OsoI63-dlgDSxup8ZTO');">
+<!-- SENA Golden Luminous Facade Insignia -->
+<div class="absolute right-[8%] sm:right-[15%] md:right-[20%] top-[42%] md:top-[38%] flex flex-col items-center pointer-events-none drop-shadow-[0_0_30px_rgba(255,215,100,0.85)]">
+<span class="text-amber-300 font-extrabold tracking-widest text-sm md:text-base mb-1">SENA</span>
+<svg class="w-16 h-16 sm:w-20 sm:h-20 text-amber-200 fill-current" viewBox="0 0 100 100">
+<circle cx="50" cy="22" r="9"></circle>
+<path d="M50 36 L30 50 L38 56 L50 48 L62 56 L70 50 Z"></path>
+<path d="M30 60 L50 78 L70 60 L64 54 L50 66 L36 54 Z"></path>
+<line stroke="currentColor" stroke-linecap="round" stroke-width="7" x1="50" x2="50" y1="36" y2="92"></line>
+<line stroke="currentColor" stroke-linecap="round" stroke-width="7" x1="50" x2="20" y1="66" y2="90"></line>
+<line stroke="currentColor" stroke-linecap="round" stroke-width="7" x1="50" x2="80" y1="66" y2="90"></line>
+</svg>
+</div>
+</div>
+<!-- Slide 1 Text Content -->
+<div class="hero-slide-content relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-12 flex flex-col justify-center text-white">
+<div class="max-w-xl space-y-3.5">
+<span class="inline-block tracking-widest text-xs sm:text-sm font-bold text-amber-300 uppercase drop-shadow-sm lg:text-base">
+            FORMACIÓN QUE TRANSFORMA VIDAS
+          </span>
+<h1 class="font-title text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-white drop-shadow-lg lg:leading-[1.1]">
+            Impulsamos<br>tu futuro
+          </h1>
+<p class="text-sm sm:text-base md:text-lg text-slate-100 font-light leading-relaxed max-w-md drop-shadow lg:text-xl">
+            Educación, innovación y oportunidades para construir el talento que Colombia necesita.
+          </p>
+<div class="pt-3">
+<a class="inline-flex items-center gap-2 text-sm md:text-base font-bold tracking-wider uppercase text-white hover:text-emerald-300 transition-colors group" href="#programas">
+<span class="">CONOCE MÁS</span>
+<span class="text-xl transform group-hover:translate-x-1.5 transition-transform">→</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- SLIDE 2: Innovación y Tecnología -->
+<div class="hero-slide absolute inset-0 w-full h-full opacity-0 z-10 pointer-events-none translate-y-8" id="slide-1">
+<div class="hero-slide-bg absolute inset-0 w-full h-full scale-105 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(7, 24, 28, 0.9) 15%, rgba(6, 40, 32, 0.55) 60%, rgba(10, 20, 30, 0.4) 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGTzim1xRwAaxrb2KvZclbh9cnQdz-kgySdkuvDQTHbWyQSWzrpgwu5O4KsGlwGIXv4-0xjaVn-o9mxExp-BUN_dSWJ3cFQbFTjolf6JKHz_P31agRNTSIAH9tCspK032oW1oVHIY7Wm-sj-z_0mc7CyFXbGNa4yhBHM1Fb2FN8fRpRhig8fA_8TkvahnDiXjRvHhoz9VfiJZdckp3KeEIq5ACqm5dp5jJHZuGZYK5-s6XMHKEtJWN');"></div>
+<div class="hero-slide-content relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-12 flex flex-col justify-center text-white">
+<div class="max-w-xl space-y-3.5">
+<span class="inline-block tracking-widest text-xs sm:text-sm font-bold text-emerald-400 uppercase drop-shadow-sm lg:text-base">
+            TECNOLOGÍA E INNOVACIÓN
+          </span>
+<h2 class="font-title text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-white drop-shadow-lg">
+            Lideramos<br>la era digital
+          </h2>
+<p class="text-sm sm:text-base md:text-lg text-slate-100 font-light leading-relaxed max-w-md drop-shadow lg:text-xl">
+            Desarrolla habilidades globales en inteligencia artificial, analítica de datos, software e industrias 4.0.
+          </p>
+<div class="pt-3">
+<a class="inline-flex items-center gap-2 text-sm md:text-base font-bold tracking-wider uppercase text-white hover:text-emerald-300 transition-colors group" href="#programas">
+<span class="">EXPLORAR ÁREAS</span>
+<span class="text-xl transform group-hover:translate-x-1.5 transition-transform">→</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- SLIDE 3: Conectamos Talento y Regiones -->
+<div class="hero-slide absolute inset-0 w-full h-full opacity-0 z-10 pointer-events-none translate-y-8" id="slide-2">
+<div class="hero-slide-bg absolute inset-0 w-full h-full scale-105 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(14, 30, 16, 0.92) 15%, rgba(15, 45, 20, 0.55) 60%, rgba(10, 30, 15, 0.35) 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMZ-aOaayeFZMp2VOJohTC5mOrIX-RNEk0l865mTWjzCqh0TnLoy2Eik8EyF1IpCb34DuNk869M441sT3-a638RQTzUr-sGvIxORV6cXNyqor7CUOC1wZCNum2QdOgz9z8aep3y4k3-iQ8gr-tavmKUhH4pIljtFoR-1BgiNiqfFk3YGdLDD0KKXgWnTYmMXZ1PutqQ8YYOADFXYzGvEfOBVpLveDZn5BpP8XhtqcPK1tg1aM5Hq18');"></div>
+<div class="hero-slide-content relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-12 flex flex-col justify-center text-white">
+<div class="max-w-xl space-y-3.5">
+<span class="inline-block tracking-widest text-xs sm:text-sm font-bold text-lime-300 uppercase drop-shadow-sm lg:text-base">
+            CONECTAMOS TALENTO Y REGIONES
+          </span>
+<h2 class="font-title text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-white drop-shadow-lg">
+            Oportunidades en<br>toda Colombia
+          </h2>
+<p class="text-sm sm:text-base md:text-lg text-slate-100 font-light leading-relaxed max-w-md drop-shadow lg:text-xl">
+            Presencia en los 32 departamentos y formación incluyente, pertinente y 100% gratuita para todos.
+          </p>
+<div class="pt-3">
+<a class="inline-flex items-center gap-2 text-sm md:text-base font-bold tracking-wider uppercase text-white hover:text-emerald-300 transition-colors group" href="Mapasena.html">
+<span class="">CONOCE NUESTRAS SEDES</span>
+<span class="text-xl transform group-hover:translate-x-1.5 transition-transform">→</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Vertical Pagination Dots (Exact from Reference) -->
+<div class="absolute right-5 sm:right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-3">
+<button aria-label="Ver Diapositiva 1" class="hero-dot w-2.5 rounded-full hover:bg-white/80 transition-all duration-300 cursor-pointer h-6 bg-white shadow-md" data-slide="0"></button>
+<button aria-label="Ver Diapositiva 2" class="hero-dot w-2.5 rounded-full hover:bg-white/80 transition-all duration-300 cursor-pointer h-2.5 bg-white/50" data-slide="1"></button>
+<button aria-label="Ver Diapositiva 3" class="hero-dot w-2.5 rounded-full hover:bg-white/80 transition-all duration-300 cursor-pointer h-2.5 bg-white/50" data-slide="2"></button>
+</div>
+<!-- Bottom Left Subtle Tag: Home Institucional -->
+<div class="absolute left-6 sm:left-12 bottom-6 z-30 text-white/70 text-xs tracking-wider uppercase font-semibold">
+      Home Institucional
+    </div>
+</div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Search & Discovery Section (Positioned directly below hero fold) -->
+<main class="relative z-10 bg-[#F9FFFA]" id="sena-content">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-10" id="charlemos">
+<!-- Main Search Card matching reference -->
+<div class="relative bg-white rounded-[36px] shadow-soft border border-emerald-100/60 overflow-hidden pt-6 px-6 sm:pt-10 sm:px-10 pb-0">
+<div class="grid grid-cols-12 gap-y-4 gap-x-4 md:gap-6 items-center"><!-- Text / Title Left Side (col-span-8 on mobile, md:col-span-8) -->
+<div class="col-span-8 md:col-span-8 z-10 min-w-0">
+<h2 class="font-title text-2xl sm:text-4xl lg:text-5xl font-extrabold lg:font-black text-slate-800 tracking-tight leading-tight lg:leading-[1.1]">
+            ¿Que quieres saber del <span class="text-brand-darkgreen">SENA</span>?
+          </h2>
+<p class="text-xs sm:text-sm md:text-base text-gray-500 mt-1.5 mb-2 md:mb-5 lg:mb-8 lg:text-xl lg:max-w-xl">Encuentra programas formativos,<br class="hidden lg:block"> eventos culturales y nuestras sedes a nivel nacional.</p>
+<!-- Desktop/Tablet Search Bar (visible md and up) -->
+<div class="hidden md:block relative max-w-lg lg:max-w-xl w-full">
+<div class="relative flex items-center bg-[#F4F4EB] rounded-full px-5 lg:px-6 py-3 lg:py-4 shadow-inner transition-all focus-within:ring-2 focus-within:ring-brand-green focus-within:bg-white w-full">
+<input autocomplete="off" class="w-full bg-transparent border-0 text-xs sm:text-sm lg:text-base text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none pr-7 min-w-0" id="mainSearchInput" placeholder="Busca cursos, eventos, sedes..." type="text">
+<span class="text-gray-400 pl-2 cursor-pointer">
+<svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.65 5.65a7.5 7.5 0 0010.7 10.7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+</div>
+</div>
+</div>
+<!-- Inquisitive Beci Cloud Mascot Right Side (col-span-4) -->
+<div class="col-span-4 md:col-span-4 flex justify-end relative">
+<div class="relative w-24 h-24 sm:w-36 sm:h-36 md:w-52 md:h-52 lg:w-60 lg:h-60 flex items-center justify-center">
+<!-- Question Mark Badge -->
+<div class="absolute -top-1 right-2 md:right-3 bg-sky-100 text-sky-600 rounded-full w-7 h-7 md:w-9 md:h-9 lg:w-10 lg:h-10 flex items-center justify-center font-bold text-base md:text-xl lg:text-2xl shadow-md animate-bounce">
+              ?
+            </div>
+<!-- Beci 3D Cloud Character Vector Illustration -->
+<svg class="w-full h-full drop-shadow-xl" fill="none" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient gradientUnits="userSpaceOnUse" id="beciGrad" x1="20" x2="220" y1="30" y2="210">
+<stop stop-color="#9BC2FF"></stop>
+<stop offset="0.5" stop-color="#7CA8FF"></stop>
+<stop offset="0.85" stop-color="#E2A6FF"></stop>
+<stop offset="1" stop-color="#FFA8E6"></stop>
+</linearGradient>
+</defs>
+<path d="M70 170 C50 170 30 155 30 130 C30 108 48 92 70 92 C74 70 98 52 125 52 C155 52 180 72 184 100 C198 102 210 115 210 130 C210 150 195 170 170 170 Z" fill="url(#beciGrad)"></path>
+<!-- Cute inquisitive eyes -->
+<ellipse cx="110" cy="118" fill="#1C2B4D" rx="8" ry="11"></ellipse>
+<ellipse cx="152" cy="116" fill="#1C2B4D" rx="8" ry="11"></ellipse>
+<circle cx="113" cy="114" fill="#FFFFFF" r="3"></circle>
+<circle cx="155" cy="112" fill="#FFFFFF" r="3"></circle>
+<!-- Cheeks blush -->
+<ellipse cx="98" cy="128" fill="#FF84B7" opacity="0.6" rx="7" ry="4"></ellipse>
+<ellipse cx="164" cy="126" fill="#FF84B7" opacity="0.6" rx="7" ry="4"></ellipse>
+<!-- Thinking hand gesture -->
+<path d="M127 128 Q131 133 136 129" stroke="#1C2B4D" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M138 150 C138 140 148 136 154 142 C158 146 156 154 146 158 Z" fill="#90B8FF"></path>
+</svg>
+</div>
+</div>
+<!-- Mobile Full-Width Search Bar row (col-span-12, visible only on mobile, hidden on md+) -->
+<div class="col-span-12 block md:hidden w-full" id="searchContainerMobile">
+<div class="relative flex items-center bg-[#F4F4EB] rounded-full px-5 py-3 shadow-inner transition-all focus-within:ring-2 focus-within:ring-brand-green focus-within:bg-white w-full">
+<input autocomplete="off" class="w-full bg-transparent border-0 text-xs sm:text-sm text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none pr-7 min-w-0" id="mobileSearchInput" placeholder="Busca cursos, eventos, sedes..." type="text">
+<span class="text-gray-400 pl-2 cursor-pointer">
+<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.65 5.65a7.5 7.5 0 0010.7 10.7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+</div>
+</div>
+<!-- Dynamic Dropdown Results Container -->
+<div class="col-span-12 relative">
+<div class="hidden absolute left-0 right-0 top-0 mt-1 bg-white rounded-2xl shadow-xl border border-gray-100 p-2.5 z-50 max-h-72 overflow-y-auto" id="searchResultsDropdown"></div>
+</div></div>
+<!-- 3 Arched Cards Grid -->
+<div class="relative border-t border-emerald-50 flex flex-col items-center overflow-hidden -mb-0 pt-3 md:pt-10 mt-2 md:mt-6" id="programas"><style class="">@media (max-width: 767px) { #programas > div.max-w-4xl { transform: scale(1.03); transform-origin: bottom center; } }</style><style class="">@media (min-width: 768px) and (max-width: 1024px) { .tablet-card-side { width: 35% !important; height: 323px !important; } .tablet-card-center { width: 44% !important; height: 380px !important; } }</style><div class="relative w-full max-w-4xl mx-auto flex items-end justify-center -space-x-4 sm:-space-x-12 md:-space-x-16 lg:-space-x-20 overflow-visible pt-4 -bottom-4 px-2 sm:px-4"><a class="group relative w-[31%] max-w-[280px] h-36 sm:h-72 md:h-[340px] rounded-t-[24px] sm:rounded-t-[54px] md:rounded-t-[60px] rounded-b-none overflow-hidden shadow-xl border border-white/60 -rotate-6 hover:-rotate-2 hover:scale-105 hover:z-30 transition-all duration-300 origin-bottom-left z-0 flex-shrink-0 tablet-card-side" href="eventossena.html" style="--tablet-w: 39%;"><img alt="Eventos" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNTvAFRo63B1pVvXcW9sSveCYAE2K-_TMFv7PD31J8X-WZ6iQWpTh-m8YJ5MXir84MiO8KkjT60zmM5sfuY6VD7luPFkZBwIZvfxcCnH2GYGyOc1LDr7y_4Knv_indIjGInWqCClDwcWtoXZSfDY29MBl1g2LjBKFJ66ahaZ5edGOihzL2IH4UGF4UNAKiSwz3SP80e005xID6VuMSF58y1PMY6WzWOXB_E5b9-I36UN3ILApGMSCE"><div class="absolute inset-0 bg-gradient-to-b from-[#1b3d11]/90 via-[#1b3d11]/40 to-transparent h-2/3"></div><div class="relative z-10 pt-2 sm:pt-5 md:pt-6 px-1 sm:px-3 md:px-4 text-center"><h3 class="font-title text-[11px] sm:text-xl md:text-3xl font-bold text-white drop-shadow-md tracking-tight sm:tracking-normal">Eventos</h3></div></a><a class="group relative w-[40%] max-w-[320px] h-44 sm:h-88 md:h-[400px] rounded-t-[30px] sm:rounded-t-[64px] md:rounded-t-[72px] rounded-b-none overflow-hidden shadow-2xl border-2 border-white/80 hover:scale-105 hover:-translate-y-2 transition-all duration-300 z-20 flex-shrink-0 tablet-card-center" href="#programas" style="--tablet-w: 48%;"><img alt="Programas de Formación" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHUZfV3eXXjheCfzesZj0Ze0Ko01vjROPWetF_zCCJAMxzN0sumpcxu6fghAR3FcOKFY367e_p8tPsU3oFuPylvOk3A-HuqESDz2e72VBySgqR3WhWaLWirdfx3AQNRlAANqre-sSzZI4pbDjOGhsKOBAQT0gMCBf2GJA0FqvL_uwR6feIIhxBEZ5ts4TgeMIVt1m2iOkes79UTozGnPAJte3q7EQsYfUygyp4k8Qem6RWo6iJVdDI"><div class="absolute inset-0 bg-gradient-to-b from-[#1b3d11]/90 via-[#1b3d11]/40 to-transparent h-2/3"></div><div class="relative z-10 pt-2.5 sm:pt-6 md:pt-8 px-1 sm:px-3 md:px-4 text-center"><h3 class="font-title text-xs sm:text-2xl md:text-3xl font-bold text-white drop-shadow-md leading-tight">Programas de<br>Formación</h3></div></a><a class="group relative w-[31%] max-w-[280px] h-36 sm:h-72 md:h-[340px] rounded-t-[24px] sm:rounded-t-[54px] md:rounded-t-[60px] rounded-b-none overflow-hidden shadow-xl border border-white/60 rotate-6 hover:rotate-2 hover:scale-105 hover:z-30 transition-all duration-300 origin-bottom-right z-0 flex-shrink-0 tablet-card-side" href="#sedes" style="--tablet-w: 39%;"><img alt="Centros" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzbpQt0UPKVt1UZ6k4rCFPsllNwyvOMYGbgXFtfMd_KSWjpCVPVJ5bouBLy0rf9hswJIo781j1KD-TiRprxCDxIDfZi10XCNlKHz0ZDbunVaOU_pNIRzMfMBFZZ-RsmTIpZsGd-fTzQMB1t_dF3rl-tO_cfqhfEI65P8OLkSqTqzFjS-0uReU7XXxp04fMIdcFmVv3CAr9OwUt-OjWPB_EHQHndR1l-vrxu6J7p5_1dFAeGwKmFAjX"><div class="absolute inset-0 bg-gradient-to-b from-[#1b3d11]/90 via-[#1b3d11]/40 to-transparent h-2/3"></div><div class="relative z-10 pt-2 sm:pt-5 md:pt-6 px-1 sm:px-3 md:px-4 text-center"><h3 class="font-title text-[11px] sm:text-xl md:text-3xl font-bold text-white drop-shadow-md tracking-tight sm:tracking-normal">Centros</h3></div></a></div></div>
+</div>
+</section>
+<!-- END: Search & Discovery Section -->
+<!-- BEGIN: Events Section -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2 mb-6 sm:mb-8" id="eventos">
+<div class="flex items-center justify-between mb-3 sm:mb-5">
+<h2 class="font-title text-xl sm:text-2xl lg:text-4xl font-extrabold text-slate-800 tracking-tight">
+        Eventos para ti
+      </h2>
+<a class="text-xs sm:text-sm font-bold text-gray-500 hover:text-brand-darkgreen transition-colors flex items-center gap-1 lg:text-lg" href="eventossena.html">
+        Ver todos <span class="text-base">&gt;</span>
+</a>
+</div>
+<!-- Responsive Grid / Horizontal Carousel with full mouse and touch Drag-to-Scroll support across all screen sizes -->
+<div class="relative w-full overflow-hidden">
+<div class="pointer-events-none absolute left-0 top-0 bottom-0 w-6 sm:w-10 bg-gradient-to-r from-[#F9FFFA] to-transparent z-20"></div>
+<div class="pointer-events-none absolute right-0 top-0 bottom-0 w-6 sm:w-10 bg-gradient-to-l from-[#F9FFFA] to-transparent z-20"></div>
+<div class="events-scroll-container flex gap-3.5 sm:gap-4 lg:gap-5 overflow-x-auto pb-2 pt-1 px-1 hide-scrollbar scroll-smooth w-full select-none" id="eventsCarouselTrack" style="touch-action: pan-y pinch-zoom; cursor: grab;">
+<!-- Event Card 1: Reference image https://lh3.googleusercontent.com/aida-public/AB6AXuDNQGnKVlic8JHwyEqHmCr4lzFLc_eMb0uEiEK_PfEE3a-Fn05-6XbztwtMkOh_sWCU7m716vZHxqpfT-mojNncJD54wOLufvdHSal8VbhBslck0kcmKxFGdjqb9uCoL-ZbxLUnIHkIzZhMlOQa3uhFf-ZWgY_r00ifys1Vs0r-DvEyXgEURIL6YmZKHUdk3v1_gAOknQI4uJXvxkxWgx1UtPj91c_nYDX0z1xX3tHFjxZ7sWjjySvahwWjFmjr8J7tEw -->
+<div class="event-card-item flex-shrink-0 w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] bg-white rounded-2xl sm:rounded-3xl shadow-card border border-gray-100/80 overflow-hidden relative min-h-[160px] sm:min-h-[185px] lg:min-h-[200px] flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group select-none">
+<div class="absolute right-0 top-0 bottom-0 w-[52%] sm:w-[50%] h-full z-0 overflow-hidden pointer-events-none" style="clip-path: polygon(36% 0%, 100% 0%, 100% 100%, 0% 100%);">
+<img alt="Taller Fotografía Urbana" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none" draggable="false" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoSkceFP5Rd9q6cvovyz0vivmL2ioeukaxt2f7xiIkyzVdiBEN4jrQrt4kNPjacczM8QCN1a5N1IGhMrtTvV3wvw5jdP8MBk4T2y23nakkGdBcifaFkdUZJb0-5YXSoNUiBZS1jR-7Sye5Cp18w8YrJtjx-nVdANpYS7MtsrFq3a_AIdxN9Lv6AFKCxgjQHlddetG2ztF8JqiwARcI-EZfYgy1pHKs8UgS85PqscU1EBFYwwL5BS4DLRo4AzDhobqR6Q">
+</div>
+<div class="relative z-10 p-3 sm:p-4 lg:p-5 flex flex-col justify-between h-full max-w-[65%] sm:max-w-[62%] select-none">
+<div>
+<div class="flex items-start gap-2 sm:gap-3">
+<div class="bg-[#095247] text-white rounded-xl sm:rounded-2xl px-2.5 py-1.5 sm:px-3 sm:py-2 flex flex-col items-center justify-center min-w-[40px] sm:min-w-[50px] shadow-sm flex-shrink-0">
+<span class="font-title font-bold text-base sm:text-lg lg:text-xl leading-none">01</span>
+<span class="text-[9px] sm:text-[11px] font-medium leading-tight mt-0.5">May</span>
+</div>
+<h4 class="font-title font-bold text-xs sm:text-base lg:text-xl text-gray-900 leading-tight tracking-tight">Taller Fotografía Urbana</h4>
+</div>
+<div class="flex items-center gap-1 mt-2 sm:mt-3.5 pl-0.5 text-gray-700">
+<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+<span class="text-[11px] sm:text-xs lg:text-sm font-medium text-gray-800 leading-snug">Biblioteca la piloto</span>
+</div>
+</div>
+<div class="mt-3 sm:mt-5 pt-0.5 sm:pt-1">
+<span class="inline-block px-2.5 py-0.5 sm:px-4 sm:py-1 text-[10px] sm:text-xs lg:text-sm font-bold rounded-full bg-brand-green text-white shadow-xs tracking-wide">Gratuito</span>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="event-card-item flex-shrink-0 w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] bg-white rounded-2xl sm:rounded-3xl shadow-card border border-gray-100/80 overflow-hidden relative min-h-[160px] sm:min-h-[185px] lg:min-h-[200px] flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group select-none">
+<div class="absolute right-0 top-0 bottom-0 w-[52%] sm:w-[50%] h-full z-0 overflow-hidden pointer-events-none" style="clip-path: polygon(36% 0%, 100% 0%, 100% 100%, 0% 100%);">
+<img alt="Taller Pintura Acrílica" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none" draggable="false" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEjOUR8WYyScYKsPPuswAhPHFPyEYNVu2rX0CCCM03L7IKgAGV2Rh0etUKFJjwDoXr3lDe7n4rRTwfEIqqC1vmhd3VRrhmexIWul88svgaDTgjD6xqWdrokOXb9xUo_a07Aj381VHVnFWd8H9LmV76UR0uZ2wICbWEpEKKgRlnpNCN5AkBuqMBsldNLRrYkkoeTc9MXti8p0GnwfDfT4rS6XFmDOl7A9C8ps6gbMQ4pAi86vt1i7_c">
+</div>
+<div class="relative z-10 p-3 sm:p-4 lg:p-5 flex flex-col justify-between h-full max-w-[65%] sm:max-w-[62%] select-none">
+<div>
+<div class="flex items-start gap-2 sm:gap-3">
+<div class="bg-[#095247] text-white rounded-xl sm:rounded-2xl px-2.5 py-1.5 sm:px-3 sm:py-2 flex flex-col items-center justify-center min-w-[40px] sm:min-w-[50px] shadow-sm flex-shrink-0">
+<span class="font-title font-bold text-base sm:text-lg lg:text-xl leading-none">01</span>
+<span class="text-[9px] sm:text-[11px] font-medium leading-tight mt-0.5">May</span>
+</div>
+<h4 class="font-title font-bold text-xs sm:text-base lg:text-xl text-gray-900 leading-tight tracking-tight">Taller Pintura Acrílica</h4>
+</div>
+<div class="flex items-center gap-1 mt-2 sm:mt-3.5 pl-0.5 text-gray-700">
+<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+<span class="text-[11px] sm:text-xs lg:text-sm font-medium text-gray-800 leading-snug">Salón Mural CTMA</span>
+</div>
+</div>
+<div class="mt-3 sm:mt-5 pt-0.5 sm:pt-1">
+<span class="inline-block px-2.5 py-0.5 sm:px-4 sm:py-1 text-[10px] sm:text-xs lg:text-sm font-bold rounded-full bg-brand-green text-white shadow-xs tracking-wide">Gratuito</span>
+</div>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="event-card-item flex-shrink-0 w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] bg-white rounded-2xl sm:rounded-3xl shadow-card border border-gray-100/80 overflow-hidden relative min-h-[160px] sm:min-h-[185px] lg:min-h-[200px] flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group select-none">
+<div class="absolute right-0 top-0 bottom-0 w-[52%] sm:w-[50%] h-full z-0 overflow-hidden pointer-events-none" style="clip-path: polygon(36% 0%, 100% 0%, 100% 100%, 0% 100%);">
+<img alt="Seminario Robótica &amp; IA" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none" draggable="false" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzcrmxajfk_NVwJuTeHU3qP4J_cnv4DGxj80r5ZKJUs6-Qnoms_KTXjHKvBtHKTAhg3uJke_n3VR1JGP3MO0LeWUL53GtltvDZMpKuL8i5DeTeG0vd2sOsztoAssdGIej3MkzdWZ-wivPrjxcLaKkSmCpPBpJKFAoUhEAwAipeN2bFYCTfOn4YfBm7tXriW7GCt6AephaQo0GFVHgJr05ro9z0wfBYlljsF6F7ceu88Fox6TnekABN">
+</div>
+<div class="relative z-10 p-3 sm:p-4 lg:p-5 flex flex-col justify-between h-full max-w-[65%] sm:max-w-[62%] select-none">
+<div>
+<div class="flex items-start gap-2 sm:gap-3">
+<div class="bg-[#095247] text-white rounded-xl sm:rounded-2xl px-2.5 py-1.5 sm:px-3 sm:py-2 flex flex-col items-center justify-center min-w-[40px] sm:min-w-[50px] shadow-sm flex-shrink-0">
+<span class="font-title font-bold text-base sm:text-lg lg:text-xl leading-none">05</span>
+<span class="text-[9px] sm:text-[11px] font-medium leading-tight mt-0.5">May</span>
+</div>
+<h4 class="font-title font-bold text-xs sm:text-base lg:text-xl text-gray-900 leading-tight tracking-tight">Seminario Robótica &amp; IA</h4>
+</div>
+<div class="flex items-center gap-1 mt-2 sm:mt-3.5 pl-0.5 text-gray-700">
+<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+<span class="text-[11px] sm:text-xs lg:text-sm font-medium text-gray-800 leading-snug">Hub Innovación Medellín</span>
+</div>
+</div>
+<div class="mt-3 sm:mt-5 pt-0.5 sm:pt-1">
+<span class="inline-block px-2.5 py-0.5 sm:px-4 sm:py-1 text-[10px] sm:text-xs lg:text-sm font-bold rounded-full bg-brand-green text-white shadow-xs tracking-wide">Gratuito</span>
+</div>
+</div>
+</div>
+<!-- Event Card 4: Additional event for expansive scroll discovery -->
+<div class="event-card-item flex-shrink-0 w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] bg-white rounded-2xl sm:rounded-3xl shadow-card border border-gray-100/80 overflow-hidden relative min-h-[160px] sm:min-h-[185px] lg:min-h-[200px] flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group select-none">
+<div class="absolute right-0 top-0 bottom-0 w-[52%] sm:w-[50%] h-full z-0 overflow-hidden pointer-events-none" style="clip-path: polygon(36% 0%, 100% 0%, 100% 100%, 0% 100%);">
+<img alt="Feria de Empleo y Emprendimiento" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none" draggable="false" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNTvAFRo63B1pVvXcW9sSveCYAE2K-_TMFv7PD31J8X-WZ6iQWpTh-m8YJ5MXir84MiO8KkjT60zmM5sfuY6VD7luPFkZBwIZvfxcCnH2GYGyOc1LDr7y_4Knv_indIjGInWqCClDwcWtoXZSfDY29MBl1g2LjBKFJ66ahaZ5edGOihzL2IH4UGF4UNAKiSwz3SP80e005xID6VuMSF58y1PMY6WzWOXB_E5b9-I36UN3ILApGMSCE">
+</div>
+<div class="relative z-10 p-3 sm:p-4 lg:p-5 flex flex-col justify-between h-full max-w-[65%] sm:max-w-[62%] select-none">
+<div>
+<div class="flex items-start gap-2 sm:gap-3">
+<div class="bg-[#095247] text-white rounded-xl sm:rounded-2xl px-2.5 py-1.5 sm:px-3 sm:py-2 flex flex-col items-center justify-center min-w-[40px] sm:min-w-[50px] shadow-sm flex-shrink-0">
+<span class="font-title font-bold text-base sm:text-lg lg:text-xl leading-none">12</span>
+<span class="text-[9px] sm:text-[11px] font-medium leading-tight mt-0.5">May</span>
+</div>
+<h4 class="font-title font-bold text-xs sm:text-base lg:text-xl text-gray-900 leading-tight tracking-tight">Feria Empleo SENA</h4>
+</div>
+<div class="flex items-center gap-1 mt-2 sm:mt-3.5 pl-0.5 text-gray-700">
+<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+<span class="text-[11px] sm:text-xs lg:text-sm font-medium text-gray-800 leading-snug">Plaza Mayor Medellín</span>
+</div>
+</div>
+<div class="mt-3 sm:mt-5 pt-0.5 sm:pt-1">
+<span class="inline-block px-2.5 py-0.5 sm:px-4 sm:py-1 text-[10px] sm:text-xs lg:text-sm font-bold rounded-full bg-brand-green text-white shadow-xs tracking-wide">Gratuito</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- END: Events Section -->
+<!-- BEGIN: Bottom Fixed Institutional Banner -->
+<aside class="fixed bottom-0 left-0 right-0 z-50 bg-brand-green text-white shadow-2xl transition-transform duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-8 py-2.5 sm:py-3 flex items-center justify-between">
+<!-- Left side teaser bullet -->
+<div class="flex items-center gap-2">
+<span class="text-xs sm:text-sm font-semibold tracking-wide text-white">
+          Entérate de todo
+        </span>
+</div>
+<!-- Right side "Chismear" Action CTA with light sweep effect -->
+<button class="light-sweep-btn px-6 sm:px-8 py-1.5 sm:py-2 bg-brand-darkgreen hover:bg-[#254f1b] text-white text-xs sm:text-sm font-bold rounded-full shadow-md transition-all active:scale-95" id="chismearBtn">
+        Chismear
+      </button>
+</div>
+</aside>
+<!-- END: Bottom Fixed Institutional Banner -->
+<!-- BEGIN: Interactive Modal for "Chismear" -->
+<div class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" id="infoModal">
+<div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 text-center shadow-2xl relative">
+<button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold p-1" id="closeModalBtn">
+        ✕
+      </button>
+<div class="w-16 h-16 bg-emerald-100 text-brand-green rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+        📢
+      </div>
+<h3 class="font-title text-xl font-bold text-slate-800">¡Entérate del chisme SENA!</h3>
+<p class="text-xs sm:text-sm text-gray-600 mt-2 mb-5">
+        Recibe novedades de convocatorias nacionales, becas, cursos virtuales y ofertas de empleo antes que nadie.
+      </p>
+<input class="w-full text-xs sm:text-sm rounded-full border-gray-300 focus:ring-brand-green focus:border-brand-green mb-3 py-2.5 px-4" placeholder="Ingresa tu correo electrónico..." type="email">
+<button class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 rounded-full text-sm transition-colors" id="subscribeBtn">
+        ¡Manténganme al tanto!
+      </button>
+</div>
+</div>
+<!-- END: Interactive Modal -->
+<!-- JavaScript: Strict Scroll-Locked Hero Carousel with Slide 0 Guaranteed Initializer -->
+<script data-purpose="hero-carousel">
+  // Force browser scroll restoration to manual so it always starts at top
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
 
-        togglePassword.addEventListener('click', function (e) {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            eyeIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
-        });
-    </script>
-<script>
-    (function () {
-        'use strict';
+  document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+    const heroSection = document.getElementById('hero-scroll-track');
+    const headerEl = document.getElementById('mainHeader');
 
-        const AUTH = window.BeciAuth;
-        const form = document.querySelector('form');
-        const err = document.getElementById('login-error');
+    // Dynamically adjust hero height to perfectly fill 100% of visible viewport below header
+    function updateHeroHeight() {
+      if (!heroSection) return;
+      const headerHeight = headerEl ? headerEl.offsetHeight : 80;
+      const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      const exactHeight = Math.max(viewportHeight - headerHeight, 480);
+      heroSection.style.height = `${exactHeight}px`;
+    }
 
-        function showError(message) {
-            if (!err) return;
+    updateHeroHeight();
+    window.addEventListener('resize', updateHeroHeight, { passive: true });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', updateHeroHeight, { passive: true });
+    }
 
-            err.textContent = message || 'No se pudo iniciar sesión.';
-            err.classList.remove('hidden');
+    const slides = [
+      document.getElementById('slide-0'),
+      document.getElementById('slide-1'),
+      document.getElementById('slide-2')
+    ];
+    const dots = document.querySelectorAll('.hero-dot');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+    let isTransitioning = false;
+    const transitionDuration = 700; // ms
+    let lastSlideSettledAt = 0;
+    const LAST_SLIDE_SETTLE_COOLDOWN = 450; // ms required before intentional scroll down exits to content
+
+    // Slide updater: supports animated or immediate instant initialization
+    function updateSlide(targetIndex, animate = true) {
+      if (targetIndex < 0 || targetIndex >= totalSlides) return;
+      if (animate && isTransitioning) return;
+
+      if (animate) {
+        isTransitioning = true;
+      }
+      currentSlide = targetIndex;
+
+      slides.forEach((slide, idx) => {
+        if (!slide) return;
+        if (!animate) {
+          slide.style.transition = 'none';
+        } else {
+          slide.style.transition = '';
         }
 
-        function clearError() {
-            if (!err) return;
-
-            err.textContent = '';
-            err.classList.add('hidden');
+        if (idx === targetIndex) {
+          slide.classList.remove('opacity-0', 'z-10', 'pointer-events-none', '-translate-y-8', 'translate-y-8');
+          slide.classList.add('opacity-100', 'z-20', 'pointer-events-auto', 'translate-y-0');
+        } else {
+          slide.classList.remove('opacity-100', 'z-20', 'pointer-events-auto', 'translate-y-0');
+          slide.classList.add('opacity-0', 'z-10', 'pointer-events-none');
+          if (idx < targetIndex) {
+            slide.classList.remove('translate-y-8');
+            slide.classList.add('-translate-y-8');
+          } else {
+            slide.classList.remove('-translate-y-8');
+            slide.classList.add('translate-y-8');
+          }
         }
 
-        if (!AUTH || !form) {
-            console.error('BECI: no se encontró el sistema de autenticación o el formulario.');
-            return;
+        if (!animate) {
+          // Force layout reflow then restore transition styles
+          void slide.offsetHeight;
+          slide.style.transition = '';
         }
+      });
 
-        form.addEventListener('submit', async function (e) {
+      // Update vertical pagination dots
+      dots.forEach((dot, idx) => {
+        if (idx === targetIndex) {
+          dot.classList.remove('h-2.5', 'bg-white/50');
+          dot.classList.add('h-6', 'bg-white', 'shadow-md');
+        } else {
+          dot.classList.remove('h-6', 'bg-white', 'shadow-md');
+          dot.classList.add('h-2.5', 'bg-white/50');
+        }
+      });
+
+      if (animate) {
+        setTimeout(() => {
+          isTransitioning = false;
+          if (currentSlide === totalSlides - 1) {
+            lastSlideSettledAt = Date.now();
+          }
+        }, transitionDuration);
+      } else {
+        isTransitioning = false;
+        if (currentSlide === totalSlides - 1) {
+          lastSlideSettledAt = Date.now();
+        }
+      }
+    }
+
+    // STRICT INITIALIZATION TO SLIDE 0:
+    updateSlide(0, false);
+
+    function isAtHeroTop() {
+      return window.scrollY <= 10;
+    }
+
+    // Wheel event handler with fluid slide progression and natural unlock on slide 2
+    window.addEventListener('wheel', (e) => {
+      const atTop = isAtHeroTop();
+
+      if (atTop) {
+        if (e.deltaY > 0) {
+          // Scrolling Down
+          if (currentSlide < totalSlides - 1) {
             e.preventDefault();
-
-            clearError();
-
-            const emailInput = document.getElementById('loginEmail');
-            const passwordInput = document.getElementById('password');
-            const submitButton = form.querySelector('button[type="submit"]');
-
-            if (!emailInput || !passwordInput) {
-                showError('No se encontraron los campos de inicio de sesión.');
-                return;
+            if (!isTransitioning && Math.abs(e.deltaY) > 8) {
+              updateSlide(currentSlide + 1, true);
             }
-
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-
-            if (!email) {
-                showError('Escribe tu correo.');
-                return;
+          } else {
+            // Reached Slide 2 (last slide)
+            if (isTransitioning || (Date.now() - lastSlideSettledAt < LAST_SLIDE_SETTLE_COOLDOWN)) {
+              e.preventDefault();
+            } else {
+              // Smooth, seamless descent into page content without requiring double scroll
             }
-
-            if (!password) {
-                showError('Escribe tu contraseña.');
-                return;
+          }
+        } else if (e.deltaY < 0) {
+          // Scrolling Up while at top of viewport
+          if (currentSlide > 0) {
+            e.preventDefault();
+            if (!isTransitioning && Math.abs(e.deltaY) > 8) {
+              updateSlide(currentSlide - 1, true);
             }
+          }
+        }
+      } else {
+        // Scrolling up from lower sections: when reaching the top, re-dock at slide 2
+        if (window.scrollY <= 15 && e.deltaY < 0) {
+          if (currentSlide !== totalSlides - 1) {
+            updateSlide(totalSlides - 1, false);
+          }
+          lastSlideSettledAt = Date.now();
+        }
+      }
+    }, { passive: false });
 
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Iniciando sesión...';
+    // Touch event handling for mobile and tablets
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!touchStartY) return;
+      const currentY = e.touches[0].clientY;
+      const currentX = e.touches[0].clientX;
+      const diffY = touchStartY - currentY;
+      const diffX = touchStartX - currentX;
+
+      if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 10) {
+        const atTop = isAtHeroTop();
+        if (atTop) {
+          if (diffY > 0) {
+            // Swiping up -> next slide
+            if (currentSlide < totalSlides - 1) {
+              e.preventDefault();
+            } else if (isTransitioning || (Date.now() - lastSlideSettledAt < LAST_SLIDE_SETTLE_COOLDOWN)) {
+              e.preventDefault();
             }
+          } else if (diffY < 0 && currentSlide > 0) {
+            // Swiping down -> prev slide
+            e.preventDefault();
+          }
+        }
+      }
+    }, { passive: true });
 
-            try {
-                await AUTH.ensureReady();
+    window.addEventListener('touchend', (e) => {
+      if (!touchStartY) return;
+      const touchEndY = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : 0;
+      const diffY = touchStartY - touchEndY;
+      touchStartY = 0;
 
-                const result = await AUTH.login(email, password);
+      if (Math.abs(diffY) > 40 && isAtHeroTop()) {
+        if (diffY > 0) {
+          if (currentSlide < totalSlides - 1) {
+            updateSlide(currentSlide + 1, true);
+          }
+        } else if (diffY < 0 && currentSlide > 0) {
+          updateSlide(currentSlide - 1, true);
+        }
+      }
+    });
 
-                if (!result || !result.ok) {
-                    showError(
-                        (result && result.error) ||
-                        'Correo o contraseña incorrectos.'
-                    );
+    // Keyboard navigation (ArrowDown, ArrowUp, PageDown, PageUp, Space)
+    window.addEventListener('keydown', (e) => {
+      const atTop = isAtHeroTop();
+      if (!atTop) return;
 
-                    if (submitButton) {
-                        submitButton.disabled = false;
-                        submitButton.textContent = 'Iniciar Sesión';
-                    }
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
+        if (currentSlide < totalSlides - 1) {
+          e.preventDefault();
+          updateSlide(currentSlide + 1, true);
+        } else if (isTransitioning || (Date.now() - lastSlideSettledAt < LAST_SLIDE_SETTLE_COOLDOWN)) {
+          e.preventDefault();
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
+        if (currentSlide > 0) {
+          e.preventDefault();
+          updateSlide(currentSlide - 1, true);
+        }
+      }
+    });
 
-                    return;
-                }
+    // Pagination dots click handler
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateSlide(index, true);
+      });
+    });
 
-                /*
-                 * Login correcto.
-                 * BeciAuth ya guarda y sincroniza la sesión
-                 * del usuario autenticado.
-                 */
-
-                AUTH.redirectAfterAuth('HomeBeci.html');
-
-            } catch (error) {
-                console.error('BECI - Error al iniciar sesión:', error);
-
-                showError(
-                    'No se pudo iniciar sesión en este momento. Intenta nuevamente.'
-                );
-
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Iniciar Sesión';
-                }
-            }
-        });
-    })();
+    // Re-enforce initial position on window load
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
+      updateSlide(0, false);
+    });
+  });
 </script>
+<!-- JavaScript: Live Filter Search Engine -->
+<script data-purpose="live-search">
+    const searchData = [
+      { title: 'ADSO - Análisis y Desarrollo de Software', category: 'Programa Tecnólogo', icon: '💻', link: '#programas' },
+      { title: 'Enfermería y Servicios de Salud', category: 'Programa Técnico', icon: '🩺', link: '#programas' },
+      { title: 'Gestión Empresarial y Emprendimiento', category: 'Programa Tecnólogo', icon: '📈', link: '#programas' },
+      { title: 'Animación Digital 3D & VFX', category: 'Programa Técnico', icon: '🎨', link: '#programas' },
+      { title: 'Taller Fotografía Urbana', category: 'Evento Gratuito', icon: '📷', link: '#eventos' },
+      { title: 'Taller Pintura Acrílica', category: 'Evento Gratuito', icon: '🖌️', link: '#eventos' },
+      { title: 'Seminario Robótica e Inteligencia Artificial', category: 'Evento Presencial', icon: '🤖', link: '#eventos' },
+      { title: 'Centro Tecnológico del Mobiliario (CTMA - Medellín)', category: 'Sede / Centro', icon: '🏢', link: '#sedes' },
+      { title: 'Sede Pedregal (Medellín)', category: 'Sede / Centro', icon: '🏢', link: '#sedes' },
+      { title: 'Centro Náutico Pesquero (Cartagena)', category: 'Sede / Centro', icon: '⚓', link: '#sedes' },
+      { title: 'Complejo Paloquemao (Bogotá)', category: 'Sede / Centro', icon: '🏛️', link: '#sedes' }
+    ];
+
+    const searchInput = document.getElementById('mainSearchInput');
+    const searchDropdown = document.getElementById('searchResultsDropdown');
+
+    if (searchInput && searchDropdown) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (query.length < 2) {
+          searchDropdown.classList.add('hidden');
+          searchDropdown.innerHTML = '';
+          return;
+        }
+
+        const filtered = searchData.filter(item => 
+          item.title.toLowerCase().includes(query) || 
+          item.category.toLowerCase().includes(query)
+        );
+
+        if (filtered.length === 0) {
+          searchDropdown.innerHTML = `
+            <div class="px-4 py-3 text-xs text-gray-400 text-center">
+              No encontramos resultados para "${e.target.value}". Prueba con "Software", "Pintura" o "CTMA".
+            </div>
+          `;
+        } else {
+          searchDropdown.innerHTML = filtered.map(item => `
+            <a href="${item.link}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-emerald-50 transition-colors group">
+              <span class="text-xl">${item.icon}</span>
+              <div class="text-left">
+                <div class="text-xs sm:text-sm font-semibold text-gray-800 group-hover:text-brand-darkgreen">${item.title}</div>
+                <div class="text-[10px] text-gray-400 font-medium">${item.category}</div>
+              </div>
+            </a>
+          `).join('');
+        }
+
+        searchDropdown.classList.remove('hidden');
+      });
+
+      document.addEventListener('click', (e) => {
+        const searchBox = document.getElementById('mainSearchInput');
+        if (searchBox && !searchBox.contains(e.target) && !searchDropdown.contains(e.target)) {
+          searchDropdown.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+<!-- JavaScript: UI Interactivity & Drag-to-Scroll for Mobile Pills & Events Carousel -->
+<script data-purpose="ui-interactions">
+    // Mobile Drawer Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    if (mobileBtn && mobileDrawer) {
+      mobileBtn.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('hidden');
+      });
+    }
+
+    // Modal Interactions
+    const chismearBtn = document.getElementById('chismearBtn');
+    const infoModal = document.getElementById('infoModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const subscribeBtn = document.getElementById('subscribeBtn');
+
+    if (chismearBtn && infoModal) {
+      chismearBtn.addEventListener('click', () => {
+        window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank');
+      });
+      closeModalBtn.addEventListener('click', () => {
+        infoModal.classList.add('hidden');
+      });
+      infoModal.addEventListener('click', (e) => {
+        if (e.target === infoModal) {
+          infoModal.classList.add('hidden');
+        }
+      });
+      subscribeBtn.addEventListener('click', () => {
+        subscribeBtn.innerText = '¡Listo! Te avisaremos 🚀';
+        subscribeBtn.classList.remove('bg-brand-green');
+        subscribeBtn.classList.add('bg-emerald-700');
+        setTimeout(() => {
+          infoModal.classList.add('hidden');
+          subscribeBtn.innerText = '¡Manténganme al tanto!';
+          subscribeBtn.classList.remove('bg-emerald-700');
+          subscribeBtn.classList.add('bg-brand-green');
+        }, 1200);
+      });
+    }
+
+    // Drag-to-scroll implementation for Mobile Navigation Pills
+    const mobilePillsTrack = document.getElementById('mobilePillsTrack');
+    if (mobilePillsTrack) {
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let hasMoved = false;
+
+      mobilePillsTrack.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasMoved = false;
+        mobilePillsTrack.classList.add('is-dragging');
+        startX = e.pageX - mobilePillsTrack.offsetLeft;
+        scrollLeft = mobilePillsTrack.scrollLeft;
+      });
+
+      mobilePillsTrack.addEventListener('mouseleave', () => {
+        isDown = false;
+        mobilePillsTrack.classList.remove('is-dragging');
+      });
+
+      mobilePillsTrack.addEventListener('mouseup', () => {
+        isDown = false;
+        setTimeout(() => {
+          mobilePillsTrack.classList.remove('is-dragging');
+        }, 50);
+      });
+
+      mobilePillsTrack.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - mobilePillsTrack.offsetLeft;
+        const walk = (x - startX) * 1.5; // Scroll speed factor
+        if (Math.abs(walk) > 4) {
+          hasMoved = true;
+        }
+        mobilePillsTrack.scrollLeft = scrollLeft - walk;
+      });
+
+      // Prevent link activation when dragging
+      mobilePillsTrack.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          if (hasMoved) {
+            e.preventDefault();
+          }
+        });
+      });
+    }
+
+    // Full Mouse Drag-to-Scroll implementation for 'Eventos para ti' across all screens
+    const eventsTrack = document.getElementById('eventsCarouselTrack');
+    if (eventsTrack) {
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let hasDragged = false;
+
+      // Prevent native HTML5 drag on child images
+      eventsTrack.querySelectorAll('img').forEach(img => {
+        img.setAttribute('draggable', 'false');
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+      });
+
+      eventsTrack.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        eventsTrack.classList.add('is-dragging');
+        eventsTrack.classList.remove('scroll-smooth'); // Temporary disable smooth scrolling during active dragging for immediate precision
+        startX = e.pageX - eventsTrack.offsetLeft;
+        scrollLeft = eventsTrack.scrollLeft;
+      });
+
+      eventsTrack.addEventListener('mouseleave', () => {
+        if (!isDown) return;
+        isDown = false;
+        eventsTrack.classList.remove('is-dragging');
+        eventsTrack.classList.add('scroll-smooth');
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDown) {
+          isDown = false;
+          eventsTrack.classList.remove('is-dragging');
+          eventsTrack.classList.add('scroll-smooth');
+          setTimeout(() => {
+            hasDragged = false;
+          }, 60);
+        }
+      });
+
+      eventsTrack.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - eventsTrack.offsetLeft;
+        const walk = (x - startX) * 1.8; // High-precision responsive multiplier
+        if (Math.abs(walk) > 5) {
+          hasDragged = true;
+        }
+        eventsTrack.scrollLeft = scrollLeft - walk;
+      });
+
+      // Prevent accidental card or inner link triggers when dragging
+      eventsTrack.addEventListener('click', (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      // Deep-link navigation for 'Eventos para ti' cards (each card opens its day on the calendar page)
+      const eventCards = Array.from(eventsTrack.querySelectorAll('.event-card-item'));
+      const eventDaysMap = ['01', '02', '05', '12'];
+      eventsTrack.querySelectorAll('.event-card-item').forEach(card => {
+        card.style.cursor = 'pointer';
+      });
+      eventsTrack.addEventListener('click', (e) => {
+        if (hasDragged) return;
+        const card = e.target.closest('.event-card-item');
+        if (!card) return;
+        const idx = eventCards.indexOf(card);
+        const dayStr = eventDaysMap[idx];
+        if (dayStr) {
+          window.location.href = 'eventossena.html?evt=' + dayStr;
+        }
+      });
+    }
+  </script>
 
 
-</body></html>
+<script class="">
+  function openHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.remove('hidden');
+    void overlay.offsetWidth; // Trigger reflow for smooth fade-in
+    overlay.classList.remove('opacity-0');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.add('opacity-0');
+    modal.classList.remove('scale-100');
+    modal.classList.add('scale-95');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
+  }
+
+  function toggleHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay && overlay.classList.contains('hidden')) {
+      openHeaderMobileNav();
+    } else {
+      closeHeaderMobileNav();
+    }
+  }
+
+  function handleMobileOverlayClick(e) {
+    if (e.target.id === 'mobile-nav-overlay') {
+      closeHeaderMobileNav();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeHeaderMobileNav();
+    }
+  });
+</script></body></html>

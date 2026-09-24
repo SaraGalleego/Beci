@@ -101,13 +101,12 @@
 <header class="w-full border-none md:border-none lg:border-b lg:border-emerald-100/60 lg:bg-[#FFFFFF] transition-colors z-20 bg-transparent lg:bg-white lg:shadow-md shrink-0">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
 <a class="flex items-center gap-1 cursor-pointer select-none group" href="#"><img alt="BECI" class="h-[52px] md:h-[62px] lg:h-12 w-auto object-contain transition-transform group-hover:scale-105 relative top-[3%] lg:top-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhLv8mu71mViEz1jgUpwT_7OzXUQYykxLafd4nqAKswE5_3dbWSGb9teWJ2h6R7xJLUwtncmBLt1bKkhKYsjt7FJujx2fEq67aW6_XCcfkZjWTtskcZM1vxrnTkZdvNBOVjnNr_oUyi40fy25j7FQjfrIaMfyuvyyXYyU06lnfEPCdRqoeK3JQ3hfv0g82_5CrFBylFDpNlZdAZi-d8K9swAsMtEpVfrz3Rk2CT5elr_4fZlu4N-64PzysH74K03X9_g" style="transform: scale(1.08); transform-origin: left center;"></a>
-<nav class="hidden lg:flex items-center gap-8 lg:gap-10 ml-auto mr-0">
-<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Ayuda</a>
-<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Eventos</a>
-<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="#"><span class="font-bold text-sm lg:text-base text-stone-800">Charlemos</span><span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span></a>
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="InicioSena.html">Inicio</a>
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="Charlemos.html"><span class="font-bold text-sm lg:text-base text-stone-800">Charlemos</span><span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span></a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Mapasena.html">Explorar Sedes</a>
 <a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="registratucorreosena.html">Estar al Tanto</a>
-<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Explorar Sedes</a>
-<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#">Explorar programas</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#programas">Explorar programas</a>
 </nav>
 <div class="flex items-center gap-3 lg:hidden">
 <button aria-label="Menú" class="p-2 rounded-2xl bg-transparent hover:bg-black/5 text-[#336926] transition active:scale-95 border-none cursor-pointer" onclick="openMobileNavMenu()" type="button"><img alt="Menú" class="w-7 h-5 md:w-8 md:h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSo7NPtEvcPb86mvyKmZNR2nf1i_JDTAnSCGXp7GLXv5_1JxWRtCwp76e7HLB_00jay969HjOGCVGW1E74_bp_a2hjDhVjd-LFlbziB8q_aN2YNSKKQqGwhzqHBfwouSXUUh9t7bEXwOGzn7P_TbEBsTXbB7zGTALbkSVchysJsueZV7IlRqpQXeBvzxxOxsZpY-qJBbU0t9Lzamwq0PYryHCXUfiVm4lHgGmxpKOZWgRmkWASbiQDnrHjno2V8mZSg"></button>
@@ -270,21 +269,15 @@
 </button>
 <!-- Opciones de Navegación con tipografía amplia, cómoda y espaciado generoso -->
 <div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4">
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
-        Ayuda
-      </a>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
-        Eventos
-      </a>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="registratucorreosena.html" onclick="closeMobileNavMenu()">
-        Estar al Tanto
-      </a>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
-        Explorar Sedes
-      </a>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#" onclick="closeMobileNavMenu()">
-        Explorar Programas
-      </a>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="InicioSena.html" onclick="closeMobileNavMenu()">Inicio</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-bold tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Charlemos.html" onclick="closeMobileNavMenu()">Charlemos</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Mapasena.html" onclick="closeMobileNavMenu()">Explorar Sedes</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="registratucorreosena.html" onclick="closeMobileNavMenu()">Estar al Tanto</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#programas" onclick="closeMobileNavMenu()">Explorar Programas</a>
 </div>
 </div>
 </div>
