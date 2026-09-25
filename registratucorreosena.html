@@ -56,6 +56,23 @@
       animation: floatBg 7s ease-in-out infinite;
     }
   </style>
+<style id="areas-formacion-bg-animations">
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes flotarDelay {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+@keyframes flotarSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.anim-flotar { animation: flotar 6s ease-in-out infinite; }
+.anim-flotar-delay { animation: flotarDelay 7s ease-in-out infinite; }
+.anim-flotar-slow { animation: flotarSlow 8s ease-in-out infinite; }
+</style>
 <style data-purpose="mascot-animation">
     /* Animación Mascota Peek-a-boo */
     @keyframes mascotPeek {
@@ -453,13 +470,48 @@
 }
 </style>
 
+
+<style id="desktop-register-button-up-20">
+@media (min-width: 768px) {
+  [data-purpose="submit-register-button"] {
+    transform: translateY(-20px) !important;
+  }
+}
+</style>
+
 </head>
 <body class="min-h-screen text-slate-800 flex flex-col relative antialiased selection:bg-brand-green selection:text-white">
-<!-- BEGIN: Institutional Background Decor -->
-<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" data-purpose="background-layer">
-<img alt="Fondo Institucional" class="w-full h-full object-cover opacity-60 animated-bg-decor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbK2VmU3fT41qAGa2tFNKSvBj7ySxacOtg4byRs0zLN-Dql5FZCi9v0upKykhlGGr0MupKB4z4cSNQWfhjf3u9RRAt7DopgOpYJM7NFVyreGzLclrZsyG7zyF6kElZG-sa8t_wcvdZYzfHUntpa4iCztHLkQ8wgbPEY2pftotJ4WMyipwjyTKoYL1UpDrVqmcFCv3UkcO3MpgUBotAnIldzVZ6MlJvxW9ONDM46pIruvDVKvX46Rcd9RPeanyIeKZ_HQ"/>
+<!-- DESKTOP: Fondo institucional de areasformacion.html -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden md:block" data-purpose="areas-formacion-desktop-bg">
+  <div class="absolute inset-0 bg-repeat bg-[length:420px_auto] opacity-35" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuD4NN-5rc_YsAXt3W23Nl2UMA_c59gc38iVpg5ekSCBRrpiywC9FKxO_ZcHMI6qeDWytWBkckcVR2rz7W0IHRtnlBzwxNXwoprbtcKfcoKVkbwfJPd1OHy1A8VUCj8-I1MRSktt6RlMvN5HNjTrPhGewdaCYtLbGn1MdulcTSWTK5b4WAHzi4C1oXGV0UuoE92inhImeTcv6N6pkIL68SsXgQxNtlutmkMM8NbBwbQRtZm_MEQ1zaPnEw6PEW-HH9qoQzo&quot;);"></div>
+  <div class="absolute -top-12 right-0 w-80 h-96 anim-flotar opacity-70">
+    <svg class="w-full h-full" fill="none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#A9D49E" opacity="0.6">
+        <circle cx="120" cy="40" r="3"></circle><circle cx="135" cy="40" r="3"></circle><circle cx="150" cy="40" r="3"></circle><circle cx="165" cy="40" r="3"></circle>
+        <circle cx="120" cy="55" r="3"></circle><circle cx="135" cy="55" r="3"></circle><circle cx="150" cy="55" r="3"></circle><circle cx="165" cy="55" r="3"></circle>
+        <circle cx="120" cy="70" r="3"></circle><circle cx="135" cy="70" r="3"></circle><circle cx="150" cy="70" r="3"></circle><circle cx="165" cy="70" r="3"></circle>
+        <circle cx="120" cy="85" r="3"></circle><circle cx="135" cy="85" r="3"></circle><circle cx="150" cy="85" r="3"></circle><circle cx="165" cy="85" r="3"></circle>
+      </g>
+      <path d="M160 140 C 150 120, 130 110, 110 115 C 130 135, 145 150, 160 140 Z" fill="#93C886" opacity="0.5"></path>
+      <path d="M140 160 C 120 150, 110 130, 115 110 C 135 130, 150 145, 140 160 Z" fill="#A3D498" opacity="0.4"></path>
+    </svg>
+  </div>
+  <div class="absolute bottom-20 -left-10 w-96 h-96 anim-flotar-delay opacity-60">
+    <svg class="w-full h-full" fill="none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="140" opacity="0.55" r="70" stroke="#B8DFAC" stroke-dasharray="140 30" stroke-linecap="round" stroke-width="9"></circle>
+      <circle cx="130" cy="80" opacity="0.6" r="6" stroke="#93C886" stroke-width="3"></circle>
+    </svg>
+  </div>
+  <div class="absolute top-1/2 right-4 w-40 h-40 anim-flotar-slow opacity-50">
+    <svg class="w-full h-full" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" fill="#4DB21A" r="2.5"></circle>
+      <circle cx="45" cy="25" fill="#4DB21A" r="2"></circle>
+      <circle cx="40" cy="40" fill="#4DB21A" r="2.5"></circle>
+      <path d="M60 50 C50 40 40 55 60 70 C70 55 65 45 60 50 Z" fill="#B2DE9F"></path>
+    </svg>
+  </div>
 </div>
-<!-- END: Institutional Background Decor -->
+
 <!-- FIXED BOTTOM BAR -->
 <nav class="state-transition fixed bottom-0 left-0 right-0 z-30 bg-[#4DB21A] text-white py-2.5 px-5 md:py-4 md:px-10 lg:py-5 lg:px-16 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.06)] mx-auto" id="bottom-bar">
   <span class="text-xs md:text-base lg:text-lg font-medium tracking-wide text-white/95">

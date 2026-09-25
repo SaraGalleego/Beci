@@ -125,73 +125,76 @@
     }
   </style>
 </head>
-<body class="bg-[#F9FFFA] min-h-screen text-gray-800 antialiased flex flex-col items-center">
-<!-- ==================== 1. DESKTOP HEADER (lg: 1024px+) ==================== -->
-<header class="hidden lg:flex w-full bg-white border-b border-green-50 shadow-sm sticky top-0 z-50 px-6 py-4 items-center justify-between">
-<div class="max-w-7xl w-full mx-auto flex items-center justify-between">
-<a class="flex items-center transition hover:scale-105 active:scale-95" href="#">
-<img alt="Beci Logo" class="h-10 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvm1nS_iI8sAXnYP-ACprr9tFpJ37zVhJCzi3TKkRZ4GK32cu1O9naXi74A1kFd6MAQD1lIom9xJtkQJSq50ItepRhpj75BcXF-VfskNvy5Hmmc3-W20BFrXuVML3DHq1O4SgfBHJoFH7aXvSJbnntoXTJFMrzXQMnnWrE2spkdOSVyzm-d1wk-MPTBtpY5CGUK4IRrb8AE5HdJRU0hpbcUuoW8x8PFPHooleAYXzIM7I6EPHbMfTtynBB6DKUItV5xw"/>
+<body class="bg-[#F9FFFA] min-h-screen text-gray-800 antialiased flex flex-col">
+<!-- BEGIN: MainHeader -->
+<!-- TOP HEADER -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-50/80 shadow-xs transition-all duration-300" id="mainHeader">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<!-- Left: Official BECI 3D Logo from Datastore -->
+<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="#">
+<img alt="Beci Mascota SENA 3D" class="h-12 sm:h-14 md:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjShFTCs-PnE_E_ZfB9xd46lmXxET0S59qbcUf3HsXs_dovvSF-z30BpiCaN0-1TfAtXizSqwi32i-NXawVYs_ODMtk8fJPzCXSauaw8qYTWnvjK9zG0n_-PoedEW33lzTrmNUVL445rq17Y9uxwM_dNRMelQQALaqCZ6XTAvB2VedcHKlYLNL4-TmHYS8FqnEKpCzPOiLGRuQ2osGgy3ihHF27Ww4cMw8f4SYx0eaqxAYwoqpbT7LbZlEpVyNhPf_tg">
 </a>
-<nav class="flex items-center gap-8 text-[15px] font-medium text-gray-700">
-<a class="hover:text-[#4DB21A] transition" href="InicioSena.html">Inicio</a>
-<a class="hover:text-[#4DB21A] transition" href="Charlemos.html">Charlemos</a>
-<div class="relative py-1">
-<a class="text-gray-900 font-semibold transition" href="Mapasena.html">Explorar Sedes</a>
-<span class="absolute -bottom-1.5 left-0 right-0 h-[3px] bg-[#4DB21A] rounded-full"></span>
-</div>
-<a class="hover:text-[#4DB21A] transition" href="registratucorreosena.html">Estar al Tanto</a>
-<a class="hover:text-[#4DB21A] transition" href="areasformacion.html">Explorar áreas de formación</a>
+<!-- Desktop Navigation Pills (Faithful to reference: Inicio, Charlemos, Explorar Sedes, Eventos, Explorar áreas de formación) -->
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="InicioSena.html">Inicio</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Charlemos.html">Charlemos</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="eventossena.html">Eventos</a>
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="Mapasena.html">
+  <span class="font-bold text-sm lg:text-base text-stone-800">Explorar Sedes</span>
+  <span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span>
+</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="registratucorreosena.html">Estar al Tanto</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="areasformacion.html">Explorar áreas de formación</a>
 </nav>
-</div>
-</header>
-<!-- ==================== MAIN RESPONSIVE CONTAINER ==================== -->
-<div class="w-full max-w-md md:max-w-3xl bg-[#F9FFFA] min-h-screen relative pb-28 md:pb-32 lg:pb-24 border-green-100 lg:max-w-none">
-<!-- ==================== MOBILE & TABLET HEADER (Hidden on lg+) ==================== -->
-<header class="lg:hidden w-full px-5 pt-4 pb-2.5 flex items-center justify-between z-40 sticky top-0 bg-[#F9FFFA]/95 backdrop-blur-md border-b border-green-50">
-<!-- Beci Logo -->
-<a class="block transition hover:scale-105 active:scale-95" href="#">
-<img alt="Beci" class="h-10 md:h-12 object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPUJH9yVMygpwOSnfKphEHfDADxfZsNkUi1WEbvlHjiZhoJBFcL8ikH4nREbX1X7eALt6T9OR1M4iI54IYg81HEJUj3rbvEbdoa1pnXMlH0uyRgE11xrXBqtfam1KEib6tA-CDKNkx6F82Tnn8kVyh57GeX-_4ED0Uai3J-uhpHhMuSR6VSApQKRi1qWgVQOnQ-kUFPLtns_0_SX3YIrddIu93oUQmlBaoVGam12c_eoYyNi1SXEwybtglYUqvWj_bdw"/>
-</a>
-<!-- Title CTMA with navigation arrows -->
-<div class="flex items-center gap-3 md:gap-5">
-<button aria-label="Anterior" class="text-green-700 hover:text-green-900 transition text-lg md:text-xl font-bold">
-          &lt;
-        </button>
-<div class="relative pb-0.5">
-<span class="font-heading font-black text-2xl md:text-3xl tracking-wider text-[#1F2937]">CTMA</span>
-<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-green-600 rounded-full"></div>
-</div>
-<button aria-label="Siguiente" class="text-gray-300 hover:text-green-900 transition text-lg md:text-xl font-bold">
-          &gt;
-        </button>
-</div>
-<!-- Hamburger Menu Icon (Group 90) -->
-<button aria-label="Menú" class="p-1 hover:opacity-80 transition focus:outline-none flex items-center justify-center" id="menu-btn">
-<img alt="Menú" class="w-8 md:w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtMZQeMBHWcY1L_iVHDOqivEyPs738Fs2Xccfm3Mm2Ot0ao1MzxvWymJlflYiO1dd58PovrcSksrzJantFUI0Mm-05847U80DTRYiAuROoTMIvbX7hmIz_rpM0--hJZGcTj_SbCWG9f7AwOcICvj3RmYBYiwHtCBodTryPn2Y-jw9oaq6yRMsvMuDEZ2hCdNIryOst4b7bkYgG_P_3iG0vNeNNWAD0JeRS1OuHtEjy0wcRu8c3fMFnsXAkVWyxg1XnCQ"/>
+<!-- Right: Official SENA Identification & Mobile Menu Toggle -->
+<div class="flex items-center gap-3">
+<!-- Desktop SENA Wordmark -->
+<div class="flex flex-col items-end leading-none pr-1"><span class="font-title font-black tracking-widest text-xl sm:text-2xl text-[#336926]">SENA</span><span class="text-[9px] sm:text-[10px] font-semibold text-gray-500 tracking-wider">Medellín</span></div>
+<!-- Mobile / Tablet Hamburger Toggle Button -->
+<button aria-label="Abrir Menú Móvil" class="lg:hidden p-1 focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg transition-transform active:scale-95" id="mobileMenuBtn" onclick="toggleHeaderMobileNav()">
+<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArciEck3dnb-Fg2UuGEXw_zcNhOEWFE1F8QWORqCjsJoB1gH0pFTDGC_vTUOP-8J113bWwvFgnfGLPSpQWfOKls6Mlp9l9TCI7xXvs0PH3YDFsb6jECbgGBUmiWPrhHXaO9rGUvyU8BIFOpGgDAP3S4TdVUxyHcDqAHMOcaDgyfOwPPv8xTWNSyZmPjiuXaMTCuVdxQeW0hFh__yvFQj6ZQ2rz5-3Z3iI4PjhYKQf8O51s7Yn0ceoTICvt6cRm34hE5g">
 </button>
-</header>
-<!-- FLOATING GLASS HAMBURGER MENU DROPDOWN (Mobile & Tablet) -->
-<div class="hidden fixed inset-0 z-50 bg-black/25 backdrop-blur-[2px] flex items-start justify-center pt-20 px-4" id="menu-backdrop">
-<div class="w-full max-w-xs md:max-w-sm glass-card rounded-3xl p-6 relative transition-all transform scale-95 opacity-0 duration-300 shadow-2xl border border-white/70" id="dropdown-menu">
-<!-- Close button "X" in green -->
-<div class="flex justify-between items-center mb-5">
-<span class="text-xs font-bold text-[#336926] uppercase tracking-wider">Menú Navegación</span>
-<button aria-label="Cerrar menú" class="w-8 h-8 rounded-full bg-green-50 text-[#336926] hover:bg-green-100 hover:text-[#4DB21A] font-extrabold flex items-center justify-center text-base transition shadow-sm" id="close-menu-btn">✕</button>
-</div>
-<!-- Centered options with intermediate divider lines -->
-<div class="flex flex-col text-center font-semibold text-gray-800 text-[15px]">
-<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="InicioSena.html">Ayuda / Inicio</a>
-<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
-<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="eventossena.html">Eventos</a>
-<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
-<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="registratucorreosena.html">Estar al Tanto</a>
-<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
-<a class="py-2.5 text-[#336926] font-bold transition hover:scale-105" href="Mapasena.html">Explorar Sedes</a>
-<div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
-<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="areasformacion.html">Explorar áreas de formación</a>
 </div>
 </div>
+<!-- MODAL MENÚ HAMBURGUESA GLASSMORFISM MÓVIL Y TABLET (FRAME 28) -->
+<div id="mobile-nav-overlay" class="fixed inset-0 z-50 bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" onclick="handleMobileOverlayClick(event)">
+  <div id="mobile-nav-modal" class="relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" style="background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(24px) saturate(180%) brightness(1.1); border: 1.5px solid rgba(255, 255, 255, 0.7); box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 40px, rgba(255, 255, 255, 0.4) 0px 0px 20px, rgba(255, 255, 255, 0.9) 0px 1px 2px inset;">
+    <!-- Botón Cerrar 'X' verde cómodo y accesible -->
+    <button type="button" onclick="closeHeaderMobileNav()" aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer">
+      <svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <!-- Opciones de Navegación con tipografía amplia, cómoda y espaciado generoso -->
+    <div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4"><a href="InicioSena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Inicio
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="Charlemos.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Charlemos
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="eventossena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Eventos
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="Mapasena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Explorar Sedes
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="registratucorreosena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Estar al Tanto
+      </a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="areasformacion.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">
+        Explorar áreas de formación
+      </a>
+    </div>
+  </div>
 </div>
+<!-- END: MainHeader -->
 <!-- ==================== MAIN SCROLLABLE CONTENT ==================== -->
 <main class="relative z-10">
 <!-- SECTION 1: HERO - CTMA SEDE PEDREGAL -->
@@ -404,19 +407,59 @@
 </div></div>
 </section>
 </main>
-<!-- ==================== FIXED INSTITUTIONAL BOTTOM BAR (Mobile & Tablet) ==================== -->
-<footer class="fixed bottom-0 left-0 w-full bg-[#4DB21A] py-2.5 md:py-3 px-6 md:px-12 flex items-center justify-between z-50 shadow-lg">
-<div class="flex items-center gap-2">
-<span class="text-white text-xs md:text-sm font-semibold tracking-wide">
-          Entérate de todo
-        </span>
+<nav class="state-transition fixed bottom-0 left-0 right-0 z-30 bg-[#4DB21A] text-white py-2.5 px-5 md:py-4 md:px-10 lg:py-5 lg:px-16 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.06)] mx-auto" id="bottom-bar">
+  <span class="text-xs md:text-base lg:text-lg font-medium tracking-wide text-white/95">
+    Enterate de todo
+  </span>
+  <button class="relative overflow-hidden group bg-[#336926] hover:bg-[#28531e] active:scale-95 text-white text-xs md:text-base lg:text-lg font-bold px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-3.5 rounded-full shadow-sm transition-all duration-300 hover:shadow-[0_0_20px_#4db21a,0_0_35px_rgba(255,255,255,0.7)] hover:brightness-125 cursor-pointer" onclick="openSofiaPortal()" type="button">
+    <span class="relative z-10">Chismear</span>
+    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"></span>
+  </button>
+</nav>
 </div>
-<!-- Chismear Button (#336926 pill, with light sweep) -->
-<button class="btn-chismear text-white font-bold text-xs md:text-sm px-6 md:px-8 py-2 md:py-2.5 rounded-full shadow-md active:scale-95 hover:brightness-110 transition" onclick="window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank')">
-        Chismear
-      </button>
-</footer>
-</div>
+<script>
+  function openSofiaPortal() {
+    window.open('https://oferta.senasofiaplus.edu.co', '_blank');
+  }
+
+  function openHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+    overlay.classList.remove('hidden');
+    void overlay.offsetWidth;
+    overlay.classList.remove('opacity-0');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+    overlay.classList.add('opacity-0');
+    modal.classList.remove('scale-100');
+    modal.classList.add('scale-95');
+    document.body.style.overflow = '';
+    setTimeout(() => overlay.classList.add('hidden'), 300);
+  }
+
+  function toggleHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay && overlay.classList.contains('hidden')) openHeaderMobileNav();
+    else closeHeaderMobileNav();
+  }
+
+  function handleMobileOverlayClick(e) {
+    if (e.target.id === 'mobile-nav-overlay') closeHeaderMobileNav();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeHeaderMobileNav();
+  });
+</script>
+
 <!-- ==================== INTERACTION SCRIPT: VERTICAL WHEEL & MENU ==================== -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -600,52 +643,6 @@
       window.addEventListener('resize', () => {
         renderWheel(currentAngle, isMoving || isDragging);
       });
-
-      /* -------------------------------------------------------------
-         2. HAMBURGER MENU MODAL TOGGLE (Mobile & Tablet)
-         ------------------------------------------------------------- */
-      const menuBtn = document.getElementById('menu-btn');
-      const closeMenuBtn = document.getElementById('close-menu-btn');
-      const dropdownMenu = document.getElementById('dropdown-menu');
-      const menuBackdrop = document.getElementById('menu-backdrop');
-
-      function openMenu() {
-        menuBackdrop.classList.remove('hidden');
-        setTimeout(() => {
-          dropdownMenu.classList.remove('scale-95', 'opacity-0');
-          dropdownMenu.classList.add('scale-100', 'opacity-100');
-        }, 10);
-      }
-
-      function closeMenu() {
-        dropdownMenu.classList.remove('scale-100', 'opacity-100');
-        dropdownMenu.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-          menuBackdrop.classList.add('hidden');
-        }, 250);
-      }
-
-      if (menuBtn) {
-        menuBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openMenu();
-        });
-      }
-
-      if (closeMenuBtn) {
-        closeMenuBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          closeMenu();
-        });
-      }
-
-      if (menuBackdrop) {
-        menuBackdrop.addEventListener('click', (e) => {
-          if (!dropdownMenu.contains(e.target)) {
-            closeMenu();
-          }
-        });
-      }
 
     });
   </script>
