@@ -94,6 +94,14 @@
       }
     }
 
+
+    /* Kairu visible on mobile with the same visual role as desktop */
+    @media (max-width: 767px) {
+      #hero-section .pointer-events-none {
+        right: -6px;
+        bottom: 0;
+      }
+    }
     /* Card styling */
     .kairu-card-inner {
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
@@ -118,7 +126,7 @@
 <span class="absolute -bottom-1.5 left-0 right-0 h-[3px] bg-[#4DB21A] rounded-full"></span>
 </div>
 <a class="hover:text-[#4DB21A] transition" href="registratucorreosena.html">Estar al Tanto</a>
-<a class="hover:text-[#4DB21A] transition" href="#">Explorar Programas</a>
+<a class="hover:text-[#4DB21A] transition" href="areasformacion.html">Explorar áreas de formación</a>
 </nav>
 </div>
 </header>
@@ -160,13 +168,13 @@
 <div class="flex flex-col text-center font-semibold text-gray-800 text-[15px]">
 <a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="InicioSena.html">Ayuda / Inicio</a>
 <div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
-<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="#">Eventos</a>
+<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="eventossena.html">Eventos</a>
 <div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
 <a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="registratucorreosena.html">Estar al Tanto</a>
 <div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
 <a class="py-2.5 text-[#336926] font-bold transition hover:scale-105" href="Mapasena.html">Explorar Sedes</a>
 <div class="h-px bg-gray-300/60 w-4/5 mx-auto"></div>
-<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="#">Explorar Programas</a>
+<a class="py-2.5 hover:text-[#4DB21A] transition text-gray-700 hover:scale-105" href="areasformacion.html">Explorar áreas de formación</a>
 </div>
 </div>
 </div>
@@ -199,7 +207,7 @@
 <div class="text-orange-500 ml-auto text-sm drop-shadow-sm">📍</div>
 </div>
 </div>
-<div class="absolute bottom-0 right-2 md:right-8 lg:right-14 z-20 pointer-events-none flex items-end justify-end"><img alt="Kairu Sede Pedregal" class="w-[150px] sm:w-[190px] md:w-[250px] lg:w-[490px] h-auto max-h-[220px] md:max-h-[300px] lg:max-h-none object-contain block drop-shadow-2xl translate-y-1 lg:translate-y-2 origin-bottom transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO-XyEY-ffRrA8wrW4PiAlW5KDB13i4WP2uAw6P9iuCJO8PCdKxZvq4TUK_5OCeG_2XRDxHPzhpr7c0rvm8PlLcFaFI59UPjPvvlTvGJLDnJxFBCn1FTD0hQhTPrjuT5HRy29S91aBPdHnF9WPol-cLnvR_wVz681ODpOQ5C31hK1S7XVyxPdUMPW8aLwqlyVX3pY8eMbghYDEx6zyms989abPpyCPLydg5U4VNawALLiKP4O269sOaGPJ0kRqRh3fpQ"/></div></div>
+<div class="absolute bottom-0 right-2 md:right-8 lg:right-14 z-20 pointer-events-none flex items-end justify-end"><img alt="Kairu Sede Pedregal" class="w-[250px] sm:w-[300px] md:w-[360px] lg:w-[490px] h-auto max-h-[300px] sm:max-h-[340px] md:max-h-[380px] lg:max-h-none object-contain block drop-shadow-2xl translate-y-1 lg:translate-y-2 origin-bottom transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO-XyEY-ffRrA8wrW4PiAlW5KDB13i4WP2uAw6P9iuCJO8PCdKxZvq4TUK_5OCeG_2XRDxHPzhpr7c0rvm8PlLcFaFI59UPjPvvlTvGJLDnJxFBCn1FTD0hQhTPrjuT5HRy29S91aBPdHnF9WPol-cLnvR_wVz681ODpOQ5C31hK1S7XVyxPdUMPW8aLwqlyVX3pY8eMbghYDEx6zyms989abPpyCPLydg5U4VNawALLiKP4O269sOaGPJ0kRqRh3fpQ"/></div></div>
 </section>
 <!-- ==================== SECTION 2: 3D CYLINDER CARPETAS WHEEL ==================== -->
 <section class="px-4 md:px-8 lg:px-10 py-3 md:py-6 relative -mt-16 z-20" id="folders-section" style="margin-top: -6rem;">
@@ -547,11 +555,29 @@
 
       folders.forEach(folder => {
         folder.addEventListener('click', () => {
-          const idx = parseInt(folder.getAttribute('data-index'));
-          if (folder.getAttribute('data-label') === 'Tour Virtual') {
+          const label = folder.getAttribute('data-label');
+
+          if (label === 'Tour Virtual') {
             window.location.href = '360ctma.html';
             return;
           }
+
+          if (label === 'Eventos') {
+            window.location.href = 'eventossena.html';
+            return;
+          }
+
+          if (label === 'Estar al Tanto') {
+            window.location.href = 'registratucorreosena.html';
+            return;
+          }
+
+          if (label === 'Programas') {
+            window.location.href = 'areasformacion.html';
+            return;
+          }
+
+          const idx = parseInt(folder.getAttribute('data-index'));
           targetAngle = -idx * angleStep;
           animateTo(targetAngle);
         });

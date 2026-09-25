@@ -232,73 +232,7 @@
     #beci-map-wrap .leaflet-shadow-pane {
       z-index: 955 !important;
     }
-
-    /* --- Holograma: resplandor base, rayo, escaneo --- */
-    .holo-wrap {
-      position: absolute;
-      pointer-events: none;
-    }
-    .holo-wrap.func .holo-glow {
-      background: radial-gradient(ellipse at center, rgba(255, 150, 40, 0.95) 0%, rgba(255, 108, 1, 0.45) 45%, rgba(255, 108, 1, 0) 72%);
-    }
-    .holo-glow {
-      position: absolute;
-      width: 130px;
-      height: 56px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at center, rgba(255, 120, 25, 0.9) 0%, rgba(255, 108, 1, 0.4) 45%, rgba(255, 108, 1, 0) 72%);
-      transform: translate(-50%, -32%);
-      opacity: 0;
-      animation: glowPulse 2.4s ease-in-out infinite;
-      animation-delay: var(--holo-delay);
-      animation-fill-mode: both;
-      filter: blur(0.5px);
-    }
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.9; transform: translate(-50%, -32%) scale(1); }
-      50% { opacity: 0.6; transform: translate(-50%, -32%) scale(1.06); }
-    }
-    .holo-beam {
-      position: absolute;
-      width: 14px;
-      transform-origin: center bottom;
-      background: linear-gradient(to top, rgba(255, 122, 20, 0.95), rgba(255, 185, 95, 0.4));
-      clip-path: polygon(45% 100%, 55% 100%, 90% 0%, 10% 0%);
-      opacity: 0;
-      animation: beamFlicker 3.4s ease-in-out infinite;
-      animation-delay: var(--holo-delay);
-      animation-fill-mode: both;
-    }
-    @keyframes beamFlicker {
-      0%, 100% { opacity: 0.85; }
-      8% { opacity: 0.45; }
-      14% { opacity: 0.95; }
-      45% { opacity: 0.7; }
-      60% { opacity: 0.95; }
-    }
-    .holo-scan {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 14px;
-      height: 3px;
-      margin-left: -7px;
-      border-radius: 3px;
-      background: rgba(255, 205, 130, 0.95);
-      box-shadow: 0 0 10px 2px rgba(255, 150, 40, 0.75);
-      opacity: 0;
-      animation: scanUp 2.6s linear infinite;
-      animation-delay: var(--holo-delay);
-      animation-fill-mode: both;
-    }
-    @keyframes scanUp {
-      0% { opacity: 0; transform: translateY(0); }
-      8% { opacity: 0.95; }
-      88% { opacity: 0.9; }
-      100% { opacity: 0; transform: translateY(-100%); }
-    }
-
-    /* --- Card holograma --- */
+    /* --- Cards de sedes --- */
     .ms-card {
       width: clamp(200px, 85vw, 240px);
       max-width: 240px;
@@ -558,6 +492,251 @@
       transform: translateX(-50%) translateY(-2px);
     }
   </style>
+
+<style id="mapasena-beci-ajustes">
+@media (min-width: 1024px) {
+  #beci-map-wrap {
+    width: 100%;
+    height: calc(100dvh - 10.5rem);
+    min-height: 560px;
+    border-radius: 28px;
+  }
+}
+
+/* El holograma siempre queda detrás de su card y del pin. */
+#beci-map-wrap .holo-wrap {
+  z-index: 940;
+}
+#beci-map-wrap .holo-glow,
+#beci-map-wrap .holo-beam,
+#beci-map-wrap .holo-scan {
+  z-index: 0;
+}
+#beci-map-wrap .ms-card {
+  position: relative;
+  z-index: 3;
+}
+
+@media (max-width: 767px) {
+  #beci-map-wrap {
+    min-height: 500px;
+    height: calc(100dvh - 10.5rem);
+  }
+
+  #beci-map-wrap .ms-card {
+    width: 156px;
+    max-width: 156px;
+    border-radius: 14px;
+  }
+
+  #beci-map-wrap .ms-card-img {
+    height: 82px;
+  }
+
+  #beci-map-wrap .ms-card-title {
+    left: 8px;
+    right: 8px;
+    bottom: 24px;
+    font-size: 10.5px !important;
+  }
+
+  #beci-map-wrap .ms-card-addr {
+    left: 8px;
+    right: 8px;
+    bottom: 6px;
+    font-size: 8px;
+  }
+
+  #beci-map-wrap .ms-card-addr svg {
+    width: 9px;
+    height: 9px;
+  }
+
+  #beci-map-wrap .ms-360 {
+    top: 6px;
+    right: 6px;
+    padding: 4px 7px;
+    font-size: 8px;
+  }
+
+  #beci-map-wrap .ms-360 svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  #beci-map-wrap .ms-vermas {
+    padding: 7px 8px;
+    font-size: 9px;
+  }
+
+  #beci-map-wrap .ms-vermas svg {
+    width: 11px;
+    height: 11px;
+  }
+}
+</style>
+
+<style id="mapasena-final-layout-fixes">
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden !important;
+}
+
+body {
+  min-height: 100dvh !important;
+  height: 100dvh !important;
+}
+
+#mainContentWrapper {
+  width: 100% !important;
+}
+
+@media (min-width: 1024px) {
+  body {
+    overflow: hidden !important;
+  }
+
+  /* Header completamente a lo ancho */
+  #mainHeader {
+    width: 100vw !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  #mainHeader > div {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+
+  /* El título siempre visible en desktop */
+  #map-page-title {
+    display: block !important;
+    width: 100% !important;
+    margin: 14px 0 10px !important;
+    text-align: center !important;
+    font-family: "DM Sans", sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 34px !important;
+    line-height: 1.05 !important;
+    color: #1B2B1B !important;
+  }
+
+  #map-page-main {
+    height: calc(100dvh - 80px - 58px) !important;
+    min-height: 0 !important;
+    padding: 0 24px 12px !important;
+  }
+
+  #beci-map-wrap {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    border-radius: 24px !important;
+  }
+
+  #mainContentWrapper {
+    max-width: none !important;
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  #mainContentWrapper {
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Título siempre visible en móvil/tablet */
+  #map-page-title {
+    display: block !important;
+    width: 100% !important;
+    margin: 4px 0 8px !important;
+    text-align: center !important;
+    font-family: "DM Sans", sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 30px !important;
+    line-height: 1.05 !important;
+    color: #1B2B1B !important;
+  }
+
+  #map-page-main {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: calc(100dvh - 64px - 52px) !important;
+    padding: 0 10px 8px !important;
+  }
+
+  #beci-map-wrap {
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+}
+
+/* Las cards nunca se apilan una sobre otra */
+#beci-map-wrap .beci-search-cards-layer {
+  overflow: hidden !important;
+}
+
+#beci-map-wrap .holo-wrap {
+  z-index: 940 !important;
+}
+
+#beci-map-wrap .ms-card {
+  position: relative !important;
+  z-index: 3 !important;
+}
+</style>
+
+
+<style id="mapasena-cards-desde-pin">
+/* El mapa conserva sus márgenes; únicamente el header es full-width. */
+@media (min-width: 1024px) {
+  #map-page-main {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  #beci-map-wrap {
+    width: 100% !important;
+  }
+}
+
+/* Las cards salen de la ubicación de cada pin, no desde un costado fijo. */
+#beci-map-wrap .beci-search-cards-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+#beci-map-wrap .holo-wrap {
+  position: absolute !important;
+  pointer-events: none !important;
+  z-index: 940 !important;
+}
+
+#beci-map-wrap .ms-card {
+  pointer-events: auto !important;
+}
+
+/* Indicador de la card apuntando directamente al pin */
+#beci-map-wrap .ms-card.tail-bottom::after,
+#beci-map-wrap .ms-card.tail-top::after,
+#beci-map-wrap .ms-card.tail-left::after,
+#beci-map-wrap .ms-card.tail-right::after {
+  display: block !important;
+}
+</style>
+
 </head>
 <body class="bg-[#F4F9F2] text-[#1B2B1B] font-poppins min-h-screen relative overflow-x-hidden flex flex-col justify-between select-none">
 <!-- BEGIN: AnimatedBackgroundDecorations -->
@@ -566,25 +745,25 @@
 </div>
 <!-- END: AnimatedBackgroundDecorations -->
 <!-- BEGIN: MainContentWrapper -->
-<div class="relative z-10 w-full max-w-[430px] md:max-w-xl lg:max-w-2xl mx-auto flex flex-col min-h-screen pb-24">
-<!-- BEGIN: Header -->
-<header class="pt-6 pb-4 px-6 flex items-center justify-between relative" data-purpose="main-header">
-<!-- Back Button -->
-<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center -ml-2 text-sena-greenDark hover:text-sena-greenLight transition-colors cursor-pointer rounded-full active:bg-black/5" type="button">
-<svg class="w-7 h-7 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-</button>
-<!-- Center Title -->
-<h1 class="font-dmsans font-[900] text-3xl tracking-tight text-sena-deepDark text-center absolute left-1/2 -translate-x-1/2 pointer-events-none">
-         Mapa
-       </h1>
-<!-- Balanced spacer for header alignment -->
-<div class="w-10 h-10"></div>
+<div id="mainContentWrapper" class="relative z-10 w-full max-w-[430px] md:max-w-4xl lg:max-w-7xl mx-auto flex flex-col min-h-screen pb-24">
+<header id="mainHeader" class="w-full border-none md:border-none lg:border-b lg:border-emerald-100/60 lg:bg-[#FFFFFF] transition-colors z-20 bg-transparent lg:bg-white lg:shadow-md shrink-0">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+<a class="flex items-center gap-1 cursor-pointer select-none group" href="#"><img alt="BECI" class="h-[52px] md:h-[62px] lg:h-12 w-auto object-contain transition-transform group-hover:scale-105 relative top-[3%] lg:top-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhLv8mu71mViEz1jgUpwT_7OzXUQYykxLafd4nqAKswE5_3dbWSGb9teWJ2h6R7xJLUwtncmBLt1bKkhKYsjt7FJujx2fEq67aW6_XCcfkZjWTtskcZM1vxrnTkZdvNBOVjnNr_oUyi40fy25j7FQjfrIaMfyuvyyXYyU06lnfEPCdRqoeK3JQ3hfv0g82_5CrFBylFDpNlZdAZi-d8K9swAsMtEpVfrz3Rk2CT5elr_4fZlu4N-64PzysH74K03X9_g" style="transform: scale(1.08); transform-origin: left center;"></a>
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="InicioSena.html">Inicio</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Charlemos.html">Charlemos</a>
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="Mapasena.html"><span class="font-bold text-sm lg:text-base text-stone-800">Explorar Sedes</span><span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span></a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="registratucorreosena.html">Estar al Tanto</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="#programas">Explorar programas</a>
+</nav>
+<div class="flex items-center gap-3 lg:hidden">
+<button aria-label="Menú" class="p-2 rounded-2xl bg-transparent hover:bg-black/5 text-[#336926] transition active:scale-95 border-none cursor-pointer" onclick="openMobileNavMenu()" type="button"><img alt="Menú" class="w-7 h-5 md:w-8 md:h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSo7NPtEvcPb86mvyKmZNR2nf1i_JDTAnSCGXp7GLXv5_1JxWRtCwp76e7HLB_00jay969HjOGCVGW1E74_bp_a2hjDhVjd-LFlbziB8q_aN2YNSKKQqGwhzqHBfwouSXUUh9t7bEXwOGzn7P_TbEBsTXbB7zGTALbkSVchysJsueZV7IlRqpQXeBvzxxOxsZpY-qJBbU0t9Lzamwq0PYryHCXUfiVm4lHgGmxpKOZWgRmkWASbiQDnrHjno2V8mZSg"></button>
+</div>
+</div>
 </header>
-<!-- END: Header -->
 <!-- BEGIN: MapSection -->
-<main class="flex-1 px-3 sm:px-4 flex flex-col justify-start pb-4">
+<h1 id="map-page-title">Explorar Sedes</h1>
+<main id="map-page-main" class="flex-1 px-3 sm:px-4 flex flex-col justify-start pb-4">
 <!-- BEGIN: Beci Interactive Map Component -->
 <section id="beci-map-wrap" aria-label="Mapa de sedes SENA en Medellín">
 <div id="beci-map"></div>
@@ -614,6 +793,75 @@
 </div>
 </footer>
 <!-- END: BottomNavigationBanner -->
+<script>function openMobileNavMenu() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.remove('hidden');
+    // Force reflow for smooth CSS transitions
+    void overlay.offsetWidth;
+    overlay.classList.remove('opacity-0');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileNavMenu() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.add('opacity-0');
+    modal.classList.remove('scale-100');
+    modal.classList.add('scale-95');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target.id === 'mobile-nav-overlay') {
+      closeMobileNavMenu();
+    }
+  }
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileNavMenu();
+    }
+  });
+
+  </script>
+<!-- ======================================================== -->
+<!-- MODAL MENÚ HAMBURGUESA MÓVIL / TABLET (FRAME 28)         -->
+<!-- ======================================================== -->
+<div class="fixed inset-0 z-50 bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" id="mobile-nav-overlay" onclick="handleOverlayClick(event)">
+<div class="glass-menu-card relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" id="mobile-nav-modal" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: rgba(31, 38, 135, 0.08) 0px 8px 32px 0px, rgba(0, 0, 0, 0.05) 0px 4px 16px;">
+<!-- Botón Cerrar 'X' verde cómodo y accesible -->
+<button aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer" onclick="closeMobileNavMenu()" type="button">
+<svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+<!-- Opciones de Navegación con tipografía amplia, cómoda y espaciado generoso -->
+<div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4">
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="InicioSena.html" onclick="closeMobileNavMenu()">Inicio</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-bold tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Charlemos.html" onclick="closeMobileNavMenu()">Charlemos</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-bold tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Mapasena.html" onclick="closeMobileNavMenu()">Explorar Sedes</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="registratucorreosena.html" onclick="closeMobileNavMenu()">Estar al Tanto</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="#programas" onclick="closeMobileNavMenu()">Explorar Programas</a>
+</div>
+</div>
+</div>
 <!-- Map Engine -->
 <script data-purpose="mapasena-engine">
 (function () {
@@ -621,7 +869,7 @@
 
   /* ============================================================
      Mapasena — 7 sedes SENA en Medellín
-     Leaflet + OSM + tarjetas holograma (naranja) sobre cada pin.
+     Leaflet + OSM + tarjetas informativas sobre cada pin.
      Solo las cards CTMA y Complejo Norte tienen botones activos.
      ============================================================ */
 
@@ -792,15 +1040,6 @@
     wrap.sede = sede;
     sede.wrap = wrap;
 
-    var glow = document.createElement('div');
-    glow.className = 'holo-glow';
-
-    var beam = document.createElement('div');
-    beam.className = 'holo-beam';
-    var scan = document.createElement('div');
-    scan.className = 'holo-scan';
-    beam.appendChild(scan);
-
     var card = document.createElement('div');
     card.className = 'ms-card' + (sede.func ? ' func-card' : '');
     card.title = sede.name;
@@ -824,12 +1063,10 @@
       actionMore(sede);
     });
 
-    wrap.appendChild(glow);
-    wrap.appendChild(beam);
     wrap.appendChild(card);
     el.layer.appendChild(wrap);
 
-    var entry = { wrap: wrap, cardEl: card, glow: glow, beam: beam, sede: sede };
+    var entry = { wrap: wrap, cardEl: card, sede: sede };
     wraps.push(entry);
     return entry;
   }
@@ -841,173 +1078,207 @@
 
     var mapW = el.map.clientWidth;
     var mapH = el.map.clientHeight;
-    var isMobile = mapW < 480;
-    var isTablet = mapW >= 480 && mapW < 768;
-    
-    var MARGIN = isMobile ? 12 : (isTablet ? 10 : 10);
-    var SLOT_GAP_VERTICAL = isMobile ? 8 : 12;
-    var SLOT_GAP_HORIZONTAL = isMobile ? 6 : 10;
+    var isMobile = mapW < 768;
+    var margin = isMobile ? 8 : 14;
+    var gap = isMobile ? 6 : 10;
 
     var items = wraps.map(function (w) {
       var p = map.latLngToContainerPoint([w.sede.lat, w.sede.lng]);
-      var cw = w.cardEl.offsetWidth || 240;
-      var ch = w.cardEl.offsetHeight || 132;
-      return { w: w, pinX: p.x, pinY: p.y, cw: cw, ch: ch, x: 0, y: 0, dir: 'tail-bottom' };
+      var cw = w.cardEl.offsetWidth || (isMobile ? 156 : 240);
+      var ch = w.cardEl.offsetHeight || 170;
+
+      return {
+        w: w,
+        pinX: p.x,
+        pinY: p.y,
+        cw: cw,
+        ch: ch,
+        x: 0,
+        y: 0,
+        dir: 'tail-bottom'
+      };
     });
 
-    var placedBoxes = [];
+    var placed = [];
 
     items.forEach(function (item) {
       var px = item.pinX;
       var py = item.pinY;
-      var cw = item.cw;
-      var ch = item.ch;
 
+      /*
+       * Cada card nace visualmente de SU propio pin.
+       * Se prueban las cuatro direcciones, priorizando arriba y
+       * abajo para conservar el aspecto original del mapa.
+       */
       var slots = [
-        { name: 'top', dir: 'tail-bottom', x: px - cw / 2, y: py - 42 - ch, basePenalty: isMobile ? 0 : 0 },
-        { name: 'bottom', dir: 'tail-top', x: px - cw / 2, y: py + 12, basePenalty: isMobile ? 10 : 45 },
-        { name: 'right', dir: 'tail-left', x: px + 26, y: py - 16 - ch / 2, basePenalty: isMobile ? 30 : 15 },
-        { name: 'left', dir: 'tail-right', x: px - 26 - cw, y: py - 16 - ch / 2, basePenalty: isMobile ? 40 : 25 }
+        {
+          dir: 'tail-bottom',
+          x: px - item.cw / 2,
+          y: py - item.ch - 34,
+          priority: 0
+        },
+        {
+          dir: 'tail-top',
+          x: px - item.cw / 2,
+          y: py + 18,
+          priority: 1
+        },
+        {
+          dir: 'tail-left',
+          x: px + 22,
+          y: py - item.ch / 2,
+          priority: 2
+        },
+        {
+          dir: 'tail-right',
+          x: px - item.cw - 22,
+          y: py - item.ch / 2,
+          priority: 3
+        }
       ];
 
-      var bestSlot = null;
+      var best = null;
       var bestScore = Infinity;
 
       slots.forEach(function (slot) {
-        var sx = slot.x;
-        var sy = slot.y;
-        var score = slot.basePenalty;
+        var x = slot.x;
+        var y = slot.y;
 
-        if (sx < MARGIN) score += (MARGIN - sx) * 8 + 300;
-        if (sx + cw > mapW - MARGIN) score += ((sx + cw) - (mapW - MARGIN)) * 8 + 300;
-        if (sy < MARGIN) score += (MARGIN - sy) * 8 + 400;
-        if (sy + ch > mapH - MARGIN) score += ((sy + ch) - (mapH - MARGIN)) * 8 + 400;
+        /* Mantener la card dentro del mapa. */
+        x = Math.max(margin, Math.min(x, mapW - item.cw - margin));
+        y = Math.max(margin, Math.min(y, mapH - item.ch - margin));
 
-        placedBoxes.forEach(function (pb) {
-          var ox = Math.min(sx + cw, pb.x + pb.w) - Math.max(sx, pb.x);
-          var oy = Math.min(sy + ch, pb.y + pb.h) - Math.max(sy, pb.y);
-          if (ox > 0 && oy > 0) score += (ox * oy) * 5 + 1500;
+        var score = slot.priority * 8;
+
+        /* Penalización por alejarse demasiado del pin. */
+        score += Math.abs((x + item.cw / 2) - px) * 0.15;
+        score += Math.abs((y + item.ch / 2) - py) * 0.15;
+
+        /* Evitar cards ya colocadas. */
+        placed.forEach(function (other) {
+          var ox = Math.min(x + item.cw + gap, other.x + other.w + gap) -
+                   Math.max(x - gap, other.x - gap);
+          var oy = Math.min(y + item.ch + gap, other.y + other.h + gap) -
+                   Math.max(y - gap, other.y - gap);
+
+          if (ox > 0 && oy > 0) {
+            score += 100000 + ox * oy * 100;
+          }
         });
 
+        /* Evitar tapar otros pines. */
         items.forEach(function (other) {
           if (other === item) return;
-          var pinL = other.pinX - 16;
-          var pinR = other.pinX + 16;
-          var pinT = other.pinY - 34;
-          var pinB = other.pinY + 4;
-          var ox = Math.min(sx + cw, pinR) - Math.max(sx, pinL);
-          var oy = Math.min(sy + ch, pinB) - Math.max(sy, pinT);
-          if (ox > 0 && oy > 0) score += 1500;
+
+          var pinLeft = other.pinX - 15;
+          var pinRight = other.pinX + 15;
+          var pinTop = other.pinY - 30;
+          var pinBottom = other.pinY + 4;
+
+          var ox = Math.min(x + item.cw, pinRight) -
+                   Math.max(x, pinLeft);
+          var oy = Math.min(y + item.ch, pinBottom) -
+                   Math.max(y, pinTop);
+
+          if (ox > 0 && oy > 0) {
+            score += 5000;
+          }
         });
 
         if (score < bestScore) {
           bestScore = score;
-          bestSlot = slot;
+          best = { x: x, y: y, dir: slot.dir };
         }
       });
 
-      item.x = bestSlot.x;
-      item.y = bestSlot.y;
-      item.dir = bestSlot.dir;
-      placedBoxes.push({ x: item.x, y: item.y, w: cw, h: ch });
+      item.x = best.x;
+      item.y = best.y;
+      item.dir = best.dir;
+
+      placed.push({
+        x: item.x,
+        y: item.y,
+        w: item.cw,
+        h: item.ch
+      });
     });
 
-    // Relajación suave entre cards - más iteraciones en móvil
-    var maxIter = isMobile ? 12 : 8;
-    for (var iter = 0; iter < maxIter; iter++) {
-      var moved = false;
+    /*
+     * Separación final: si dos cards se cruzan, se empujan
+     * manteniendo su relación con sus respectivos pins.
+     */
+    for (var pass = 0; pass < 80; pass++) {
+      var changed = false;
+
       for (var i = 0; i < items.length; i++) {
         for (var j = i + 1; j < items.length; j++) {
           var a = items[i];
           var b = items[j];
-          var oxC = Math.min(a.x + a.cw, b.x + b.cw) - Math.max(a.x, b.x);
-          var oyC = Math.min(a.y + a.ch, b.y + b.ch) - Math.max(a.y, b.y);
-          if (oxC > 0 && oyC > 0) {
-            moved = true;
-            var pushFactor = isMobile ? 1.5 : 1;
-            if (oxC < oyC) {
-              var shiftX = (oxC / 2 + 4) * pushFactor;
-              if (a.pinX <= b.pinX) { a.x -= shiftX; b.x += shiftX; }
-              else { a.x += shiftX; b.x -= shiftX; }
+
+          var overlapX = Math.min(a.x + a.cw, b.x + b.cw) -
+                         Math.max(a.x, b.x);
+          var overlapY = Math.min(a.y + a.ch, b.y + b.ch) -
+                         Math.max(a.y, b.y);
+
+          if (overlapX > 0 && overlapY > 0) {
+            changed = true;
+
+            if (overlapX < overlapY) {
+              var pushX = overlapX / 2 + gap;
+
+              if (a.pinX <= b.pinX) {
+                a.x -= pushX;
+                b.x += pushX;
+              } else {
+                a.x += pushX;
+                b.x -= pushX;
+              }
             } else {
-              var shiftY = (oyC / 2 + 4) * pushFactor;
-              if (a.pinY <= b.pinY) { a.y -= shiftY; b.y += shiftY; }
-              else { a.y += shiftY; b.y -= shiftY; }
+              var pushY = overlapY / 2 + gap;
+
+              if (a.pinY <= b.pinY) {
+                a.y -= pushY;
+                b.y += pushY;
+              } else {
+                a.y += pushY;
+                b.y -= pushY;
+              }
             }
           }
         }
       }
-      if (!moved) break;
+
+      items.forEach(function (item) {
+        item.x = Math.max(margin, Math.min(item.x, mapW - item.cw - margin));
+        item.y = Math.max(margin, Math.min(item.y, mapH - item.ch - margin));
+      });
+
+      if (!changed) break;
     }
 
     items.forEach(function (item) {
-      item.x = Math.max(MARGIN, Math.min(item.x, mapW - item.cw - MARGIN));
-      item.y = Math.max(MARGIN, Math.min(item.y, mapH - item.ch - MARGIN));
-
       var w = item.w;
+
       w.wrap.style.left = item.x + 'px';
       w.wrap.style.top = item.y + 'px';
 
-      var ic = w.cardEl;
-      ic.classList.remove('tail-bottom', 'tail-top', 'tail-left', 'tail-right');
-      ic.classList.add(item.dir);
+      var card = w.cardEl;
+      card.classList.remove('tail-bottom', 'tail-top', 'tail-left', 'tail-right');
+      card.classList.add(item.dir);
 
-      // Calcular posición del triángulo (tail) relativa a la card
       if (item.dir === 'tail-bottom' || item.dir === 'tail-top') {
-        var tailX = Math.max(16, Math.min(item.cw - 16, item.pinX - item.x));
-        ic.style.setProperty('--sc-tail-x', tailX + 'px');
+        var tailX = Math.max(
+          16,
+          Math.min(item.cw - 16, item.pinX - item.x)
+        );
+        card.style.setProperty('--sc-tail-x', tailX + 'px');
       } else {
-        var tailY = Math.max(14, Math.min(item.ch - 14, (item.pinY - 16) - item.y));
-        ic.style.setProperty('--sc-tail-y', tailY + 'px');
+        var tailY = Math.max(
+          14,
+          Math.min(item.ch - 14, item.pinY - item.y)
+        );
+        card.style.setProperty('--sc-tail-y', tailY + 'px');
       }
-
-      // ===== HOLOGRAMA ANCLADO A LA CARD (no al pin) =====
-      // El glow va en la base de la card, centrado horizontalmente donde está el tail
-      var tailCenterX = item.x + (item.dir === 'tail-bottom' || item.dir === 'tail-top' 
-        ? Math.max(16, Math.min(item.cw - 16, item.pinX - item.x))
-        : item.cw / 2);
-      var cardBottomY = item.y + item.ch;
-      
-      w.glow.style.left = tailCenterX + 'px';
-      w.glow.style.top = cardBottomY + 'px';
-
-      // El beam nace del icono de ubicación (en .ms-card-addr) y apunta al pin del mapa
-      // .ms-card-addr: left: 10px, bottom: 8px | svg: width: 11px
-      // Centro del icono relativo a la card: x=15.5px, y=ch-13.5px
-      var iconOffsetX = 15.5;
-      var iconOffsetY = item.ch - 13.5;
-      
-      // Ajustar según dirección de la card (dónde está el pin relativo a la card)
-      if (item.dir === 'tail-top') {
-        // Card arriba del pin: icono sigue en addr (abajo de card), pero beam va hacia arriba
-        iconOffsetX = 15.5;
-        iconOffsetY = item.ch - 13.5;
-      } else if (item.dir === 'tail-left') {
-        // Card a la izquierda del pin: addr está a la derecha
-        iconOffsetX = item.cw - 15.5;
-        iconOffsetY = item.ch - 13.5;
-      } else if (item.dir === 'tail-right') {
-        // Card a la derecha del pin: addr está a la izquierda
-        iconOffsetX = 15.5;
-        iconOffsetY = item.ch - 13.5;
-      }
-      // tail-bottom: default (icono en addr abajo-izquierda)
-
-      var iconX = item.x + iconOffsetX;
-      var iconY = item.y + iconOffsetY;
-
-      // Beam desde icono de la card hacia el pin
-      var dx = item.pinX - iconX;
-      var dy = item.pinY - iconY;
-      var beamLen = Math.sqrt(dx * dx + dy * dy);
-      var beamAngle = Math.atan2(dy, dx) * 180 / Math.PI;
-
-      w.beam.style.left = iconX + 'px';
-      w.beam.style.top = iconY + 'px';
-      w.beam.style.height = beamLen + 'px';
-      w.beam.style.transform = 'translateX(-50%) rotate(' + beamAngle + 'deg)';
-      w.beam.style.transformOrigin = 'center bottom';
-      w.wrap.style.setProperty('--beam-h', beamLen + 'px');
     });
   }
 
