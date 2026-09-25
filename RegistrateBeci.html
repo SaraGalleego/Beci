@@ -133,120 +133,22 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-    
-  @media (max-width: 767px) {
-    main > div.relative > img[data-alt="Beci Character"] {
-      width: calc(var(--beci-current-width, 100%) - 20px) !important;
-      transform: translate(12px, 130px) rotate(15deg) !important;
-    }
+    <style>
+@media (max-width: 767px) {
+  #btn-register-main { transform: translateY(-36px) !important; }
+}
 
-    @keyframes beciMascotaEntrada {
-      from {
-        opacity: 0;
-        transform: translate(12px, 155px) rotate(15deg);
-      }
-      to {
-        opacity: 1;
-        transform: translate(12px, 130px) rotate(15deg);
-      }
-    }
-
-    @keyframes beciMascotaFlotando {
-      0%, 100% {
-        transform: translate(12px, 130px) rotate(15deg);
-      }
-      50% {
-        transform: translate(12px, 123px) rotate(15deg);
-      }
-    }
+<style>
+@media (max-width: 767px) {
+  main > div.relative > div.bg-surface-bright {
+    gap: 18px !important;
   }
 
-
-  @media (max-width: 767px) {
-    main > div.relative > img[data-alt="Beci Character"] {
-      width: calc((var(--beci-current-width, 100%)) * 0.9) !important;
-      right: 0 !important;
-      left: auto !important;
-      margin-right: 0 !important;
-    }
-
-    @keyframes beciMascotaEntrada {
-      from {
-        opacity: 0;
-        transform: translate(12px, 155px) rotate(15deg);
-      }
-      to {
-        opacity: 1;
-        transform: translate(12px, 130px) rotate(15deg);
-      }
-    }
-
-    @keyframes beciMascotaFlotando {
-      0%, 100% {
-        transform: translate(12px, 130px) rotate(15deg);
-      }
-      50% {
-        transform: translate(12px, 123px) rotate(15deg);
-      }
-    }
+  #btn-register-main {
+    transform: translateY(-41px) !important;
   }
-
-
-  @media (max-width: 767px) {
-    main > div.relative > img[data-alt="Beci Character"] {
-      width: calc((var(--beci-current-width, 100%)) * 0.8) !important;
-      right: 0 !important;
-      left: auto !important;
-      margin-right: 0 !important;
-      transform: translate(52px, 130px) rotate(15deg) !important;
-    }
-
-    @keyframes beciMascotaEntrada {
-      from {
-        opacity: 0;
-        transform: translate(52px, 155px) rotate(15deg);
-      }
-      to {
-        opacity: 1;
-        transform: translate(52px, 130px) rotate(15deg);
-      }
-    }
-
-    @keyframes beciMascotaFlotando {
-      0%, 100% {
-        transform: translate(52px, 130px) rotate(15deg);
-      }
-      50% {
-        transform: translate(52px, 123px) rotate(15deg);
-      }
-    }
-  }
-
-
-  @media (max-width: 767px) {
-    html, body {
-      height: auto !important;
-      min-height: 100% !important;
-      overflow-x: hidden !important;
-      overflow-y: auto !important;
-    }
-
-    body {
-      min-height: 100vh !important;
-      height: auto !important;
-      padding-bottom: 90px !important;
-    }
-
-    main {
-      min-height: calc(100vh - 90px) !important;
-      height: auto !important;
-      overflow: visible !important;
-    }
-
-    #btn-register-main {
-      margin-bottom: 20px !important;
-    }
-  }
+}
+</style>
 
 </style>
 <style>
@@ -537,11 +439,11 @@
 <div class="text-center mb-8 fade-in-up z-20 relative" style="animation-delay: 0.2s;"><h1 class="font-headline-md md:text-display-lg text-primary-container mb-4 font-black antialiased text-[34px] sm:text-[inherit]">¡Regístrate!</h1><p class="font-body-md md:text-headline-sm text-on-surface max-w-xs md:max-w-md mx-auto leading-relaxed font-normal antialiased">¡Veci haz parte de la<br>comunidad!</p></div>
 <img class="absolute right-[-40px] md:-right-[150px] lg:-right-[200px] -top-12 md:top-1/2 md:-translate-y-1/2 w-48 md:w-[400px] lg:w-[500px] z-30 pointer-events-none" data-alt="Beci Character" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqPlYRFQqTYTTAYin-TgSryM00_ZX4d1pCRLv-CNsarMuzRlMvzvK-0sHs4mB-7biDX31-0Qej1XwGEbsz2cgONz9yHTmpRT0MGtm2dGCZ7rNJhZ1eZydOBLJgvoPGEo3PQpK0j4KGSx9MjKQ41pn2Q-NK39R7ob_FE9ZcOpnn1BpUIrZVA1yw8trZB4Ib6Hyhki4eInrZKxjIO7x4DY6WENAxkGpCa76-4bTo7ONGGY6udQFeIktZOxNrpmjF4jyrH-A" style="image-rendering: auto; transform: rotate(15deg); animation-duration: 6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: normal; animation-fill-mode: none; animation-play-state: running; animation-name: mascot-loop; animation-timeline: auto; animation-range: normal;">
 <div class="bg-surface-bright w-full md:rounded-3xl p-gutter md:p-xl shadow-[0_-10px_40px_rgba(6,37,115,0.05)] relative z-20 flex flex-col gap-6 fade-in-up rounded-t-[40px] flex-shrink-0" style="animation-delay: 0.3s;">
-<input id="regNombre" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Nombre" type="text">
-<input id="regApellido" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Apellido" type="text">
-<input id="regCorreo" class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Correo" type="email">
+<input id="regNombre" class="w-full bg-white rounded-full py-[13px] px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Nombre" type="text">
+<input id="regApellido" class="w-full bg-white rounded-full py-[13px] px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Apellido" type="text">
+<input id="regCorreo" class="w-full bg-white rounded-full py-[13px] px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Correo" type="email">
 <div class="relative w-full">
-<input class="w-full bg-white rounded-full py-4 px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all pr-12" id="password" placeholder="Contraseña" type="password">
+<input class="w-full bg-white rounded-full py-[13px] px-6 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:ring-2 focus:ring-primary-container outline-none font-body-md text-on-surface placeholder:text-outline-variant transition-all pr-12" id="password" placeholder="Contraseña" type="password">
 <button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" onclick="togglePassword()" type="button">
 <span class="material-symbols-outlined" id="eye-icon" style="image-rendering: auto;">visibility</span>
 </button>
