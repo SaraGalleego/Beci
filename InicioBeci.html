@@ -39,7 +39,21 @@
         .peek-a-boo-anim {
             animation: peek-a-boo 8s ease-in-out infinite;
         }
-    </style>
+    
+        /* Mobile: prevent any horizontal overflow so the bottom navigation is fully visible. */
+        @media (max-width: 1023px) {
+            html, body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden !important;
+                overflow-y: hidden !important;
+            }
+            * {
+                max-width: 100%;
+            }
+        }
+
+</style>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -138,7 +152,7 @@
     </script>
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
-<body class="gradient-bg min-h-screen flex flex-col items-center justify-center font-body-md text-on-surface relative overflow-x-hidden overflow-y-hidden lg:pt-20">
+<body class="gradient-bg h-screen min-h-0 flex flex-col items-center justify-start font-body-md text-on-surface relative overflow-hidden lg:pt-20">
 <!-- HomeBeci Mobile Logo -->
 <div class="self-start w-full pt-8 pl-6 lg:hidden">
   <div class="w-44 h-24 bg-contain bg-no-repeat bg-left mb-8"
@@ -157,16 +171,16 @@
   </nav>
 </header>
 <!-- END: HomeBeci Desktop Header -->
-<div class="w-full max-w-md px-gutter pt-lg pb-md flex justify-between items-start z-10">
-<div class="flex flex-col gap-sm items-center">
-<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary mt-sm text-center">¡Inicia Sesión!</h1>
-<h2 class="font-headline-sm text-headline-sm text-on-surface-variant font-medium text-center">¡Continua explorando<br>Veci!</h2>
+<div class="w-full max-w-md px-gutter pt-2 pb-0 flex justify-between items-start z-10 shrink-0">
+<div class="flex flex-col gap-sm items-center -translate-y-[23px] w-screen max-w-none self-center relative left-1/2 -translate-x-1/2">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary mt-sm text-center w-full mx-auto text-[clamp(28px,5vw,48px)] leading-tight">¡Inicia Sesión!</h1>
+<h2 class="font-headline-sm text-headline-sm text-on-surface-variant font-medium text-center w-full mx-auto text-[clamp(11px,1.8vw,25px)] leading-tight">¡Continua explorando<br>Veci!</h2>
 </div>
-<div class="w-32 -mr-8 -mt-4 md:fixed md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[30vw] md:max-w-[400px] md:z-0 md:mr-0 md:mt-0"><img alt="Beci Mascot" class="w-full h-auto object-contain drop-shadow-2xl peek-a-boo-anim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCYpTOgr_RMPLDMGl2z6QsLokVB8ABOG223cy9krwTX8DhHCRb48EPyhmPib_F4l79JqvKylfrHcnGLjjGcRy9W2yfqHtK78vrib69UlbKVWjdLfIeog-RUn2ila_CyyYoXWSSNxE2x85kJW_Rz3lWOCEw9jiMCu_L2IbiAgs8X_QX-GCMCN2Y_43nPaQexQBDjGmBqgwnh2TdmxwFgkgxLBRW8xkRwbgsNAMVRdFN9oZeD_r1tXzYVRDDcBOHFJJZEljEHoLJDeiBkqQ"></div>
+<div class="w-24 -mr-6 mt-[18px] md:fixed md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[30vw] md:max-w-[400px] md:z-0 md:mr-0 md:mt-0"><img alt="Beci Mascot" class="w-full h-auto object-contain drop-shadow-2xl peek-a-boo-anim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCYpTOgr_RMPLDMGl2z6QsLokVB8ABOG223cy9krwTX8DhHCRb48EPyhmPib_F4l79JqvKylfrHcnGLjjGcRy9W2yfqHtK78vrib69UlbKVWjdLfIeog-RUn2ila_CyyYoXWSSNxE2x85kJW_Rz3lWOCEw9jiMCu_L2IbiAgs8X_QX-GCMCN2Y_43nPaQexQBDjGmBqgwnh2TdmxwFgkgxLBRW8xkRwbgsNAMVRdFN9oZeD_r1tXzYVRDDcBOHFJJZEljEHoLJDeiBkqQ"></div>
 </div>
 <!-- Login Card -->
-<div class="w-full max-w-md px-gutter z-20 flex-grow flex flex-col justify-end">
-<div class="bg-surface/80 backdrop-blur-xl border border-white/40 rounded-t-[40px] md:rounded-b-xl shadow-[0_10px_40px_rgba(6,37,115,0.08)] p-md pt-lg flex flex-col gap-md relative overflow-hidden">
+<div class="w-full max-w-md px-gutter z-20 flex-1 min-h-0 flex flex-col justify-end lg:pb-0">
+<div class="bg-surface/80 backdrop-blur-xl border border-white/40 rounded-t-[40px] md:rounded-b-xl shadow-[0_10px_40px_rgba(6,37,115,0.08)] p-md pt-lg pb-md flex flex-col gap-md relative overflow-hidden -translate-y-[77px] md:translate-y-0">
 <p class="font-title-lg text-title-lg text-center text-primary mb-sm">¡Que bueno verte por aca<br>Vecino!</p>
 <!-- Form -->
 <form class="flex flex-col gap-sm">
@@ -185,7 +199,7 @@
 <p class="hidden text-error text-sm font-medium text-center mt-1" id="login-error"></p>
 <!-- Action Buttons -->
 <div class="flex flex-col gap-3 mt-4">
-<button class="w-full bg-primary-container text-on-primary font-title-lg text-title-lg py-3 px-6 rounded-full active:scale-95 transition-transform shadow-[0_4px_14px_rgba(6,37,115,0.25)] flex items-center justify-center transition-all" type="submit">
+<button class="w-full max-w-md mx-auto self-center relative left-1/2 -translate-x-1/2 bg-primary-container text-on-primary font-title-lg text-title-lg py-3 px-6 rounded-full active:scale-95 transition-transform shadow-[0_4px_14px_rgba(6,37,115,0.25)] flex items-center justify-center transition-all" type="submit">
                         Iniciar Sesión
                     </button>
 </div>
