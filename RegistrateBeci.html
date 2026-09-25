@@ -133,7 +133,122 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-    </style>
+    
+  @media (max-width: 767px) {
+    main > div.relative > img[data-alt="Beci Character"] {
+      width: calc(var(--beci-current-width, 100%) - 20px) !important;
+      transform: translate(12px, 130px) rotate(15deg) !important;
+    }
+
+    @keyframes beciMascotaEntrada {
+      from {
+        opacity: 0;
+        transform: translate(12px, 155px) rotate(15deg);
+      }
+      to {
+        opacity: 1;
+        transform: translate(12px, 130px) rotate(15deg);
+      }
+    }
+
+    @keyframes beciMascotaFlotando {
+      0%, 100% {
+        transform: translate(12px, 130px) rotate(15deg);
+      }
+      50% {
+        transform: translate(12px, 123px) rotate(15deg);
+      }
+    }
+  }
+
+
+  @media (max-width: 767px) {
+    main > div.relative > img[data-alt="Beci Character"] {
+      width: calc((var(--beci-current-width, 100%)) * 0.9) !important;
+      right: 0 !important;
+      left: auto !important;
+      margin-right: 0 !important;
+    }
+
+    @keyframes beciMascotaEntrada {
+      from {
+        opacity: 0;
+        transform: translate(12px, 155px) rotate(15deg);
+      }
+      to {
+        opacity: 1;
+        transform: translate(12px, 130px) rotate(15deg);
+      }
+    }
+
+    @keyframes beciMascotaFlotando {
+      0%, 100% {
+        transform: translate(12px, 130px) rotate(15deg);
+      }
+      50% {
+        transform: translate(12px, 123px) rotate(15deg);
+      }
+    }
+  }
+
+
+  @media (max-width: 767px) {
+    main > div.relative > img[data-alt="Beci Character"] {
+      width: calc((var(--beci-current-width, 100%)) * 0.8) !important;
+      right: 0 !important;
+      left: auto !important;
+      margin-right: 0 !important;
+      transform: translate(52px, 130px) rotate(15deg) !important;
+    }
+
+    @keyframes beciMascotaEntrada {
+      from {
+        opacity: 0;
+        transform: translate(52px, 155px) rotate(15deg);
+      }
+      to {
+        opacity: 1;
+        transform: translate(52px, 130px) rotate(15deg);
+      }
+    }
+
+    @keyframes beciMascotaFlotando {
+      0%, 100% {
+        transform: translate(52px, 130px) rotate(15deg);
+      }
+      50% {
+        transform: translate(52px, 123px) rotate(15deg);
+      }
+    }
+  }
+
+
+  @media (max-width: 767px) {
+    html, body {
+      height: auto !important;
+      min-height: 100% !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+    }
+
+    body {
+      min-height: 100vh !important;
+      height: auto !important;
+      padding-bottom: 90px !important;
+    }
+
+    main {
+      min-height: calc(100vh - 90px) !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    #btn-register-main {
+      margin-bottom: 20px !important;
+    }
+  }
+
+</style>
 <style>
 @keyframes mascot-loop {
   0% { transform: translateX(100px) rotate(15deg); opacity: 0; }
