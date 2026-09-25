@@ -798,18 +798,16 @@ body {
 <!-- END: MapSection -->
 </div>
 <!-- END: MainContentWrapper -->
-<!-- BEGIN: BottomNavigationBanner -->
-<footer class="fixed bottom-0 left-0 right-0 w-full z-50 bg-[#4DB21A] text-white py-3.5 px-6 shadow-lg rounded-t-2xl" data-purpose="fixed-footer-action-bar">
-<div class="w-full flex items-center justify-end gap-4">
-<span class="font-poppins font-medium text-sm sm:text-base text-white tracking-wide">
-        Enterate de todo
-      </span>
-<button class="bg-[#336926] hover:bg-[#28551e] text-white font-poppins font-semibold text-sm sm:text-base px-6 py-2 rounded-full shadow-md transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center" data-purpose="btn-chismear" style="transition: transform 0.3s;" type="button">
-        Chismear
-      </button>
-</div>
-</footer>
-<!-- END: BottomNavigationBanner -->
+<!-- FIXED BOTTOM BAR -->
+<nav class="state-transition fixed bottom-0 left-0 right-0 z-30 bg-[#4DB21A] text-white py-2.5 px-5 md:py-4 md:px-10 lg:py-5 lg:px-16 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.06)] mx-auto" id="bottom-bar">
+  <span class="text-xs md:text-base lg:text-lg font-medium tracking-wide text-white/95">
+    Enterate de todo
+  </span>
+  <button class="relative overflow-hidden group bg-[#336926] hover:bg-[#28531e] active:scale-95 text-white text-xs md:text-base lg:text-lg font-bold px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-3.5 rounded-full shadow-sm transition-all duration-300 hover:shadow-[0_0_20px_#4db21a,0_0_35px_rgba(255,255,255,0.7)] hover:brightness-125 cursor-pointer" onclick="openSofiaPortal()" type="button">
+    <span class="relative z-10">Chismear</span>
+    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"></span>
+  </button>
+</nav>
 <script>
 function openHeaderMobileNav() {
     const overlay = document.getElementById('mobile-nav-overlay');
@@ -1386,4 +1384,10 @@ document.addEventListener('keydown', (e) => {
 })();
 </script>
 <!-- END: Map Engine -->
+
+<script>
+function openSofiaPortal() {
+  window.open('https://oferta.senasofiaplus.edu.co', '_blank');
+}
+</script>
 </body></html>

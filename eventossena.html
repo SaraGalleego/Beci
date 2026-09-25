@@ -597,18 +597,20 @@
 </main>
 <!-- END: MainCalendarCard -->
 </div>
-<!-- BEGIN: BottomGreenBar -->
-<footer class="bg-[#4DB21A] px-6 py-4 flex items-center justify-end gap-3 relative z-10">
-<span class="text-white text-xs font-semibold tracking-wide">
-        Enterate de todo
-      </span>
-<button class="bg-[#336926] active:scale-95 transition text-white text-xs font-bold px-5 py-2 rounded-full shadow-md tracking-wide" id="chismearBtn" type="button" onclick="window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank')">
-        Chismear
-      </button>
-</footer>
-<!-- END: BottomGreenBar -->
+
 </div>
 </div>
+<!-- FIXED BOTTOM BAR -->
+<nav class="state-transition fixed bottom-0 left-0 right-0 z-30 bg-[#4DB21A] text-white py-2.5 px-5 md:py-4 md:px-10 lg:py-5 lg:px-16 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.06)] mx-auto" id="bottom-bar">
+  <span class="text-xs md:text-base lg:text-lg font-medium tracking-wide text-white/95">
+    Enterate de todo
+  </span>
+  <button class="relative overflow-hidden group bg-[#336926] hover:bg-[#28531e] active:scale-95 text-white text-xs md:text-base lg:text-lg font-bold px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-3.5 rounded-full shadow-sm transition-all duration-300 hover:shadow-[0_0_20px_#4db21a,0_0_35px_rgba(255,255,255,0.7)] hover:brightness-125 cursor-pointer" onclick="openSofiaPortal()" type="button">
+    <span class="relative z-10">Chismear</span>
+    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"></span>
+  </button>
+</nav>
+<!-- END: Bottom Fixed Institutional Banner -->
 <!-- ========================================================================= -->
 <!-- SHARED MODALS (Month Picker & Hamburger Navigation)                      -->
 <!-- ========================================================================= -->

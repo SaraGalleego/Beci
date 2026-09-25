@@ -460,16 +460,16 @@
 <img alt="Fondo Institucional" class="w-full h-full object-cover opacity-60 animated-bg-decor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbK2VmU3fT41qAGa2tFNKSvBj7ySxacOtg4byRs0zLN-Dql5FZCi9v0upKykhlGGr0MupKB4z4cSNQWfhjf3u9RRAt7DopgOpYJM7NFVyreGzLclrZsyG7zyF6kElZG-sa8t_wcvdZYzfHUntpa4iCztHLkQ8wgbPEY2pftotJ4WMyipwjyTKoYL1UpDrVqmcFCv3UkcO3MpgUBotAnIldzVZ6MlJvxW9ONDM46pIruvDVKvX46Rcd9RPeanyIeKZ_HQ"/>
 </div>
 <!-- END: Institutional Background Decor -->
-<!-- BEGIN: Top Bar Navigation (Responsive Desktop Order) -->
-<footer class="w-full bg-[#4DB21A] text-white px-6 py-3 fixed bottom-0 left-0 right-0 z-40 shadow-md" data-purpose="institutional-bar">
-<div class="max-w-md lg:max-w-4xl mx-auto flex items-center justify-end gap-3">
-<span class="text-sm font-medium font-poppins tracking-wide">Enterate de todo</span>
-<button class="bg-[#336926] hover:bg-[#254f1c] text-white text-xs font-semibold px-5 py-2 rounded-full transition-transform duration-200 transform hover:scale-110 active:scale-95 shadow-sm" data-purpose="action-chismear" onclick="window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank')" type="button">
-        Chismear
-      </button>
-</div>
-</footer>
-<!-- END: Top Bar Navigation (Responsive Desktop Order) -->
+<!-- FIXED BOTTOM BAR -->
+<nav class="state-transition fixed bottom-0 left-0 right-0 z-30 bg-[#4DB21A] text-white py-2.5 px-5 md:py-4 md:px-10 lg:py-5 lg:px-16 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.06)] mx-auto" id="bottom-bar">
+  <span class="text-xs md:text-base lg:text-lg font-medium tracking-wide text-white/95">
+    Enterate de todo
+  </span>
+  <button class="relative overflow-hidden group bg-[#336926] hover:bg-[#28531e] active:scale-95 text-white text-xs md:text-base lg:text-lg font-bold px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-3.5 rounded-full shadow-sm transition-all duration-300 hover:shadow-[0_0_20px_#4db21a,0_0_35px_rgba(255,255,255,0.7)] hover:brightness-125 cursor-pointer" onclick="openSofiaPortal()" type="button">
+    <span class="relative z-10">Chismear</span>
+    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"></span>
+  </button>
+</nav>
 <!-- BEGIN: Main Content Area -->
 <main class="relative z-10 flex-1 flex flex-col items-center justify-start lg:pb-12 w-full pt-0">
 <div class="w-full flex flex-col flex-1">
@@ -534,9 +534,9 @@
 <img alt="Mascota Beci saludando" class="w-full h-auto object-contain filter drop-shadow-md pointer-events-none select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC39ZdSGHI959OuLy3ulGBUmyDFhym4oRVQ9A7LCILM8i3zxlUQmnu8bPBKbMfm-zwYtvtgwCzjLAIuAJiOtf3iUpsSvCLhaewuZnkANMBaQzU9icH7fRGtjPqsPcKb_QeTKexE59c5wnna3HkkBlhDOKzz1AcSR4nqinir_380-98Sq274ACegHs_04dx7qtv5P4rZxmAjwd3jpLe3AbbR8F_Qa1L9bIuKkq3wpaiJGsWxUNHmRPXp3pnPcFva5YyVcPU"/>
 </div>
 <!-- Tarjeta Principal del Formulario -->
-<section class="relative z-10 bg-white shadow-[0_-4px_24px_rgba(51,105,38,0.08)] border border-[#eaf3e9] px-6 sm:px-8 pt-8 flex flex-col gap-4 rounded-t-[40px] flex-1 pb-24 md:max-w-md md:mx-auto md:rounded-t-[40px]" data-purpose="form-card">
+<section class="relative z-10 bg-white shadow-[0_-4px_24px_rgba(51,105,38,0.08)] border border-[#eaf3e9] px-6 sm:px-8 pt-8 flex flex-col gap-4 rounded-t-[40px] flex-1 pb-36 md:max-w-md md:mx-auto md:rounded-t-[40px]" data-purpose="form-card">
 <!-- Formulario de Registro -->
-<form class="flex flex-col gap-3.5 mt-1 max-w-md mx-auto w-full" id="registerForm" onsubmit="event.preventDefault();">
+<form class="flex flex-col gap-3.5 mt-1 max-w-md mx-auto w-full" id="registerForm" onsubmit="event.preventDefault();" style="transform: translateY(-30px);">
 <!-- Fila: Nombre y Apellido -->
 <div class="grid grid-cols-2 gap-3">
 <div>
@@ -793,5 +793,11 @@ document.addEventListener('keydown', (e) => {
     closeHeaderMobileNav();
   }
 });
+</script>
+
+<script>
+function openSofiaPortal() {
+  window.open('https://oferta.senasofiaplus.edu.co', '_blank');
+}
 </script>
 </body></html>
