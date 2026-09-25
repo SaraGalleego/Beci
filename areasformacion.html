@@ -214,29 +214,32 @@
   .btn-light-sweep:hover::after {
     animation: lightSweepOnce 0.75s ease 1 forwards !important;
   }
-</style><header class="relative z-30 w-full bg-white/90 backdrop-blur-md border-b border-beci-green-light/20">
-
-<!-- Barra principal del Header -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-<!-- Logo Beci oficial 3D intacto -->
-<div class="flex items-center space-x-4">
-<a class="inline-block transition-transform hover:scale-105 active:scale-95 focus:outline-none" href="#" title="Beci Inicio">
-<img alt="Beci Logo Oficial" class="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkaPr8Uj_wmpY8uhl7rdgOepID4oQTFrCkfVj7qBpdccCkwIpL3iZUuDTxtKyFMcY23MeOGYoUon906iuIAHXbrEaQmcXH_qlYYhl8vdLwlEQQ9zi5vFuA9OdqGtOKDsGRMKKaJp0Jgr5l4IryFcZn_qkV8q3oeLdUOi7z4Obg9DFxADTIsI39p96OiZLynIdPC6zfYTu2Bk2vRNRC7llcMKuZ2wYpa_iIPJO81gF_lDJjAC0EN6EWxcSkw4X9SseI8XI">
+</style><header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-50/80 shadow-xs transition-all duration-300" id="mainHeader">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="InicioSena.html">
+<img alt="Beci Mascota SENA 3D" class="h-12 sm:h-14 md:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF-Msh5Qb53Telt0VzN089iP-TVidxfz-Ox0wU8GJ_JAFZ0kgbPyCfTjQjiksbCteGzIDHgPBq4N9XFWJgJeFMZLgXleycSMQjUigqtiGr1SqiqK6ZVk1okpvPTjcmW8VkuU0kmH4J0LACtXsWkaaPJxY8mnv5tkjzyGty8tUPWWaVyMizEM3ac3QwGrG3B3PAlMGn5RALsG-6hUAZBuovOoMZlXPW-UT9_t6l_zGc--ihoXZDrZZFWmwV3aezADfTTGw">
 </a>
-</div>
-<!-- Menú Desktop Horizontal (min-width: 1024px) -->
-<nav class="hidden lg:flex items-center space-x-8 text-[15px] font-medium text-gray-700">
-<a class="hover:text-beci-green-dark transition-colors py-1" href="#">Ayuda</a>
-<a class="hover:text-beci-green-dark transition-colors py-1" href="#">Eventos</a>
-<a class="text-beci-green-dark font-bold border-b-2 border-beci-green-dark py-1" href="#">Explorar Programas</a>
-<a class="hover:text-beci-green-dark transition-colors py-1" href="Mapasena.html">Explorar Sedes</a>
-<a class="hover:text-beci-green-dark transition-colors py-1" href="registratucorreosena.html">Estar al Tanto</a>
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="InicioSena.html">Inicio</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Charlemos.html">Charlemos</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="eventossena.html">Eventos</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Mapasena.html">Explorar Sedes</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="registratucorreosena.html">Estar al Tanto</a>
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="areasformacion.html">
+<span class="font-bold text-sm lg:text-base text-stone-800">Explorar áreas de formación</span>
+<span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span>
+</a>
 </nav>
-<!-- Botón Menú Hamburguesa (Móvil y Tablet < 1024px) -->
-<div class="lg:hidden flex items-center">
-<button aria-label="Abrir menú" class="p-2 transition-transform hover:scale-105 active:scale-90 focus:outline-none" id="openMenuBtn" type="button">
-<img alt="Menú" class="w-10 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJCLX5sBrFi_a1OkjoySlx-e9-Oi2bhbxSlB-oHEk3x7Y14Bl-nvb0WAQ2ii84jqp2pnFutIUCczYnKJP9TU9jsUFeERPTgeUj-0cccghO-YnTBPmqgH5PX5yNhIPIxUF_YW-9kqGEM74cWYktsGHrBE0zK9mBtagSthxBol2Mg0PYkz5PvJRWJcJX82iGa7hPXKUmweIwEdRt-rfCjfiV7evDDPtT_ZXGQ4pjKnsDqzUBpAffGJ_TTSImsT50bXyk6lM">
+<div class="flex items-center gap-3">
+<div class="flex flex-col items-end leading-none pr-1">
+<span class="font-title font-black tracking-widest text-xl sm:text-2xl text-[#336926]">SENA</span>
+<span class="text-[9px] sm:text-[10px] font-semibold text-gray-500 tracking-wider">Medellín</span>
+</div>
+<button aria-label="Abrir Menú Móvil" class="lg:hidden p-1 focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg transition-transform active:scale-95" id="mobileMenuBtn" onclick="toggleHeaderMobileNav()" type="button">
+<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArciEck3dnb-Fg2UuGEXw_zcNhOEWFE1F8QWORqCjsJoB1gH0pFTDGC_vTUOP-8J113bWwvFgnfGLPSpQWfOKls6Mlp9l9TCI7xXvs0PH3YDFsb6jECbgGBUmiWPrhHXaO9rGUvyU8BIFOpGgDAP3S4TdVUxyHcDqAHMOcaDgyfOwPPv8xTWNSyZmPjiuXaMTCuVdxQeW0hFh__yvFQj6ZQ2rz5-3Z3iI4PjhYKQf8O51s7Yn0ceoTICvt6cRm34hE5g">
 </button>
+</div>
 </div>
 </div>
 </header>
@@ -269,14 +272,14 @@
     <!-- TARJETA 1: TICS (Activa por defecto con borde destacado verde como en image.png) -->
     <article id="card-tics" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
       <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
-        <img alt="Estudiantes en aula de TICS" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7Vh4UOBC60CQCkbD_eqgMZvb3XaSShUmGZP2xO87x_QsSqKlnafHGklD6t1qOfzuYhz1RLYomilRMvnJcYYZj_fR8WE2kmAQANlHzWprWRuMV9ivsHq92rfYyRdzAGwpLjUVrDkEGWbco0pBMa3Txs0wQtzSek-ZL6aEJzVk5ucvBqwfRzA9C5T9wC02WtvjCl7sz8R0asHLbrPR2HWLf1BSMZmHUWiyqz3gcIHjPQx3yj2oxVDgDiB0tN4Ziy4X_8GY89roNS_uc4e0">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr2UJ99zaxyonQcUsbfiE14xwbJ3yyN9Z0rnNEQTwdhnLVtGxx3fGS1ertC_1YC2xd27b3TDUTAQv3sqPGShg0Po5Iwei4_NMHj9XXmY6Y_Ri8ALVAEafC1tm5gbdk0ZStjN-cp--aFh92wUOapPpl3z5-Eh0KSC8OLbf-l2tjx6TqoW2Zlg9jrfQVNkuqD7PcXHJO-VYtFP320e-mepZe9_-vdZYx43cZUeWzl9mJIMd_6BL9N0vbavYGUW6fFCOyHhA" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
-        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-lg sm:text-xl tracking-wider drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">TICS</span>
+        <img alt="Electricidad" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="img/electricidad.jpg">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-lg sm:text-xl tracking-wider drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">Electricidad</span>
       </div>
       <div class="flex-1 flex flex-col justify-between py-1 pr-1 sm:pr-2">
-        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">Tecnología, desarrollo de software, redes, sistemas y más.</p>
+        <p class="text-xs sm:text-sm lg:text-base text-gray-700 font-normal leading-relaxed mb-3">Electricidad industrial, automatización, Energias Renovables y más.</p>
         <div class="flex justify-end">
-          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('TICS')" type="button">Ver detalles</button>
+          <button class="btn-light-sweep bg-beci-orange text-white font-heading text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-md" onclick="selectDesktopProgram('Electricidad')" type="button">Ver detalles</button>
         </div>
       </div>
     </article>
@@ -339,7 +342,7 @@
     <!-- TARJETA 6: Electricidad -->
     <article id="card-electricidad" class="card-hover bg-white/95 rounded-[38px] p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 shadow-md relative overflow-hidden group transition-all duration-300 border border-beci-green-light/40">
       <div class="relative w-36 sm:w-44 h-32 sm:h-36 rounded-[28px] overflow-hidden flex-shrink-0 bg-gray-900 shadow-inner">
-        <img alt="Circuitos eléctricos y tableros industriales" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIUul7WJwZg1URZ-DIeDCarQwvM1hRfWtMF1AqpM8HPFWWPtie0xV8KrBMw1SABq9NPymeTbEx3QI22uMgtq-IIMXF6620CoI-BtJno1ZQet_DM347tI__tuepoXaTRy2DAHNi0Gofe1ApMknz__-m6t0kZtWxiK--SpQxnVEEbRJ1xGoS9G85Z5TjA8KOuQ9N2Hv_OvCi3jlVp39zXUY0vYBqy5A3Ky84AWSg8egvHWfdrJzD7Cit-utykKwYMhojIX8kjry_pswCmLQ">
+        <img alt="Circuitos eléctricos y tableros industriales" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90" src="img/electricidad.jpg">
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2BhZffQz2jJt72ehHfawzDIF-OESt10Z8hYxcILKk0fDLogzkgTKPSCpIxeruS_YFG1wrxZ74hOe8SqoUx_HN3FIZx0a1suiYQeiZ-IrV3_-sFXog-Wl7z19O0Lj_b6BjZAjLclbTWoj2UotD8Fb_2b0MmIOrwYZD3aaJYGUtAGWtCxhHP-U6u5aXrSRlFwediaVMBW9BuisE6E3ujCg_421RCM5pdr74Jb0sm5KgceoQWIU50zYGVU4s_7KYgrepQac" alt="" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-80 mix-blend-multiply">
         <span class="absolute top-2.5 left-2.5 font-heading text-white font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow-md" style="text-shadow: rgba(0, 0, 0, 0.85) 0px 2px 5px;">Electricidad</span>
       </div>
@@ -426,7 +429,7 @@
 <!-- Telón de fondo con Glassmorphism intenso -->
 <div class="glass-overlay absolute inset-0 transition-opacity duration-300" onclick="closeTicsModal()"></div>
 <!-- Tarjeta del Modal con estilo réplica de image_f0b18a.png -->
-<div class="glass-modal relative w-full max-w-sm sm:max-w-md bg-white rounded-[36px] shadow-2xl p-6 sm:p-7 border border-white/80 overflow-hidden transform transition-all duration-300 scale-95">
+<div class="glass-modal relative w-full max-w-sm sm:max-w-md bg-white rounded-[36px] shadow-2xl p-6 sm:p-7 border border-white/80 overflow-hidden transform transition-all duration-300 scale-95 max-h-[90vh] overflow-y-auto">
 <!-- Botón de cierre superior izquierdo (<) idéntico a la referencia -->
 <button aria-label="Cerrar modal" class="absolute left-6 top-6 text-beci-green-dark hover:text-beci-green-light transition-transform duration-200 active:scale-90 hover:-translate-x-1" onclick="closeTicsModal()" type="button"><svg class="w-6 h-6 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
 <!-- Título Central -->
@@ -435,55 +438,33 @@
       </h3>
 <!-- Contenido en 2 Bloques con divisor sutil -->
 <div class="space-y-6">
-<!-- Bloque 1: Audio Visuales -->
+<!-- Bloque 1: Multimedia -->
 <div class="space-y-2">
-<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">
-            Audio Visuales
-          </h4>
-<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-            Forma profesionales en la producción de contenidos audiovisuales para diferentes medios y plataformas.
-          </p>
-<div class="flex items-center justify-between pt-1">
-<div>
-<span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span>
-<span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span>
-<span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span>
-<span class="block text-xs sm:text-sm text-gray-700">24 Meses</span>
+<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">Multimedia</h4>
+<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">Formación enfocada en la creación de contenidos digitales, diseño multimedia, animación y producción para diferentes plataformas.</p>
+<div class="flex items-center justify-between pt-1"><div><span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span><span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span><span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span><span class="block text-xs sm:text-sm text-gray-700">24 Meses</span></div><div class="flex flex-col items-center"><a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">Ir a Sofia Plus</a><span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">Busca el programa directamente en la pagina oficial.</span></div></div>
 </div>
-<div class="flex flex-col items-center">
-<a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">
-                Ir a Sofia Plus
-              </a>
-<span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">
-                Busca el programa directamente en la pagina oficial.
-              </span>
-</div>
-</div>
-</div>
-<!-- Separador de línea fina sutil -->
 <hr class="border-t border-gray-200 my-4">
-<!-- Bloque 2: Producción Multimedia -->
+<!-- Bloque 2: Audiovisuales -->
 <div class="space-y-2">
-<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">
-            Producción Multimedia
-          </h4>
-<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-            Forma profesionales en la creación de contenidos digitales, diseño multimedia y producción para diferentes plataformas y medios.
-          </p>
-<div class="flex items-center justify-between pt-1">
-<div>
-<span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span>
-<span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span>
-<span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span>
-<span class="block text-xs sm:text-sm text-gray-700">24 Meses</span>
+<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">Audiovisuales</h4>
+<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">Formación para la producción de contenidos audiovisuales, fotografía, video, iluminación y edición para medios y plataformas digitales.</p>
+<div class="flex items-center justify-between pt-1"><div><span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span><span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span><span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span><span class="block text-xs sm:text-sm text-gray-700">24 Meses</span></div><div class="flex flex-col items-center"><a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">Ir a Sofia Plus</a><span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">Busca el programa directamente en la pagina oficial.</span></div></div>
 </div>
-<div class="flex flex-col items-center">
-<a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">
-                Ir a Sofia Plus
-              </a>
-<span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">
-                Busca el programa directamente en la pagina oficial.
-              </span>
+<hr class="border-t border-gray-200 my-4">
+<!-- Bloque 3: Programación de Software -->
+<div class="space-y-2">
+<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">Programación de Software</h4>
+<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">Formación en desarrollo de aplicaciones y soluciones de software, desde la lógica de programación hasta la construcción y mantenimiento de sistemas digitales.</p>
+<div class="flex items-center justify-between pt-1"><div><span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span><span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span><span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span><span class="block text-xs sm:text-sm text-gray-700">24 Meses</span></div><div class="flex flex-col items-center"><a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">Ir a Sofia Plus</a><span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">Busca el programa directamente en la pagina oficial.</span></div></div>
+
+<hr class="border-t border-gray-200 my-4">
+<!-- Bloque 4: Redes -->
+<div class="space-y-2">
+<h4 class="font-heading text-base sm:text-lg font-extrabold text-gray-900">Redes</h4>
+<p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">Formación orientada a la instalación, configuración y administración de redes, conectividad y servicios de comunicación para entornos tecnológicos.</p>
+<div class="flex items-center justify-between pt-1"><div><span class="block font-heading text-xs font-bold text-gray-900">Tipo de Formación</span><span class="block text-xs sm:text-sm text-gray-700">Tecnólogo</span><span class="block font-heading text-xs font-bold text-gray-900 mt-1">Duración</span><span class="block text-xs sm:text-sm text-gray-700">24 Meses</span></div><div class="flex flex-col items-center"><a class="btn-sofia bg-beci-green-dark hover:bg-beci-green-dark/95 text-white font-heading text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow transition-transform duration-200 hover:scale-105 active:scale-95" href="http://oferta.senasofiaplus.edu.co" rel="noopener noreferrer" target="_blank">Ir a Sofia Plus</a><span class="text-[9px] text-gray-500 text-center max-w-[120px] mt-1 leading-tight">Busca el programa directamente en la pagina oficial.</span></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -493,35 +474,24 @@
 <!-- ========================================================================= -->
 <!-- 7. MODAL 2: MENÚ HAMBURGUESA (Móvil - Glassmorphism puro, ref menú hamburguesa_2.png) -->
 <!-- ========================================================================= -->
-<div class="fixed inset-0 z-50 flex p-4 sm:p-6 transition-opacity duration-300 justify-end items-start opacity-0 pointer-events-none" id="hamburguerModal">
-<!-- Fondo translúcido con desenfoque de fondo -->
-<div class="glass-overlay absolute inset-0 transition-opacity duration-300" onclick="closeHamburgerMenu()"></div>
-<!-- Tarjeta con Glassmorphism puro según referencia menú hamburguesa_2.png -->
-<div class="glass-modal relative w-full max-w-xs sm:max-w-sm rounded-[42px] p-6 sm:p-8 border border-white/80 overflow-hidden transform transition-all duration-300 shadow-2xl h-auto scale-95">
-<!-- Icono X verde en la esquina superior izquierda -->
-<button aria-label="Cerrar menú" class="absolute text-beci-green-dark hover:text-beci-green-light transition-transform hover:rotate-90 duration-200 active:scale-90 top-4 right-4" onclick="closeHamburgerMenu()" type="button">
-<svg class="w-7 h-7 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
+<div class="fixed inset-0 z-[1100] bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" id="mobile-nav-overlay" onclick="handleMobileOverlayClick(event)">
+<div class="relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" id="mobile-nav-modal" style="background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(24px) saturate(180%) brightness(1.1); border: 1.5px solid rgba(255, 255, 255, 0.7); box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 40px, rgba(255, 255, 255, 0.4) 0px 0px 20px, rgba(255, 255, 255, 0.9) 0px 1px 2px inset;">
+<button aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer" onclick="closeHeaderMobileNav()" type="button">
+<svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
 </button>
-<!-- Lista de opciones centradas con divisores finos -->
-<nav class="mt-8 flex flex-col items-center space-y-0 text-center font-heading text-xl sm:text-2xl text-gray-900">
-<a class="w-full py-3.5 hover:text-beci-green-dark transition-colors border-b border-gray-300/70" href="#" onclick="closeHamburgerMenu()">
-          Ayuda
-        </a>
-<a class="w-full py-3.5 hover:text-beci-green-dark transition-colors border-b border-gray-300/70" href="#" onclick="closeHamburgerMenu()">
-          Eventos
-        </a>
-<a class="w-full py-3.5 text-beci-green-dark font-extrabold hover:text-beci-green-light transition-colors border-b border-gray-300/70" href="registratucorreosena.html" onclick="closeHamburgerMenu()">
-          Estar al Tanto
-        </a>
-<a class="w-full py-3.5 hover:text-beci-green-dark transition-colors border-b border-gray-300/70" href="Mapasena.html" onclick="closeHamburgerMenu()">
-          Explorar Sedes
-        </a>
-<a class="w-full pt-3.5 hover:text-beci-green-dark transition-colors pb-3.5" href="#" onclick="closeHamburgerMenu()">
-          Explorar Programas
-        </a>
-</nav>
+<div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4">
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="InicioSena.html" onclick="closeHeaderMobileNav()">Inicio</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Charlemos.html" onclick="closeHeaderMobileNav()">Charlemos</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="eventossena.html" onclick="closeHeaderMobileNav()">Eventos</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Mapasena.html" onclick="closeHeaderMobileNav()">Explorar Sedes</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="registratucorreosena.html" onclick="closeHeaderMobileNav()">Estar al Tanto</a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-bold tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="areasformacion.html" onclick="closeHeaderMobileNav()">Explorar áreas de formación</a>
+</div>
 </div>
 </div>
 <!-- ========================================================================= -->
@@ -562,15 +532,13 @@
 <script>
     // Variables de referencia para modales
     const ticsModal = document.getElementById('ticsModal');
-    const hamburguerModal = document.getElementById('hamburguerModal');
     const genericModal = document.getElementById('genericModal');
 
     const openTicsBtn = document.getElementById('openTicsModalBtn');
-    const openMenuBtn = document.getElementById('openMenuBtn');
 
     // Función auxiliar para abrir modales con animación suave
     function showModal(modalEl) {
-      modalEl.classList.remove('opacity-0', 'pointer-events-none');
+      modalEl.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
       const dialog = modalEl.querySelector('.glass-modal');
       if (dialog) {
         dialog.classList.remove('scale-95');
@@ -587,6 +555,9 @@
         dialog.classList.add('scale-95');
       }
       modalEl.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        modalEl.classList.add('hidden');
+      }, 300);
       document.body.style.overflow = '';
     }
 
@@ -601,19 +572,6 @@
 
     if (openTicsBtn) {
       openTicsBtn.addEventListener('click', openTicsModal);
-    }
-
-    // Controladores del menú Hamburguesa
-    function openHamburgerMenu() {
-      showModal(hamburguerModal);
-    }
-
-    function closeHamburgerMenu() {
-      hideModal(hamburguerModal);
-    }
-
-    if (openMenuBtn) {
-      openMenuBtn.addEventListener('click', openHamburgerMenu);
     }
 
     // Modal Genérico para las demás tarjetas
@@ -634,20 +592,10 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeTicsModal();
-        closeHamburgerMenu();
         closeGenericModal();
       }
     });
 
-    // Interacción Chismear
-    const chismearActions = [document.getElementById('mobileChismearBtn'), document.getElementById('desktopChismearBtn')];
-    chismearActions.forEach(btn => {
-      if (btn) {
-        btn.addEventListener('click', () => {
-          openHamburgerMenu();
-        });
-      }
-    });
   </script>
 
 
@@ -758,6 +706,11 @@
   };
 
   function selectDesktopProgram(key) {
+    if (key === 'TICS') {
+      openTicsModal();
+      return;
+    }
+
     if (window.innerWidth < 1024) {
       if (key === 'TICS') {
         openTicsModal();
@@ -868,4 +821,56 @@
 
 
 
+
+<script>
+function openHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.remove('hidden');
+    void overlay.offsetWidth;
+    overlay.classList.remove('opacity-0');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.add('opacity-0');
+    modal.classList.remove('scale-100');
+    modal.classList.add('scale-95');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
+}
+
+function toggleHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay && overlay.classList.contains('hidden')) {
+      openHeaderMobileNav();
+    } else {
+      closeHeaderMobileNav();
+    }
+}
+
+function handleMobileOverlayClick(e) {
+    if (e.target.id === 'mobile-nav-overlay') {
+      closeHeaderMobileNav();
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeHeaderMobileNav();
+    }
+});
+
+</script>
 </body></html>
