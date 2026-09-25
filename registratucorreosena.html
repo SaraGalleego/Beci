@@ -420,6 +420,39 @@
 }
 </style>
 
+
+<style id="ajuste-mobile-titulo-campos-final">
+@media (max-width: 767px) {
+  /* Título y descripción 30px más abajo */
+  [data-purpose="registration-heading"] {
+    transform: translateY(30px) !important;
+  }
+
+  /* La sección de campos sube para dejar libre el botón */
+  .relative.w-full.mt-6.flex-1.flex.flex-col.md\:max-w-md {
+    transform: translateY(-30px) !important;
+  }
+
+  [data-purpose="form-card"] {
+    transform: translateY(-30px) !important;
+  }
+
+  /* Mantener el botón dentro de la tarjeta sin tapar los campos */
+  #registerForm > div.mt-4 {
+    margin-bottom: 5.5rem !important;
+  }
+}
+</style>
+
+<style id="registro-boton-y-mensaje">
+@media (max-width: 767px) {
+  /* Solo el botón: 30px más abajo, sin mover los campos ni la tarjeta. */
+  [data-purpose="submit-register-button"] {
+    transform: translateY(30px) !important;
+  }
+}
+</style>
+
 </head>
 <body class="min-h-screen text-slate-800 flex flex-col relative antialiased selection:bg-brand-green selection:text-white">
 <!-- BEGIN: Institutional Background Decor -->
@@ -444,71 +477,46 @@
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-50/80 shadow-xs transition-all duration-300" id="mainHeader">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-20">
-<!-- Left: Official BECI 3D Logo from Datastore -->
-<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="#">
-<img alt="Beci Mascota SENA 3D" class="h-12 sm:h-14 md:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjShFTCs-PnE_E_ZfB9xd46lmXxET0S59qbcUf3HsXs_dovvSF-z30BpiCaN0-1TfAtXizSqwi32i-NXawVYs_ODMtk8fJPzCXSauaw8qYTWnvjK9zG0n_-PoedEW33lzTrmNUVL445rq17Y9uxwM_dNRMelQQALaqCZ6XTAvB2VedcHKlYLNL4-TmHYS8FqnEKpCzPOiLGRuQ2osGgy3ihHF27Ww4cMw8f4SYx0eaqxAYwoqpbT7LbZlEpVyNhPf_tg"/>
+<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="InicioSena.html">
+<img alt="BECI" class="h-12 sm:h-14 md:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhLv8mu71mViEz1jgUpwT_7OzXUQYykxLafd4nqAKswE5_3dbWSGb9teWJ2h6R7xJLUwtncmBLt1bKkhKYsjt7FJujx2fEq67aW6_XCcfkZjWTtskcZM1vxrnTkZdvNBOVjnNr_oUyi40fy25j7FQjfrIaMfyuvyyXYyU06lnfEPCdRqoeK3JQ3hfv0g82_5CrFBylFDpNlZdAZi-d8K9swAsMtEpVfrz3Rk2CT5elr_4fZlu4N-64PzysH74K03X9_g">
 </a>
-<!-- Desktop Navigation Pills (Faithful to reference: Inicio, Charlemos, Explorar Sedes, Eventos, Explorar Programas) -->
 <nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
 <a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="InicioSena.html">Inicio</a>
 <a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Charlemos.html">Charlemos</a>
 <a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="eventossena.html">Eventos</a>
 <a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Mapasena.html">Explorar Sedes</a>
-<a class="text-sm lg:text-base font-bold text-[#336926] transition relative whitespace-nowrap flex items-center justify-center" href="registratucorreosena.html">
-<span class="font-bold text-sm lg:text-base text-[#336926]">Estar al Tanto</span>
-<span class="absolute -bottom-1.5 left-0 right-0 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span>
-</a>
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="registratucorreosena.html"><span class="font-bold text-sm lg:text-base text-stone-800">Estar al Tanto</span><span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span></a>
 <a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="areasformacion.html">Explorar áreas de formación</a>
 </nav>
-<!-- Right: Official SENA Identification & Mobile Menu Toggle -->
 <div class="flex items-center gap-3">
-<!-- Desktop SENA Wordmark -->
 <div class="flex flex-col items-end leading-none pr-1"><span class="font-title font-black tracking-widest text-xl sm:text-2xl text-[#336926]">SENA</span><span class="text-[9px] sm:text-[10px] font-semibold text-gray-500 tracking-wider">Medellín</span></div>
-<!-- Mobile / Tablet Hamburger Toggle Button -->
 <button aria-label="Abrir Menú Móvil" class="lg:hidden p-1 focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg transition-transform active:scale-95" id="mobileMenuBtn" onclick="toggleHeaderMobileNav()">
-<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArciEck3dnb-Fg2UuGEXw_zcNhOEWFE1F8QWORqCjsJoB1gH0pFTDGC_vTUOP-8J113bWwvFgnfGLPSpQWfOKls6Mlp9l9TCI7xXvs0PH3YDFsb6jECbgGBUmiWPrhHXaO9rGUvyU8BIFOpGgDAP3S4TdVUxyHcDqAHMOcaDgyfOwPPv8xTWNSyZmPjiuXaMTCuVdxQeW0hFh__yvFQj6ZQ2rz5-3Z3iI4PjhYKQf8O51s7Yn0ceoTICvt6cRm34hE5g"/>
+<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSo7NPtEvcPb86mvyKmZNR2nf1i_JDTAnSCGXp7GLXv5_1JxWRtCwp76e7HLB_00jay969HjOGCVGW1E74_bp_a2hjDhVjd-LFlbziB8q_aN2YNSKKQqGwhzqHBfwouSXUUh9t7bEXwOGzn7P_TbEBsTXbB7zGTALbkSVchysJsueZV7IlRqpQXeBvzxxOxsZpY-qJBbU0t9Lzamwq0PYryHCXUfiVm4lHgGmxpKOZWgRmkWASbiQDnrHjno2V8mZSg">
 </button>
 </div>
 </div>
-<!-- Mobile Pills Carousel Wrapper with Soft Edge Fade Gradient and Drag-to-Scroll Support -->
-
-</div>
-<!-- Mobile Drawer Menu -->
-</header><div class="fixed inset-0 z-50 bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" id="mobile-nav-overlay" onclick="handleMobileOverlayClick(event)">
-<div class="relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" id="mobile-nav-modal" style="background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(24px) saturate(180%) brightness(1.1); border: 1.5px solid rgba(255, 255, 255, 0.7); box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 40px, rgba(255, 255, 255, 0.4) 0px 0px 20px, rgba(255, 255, 255, 0.9) 0px 1px 2px inset;">
-<!-- Botón Cerrar 'X' verde cómodo y accesible -->
-<button aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer" onclick="closeHeaderMobileNav()" type="button">
-<svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
-<line x1="18" x2="6" y1="6" y2="18"></line>
-<line x1="6" x2="18" y1="6" y2="18"></line>
-</svg>
-</button>
-<!-- Opciones de Navegación con tipografía amplia, cómoda y espaciado generoso -->
-<div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4"><a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="InicioSena.html" onclick="closeHeaderMobileNav()">
-        Inicio
-      </a>
-<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Charlemos.html" onclick="closeHeaderMobileNav()">
-        Charlemos
-      </a>
-<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="eventossena.html" onclick="closeHeaderMobileNav()">
-        Eventos
-      </a>
-<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Mapasena.html" onclick="closeHeaderMobileNav()">
-        Explorar Sedes
-      </a>
-<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
-<a class="font-title text-base font-bold tracking-tight text-[#336926] transition active:scale-95 py-0.5" href="registratucorreosena.html" onclick="closeHeaderMobileNav()">
-        Estar al Tanto
-      </a>
-<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
-<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="areasformacion.html" onclick="closeHeaderMobileNav()">
-        Explorar áreas de formación
-      </a>
-</div>
-</div>
+</header><div id="mobile-nav-overlay" class="fixed inset-0 z-50 bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" onclick="handleMobileOverlayClick(event)">
+  <div id="mobile-nav-modal" class="relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" style="background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(24px) saturate(180%) brightness(1.1); border: 1.5px solid rgba(255, 255, 255, 0.7); box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 40px, rgba(255, 255, 255, 0.4) 0px 0px 20px, rgba(255, 255, 255, 0.9) 0px 1px 2px inset;">
+    <button type="button" onclick="closeHeaderMobileNav()" aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer">
+      <svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4">
+      <a href="InicioSena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">Inicio</a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="Charlemos.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-bold tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">Charlemos</a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="eventossena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">Eventos</a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="Mapasena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">Explorar Sedes</a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="registratucorreosena.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">Estar al Tanto</a>
+      <div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+      <a href="areasformacion.html" onclick="closeHeaderMobileNav()" class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5">Explorar áreas de formación</a>
+    </div>
+  </div>
 </div>
 <!-- END: Header Navigation -->
 <!-- BEGIN: Headline Titles -->
@@ -591,6 +599,20 @@
 </div>
 </main>
 <!-- END: Main Content Area -->
+<!-- MENSAJE DE REGISTRO EXITOSO -->
+<div id="registration-success" class="fixed inset-0 z-[1200] hidden items-center justify-center px-5 bg-[#0d1e3a]/20 backdrop-blur-sm">
+  <div class="w-full max-w-[360px] bg-white/95 rounded-[30px] p-7 text-center shadow-[0_18px_50px_rgba(51,105,38,0.22)] border border-white/80 transform transition-all">
+    <div class="mx-auto mb-4 w-14 h-14 rounded-full bg-[#F9FFFA] border border-[#dce8dc] flex items-center justify-center">
+      <span class="text-[#4DB21A] text-2xl font-bold">✓</span>
+    </div>
+    <h2 class="font-dmsans font-extrabold text-[#0d1e3a] text-xl leading-tight mb-2">¡Listo, Veci!</h2>
+    <p class="font-poppins text-sm text-slate-600 leading-relaxed">Te has registrado exitosamente. Te estaremos avisando de todas las novedades para que no te pierdas ningún chismecito.</p>
+    <button type="button" id="close-registration-success" class="mt-5 bg-[#336926] hover:bg-[#254f1c] text-white font-poppins font-semibold text-sm px-6 py-2.5 rounded-full transition-transform duration-200 hover:scale-105 active:scale-95">
+      ¡De una!
+    </button>
+  </div>
+</div>
+
 <!-- BEGIN: Hamburger Menu Modal -->
 <!-- END: Hamburger Menu Modal -->
 <!-- BEGIN: Interactive Logic Scripts -->
@@ -669,50 +691,107 @@
     newsletterSwitch.addEventListener('click', toggleNewsletter);
     switchLabel.addEventListener('click', toggleNewsletter);
   </script>
+<script id="registro-exitoso-logic">
+(function () {
+  const form = document.getElementById('registerForm');
+  const success = document.getElementById('registration-success');
+  const closeBtn = document.getElementById('close-registration-success');
+
+  if (!form || !success) return;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Solo mostrar el mensaje cuando los campos obligatorios estén completos y válidos.
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    success.classList.remove('hidden');
+    success.classList.add('flex');
+  });
+
+  function closeSuccess() {
+    success.classList.add('hidden');
+    success.classList.remove('flex');
+
+    // Limpiar completamente el formulario al cerrar el mensaje.
+    form.reset();
+
+    // Dejar el switch de novedades nuevamente apagado.
+    if (typeof isSubscribed !== 'undefined' && isSubscribed) {
+      isSubscribed = false;
+      if (newsletterSwitch) {
+        newsletterSwitch.setAttribute('aria-checked', 'false');
+        newsletterSwitch.classList.add('bg-slate-200');
+        newsletterSwitch.classList.remove('bg-[#4DB21A]');
+      }
+      if (switchKnob) switchKnob.classList.remove('translate-x-5');
+    }
+
+    // Restablecer también la contraseña en modo oculto.
+    if (passwordInput) passwordInput.setAttribute('type', 'text');
+    if (eyeIconOpen) eyeIconOpen.classList.add('hidden');
+    if (eyeIconClosed) eyeIconClosed.classList.remove('hidden');
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeSuccess);
+
+  success.addEventListener('click', function (event) {
+    if (event.target === success) closeSuccess();
+  });
+})();
+</script>
 <!-- END: Interactive Logic Scripts -->
 <script id="inicio-sena-mobile-header-logic">
+function openHeaderMobileNav() {
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const modal = document.getElementById('mobile-nav-modal');
+  if (!overlay || !modal) return;
+
+  overlay.classList.remove('hidden');
+  void overlay.offsetWidth;
+  overlay.classList.remove('opacity-0');
+  modal.classList.remove('scale-95');
+  modal.classList.add('scale-100');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeHeaderMobileNav() {
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const modal = document.getElementById('mobile-nav-modal');
+  if (!overlay || !modal) return;
+
+  overlay.classList.add('opacity-0');
+  modal.classList.remove('scale-100');
+  modal.classList.add('scale-95');
+  document.body.style.overflow = '';
+
+  setTimeout(() => {
+    overlay.classList.add('hidden');
+  }, 300);
+}
+
+function toggleHeaderMobileNav() {
+  const overlay = document.getElementById('mobile-nav-overlay');
+  if (overlay && overlay.classList.contains('hidden')) {
+    openHeaderMobileNav();
+  } else {
+    closeHeaderMobileNav();
+  }
+}
+
+function handleMobileOverlayClick(e) {
+  if (e.target.id === 'mobile-nav-overlay') {
+    closeHeaderMobileNav();
+  }
+}
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeHeaderMobileNav();
-    }
-  });</script>
-<script>
-  function openHeaderMobileNav() {
-    const overlay = document.getElementById('mobile-nav-overlay');
-    const modal = document.getElementById('mobile-nav-modal');
-    if (!overlay || !modal) return;
-    overlay.classList.remove('hidden');
-    void overlay.offsetWidth;
-    overlay.classList.remove('opacity-0');
-    modal.classList.remove('scale-95');
-    modal.classList.add('scale-100');
-    document.body.style.overflow = 'hidden';
+  if (e.key === 'Escape') {
+    closeHeaderMobileNav();
   }
-
-  function closeHeaderMobileNav() {
-    const overlay = document.getElementById('mobile-nav-overlay');
-    const modal = document.getElementById('mobile-nav-modal');
-    if (!overlay || !modal) return;
-    overlay.classList.add('opacity-0');
-    modal.classList.remove('scale-100');
-    modal.classList.add('scale-95');
-    document.body.style.overflow = '';
-    setTimeout(() => overlay.classList.add('hidden'), 300);
-  }
-
-  function toggleHeaderMobileNav() {
-    const overlay = document.getElementById('mobile-nav-overlay');
-    if (overlay && overlay.classList.contains('hidden')) openHeaderMobileNav();
-    else closeHeaderMobileNav();
-  }
-
-  function handleMobileOverlayClick(e) {
-    if (e.target.id === 'mobile-nav-overlay') closeHeaderMobileNav();
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeHeaderMobileNav();
-  });
+});
 </script>
 </body></html>
