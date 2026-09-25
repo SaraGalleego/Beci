@@ -412,16 +412,16 @@
 <!-- ========================================================================= -->
 <!-- 5. BARRA INFERIOR (FOOTER NAV - SOLO MÓVIL Y TABLET < 1024px) -->
 <!-- ========================================================================= -->
-<footer class="fixed bottom-0 left-0 right-0 z-20 bg-beci-green-light text-white py-3 shadow-[0_-6px_20px_rgba(0,0,0,0.1)] flex items-center justify-between px-4 sm:px-8">
-<div class="hidden lg:flex items-center space-x-3 text-sm font-medium tracking-wide">
-<span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-300 animate-pulse"></span>
-<span class="">¡Conoce todas las convocatorias y novedades en tiempo real!</span>
-</div>
-<div class="flex items-center gap-3 justify-end w-full lg:w-auto">
-<span class="text-sm sm:text-base font-medium tracking-wide">Enterate de todo</span>
-<button class="bg-beci-green-dark hover:bg-beci-green-dark/90 text-white font-heading font-bold text-sm px-6 py-2 rounded-full shadow transition-transform duration-200 hover:scale-110 active:scale-95" type="button" onclick="event.preventDefault(); event.stopPropagation(); window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank');">Chismear</button>
-</div>
-</footer>
+<!-- FIXED BOTTOM BAR -->
+<nav class="state-transition fixed bottom-0 left-0 right-0 z-30 bg-[#4DB21A] text-white py-2.5 px-5 md:py-4 md:px-10 lg:py-5 lg:px-16 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.06)] mx-auto" id="bottom-bar">
+  <span class="text-xs md:text-base lg:text-lg font-medium tracking-wide text-white/95">
+    Enterate de todo
+  </span>
+  <button class="relative overflow-hidden group bg-[#336926] hover:bg-[#28531e] active:scale-95 text-white text-xs md:text-base lg:text-lg font-bold px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-3.5 rounded-full shadow-sm transition-all duration-300 hover:shadow-[0_0_20px_#4db21a,0_0_35px_rgba(255,255,255,0.7)] hover:brightness-125 cursor-pointer" onclick="openSofiaPortal()" type="button">
+    <span class="relative z-10">Chismear</span>
+    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"></span>
+  </button>
+</nav>
 <!-- ========================================================================= -->
 <!-- 6. MODAL 1: DETALLES DEL PROGRAMA TICS (Referencia exacta image_f0b18a.png) -->
 <!-- ========================================================================= -->
@@ -872,5 +872,11 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+</script>
+
+<script>
+function openSofiaPortal() {
+  window.open('https://oferta.senasofiaplus.edu.co', '_blank');
+}
 </script>
 </body></html>
