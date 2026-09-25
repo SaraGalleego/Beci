@@ -94,6 +94,21 @@
       display: none;
     }
   </style>
+
+<style id="mobile-event-card-below-calendar">
+@media (max-width: 767px) {
+  #eventModalOverlay {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    inset: auto !important;
+    width: calc(100% - 0.5rem) !important;
+    margin: 1rem auto 0 !important;
+  }
+}
+</style>
 </head>
 <body class="bg-[#F4F9F2] min-h-screen p-0 m-0 text-[#1E293B] antialiased">
 <!-- ========================================================================= -->
@@ -101,15 +116,34 @@
 <!-- ========================================================================= -->
 <div class="hidden md:flex flex-col min-h-screen w-full relative overflow-x-hidden" style="background: radial-gradient(circle at 10% 20%, #F5FBF2 0%, #FAF6EE 40%, #FBF1EA 70%, #F8F3EC 100%);">
 <!-- DESKTOP HEADER -->
-<header class="w-full bg-white/95 backdrop-blur-md px-10 lg:px-14 py-4 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-b border-gray-100 z-30 relative">
-<!-- Left: 3D Official BECI Logo -->
-<a class="flex items-center group transition-transform duration-300 hover:scale-105" href="#">
-<img alt="Beci Logo" class="h-14 lg:h-16 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF-Msh5Qb53Telt0VzN089iP-TVidxfz-Ox0wU8GJ_JAFZ0kgbPyCfTjQjiksbCteGzIDHgPBq4N9XFWJgJeFMZLgXleycSMQjUigqtiGr1SqiqK6ZVk1okpvPTjcmW8VkuU0kmH4J0LACtXsWkaaPJxY8mnv5tkjzyGty8tUPWWaVyMizEM3ac3QwGrG3B3PAlMGn5RALsG-6hUAZBuovOoMZlXPW-UT9_t6l_zGc--ihoXZDrZZFWmwV3aezADfTTGw">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-50/80 shadow-xs transition-all duration-300" id="mainHeader">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="InicioSena.html">
+<img alt="Beci Mascota SENA 3D" class="h-12 sm:h-14 md:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF-Msh5Qb53Telt0VzN089iP-TVidxfz-Ox0wU8GJ_JAFZ0kgbPyCfTjQjiksbCteGzIDHgPBq4N9XFWJgJeFMZLgXleycSMQjUigqtiGr1SqiqK6ZVk1okpvPTjcmW8VkuU0kmH4J0LACtXsWkaaPJxY8mnv5tkjzyGty8tUPWWaVyMizEM3ac3QwGrG3B3PAlMGn5RALsG-6hUAZBuovOoMZlXPW-UT9_t6l_zGc--ihoXZDrZZFWmwV3aezADfTTGw">
 </a>
-<!-- Right: Green Hamburger Button -->
-<button aria-label="Abrir Menú" class="p-2 hover:opacity-85 active:scale-95 transition-all cursor-pointer rounded-xl hover:bg-green-50" onclick="openHamburgerMenu()" type="button">
-<img alt="Menú" class="w-10 lg:w-11 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFg32xe4V5MDwkSkhWvQ1mXe5hCY1hbirFDoTPH_2wWi5PslcPGcEtQMEvLLjDxza8jpJgYIwnp_QDbiHPMLnsVIqm3Doia96BR6txCKqfPTthY1qsOXkB8U_ZhIzyVFuSvLYo_PI_xfd-9jse7UnGKnMdHmjjXUqvsofqmRjcFui2EhtwvNYzezqxAdFonkw3YKHqPFDiOSL2D5R7JeD2dYJZ0TQW8O8nfSA1WAYtiWLNOxpKxprhSECTOXu6cTrUucQ">
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="InicioSena.html">Inicio</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Charlemos.html">Charlemos</a>
+<a class="text-sm lg:text-base font-bold hover:text-[#336926] transition relative whitespace-nowrap flex items-center justify-center text-stone-800" href="eventossena.html">
+<span class="font-bold text-sm lg:text-base text-stone-800">Eventos</span>
+<span class="absolute -bottom-1.5 w-7 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span>
+</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Mapasena.html">Explorar Sedes</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="registratucorreosena.html">Estar al Tanto</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="areasformacion.html">Explorar áreas de formación</a>
+</nav>
+<div class="flex items-center gap-3">
+<div class="flex flex-col items-end leading-none pr-1">
+<span class="font-title font-black tracking-widest text-xl sm:text-2xl text-[#336926]">SENA</span>
+<span class="text-[9px] sm:text-[10px] font-semibold text-gray-500 tracking-wider">Medellín</span>
+</div>
+<button aria-label="Abrir Menú Móvil" class="lg:hidden p-1 focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg transition-transform active:scale-95" id="mobileMenuBtn" onclick="toggleHeaderMobileNav()" type="button">
+<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArciEck3dnb-Fg2UuGEXw_zcNhOEWFE1F8QWORqCjsJoB1gH0pFTDGC_vTUOP-8J113bWwvFgnfGLPSpQWfOKls6Mlp9l9TCI7xXvs0PH3YDFsb6jECbgGBUmiWPrhHXaO9rGUvyU8BIFOpGgDAP3S4TdVUxyHcDqAHMOcaDgyfOwPPv8xTWNSyZmPjiuXaMTCuVdxQeW0hFh__yvFQj6ZQ2rz5-3Z3iI4PjhYKQf8O51s7Yn0ceoTICvt6cRm34hE5g">
 </button>
+</div>
+</div>
+</div>
 </header>
 <!-- BACKGROUND DECORATIONS (SUBTLE DOTS & OUTLINED TRIANGLES) -->
 <!-- Top-Center Dots Pattern -->
@@ -307,7 +341,7 @@
 </div>
 <!-- Right Cut Photo (Diagonal Edge) -->
 <div class="absolute right-0 top-0 bottom-0 w-[46%] h-full">
-<img alt="Taller Fotografía Urbana" class="w-full h-full object-cover diagonal-clip-desktop transition-opacity duration-300" id="desktopEventImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A">
+<img alt="Taller Fotografía Urbana" class="w-full h-full object-cover diagonal-clip-desktop transition-opacity duration-300" id="desktopEventImage" src="img/Ideasen.jpeg">
 </div>
 </div>
 </div>
@@ -323,16 +357,21 @@
 <!-- Top Floating Section (Logo + Nav) -->
 <div class="relative z-10">
 <!-- BEGIN: TopHeader -->
-<header class="relative bg-[#EBF6E9] rounded-b-[42px] px-6 pt-9 pb-5 shadow-sm flex items-center justify-between border-b border-[#D5EED1]">
-<!-- Beci 3D Character Logo -->
-<div class="h-20 flex items-center">
-<img alt="Beci Logo" class="h-20 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1sHy9GqO24ofwrKfGAqY-fv5F1k9QiCwOb11t2b9skdbJJHJhdwucyh3QbpI9jTuuvNZQiIY5tkNbjmDsa4t7ygWFTC3DXzDMV0cVrjcF0HG5gYFYdavqnvkUbHuSp0EXNqGNULyC3cpAjfa4pBtyxbq_UXvwIuTHWVL_5yqfFYywyItQZZ9BwlR0YKkgZ-d_l4FuMohTScIj-bDby1Sf2FnK7-RIjWnIyEPb-bu6fF58jyEmcIPgPLG_vgKRYSJJrz4">
+<header class="relative bg-white/95 backdrop-blur-md border-b border-emerald-50/80 shadow-xs transition-all duration-300 px-5 pt-4 pb-3 flex items-center justify-between" id="mobileMainHeader">
+<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="InicioSena.html">
+<img alt="Beci Mascota SENA 3D" class="h-12 sm:h-14 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF-Msh5Qb53Telt0VzN089iP-TVidxfz-Ox0wU8GJ_JAFZ0kgbPyCfTjQjiksbCteGzIDHgPBq4N9XFWJgJeFMZLgXleycSMQjUigqtiGr1SqiqK6ZVk1okpvPTjcmW8VkuU0kmH4J0LACtXsWkaaPJxY8mnv5tkjzyGty8tUPWWaVyMizEM3ac3QwGrG3B3PAlMGn5RALsG-6hUAZBuovOoMZlXPW-UT9_t6l_zGc--ihoXZDrZZFWmwV3aezADfTTGw">
+</a>
+<div class="flex items-center gap-3">
+<div class="flex flex-col items-end leading-none pr-1">
+<span class="font-title font-black tracking-widest text-xl sm:text-2xl text-[#336926]">SENA</span>
+<span class="text-[9px] sm:text-[10px] font-semibold text-gray-500 tracking-wider">Medellín</span>
 </div>
-<!-- Green Hamburger Menu -->
-<button aria-label="Menú" class="flex items-center justify-center p-2 focus:outline-none cursor-pointer hover:opacity-80 active:scale-95 transition" id="openMenuBtnMobile" onclick="openHamburgerMenu()" type="button">
-<img alt="Menú" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFbixf2kZvF3Krf6WDumM_lgWhY2DPha-jg79Omnh6Lir3rBWaWV2lXUNeN8DqYvf_LWnv6Kad4Ves_yOaElcrwGmFtetZU0INfetUZCr4IOBiYAYnlmW_OyBJvGf9eIyzfZG8lwD_6NLzb6f0SLABzcZIhiBhMSoiimTc0gx8UbJHOTAFezqDjZLNFxFTAS-1OwgLQDyNlByRPkd_yZ-Y-z_3PT5Gq6zowQAPXxbAQNfM0Wd3WKArb-X7T7MBd1Vt9CU">
+<button aria-label="Abrir Menú Móvil" class="p-1 focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg transition-transform active:scale-95" id="mobileMenuBtnEvents" onclick="toggleHeaderMobileNav()" type="button">
+<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArciEck3dnb-Fg2UuGEXw_zcNhOEWFE1F8QWORqCjsJoB1gH0pFTDGC_vTUOP-8J113bWwvFgnfGLPSpQWfOKls6Mlp9l9TCI7xXvs0PH3YDFsb6jECbgGBUmiWPrhHXaO9rGUvyU8BIFOpGgDAP3S4TdVUxyHcDqAHMOcaDgyfOwPPv8xTWNSyZmPjiuXaMTCuVdxQeW0hFh__yvFQj6ZQ2rz5-3Z3iI4PjhYKQf8O51s7Yn0ceoTICvt6cRm34hE5g">
 </button>
+</div>
 </header>
+<!-- END: TopHeader -->
 <!-- END: TopHeader -->
 <!-- BEGIN: SubHeaderNav -->
 <div class="px-6 pt-4 pb-2 flex items-center relative">
@@ -545,7 +584,7 @@
 </div>
 <!-- Right Event Photo with Diagonal Cut -->
 <div class="absolute right-0 top-0 bottom-0 w-[45%] h-full">
-<img alt="Taller Fotografía Urbana" class="w-full h-full object-cover diagonal-clip" id="modalEventImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNMIxO7X1eg7pH_OId2Fgu-ObohgCCjYEtOPSS-uXZm6fGhy1evkvrS3_iUH-pfyKlxgAj2Dl_ztkx453hrG1XGsnCObt31X1XCb9QpRHMmtNHpoD2QmMr0VvIONc-hUyWDzQzOkfjal4iTJzqmjGaFiF_LKS1MH1j1ds6Wz-Sjj2P4krH38CJD8uZ9l0TlMsdmvUgR6A5uXKcJXFHh419k6Vp-Vl4ghWQ-xGpyNx_4jTpcUDvS6Lf1A">
+<img alt="Taller Fotografía Urbana" class="w-full h-full object-cover diagonal-clip" id="modalEventImage" src="img/Ideasen.jpeg">
 </div>
 </div>
 <!-- Close toggle instruction / button -->
@@ -588,19 +627,22 @@
 </div>
 </div>
 <!-- BEGIN: Hamburger Navigation Glassmorphism Modal -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-5 transition-all duration-300 opacity-0 pointer-events-none" id="hamburgerMenuModal">
-<div class="absolute inset-0 bg-[#336926]/20 backdrop-blur-xl transition-opacity" id="hamburgerModalBackdrop" onclick="closeHamburgerMenu()"></div>
-<div class="relative w-full max-w-[360px] rounded-[36px] p-7 shadow-[0_20px_50px_rgba(35,90,30,0.22)] border border-white/60 bg-white/80 backdrop-blur-2xl z-10 flex flex-col items-center transform transition-all duration-300 scale-95" id="hamburgerModalContent">
-<button aria-label="Cerrar menú" class="absolute top-6 right-6 w-9 h-9 rounded-full flex items-center justify-center text-[#336926] hover:bg-[#336926]/10 text-2xl font-bold transition active:scale-90" id="closeMenuBtn" onclick="closeHamburgerMenu()" type="button">✕</button>
-<div class="mt-3 mb-6 flex flex-col items-center">
+<div id="mobile-nav-overlay" class="fixed inset-0 z-[1100] bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" onclick="handleMobileOverlayClick(event)">
+<div id="mobile-nav-modal" class="relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" style="background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(24px) saturate(180%) brightness(1.1); border: 1.5px solid rgba(255, 255, 255, 0.7); box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 40px, rgba(255, 255, 255, 0.4) 0px 0px 20px, rgba(255, 255, 255, 0.9) 0px 1px 2px inset;">
+<button aria-label="Cerrar menú" class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-[#336926] hover:bg-[#336926]/10 text-2xl font-bold transition active:scale-90" onclick="closeHeaderMobileNav()" type="button">✕</button>
+<div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4">
+<a href="InicioSena.html" onclick="closeHeaderMobileNav()" class="text-[16px] sm:text-[17px] font-semibold text-[#1e293b] hover:text-[#336926] transition">Inicio</a>
+<div class="w-24 h-px bg-black/10"></div>
+<a href="Charlemos.html" onclick="closeHeaderMobileNav()" class="text-[16px] sm:text-[17px] font-semibold text-[#1e293b] hover:text-[#336926] transition">Charlemos</a>
+<div class="w-24 h-px bg-black/10"></div>
+<a href="eventossena.html" onclick="closeHeaderMobileNav()" class="text-[16px] sm:text-[17px] font-black text-[#336926] transition">Eventos</a>
+<div class="w-24 h-px bg-black/10"></div>
+<a href="Mapasena.html" onclick="closeHeaderMobileNav()" class="text-[16px] sm:text-[17px] font-semibold text-[#1e293b] hover:text-[#336926] transition">Explorar Sedes</a>
+<div class="w-24 h-px bg-black/10"></div>
+<a href="registratucorreosena.html" onclick="closeHeaderMobileNav()" class="text-[16px] sm:text-[17px] font-semibold text-[#1e293b] hover:text-[#336926] transition">Estar al Tanto</a>
+<div class="w-24 h-px bg-black/10"></div>
+<a href="areasformacion.html" onclick="closeHeaderMobileNav()" class="text-[16px] sm:text-[17px] font-semibold text-[#1e293b] hover:text-[#336926] transition">Explorar áreas de formación</a>
 </div>
-<nav class="w-full flex flex-col text-center divide-y divide-black/10">
-<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="#">Ayuda</a>
-<a class="py-3.5 text-lg font-black text-[#336926] active:scale-95 transition block" href="#">Eventos</a>
-<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="registratucorreosena.html">Estar al Tanto</a>
-<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="Mapasena.html">Explorar Sedes</a>
-<a class="py-3.5 text-lg font-bold text-[#1e293b] hover:text-[#336926] active:scale-95 transition block" href="#">Explorar Programas</a>
-</nav>
 </div>
 </div>
 <!-- ========================================================================= -->
@@ -616,16 +658,16 @@
     { id: 5, name: "Junio", days: 30, startWeekday: 0, eventDays: [1, 7, 10, 11, 16, 26, 29] },
     { id: 6, name: "Julio", days: 31, startWeekday: 2, eventDays: [6, 13, 20, 28] },
     { id: 7, name: "Agosto", days: 31, startWeekday: 5, eventDays: [2, 9, 15, 23] },
-    { id: 8, name: "Septiembre", days: 30, startWeekday: 1, eventDays: [5, 12, 19, 26] },
+    { id: 8, name: "Septiembre", days: 30, startWeekday: 1, eventDays: [5, 12, 19, 25] },
     { id: 9, name: "Octubre", days: 31, startWeekday: 3, eventDays: [4, 11, 18, 31] },
     { id: 10, name: "Noviembre", days: 30, startWeekday: 6, eventDays: [2, 9, 16, 23] },
     { id: 11, name: "Diciembre", days: 31, startWeekday: 1, eventDays: [7, 14, 24, 31] }
   ];
 
   const weekdayNames = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
-  let currentMonthIndex = 5; // Junio
-  let currentSelectedDay = "01";
-  let desktopSelectedDay = "01";
+  let currentMonthIndex = 8; // Septiembre
+  let currentSelectedDay = "25";
+  let desktopSelectedDay = "25";
 
   // Events dictionary for diverse days in Junio
   const eventsByDay = {
@@ -708,6 +750,14 @@
       location: "Ciudad del Río",
       cost: "Gratuito",
       image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80"
+    },
+    "25": {
+      title: "Ideas en orbita, muestra multimedia",
+      hour: "12",
+      period: "pm",
+      location: "CTMA - Pedregal",
+      cost: "Gratuito",
+      image: "img/Ideasen.jpeg"
     }
   };
 
@@ -980,21 +1030,54 @@
     }
   }
 
-  function openHamburgerMenu() {
-    const modal = document.getElementById('hamburgerMenuModal');
-    if (!modal) return;
-    modal.classList.remove('opacity-0', 'pointer-events-none');
-    modal.classList.add('opacity-100', 'pointer-events-auto');
+  function openHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.remove('hidden');
+    void overlay.offsetWidth;
+    overlay.classList.remove('opacity-0');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeHamburgerMenu() {
-    const modal = document.getElementById('hamburgerMenuModal');
-    if (!modal) return;
-    modal.classList.add('opacity-0', 'pointer-events-none');
-    modal.classList.remove('opacity-100', 'pointer-events-auto');
+  function closeHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+
+    overlay.classList.add('opacity-0');
+    modal.classList.remove('scale-100');
+    modal.classList.add('scale-95');
     document.body.style.overflow = '';
+
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
   }
+
+  function toggleHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay && overlay.classList.contains('hidden')) {
+      openHeaderMobileNav();
+    } else {
+      closeHeaderMobileNav();
+    }
+  }
+
+  function handleMobileOverlayClick(e) {
+    if (e.target.id === 'mobile-nav-overlay') {
+      closeHeaderMobileNav();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeHeaderMobileNav();
+    }
+  });
 
   function openSofiaPortal() {
     window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank');
@@ -1005,6 +1088,18 @@
     renderMonthPicker();
     wireMobileDays();
 
+    // Initial page state: September 25
+    currentMonthIndex = 8;
+    currentSelectedDay = "25";
+    desktopSelectedDay = "25";
+    const initialMonth = monthsData[currentMonthIndex];
+    const initialDesktopMonthTitle = document.getElementById('desktopMonthTitleText');
+    if (calendarTitle) calendarTitle.textContent = initialMonth.name;
+    if (initialDesktopMonthTitle) initialDesktopMonthTitle.textContent = initialMonth.name;
+    renderCalendarGrid();
+    renderDesktopCalendarGrid();
+    openEventOnDay("25");
+
     const openMonthBtn = document.getElementById('openMonthPickerBtn');
     if (openMonthBtn) openMonthBtn.addEventListener('click', openMonthPicker);
     const graphicBtn = document.getElementById('calendarGraphicBtn');
@@ -1013,11 +1108,6 @@
     if (closeMonthBtn) closeMonthBtn.addEventListener('click', closeMonthPicker);
     const monthBackdrop = document.getElementById('monthModalBackdrop');
     if (monthBackdrop) monthBackdrop.addEventListener('click', closeMonthPicker);
-    const closeMenuBtn = document.getElementById('closeMenuBtn');
-    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeHamburgerMenu);
-    const hamburgerBackdrop = document.getElementById('hamburgerModalBackdrop');
-    if (hamburgerBackdrop) hamburgerBackdrop.addEventListener('click', closeHamburgerMenu);
-
     const chismearButton = document.getElementById('chismearBtn');
     if (chismearButton) chismearButton.addEventListener('click', openSofiaPortal);
 
