@@ -1,11 +1,13 @@
-<!DOCTYPE html><html lang="es" style=""><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<!DOCTYPE html>
+
+<html lang="es" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>Estar al Tanto - Registro Beci</title>
 <!-- Google Fonts: DM Sans & Poppins -->
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS v3 -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
@@ -137,55 +139,391 @@
     0% { left: -150%; }
     100% { left: 150%; }
   }
-</style></head>
+</style>
+<style id="ajuste-final-campos-responsive">
+/* Ajuste solicitado: tarjeta centrada en desktop y elevada en móvil */
+@media (min-width: 768px) {
+  main { justify-content: center !important; }
+  [data-purpose="registration-heading"] { margin-bottom: 1.25rem !important; }
+  .relative.w-full.mt-6.flex-1.flex.flex-col.md\:max-w-md {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 760px !important;
+    margin: 0 auto !important;
+  }
+  [data-purpose="form-card"] {
+    width: 100% !important;
+    max-width: 760px !important;
+    margin: 0 auto !important;
+    flex: 0 0 auto !important;
+    min-height: 0 !important;
+    padding-left: 3.25rem !important;
+    padding-right: 3.25rem !important;
+  }
+  #registerForm { max-width: 680px !important; margin-left: auto !important; margin-right: auto !important; }
+}
+
+@media (max-width: 767px) {
+  /* La tarjeta sube hasta tocar el inicio visual de la mascota. */
+  .relative.w-full.mt-6.flex-1.flex.flex-col.md\:max-w-md {
+    margin-top: 0 !important;
+    flex: 0 0 50dvh !important;
+    height: 50dvh !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+  }
+  [data-purpose="form-card"] {
+    margin-top: 0 !important;
+    height: 50dvh !important;
+    min-height: 0 !important;
+    max-height: 50dvh !important;
+    flex: 0 0 50dvh !important;
+    overflow: visible !important;
+    padding-top: .75rem !important;
+    padding-bottom: .5rem !important;
+  }
+  #registerForm {
+    height: 100% !important;
+    max-height: none !important;
+    gap: .42rem !important;
+    margin-top: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #registerForm input { padding-top: .48rem !important; padding-bottom: .48rem !important; }
+  #registerForm > div.mt-4 {
+    margin-top: auto !important;
+    margin-bottom: .15rem !important;
+    flex-shrink: 0 !important;
+  }
+  [data-purpose="submit-register-button"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: 290px !important;
+    padding-top: .72rem !important;
+    padding-bottom: .72rem !important;
+    flex-shrink: 0 !important;
+  }
+  .mascot-peek-anim { top: -6.2rem !important; z-index: 1 !important; }
+}
+</style>
+<style id="ajuste-seccion-campos-proporcional">
+/* La sección de campos queda anclada hacia la parte inferior,
+   conservando su borde superior aproximadamente donde estaba. */
+@media (min-width: 768px) {
+  .relative.w-full.mt-6.flex-1.flex.flex-col.md\:max-w-md {
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+    flex: 0 0 50dvh !important;
+    height: 50dvh !important;
+    min-height: 0 !important;
+  }
+
+  [data-purpose="form-card"] {
+    height: 50dvh !important;
+    min-height: 0 !important;
+    max-height: 50dvh !important;
+    flex: 0 0 50dvh !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  #registerForm {
+    height: 100% !important;
+    max-width: 680px !important;
+    gap: .8rem !important;
+    margin-top: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  #registerForm input {
+    padding-top: .75rem !important;
+    padding-bottom: .75rem !important;
+  }
+
+  #registerForm > div.mt-4 {
+    margin-top: auto !important;
+    margin-bottom: .75rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  [data-purpose="submit-register-button"] {
+    max-width: 300px !important;
+    padding-top: .9rem !important;
+    padding-bottom: .9rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .relative.w-full.mt-6.flex-1.flex.flex-col.md\:max-w-md {
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+    flex: 0 0 50dvh !important;
+    height: 50dvh !important;
+    min-height: 0 !important;
+  }
+
+  [data-purpose="form-card"] {
+    height: 50dvh !important;
+    min-height: 0 !important;
+    max-height: 50dvh !important;
+    flex: 0 0 50dvh !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1.25rem !important;
+    overflow: visible !important;
+  }
+
+  #registerForm {
+    height: 100% !important;
+    max-height: none !important;
+    gap: .65rem !important;
+    margin-top: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  #registerForm input {
+    padding-top: .68rem !important;
+    padding-bottom: .68rem !important;
+  }
+
+  #registerForm > div.mt-4 {
+    margin-top: auto !important;
+    margin-bottom: .75rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  [data-purpose="submit-register-button"] {
+    width: 100% !important;
+    max-width: 290px !important;
+    padding-top: .85rem !important;
+    padding-bottom: .85rem !important;
+    flex-shrink: 0 !important;
+  }
+}
+</style>
+<style id="ajuste-mascota-titulo-boton-mobile">
+@media (max-width: 767px) {
+  /* Mascota un poco más grande en teléfono */
+  .mascot-peek-anim {
+    width: 9rem !important;
+    max-width: 9rem !important;
+    top: -7.2rem !important;
+  }
+
+  /* Título y descripción más grandes y un poco más abajo */
+  [data-purpose="registration-heading"] {
+    margin-top: 3.8rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  [data-purpose="registration-heading"] h1 {
+    font-size: 1.8rem !important;
+    line-height: 1.15 !important;
+  }
+
+  [data-purpose="registration-heading"] p {
+    font-size: 1.15rem !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Sube el botón para que quede por encima de la barra verde inferior */
+  #registerForm > div.mt-4 {
+    margin-top: auto !important;
+    margin-bottom: 4.25rem !important;
+  }
+
+  [data-purpose="submit-register-button"] {
+    padding-top: .9rem !important;
+    padding-bottom: .9rem !important;
+  }
+}
+</style>
+<style id="mobile-final-adjustments">
+@media (max-width: 767px) {
+  /* La sección de campos termina un poco más arriba */
+  .relative.w-full.mt-6.flex-1.flex.flex-col.md\:max-w-md {
+    flex-basis: 47dvh !important;
+    height: 47dvh !important;
+  }
+
+  [data-purpose="form-card"] {
+    height: 47dvh !important;
+    max-height: 47dvh !important;
+    flex-basis: 47dvh !important;
+    transform: translateY(-0.65rem) !important;
+  }
+
+  /* Texto centrado, manteniendo su alineación */
+  [data-purpose="registration-heading"] {
+    margin-top: 4.6rem !important;
+    margin-bottom: 0.45rem !important;
+    text-align: center !important;
+  }
+
+  [data-purpose="registration-heading"] h1 {
+    font-size: 2rem !important;
+    line-height: 1.12 !important;
+    margin-bottom: 0.15rem !important;
+    text-align: center !important;
+  }
+
+  [data-purpose="registration-heading"] p {
+    font-size: 1.3rem !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+  }
+
+  /* Mascota 5% más grande y ubicada al costado derecho del texto */
+  .mascot-peek-anim {
+    width: 10.9725rem !important;
+    max-width: 10.9725rem !important;
+    right: 0.1rem !important;
+    top: -9.1rem !important;
+    z-index: 1 !important;
+  }
+
+  [data-purpose="submit-register-button"] {
+    transform: translateY(-1.25rem) !important;
+  }
+}
+</style>
+<style id="inicio-sena-header-reference">
+#mainHeader nav a,
+#mobile-nav-modal a {
+  font-family: 'Poppins', sans-serif;
+}
+#mainHeader {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+#mobile-nav-overlay {
+  z-index: 1100 !important;
+}
+@media (max-width: 1023px) {
+  #mainHeader {
+    margin-bottom: 0 !important;
+  }
+}
+</style><style id="remove-mobile-pills">
+@media (max-width: 1023px) {
+  #mobilePillsTrack,
+  .nav-scroll-mask {
+    display: none !important;
+  }
+}
+</style>
+<style id="desktop-heading-lower">
+@media (min-width: 768px) {
+  [data-purpose="registration-heading"] {
+    transform: translateY(1.5rem) !important;
+  }
+}
+</style>
+
+</head>
 <body class="min-h-screen text-slate-800 flex flex-col relative antialiased selection:bg-brand-green selection:text-white">
 <!-- BEGIN: Institutional Background Decor -->
 <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" data-purpose="background-layer">
-<img alt="Fondo Institucional" class="w-full h-full object-cover opacity-60 animated-bg-decor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbK2VmU3fT41qAGa2tFNKSvBj7ySxacOtg4byRs0zLN-Dql5FZCi9v0upKykhlGGr0MupKB4z4cSNQWfhjf3u9RRAt7DopgOpYJM7NFVyreGzLclrZsyG7zyF6kElZG-sa8t_wcvdZYzfHUntpa4iCztHLkQ8wgbPEY2pftotJ4WMyipwjyTKoYL1UpDrVqmcFCv3UkcO3MpgUBotAnIldzVZ6MlJvxW9ONDM46pIruvDVKvX46Rcd9RPeanyIeKZ_HQ">
+<img alt="Fondo Institucional" class="w-full h-full object-cover opacity-60 animated-bg-decor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbK2VmU3fT41qAGa2tFNKSvBj7ySxacOtg4byRs0zLN-Dql5FZCi9v0upKykhlGGr0MupKB4z4cSNQWfhjf3u9RRAt7DopgOpYJM7NFVyreGzLclrZsyG7zyF6kElZG-sa8t_wcvdZYzfHUntpa4iCztHLkQ8wgbPEY2pftotJ4WMyipwjyTKoYL1UpDrVqmcFCv3UkcO3MpgUBotAnIldzVZ6MlJvxW9ONDM46pIruvDVKvX46Rcd9RPeanyIeKZ_HQ"/>
 </div>
 <!-- END: Institutional Background Decor -->
 <!-- BEGIN: Top Bar Navigation (Responsive Desktop Order) -->
 <footer class="w-full bg-[#4DB21A] text-white px-6 py-3 fixed bottom-0 left-0 right-0 z-40 shadow-md" data-purpose="institutional-bar">
 <div class="max-w-md lg:max-w-4xl mx-auto flex items-center justify-end gap-3">
 <span class="text-sm font-medium font-poppins tracking-wide">Enterate de todo</span>
-<button class="bg-[#336926] hover:bg-[#254f1c] text-white text-xs font-semibold px-5 py-2 rounded-full transition-transform duration-200 transform hover:scale-110 active:scale-95 shadow-sm" data-purpose="action-chismear" type="button" onclick="window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank')">
+<button class="bg-[#336926] hover:bg-[#254f1c] text-white text-xs font-semibold px-5 py-2 rounded-full transition-transform duration-200 transform hover:scale-110 active:scale-95 shadow-sm" data-purpose="action-chismear" onclick="window.open('https://oferta.senasofiaplus.edu.co/sofia-oferta/', '_blank')" type="button">
         Chismear
       </button>
 </div>
 </footer>
 <!-- END: Top Bar Navigation (Responsive Desktop Order) -->
 <!-- BEGIN: Main Content Area -->
-<main class="relative z-10 flex-1 flex flex-col items-center justify-start pt-6 lg:pb-12 w-full">
+<main class="relative z-10 flex-1 flex flex-col items-center justify-start lg:pb-12 w-full pt-0">
 <div class="w-full flex flex-col flex-1">
 <!-- BEGIN: Header Navigation -->
-<header class="flex items-center justify-between w-full mb-4 px-6">
-<!-- Logo 3D Beci -->
-<div class="flex flex-col items-start">
-<a aria-label="Inicio Beci" class="block transition-transform hover:scale-105 active:scale-95" href="#">
-<img alt="Beci Logo Oficial" class="h-16 sm:h-20 w-auto object-contain drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjiBpaqGt9T3OqXW83g3N0shIHHDzZV7Wdvu26RlvqC8-sEZja9YGG3_akzaGcQ4GnyZFr7GoA2W3kSz43xjbX-_N6EZgE12ysD59jt0IU5jPN_Z6n8hV40jgPjAfdSVJmB0UmcGymaJ-372VBt4M2SBkEu2y7ZIBTPCZOLMC8PMD9f5TKxZS7eE-wwlYfzdUuIA9WYZP_Tr9RpIsDuvDvskaJMKVmN2G9rYHiPQUTljnIhc3bhDCzfWFEaYN3r4tyb5Q">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-50/80 shadow-xs transition-all duration-300" id="mainHeader">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<!-- Left: Official BECI 3D Logo from Datastore -->
+<a aria-label="Ir a Inicio - Beci SENA" class="flex items-center gap-2 transition-transform hover:scale-105" href="#">
+<img alt="Beci Mascota SENA 3D" class="h-12 sm:h-14 md:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjShFTCs-PnE_E_ZfB9xd46lmXxET0S59qbcUf3HsXs_dovvSF-z30BpiCaN0-1TfAtXizSqwi32i-NXawVYs_ODMtk8fJPzCXSauaw8qYTWnvjK9zG0n_-PoedEW33lzTrmNUVL445rq17Y9uxwM_dNRMelQQALaqCZ6XTAvB2VedcHKlYLNL4-TmHYS8FqnEKpCzPOiLGRuQ2osGgy3ihHF27Ww4cMw8f4SYx0eaqxAYwoqpbT7LbZlEpVyNhPf_tg"/>
 </a>
-<!-- Flecha interactiva Volver -->
-<button aria-label="Volver" class="mt-2 text-[#336926] hover:text-[#1c4b18] font-bold text-2xl px-1 py-0.5 rounded focus:outline-none transition-transform hover:-translate-x-1" type="button">
-            ❮
-          </button>
+<!-- Desktop Navigation Pills (Faithful to reference: Inicio, Charlemos, Explorar Sedes, Eventos, Explorar Programas) -->
+<nav class="hidden lg:flex items-center gap-8 lg:gap-10 lg:ml-auto lg:mr-8">
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="InicioSena.html">Inicio</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Charlemos.html">Charlemos</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="eventossena.html">Eventos</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="Mapasena.html">Explorar Sedes</a>
+<a class="text-sm lg:text-base font-bold text-[#336926] transition relative whitespace-nowrap flex items-center justify-center" href="registratucorreosena.html">
+<span class="font-bold text-sm lg:text-base text-[#336926]">Estar al Tanto</span>
+<span class="absolute -bottom-1.5 left-0 right-0 h-1 bg-[#4DB21A] rounded-full pointer-events-none"></span>
+</a>
+<a class="text-sm lg:text-base font-medium text-stone-600 hover:text-[#336926] transition whitespace-nowrap" href="areasformacion.html">Explorar áreas de formación</a>
+</nav>
+<!-- Right: Official SENA Identification & Mobile Menu Toggle -->
+<div class="flex items-center gap-3">
+<!-- Desktop SENA Wordmark -->
+<div class="flex flex-col items-end leading-none pr-1"><span class="font-title font-black tracking-widest text-xl sm:text-2xl text-[#336926]">SENA</span><span class="text-[9px] sm:text-[10px] font-semibold text-gray-500 tracking-wider">Medellín</span></div>
+<!-- Mobile / Tablet Hamburger Toggle Button -->
+<button aria-label="Abrir Menú Móvil" class="lg:hidden p-1 focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg transition-transform active:scale-95" id="mobileMenuBtn" onclick="toggleHeaderMobileNav()">
+<img alt="Menú SENA" class="w-9 h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArciEck3dnb-Fg2UuGEXw_zcNhOEWFE1F8QWORqCjsJoB1gH0pFTDGC_vTUOP-8J113bWwvFgnfGLPSpQWfOKls6Mlp9l9TCI7xXvs0PH3YDFsb6jECbgGBUmiWPrhHXaO9rGUvyU8BIFOpGgDAP3S4TdVUxyHcDqAHMOcaDgyfOwPPv8xTWNSyZmPjiuXaMTCuVdxQeW0hFh__yvFQj6ZQ2rz5-3Z3iI4PjhYKQf8O51s7Yn0ceoTICvt6cRm34hE5g"/>
+</button>
 </div>
-<!-- Botón Menú Hamburguesa -->
-<nav class="hidden md:flex items-center gap-5 lg:gap-7 font-poppins text-sm lg:text-base"><a href="#ayuda" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Ayuda</a><a href="#eventos" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Eventos</a><a href="#estar-al-tanto" class="text-[#336926] font-bold border-b-2 border-[#336926] pb-0.5 transition-colors duration-200">Estar al Tanto</a><a href="Mapasena.html" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Explorar Sedes</a><a href="#programas" class="text-slate-700 hover:text-[#336926] font-medium transition-colors duration-200">Explorar Programas</a></nav><button aria-label="Abrir menú de navegación" class="w-12 h-12 flex flex-col justify-center items-center gap-1.5 rounded-2xl hover:bg-white/40 active:scale-95 transition-all focus:outline-none md:hidden" id="menuOpenBtn" type="button"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChsT57pP74jFCGrwR-6v2MXLvq9W24tH-lX7ygTtGGtdrUyWUrbgZwj-fLJBCt0ZI6-6Liqwy8Rc0kyfS03QkyVvkiPA4ecOqjvju4a_P6zHqRfzcQHAI92qQVw9gwDxRMWY6H2css_cik3CGUXuzc83qEZhcm3S_TmbeTWbf9HBkiKpVhYpvnju-S4xV_-hCxRA8_L2VHPCe27ijirylxwZ4GI7aPoKFGSXgAT-AV0hVKSh972dORBeStVHuVZsqmvWE" alt="Menú" class="w-10 sm:w-10 h-auto object-contain drop-shadow-sm pointer-events-none"></button>
-</header>
+</div>
+<!-- Mobile Pills Carousel Wrapper with Soft Edge Fade Gradient and Drag-to-Scroll Support -->
+
+</div>
+<!-- Mobile Drawer Menu -->
+</header><div class="fixed inset-0 z-50 bg-black/25 backdrop-blur-xs flex items-start justify-end p-3 pt-3.5 pr-3.5 sm:p-4 sm:pt-4 sm:pr-6 lg:hidden hidden opacity-0 transition-opacity duration-300" id="mobile-nav-overlay" onclick="handleMobileOverlayClick(event)">
+<div class="relative w-[265px] sm:w-[280px] max-w-[90vw] rounded-[28px] py-6 px-5 sm:py-6 sm:px-6 flex flex-col items-center text-center transform origin-top-right scale-95 transition-all duration-300 ease-out shadow-2xl mt-0" id="mobile-nav-modal" style="background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(24px) saturate(180%) brightness(1.1); border: 1.5px solid rgba(255, 255, 255, 0.7); box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 40px, rgba(255, 255, 255, 0.4) 0px 0px 20px, rgba(255, 255, 255, 0.9) 0px 1px 2px inset;">
+<!-- Botón Cerrar 'X' verde cómodo y accesible -->
+<button aria-label="Cerrar menú" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#2E7D32] hover:bg-[#2E7D32]/10 transition active:scale-90 cursor-pointer" onclick="closeHeaderMobileNav()" type="button">
+<svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+<!-- Opciones de Navegación con tipografía amplia, cómoda y espaciado generoso -->
+<div class="w-full flex flex-col items-center justify-center space-y-3.5 sm:space-y-4 mt-4"><a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="InicioSena.html" onclick="closeHeaderMobileNav()">
+        Inicio
+      </a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Charlemos.html" onclick="closeHeaderMobileNav()">
+        Charlemos
+      </a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="eventossena.html" onclick="closeHeaderMobileNav()">
+        Eventos
+      </a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="Mapasena.html" onclick="closeHeaderMobileNav()">
+        Explorar Sedes
+      </a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-bold tracking-tight text-[#336926] transition active:scale-95 py-0.5" href="registratucorreosena.html" onclick="closeHeaderMobileNav()">
+        Estar al Tanto
+      </a>
+<div class="w-4/5 h-px bg-gray-300/60 my-0.5"></div>
+<a class="font-title text-base font-medium tracking-tight text-stone-900 hover:text-[#336926] transition active:scale-95 py-0.5" href="areasformacion.html" onclick="closeHeaderMobileNav()">
+        Explorar áreas de formación
+      </a>
+</div>
+</div>
+</div>
 <!-- END: Header Navigation -->
 <!-- BEGIN: Headline Titles -->
 <section class="text-center px-4 mb-8" data-purpose="registration-heading">
 <h1 class="font-dmsans font-extrabold text-[#0d1e3a] text-2xl sm:text-[26px] leading-tight mb-1">
           ¡Registra tu correo!
         </h1>
-<p class="font-dmsans font-medium text-slate-700 text-sm sm:text-base" style="font-size: 1.03em;">si quieres seguir<br class="">recibiendo info</p>
+<p class="font-dmsans font-medium text-slate-700 text-sm sm:text-base" style="font-size: 1.03em;">si quieres seguir<br class=""/>recibiendo info</p>
 </section>
 <!-- END: Headline Titles -->
 <!-- BEGIN: Form Container with Peek-a-boo Mascot -->
 <div class="relative w-full mt-6 flex-1 flex flex-col md:max-w-md md:mx-auto">
 <!-- Mascota Azul Beci Asomándose -->
 <div class="absolute -top-24 right-2 sm:right-4 w-32 sm:w-36 z-0 pointer-events-none mascot-peek-anim md:fixed md:top-auto md:w-72 lg:w-96 md:z-10 mascot-desktop-float bottom-0" style="--desktop-right: 0;">
-<img alt="Mascota Beci saludando" class="w-full h-auto object-contain filter drop-shadow-md pointer-events-none select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC39ZdSGHI959OuLy3ulGBUmyDFhym4oRVQ9A7LCILM8i3zxlUQmnu8bPBKbMfm-zwYtvtgwCzjLAIuAJiOtf3iUpsSvCLhaewuZnkANMBaQzU9icH7fRGtjPqsPcKb_QeTKexE59c5wnna3HkkBlhDOKzz1AcSR4nqinir_380-98Sq274ACegHs_04dx7qtv5P4rZxmAjwd3jpLe3AbbR8F_Qa1L9bIuKkq3wpaiJGsWxUNHmRPXp3pnPcFva5YyVcPU">
+<img alt="Mascota Beci saludando" class="w-full h-auto object-contain filter drop-shadow-md pointer-events-none select-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC39ZdSGHI959OuLy3ulGBUmyDFhym4oRVQ9A7LCILM8i3zxlUQmnu8bPBKbMfm-zwYtvtgwCzjLAIuAJiOtf3iUpsSvCLhaewuZnkANMBaQzU9icH7fRGtjPqsPcKb_QeTKexE59c5wnna3HkkBlhDOKzz1AcSR4nqinir_380-98Sq274ACegHs_04dx7qtv5P4rZxmAjwd3jpLe3AbbR8F_Qa1L9bIuKkq3wpaiJGsWxUNHmRPXp3pnPcFva5YyVcPU"/>
 </div>
 <!-- Tarjeta Principal del Formulario -->
 <section class="relative z-10 bg-white shadow-[0_-4px_24px_rgba(51,105,38,0.08)] border border-[#eaf3e9] px-6 sm:px-8 pt-8 flex flex-col gap-4 rounded-t-[40px] flex-1 pb-24 md:max-w-md md:mx-auto md:rounded-t-[40px]" data-purpose="form-card">
@@ -195,38 +533,38 @@
 <div class="grid grid-cols-2 gap-3">
 <div>
 <label class="sr-only" for="firstName">Nombre</label>
-<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="firstName" name="firstName" placeholder="Nombre" required="" type="text">
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="firstName" name="firstName" placeholder="Nombre" required="" type="text"/>
 </div>
 <div>
 <label class="sr-only" for="lastName">Apellido</label>
-<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="lastName" name="lastName" placeholder="Apellido" required="" type="text">
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="lastName" name="lastName" placeholder="Apellido" required="" type="text"/>
 </div>
 </div>
 <!-- Campo Correo -->
 <div>
 <label class="sr-only" for="email">Correo electrónico</label>
-<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="email" name="email" placeholder="Correo" required="" type="email">
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 px-4 py-2.5 outline-none transition-all" id="email" name="email" placeholder="Correo" required="" type="email"/>
 </div>
 <!-- Campo Contraseña con Toggle Show/Hide -->
 <div class="relative flex items-center">
 <label class="sr-only" for="password">Contraseña</label>
-<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 pl-4 pr-11 py-2.5 outline-none transition-all" id="password" name="password" placeholder="Contraseña" required="" type="text">
+<input class="w-full bg-[#f8fbf7] hover:bg-[#f1f7f0] focus:bg-white text-slate-800 placeholder-slate-400 text-sm rounded-full border border-[#dce8dc] focus:border-[#4DB21A] focus:ring-2 focus:ring-[#4DB21A]/20 pl-4 pr-11 py-2.5 outline-none transition-all" id="password" name="password" placeholder="Contraseña" required="" type="text"/>
 <!-- Botón Toggle Visibilidad -->
 <button aria-label="Mostrar u ocultar contraseña" class="absolute right-3.5 text-slate-400 hover:text-slate-700 p-1 focus:outline-none transition-colors" id="togglePasswordBtn" type="button">
 <!-- SVG Ojo Abierto -->
-<svg class="w-5 h-5 hidden" fill="none" id="eyeIconOpen" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<svg class="w-5 h-5 hidden" fill="none" id="eyeIconOpen" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
 <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
 <!-- SVG Ojo Cerrado (oculto al inicio) -->
-<svg class="w-5 h-5" fill="none" id="eyeIconClosed" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<svg class="w-5 h-5" fill="none" id="eyeIconClosed" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
 <path d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
 </button>
 </div>
 <!-- Casilla Términos y Condiciones -->
 <div class="flex items-center gap-2.5 mt-1 px-1">
-<input class="w-4 h-4 text-[#336926] border-slate-300 rounded focus:ring-[#4DB21A] focus:ring-offset-0 cursor-pointer" id="termsCheckbox" required="" type="checkbox">
+<input class="w-4 h-4 text-[#336926] border-slate-300 rounded focus:ring-[#4DB21A] focus:ring-offset-0 cursor-pointer" id="termsCheckbox" required="" type="checkbox"/>
 <label class="text-xs text-slate-700 font-poppins cursor-pointer select-none" for="termsCheckbox">
                 Acepto terminos y condiciones
               </label>
@@ -254,38 +592,6 @@
 </main>
 <!-- END: Main Content Area -->
 <!-- BEGIN: Hamburger Menu Modal -->
-<div class="fixed inset-0 z-50 flex p-4 bg-slate-900/30 backdrop-blur-sm transition-opacity duration-300 ease-out items-start justify-end pt-6 opacity-0 pointer-events-none" data-purpose="navigation-modal" id="menuModal">
-<!-- Modal Card (Clonando exactamente menu hamburguesa.png) -->
-<div class="glass-menu w-full max-w-[320px] p-6 relative flex flex-col items-center transform transition-transform duration-300 ease-out scale-90" id="menuCard">
-<!-- Botón Cerrar (X) Verde Institucional -->
-<button aria-label="Cerrar Menú" class="absolute top-5 left-5 text-[#336926] hover:text-[#1e4415] focus:outline-none transition-transform hover:scale-110 active:scale-90" id="menuCloseBtn" type="button">
-<svg class="w-6 h-6 stroke-current" fill="none" stroke-linecap="round" stroke-width="3.5" viewBox="0 0 24 24">
-<line x1="18" x2="6" y1="6" y2="18"></line>
-<line x1="6" x2="18" y1="6" y2="18"></line>
-</svg>
-</button>
-<!-- Lista de enlaces de navegación -->
-<nav class="w-full pt-6 pb-2 flex flex-col text-center font-poppins"><a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#ayuda">
-          Ayuda
-        </a>
-<div class="w-full h-px bg-slate-300/70"></div>
-<a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#eventos">
-          Eventos
-        </a>
-<div class="w-full h-px bg-slate-300/70"></div>
-<a class="py-2.5 text-[#336926] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-bold text-lg transition-colors duration-200" href="#estar-al-tanto">
-          Estar al Tanto
-        </a>
-<div class="w-full h-px bg-slate-300/70"></div>
-<a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="Mapasena.html">
-          Explorar Sedes
-        </a>
-<div class="w-full h-px bg-slate-300/70"></div>
-<a class="py-2.5 text-[#0d1e3a] hover:text-[#336926] focus:text-[#336926] active:text-[#336926] font-semibold text-lg transition-colors duration-200" href="#programas">
-          Explorar Programas
-        </a></nav>
-</div>
-</div>
 <!-- END: Hamburger Menu Modal -->
 <!-- BEGIN: Interactive Logic Scripts -->
 <script data-purpose="menu-toggle-logic">
@@ -364,20 +670,49 @@
     switchLabel.addEventListener('click', toggleNewsletter);
   </script>
 <!-- END: Interactive Logic Scripts -->
+<script id="inicio-sena-mobile-header-logic">
 
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeHeaderMobileNav();
+    }
+  });</script>
+<script>
+  function openHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+    overlay.classList.remove('hidden');
+    void overlay.offsetWidth;
+    overlay.classList.remove('opacity-0');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
+    document.body.style.overflow = 'hidden';
+  }
 
+  function closeHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const modal = document.getElementById('mobile-nav-modal');
+    if (!overlay || !modal) return;
+    overlay.classList.add('opacity-0');
+    modal.classList.remove('scale-100');
+    modal.classList.add('scale-95');
+    document.body.style.overflow = '';
+    setTimeout(() => overlay.classList.add('hidden'), 300);
+  }
 
+  function toggleHeaderMobileNav() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay && overlay.classList.contains('hidden')) openHeaderMobileNav();
+    else closeHeaderMobileNav();
+  }
 
+  function handleMobileOverlayClick(e) {
+    if (e.target.id === 'mobile-nav-overlay') closeHeaderMobileNav();
+  }
 
-
-
-
-
-
-
-
-
-
-
-
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeHeaderMobileNav();
+  });
+</script>
 </body></html>
